@@ -6,7 +6,7 @@
 <title>Patanjali Yog Peeth Nepal</title>
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-<link href="https://fonts.googleapis.com/css2?family=Merriweather:wght@300;400;700&family=Merriweather+Sans:wght@400;500&family=Noto+Serif+Devanagari:wght@500&family=Crete+Round&display=swap" rel="stylesheet">
+<link href="https://fonts.googleapis.com/css2?family=Merriweather:wght@300;400;700&family=Merriweather+Sans:wght@400;500&family=Noto+Serif+Devanagari:wght@300;400;500&family=Crete+Round&display=swap" rel="stylesheet">
 <style>
   :root{
     --maroon:        #8A2D3B;
@@ -1385,13 +1385,151 @@
     color: var(--muted-text);
   }
 
+  /* ---- the portrait: the hesitation, illustrated ---- */
+  .faq-visual {
+    position: relative;
+    width: clamp(148px, 15vw, 196px);
+    justify-self: end;
+    flex-shrink: 0;
+  }
+  .faq-visual-frame {
+    position: relative;
+    border-radius: 18px;
+    overflow: hidden;
+    background: var(--ivory-text);
+    border: 1px solid var(--cream-line);
+    box-shadow: 0 26px 48px -26px rgba(43, 17, 20, 0.28);
+    transform: rotate(2.5deg);
+  }
+  .faq-visual-frame img {
+    display: block;
+    width: 100%;
+    height: auto;
+  }
+  .faq-visual-ring {
+    position: absolute;
+    top: -14px;
+    right: -14px;
+    width: 42px;
+    height: 42px;
+    border-radius: 50%;
+    border: 1.5px dashed var(--gold);
+    opacity: 0.7;
+  }
+  .faq-visual-caption {
+    margin-top: 10px;
+    text-align: center;
+    font-family: 'Merriweather', serif;
+    font-style: italic;
+    font-size: 12px;
+    color: var(--muted-text);
+    transform: rotate(2.5deg);
+  }
   @media (max-width: 620px) {
     .faq-header {
       grid-template-columns: 1fr;
       text-align: center;
     }
+    .faq-visual { justify-self: center; margin-bottom: 8px; }
     .faq-quote-mark { left: 50%; transform: translateX(-50%); }
   }
+
+  .faq-list { max-width: 720px; margin: 0 auto; }
+
+  /* ---- accordion items (native <details>, progressively animated) ---- */
+  .faq-item {
+    position: relative;
+    background: #FFFFFF;
+    border: 1px solid var(--cream-line);
+    border-radius: 10px;
+    margin-bottom: 14px;
+    overflow: hidden;
+    transition: border-color 0.3s ease, box-shadow 0.3s ease;
+  }
+  .faq-item[open] {
+    border-color: var(--gold);
+    box-shadow: 0 16px 36px -22px rgba(43, 17, 20, 0.22);
+  }
+  .faq-index {
+    position: absolute;
+    top: -6px;
+    right: 54px;
+    font-family: 'Merriweather', serif;
+    font-weight: 700;
+    font-size: clamp(40px, 5vw, 56px);
+    line-height: 1;
+    color: var(--maroon);
+    opacity: 0.05;
+    pointer-events: none;
+  }
+  .faq-question {
+    position: relative;
+    display: flex;
+    align-items: center;
+    gap: 16px;
+    padding: clamp(18px, 2.4vw, 24px) clamp(20px, 3vw, 28px);
+    cursor: pointer;
+    list-style: none;
+  }
+  .faq-question::-webkit-details-marker { display: none; }
+  .faq-question::marker { content: ''; }
+  .faq-q-text {
+    flex: 1;
+    font-family: 'Merriweather', serif;
+    font-weight: 700;
+    font-size: clamp(15px, 1.7vw, 17px);
+    line-height: 1.5;
+    color: var(--ink);
+  }
+  .faq-icon {
+    position: relative;
+    width: 20px;
+    height: 20px;
+    flex-shrink: 0;
+    border: 1.5px solid var(--gold);
+    border-radius: 50%;
+  }
+  .faq-icon::before,
+  .faq-icon::after {
+    content: '';
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    background: var(--maroon);
+    transition: transform 0.3s cubic-bezier(0.16, 1, 0.3, 1);
+  }
+  .faq-icon::before { width: 9px; height: 1.4px; transform: translate(-50%, -50%); }
+  .faq-icon::after { width: 1.4px; height: 9px; transform: translate(-50%, -50%); }
+  .faq-item[open] .faq-icon::after { transform: translate(-50%, -50%) scaleY(0); }
+
+  .faq-answer {
+    padding: 0 clamp(20px, 3vw, 28px) clamp(20px, 2.6vw, 26px) clamp(56px, 6vw, 64px);
+  }
+  .faq-answer p {
+    font-family: 'Merriweather Sans', sans-serif;
+    font-weight: 400;
+    font-size: 14.5px;
+    line-height: 1.85;
+    color: #5A463F;
+  }
+  .faq-item[open] .faq-answer {
+    animation: faqReveal 0.45s cubic-bezier(0.16, 1, 0.3, 1);
+  }
+  @keyframes faqReveal {
+    from { opacity: 0; transform: translateY(-8px); }
+    to { opacity: 1; transform: translateY(0); }
+  }
+
+  @media (max-width: 560px) {
+    .faq-q-text { font-size: 14.5px; }
+    .faq-answer { padding-left: clamp(20px, 3vw, 28px); }
+    .faq-index { display: none; }
+  }
+
+  @media (prefers-reduced-motion: reduce) {
+    .faq-item[open] .faq-answer { animation: none !important; }
+  }
+
 
   /* ============ FAQ — QUESTION CLOUDS AROUND THE BOY ============ */
   .qcloud-wrap{
@@ -1579,6 +1717,414 @@
 
   @media (prefers-reduced-motion: reduce) {
     .qcloud, .qcloud-modal, .qcloud-modal-card{ transition:none !important; }
+  }
+
+
+  /* ============ THE 5S · GUIDING PRINCIPLE (FAN CAROUSEL) ============ */
+  /* Registered custom props so the ambient colour animates between slides
+     rather than snapping (harmless no-op where unsupported). */
+  @property --fives-accent { syntax:'<color>'; inherits:true; initial-value:#9CC3A2; }
+  @property --fives-glow   { syntax:'<color>'; inherits:true; initial-value:#4F6F52; }
+
+  .fives-section{
+    /* Colour theory: one dark ground (the site's own ink/maroon) carrying five
+       light, low-saturation accents spaced around the wheel — sage → rose →
+       indigo → terracotta → gold. Same value and saturation range throughout,
+       so the hue travels while the mood holds. */
+    --fives-accent:#9CC3A2;
+    --fives-glow:#4F6F52;
+    --fives-interval:5600ms;
+
+    position:relative;
+    overflow:hidden;
+    isolation:isolate;
+    background:linear-gradient(168deg, var(--ink) 0%, #40161D 60%, var(--maroon-deep) 100%);
+    color:var(--ivory-text);
+    font-family:'Merriweather', Georgia, serif;
+    font-weight:300;
+    padding:clamp(54px,8vw,104px) 0 clamp(44px,6vw,80px);
+    transition:--fives-accent 1.1s ease, --fives-glow 1.1s ease;
+  }
+
+  /* ---- Full-bleed blurred wash of the active photo (two layers cross-fade) ---- */
+  .fives-bg{
+    position:absolute;
+    inset:0;
+    z-index:0;
+    overflow:hidden;
+    pointer-events:none;
+  }
+  .fives-bd{
+    position:absolute;
+    inset:0;
+    width:100%; height:100%;
+    object-fit:cover;
+    transform:scale(1.14);
+    filter:blur(30px) saturate(1.15) brightness(.5);
+    opacity:0;
+    transition:opacity 1.3s ease;
+  }
+  .fives-bd.is-on{ opacity:1; }
+  .fives-bg-veil{
+    position:absolute;
+    inset:0;
+    background:
+      radial-gradient(ellipse at 50% 45%, transparent 0%, rgba(22,8,10,.55) 82%),
+      radial-gradient(circle at 78% 12%, var(--fives-glow) 0%, transparent 58%),
+      linear-gradient(180deg, rgba(22,8,10,.68) 0%, rgba(22,8,10,.28) 32%, rgba(22,8,10,.72) 100%);
+    opacity:.9;
+  }
+
+  .fives-inner{
+    position:relative;
+    z-index:3;
+    max-width:1180px;
+    margin:0 auto;
+    padding:0 clamp(20px,6vw,64px);
+  }
+
+  /* ---- Header ---- */
+  .fives-header{ text-align:center; max-width:640px; margin:0 auto; }
+  .fives-eyebrow{
+    display:inline-flex;
+    align-items:center;
+    gap:12px;
+    font-family:'Merriweather', serif;
+    font-weight:300;
+    font-size:11.5px;
+    letter-spacing:.2em;
+    text-transform:uppercase;
+    color:var(--gold-soft);
+    margin-bottom:16px;
+  }
+  .fives-eyebrow::before,
+  .fives-eyebrow::after{
+    content:'';
+    width:26px; height:1px;
+    background:var(--gold);
+    opacity:.8;
+  }
+  .fives-title{
+    font-family:'Merriweather', serif;
+    font-weight:300;
+    font-size:clamp(27px,4.2vw,42px);
+    line-height:1.24;
+    color:var(--ivory-text);
+    text-shadow:0 2px 20px rgba(18,6,8,.5);
+  }
+  .fives-title em{ font-style:normal; color:var(--gold-soft); }
+  .fives-subtitle{
+    margin-top:14px;
+    font-family:'Merriweather', serif;
+    font-weight:300;
+    font-size:clamp(13.5px,1.6vw,15.5px);
+    line-height:1.8;
+    color:rgba(246,238,226,.72);
+  }
+
+  /* ---- Stage ---- */
+  .fives-stage{
+    position:relative;
+    z-index:3;
+    height:clamp(360px,42vw,472px);
+    margin-top:clamp(28px,4vw,46px);
+    perspective:1700px;
+    perspective-origin:50% 46%;
+    touch-action:pan-y;
+    outline:none;
+  }
+
+  .fives-track{
+    position:absolute;
+    inset:0;
+    transform-style:preserve-3d;
+    z-index:1;
+  }
+
+  /* ---- Cards: near-equal size, fanned along a shallow arc ---- */
+  .fives-card{
+    --o:0;                                   /* signed offset from centre */
+    --a:0;                                   /* absolute offset           */
+    --gap:clamp(118px,15.6vw,224px);
+
+    position:absolute;
+    top:46%; left:50%;
+    width:clamp(152px,19vw,268px);
+    height:clamp(224px,27.6vw,392px);
+    margin:0;
+    border-radius:2px;
+    overflow:hidden;
+    cursor:pointer;
+    background:#241014;
+    transform:
+      translate(-50%,-50%)
+      translateX(calc(var(--o) * var(--gap)))
+      translateY(calc(var(--a) * 15px))      /* the arc: outer cards ride lower */
+      translateZ(calc(var(--a) * -58px))
+      rotateY(calc(var(--o) * -17deg))
+      scale(calc(1 - var(--a) * .07));
+    box-shadow:
+      0 26px 52px -20px rgba(0,0,0,.6),
+      inset 0 0 0 1px rgba(246,238,226,.12);
+    transition:
+      transform 1.15s cubic-bezier(.16,1,.3,1),
+      box-shadow .9s ease;
+  }
+  .fives-card.is-active{
+    box-shadow:
+      0 44px 84px -26px rgba(0,0,0,.7),
+      inset 0 0 0 1px rgba(228,199,132,.34);
+    cursor:default;
+  }
+
+  .fives-card-img{
+    position:absolute;
+    inset:0;
+    width:100%; height:100%;
+    object-fit:cover;
+    display:block;
+    filter:saturate(1.04) contrast(1.02);
+  }
+  .fives-card-img:not([src]),
+  .fives-card-img[src=""]{ display:none; }
+
+  /* fallback shown only if a photo fails to load */
+  .fives-card-fallback{
+    position:absolute;
+    inset:0;
+    display:grid;
+    place-items:center;
+    background:linear-gradient(150deg, rgba(255,255,255,.05), rgba(0,0,0,.32)),
+               linear-gradient(0deg, var(--fives-glow), var(--fives-glow));
+  }
+  .fives-card-fallback svg{
+    width:22px; height:22px;
+    stroke:rgba(246,238,226,.45);
+    fill:none; stroke-width:1.2;
+  }
+
+  /* cards away from centre sit back into the haze */
+  .fives-card-veil{
+    position:absolute;
+    inset:0;
+    background:rgba(26,9,12,.94);
+    opacity:calc(var(--a) * .30);
+    transition:opacity .95s ease;
+    pointer-events:none;
+  }
+
+  /* ---- Small plate at the top of each card ---- */
+  .fives-card-plate{
+    position:absolute;
+    top:clamp(10px,1.2vw,16px); left:50%;
+    transform:translateX(-50%);
+    z-index:3;
+    padding:5px 11px 6px;
+    max-width:82%;
+    font-family:'Noto Serif Devanagari','Merriweather',serif;
+    font-weight:400;
+    font-size:clamp(10px,1vw,12.5px);
+    line-height:1.15;
+    white-space:nowrap;
+    text-align:center;
+    color:rgba(246,238,226,.92);
+    border:1px solid rgba(246,238,226,.34);
+    border-radius:1px;
+    background:rgba(20,7,9,.24);
+    backdrop-filter:blur(3px);
+    transition:border-color 1.1s ease, opacity .9s ease;
+  }
+  .fives-card.is-active .fives-card-plate{
+    border-color:var(--fives-accent);
+  }
+
+  /* ---- The band that makes the overflowing headline readable ---- */
+  .fives-band{
+    position:absolute;
+    left:0; right:0;
+    top:0; bottom:0;
+    z-index:5;
+    pointer-events:none;
+    background:linear-gradient(180deg,
+      rgba(20,7,9,0)   0%,
+      rgba(20,7,9,.34) 28%,
+      rgba(20,7,9,.60) 52%,
+      rgba(20,7,9,.52) 76%,
+      rgba(20,7,9,0)   100%);
+  }
+
+  /* ---- Headline, deliberately wider than the centre card ---- */
+  .fives-copy{
+    position:absolute;
+    left:50%; top:54%;
+    transform:translate(-50%,-50%);
+    z-index:10;
+    width:min(88%,620px);
+    text-align:left;
+    pointer-events:none;
+    transition:opacity .32s ease, transform .32s ease;
+  }
+  .fives-copy.is-swapping{
+    opacity:0;
+    transform:translate(-50%,-50%) translateY(12px);
+  }
+  .fives-copy-heading{
+    margin:0;
+    font-family:'Merriweather', serif;
+    font-weight:300;
+    font-size:clamp(27px,5vw,58px);
+    line-height:1.1;
+    letter-spacing:.005em;
+    color:var(--ivory-text);
+    text-shadow:0 3px 26px rgba(14,5,6,.8), 0 1px 3px rgba(14,5,6,.6);
+  }
+  .fives-copy-heading .fives-copy-eng{
+    display:block;
+    color:rgba(246,238,226,.9);
+  }
+  .fives-copy-rule{
+    width:52px; height:1.5px;
+    margin:clamp(14px,1.8vw,20px) 0 clamp(12px,1.6vw,17px);
+    background:var(--fives-accent);
+    transform-origin:left center;
+    transition:background 1.1s ease;
+  }
+  .fives-copy-desc{
+    margin:0;
+    max-width:34ch;
+    font-family:'Merriweather', serif;
+    font-weight:300;
+    font-size:clamp(13px,1.65vw,16.5px);
+    line-height:1.75;
+    color:rgba(246,238,226,.86);
+    text-shadow:0 2px 16px rgba(14,5,6,.85);
+  }
+  .fives-copy-sanskrit{
+    display:block;
+    font-family:'Noto Serif Devanagari','Merriweather',serif;
+    font-weight:300;
+    font-size:clamp(13px,1.5vw,17px);
+    letter-spacing:.02em;
+    color:var(--fives-accent);
+    margin-bottom:10px;
+    transition:color 1.1s ease;
+    text-shadow:0 2px 14px rgba(14,5,6,.8);
+  }
+
+  /* ---- Bare chevron arrows, as in the reference ---- */
+  .fives-nav{
+    position:absolute;
+    top:50%;
+    transform:translateY(-50%);
+    z-index:20;
+    width:44px; height:44px;
+    display:grid;
+    place-items:center;
+    border:none;
+    background:none;
+    padding:0;
+    color:rgba(246,238,226,.72);
+    cursor:pointer;
+    transition:color .3s ease, transform .3s ease;
+  }
+  .fives-nav svg{
+    width:19px; height:19px;
+    stroke:currentColor; fill:none;
+    stroke-width:1.4;
+    filter:drop-shadow(0 2px 8px rgba(14,5,6,.7));
+  }
+  .fives-nav.prev{ left:clamp(2px,1.6vw,26px); }
+  .fives-nav.next{ right:clamp(2px,1.6vw,26px); }
+  .fives-nav:hover,
+  .fives-nav:focus-visible{ color:var(--ivory-text); outline:none; }
+  .fives-nav.prev:hover{ transform:translateY(-50%) translateX(-4px); }
+  .fives-nav.next:hover{ transform:translateY(-50%) translateX(4px); }
+
+  /* ---- Dots ---- */
+  .fives-dots{
+    position:relative;
+    z-index:3;
+    display:flex;
+    align-items:center;
+    justify-content:center;
+    gap:9px;
+    margin-top:clamp(20px,2.8vw,30px);
+  }
+  .fives-dot{
+    position:relative;
+    width:26px; height:24px;
+    display:grid;
+    place-items:center;
+    border:none; background:none; padding:0;
+    cursor:pointer;
+  }
+  .fives-dot::before{
+    content:'';
+    width:100%; height:2px;
+    border-radius:2px;
+    background:rgba(246,238,226,.24);
+    transition:background .4s ease;
+  }
+  .fives-dot:hover::before{ background:rgba(246,238,226,.5); }
+  .fives-dot-fill{
+    position:absolute;
+    left:0; top:50%;
+    margin-top:-1px;
+    width:100%; height:2px;
+    border-radius:2px;
+    background:var(--fives-accent);
+    transform:scaleX(0);
+    transform-origin:left center;
+    transition:background 1.1s ease;
+  }
+  .fives-dot.is-active .fives-dot-fill{ transform:scaleX(1); }
+  .fives-dots.is-running .fives-dot.is-active .fives-dot-fill{
+    animation:fivesDotFill var(--fives-interval) linear forwards;
+  }
+  .fives-section.is-paused .fives-dot-fill{ animation-play-state:paused; }
+  @keyframes fivesDotFill{
+    from{ transform:scaleX(0); }
+    to  { transform:scaleX(1); }
+  }
+
+  /* ---- Responsive ---- */
+  @media (max-width:1024px){
+    .fives-card{ --gap:clamp(112px,15vw,168px); }
+  }
+  @media (max-width:760px){
+    /* three cards read better than five on a narrow screen */
+    .fives-card.is-far{ opacity:0; pointer-events:none; }
+    .fives-card{
+      --gap:112px;
+      width:clamp(158px,42vw,215px);
+      height:clamp(232px,60vw,308px);
+    }
+    .fives-stage{ height:clamp(330px,84vw,420px); }
+    .fives-copy{ width:min(90%,440px); }
+    .fives-copy-desc{ max-width:30ch; }
+  }
+  @media (max-width:520px){
+    .fives-card{ --gap:96px; width:min(52vw,180px); height:min(76vw,260px); }
+    .fives-copy{ top:56%; width:calc(100% - 76px); }
+    .fives-copy-heading{ font-size:clamp(25px,7.4vw,34px); }
+    .fives-copy-desc{ max-width:28ch; font-size:13px; }
+    .fives-nav{ width:38px; height:38px; }
+    .fives-nav.prev{ left:0; }
+    .fives-nav.next{ right:0; }
+  }
+
+  @media (prefers-reduced-motion: reduce){
+    .fives-section{ transition:none; }
+    .fives-card,
+    .fives-card-veil,
+    .fives-card-plate,
+    .fives-copy,
+    .fives-nav,
+    .fives-bd{
+      transition-duration:.001ms !important;
+      transition-delay:0ms !important;
+    }
+    .fives-dots.is-running .fives-dot.is-active .fives-dot-fill{ animation:none; }
   }
 
 </style>
@@ -1791,6 +2337,144 @@
     </div>
 
   </div>
+</section>
+
+
+<!-- ============ THE 5S · GUIDING PRINCIPLE ============ -->
+<section class="fives-section" id="fives-section">
+
+  <div class="fives-bg" aria-hidden="true">
+    <img class="fives-bd" id="fives-bd-a" alt="">
+    <img class="fives-bd" id="fives-bd-b" alt="">
+    <div class="fives-bg-veil"></div>
+  </div>
+
+  <div class="fives-inner">
+    <div class="fives-header reveal-fade">
+      <div class="fives-eyebrow">Guiding Principle</div>
+      <h2 class="fives-title">The <em>5S</em></h2>
+      <p class="fives-subtitle">
+        Every program of the Trust is built on five foundations.
+      </p>
+    </div>
+  </div>
+
+  <div class="fives-stage" id="fives-stage" tabindex="0"
+       role="region" aria-roledescription="carousel"
+       aria-label="The five foundations of the Trust">
+
+    <div class="fives-track" id="fives-track">
+
+      <!-- 1 · SVASTHYA -->
+      <article class="fives-card is-active" style="--o:0; --a:0; z-index:20;"
+        data-accent="#9CC3A2" data-glow="#4F6F52"
+        data-sanskrit="स्वास्थ्य"
+        data-roman="Svāsthya"
+        data-english="Health"
+        data-desc="Physical and mental well-being through Yoga and Ayurveda">
+        <div class="fives-card-fallback">
+          <svg viewBox="0 0 24 24"><rect x="3" y="5" width="18" height="14" rx="1.5"/><circle cx="8.5" cy="10" r="1.6"/><path d="M3 16.5l5-4.5 4 3.5 3-2.5 6 5"/></svg>
+        </div>
+        <img class="fives-card-img"
+             src="https://candchomecare.com/wp-content/uploads/2023/10/senior-man-eating-vegetable-salad-smiling-at-workp-2022-12-16-07-58-37-utc-min-scaled.jpg"
+             alt="An older man enjoying a fresh vegetable salad">
+        <div class="fives-card-veil"></div>
+        <span class="fives-card-plate">स्वास्थ्य</span>
+      </article>
+
+      <!-- 2 · SAMSKARA -->
+      <article class="fives-card" style="--o:1; --a:1; z-index:19;"
+        data-accent="#E79AA5" data-glow="#8A2D3B"
+        data-sanskrit="संस्कार"
+        data-roman="Saṁskāra"
+        data-english="Values"
+        data-desc="Character, discipline, and cultural rootedness">
+        <div class="fives-card-fallback">
+          <svg viewBox="0 0 24 24"><rect x="3" y="5" width="18" height="14" rx="1.5"/><circle cx="8.5" cy="10" r="1.6"/><path d="M3 16.5l5-4.5 4 3.5 3-2.5 6 5"/></svg>
+        </div>
+        <img class="fives-card-img"
+             src="https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcQ1ZCoet70HXQQm6_WMPMy-U5oSxhu4Bi8EJT_9FVed_xFacyUbnKpHM6U&s=10"
+             alt="A traditional abhishek ritual being performed">
+        <div class="fives-card-veil"></div>
+        <span class="fives-card-plate">संस्कार</span>
+      </article>
+
+      <!-- 3 · SIKSHA -->
+      <article class="fives-card is-far" style="--o:2; --a:2; z-index:18;"
+        data-accent="#9DB9D4" data-glow="#3E5C76"
+        data-sanskrit="शिक्षा"
+        data-roman="Śikṣā"
+        data-english="Education"
+        data-desc="Access to knowledge — modern and traditional">
+        <div class="fives-card-fallback">
+          <svg viewBox="0 0 24 24"><rect x="3" y="5" width="18" height="14" rx="1.5"/><circle cx="8.5" cy="10" r="1.6"/><path d="M3 16.5l5-4.5 4 3.5 3-2.5 6 5"/></svg>
+        </div>
+        <img class="fives-card-img"
+             src="https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcRKgVwCf4DW7lvBjgxrRhqxWSAOxJ3wjUI1ReSwTgPtVJEziNEK3EiGxjCW&amp;s=10"
+             alt="Students learning together">
+        <div class="fives-card-veil"></div>
+        <span class="fives-card-plate">शिक्षा</span>
+      </article>
+
+      <!-- 4 · SEVA -->
+      <article class="fives-card is-far" style="--o:-2; --a:2; z-index:18;"
+        data-accent="#EDAC80" data-glow="#B4622D"
+        data-sanskrit="सेवा"
+        data-roman="Sevā"
+        data-english="Service"
+        data-desc="Selfless work for society, especially the vulnerable">
+        <div class="fives-card-fallback">
+          <svg viewBox="0 0 24 24"><rect x="3" y="5" width="18" height="14" rx="1.5"/><circle cx="8.5" cy="10" r="1.6"/><path d="M3 16.5l5-4.5 4 3.5 3-2.5 6 5"/></svg>
+        </div>
+        <img class="fives-card-img"
+             src="https://miro.medium.com/v2/resize:fit:1100/format:webp/1*S4RjItYMu-7HqleOjpaeoA.png"
+             alt="Volunteers carrying out community service">
+        <div class="fives-card-veil"></div>
+        <span class="fives-card-plate">सेवा</span>
+      </article>
+
+      <!-- 5 · SVAVALAMBANA -->
+      <article class="fives-card" style="--o:-1; --a:1; z-index:19;"
+        data-accent="#E4C784" data-glow="#C79A49"
+        data-sanskrit="स्वावलम्बन"
+        data-roman="Svāvalambana"
+        data-english="Self-Reliance"
+        data-desc="Skills, livelihoods, and dignity">
+        <div class="fives-card-fallback">
+          <svg viewBox="0 0 24 24"><rect x="3" y="5" width="18" height="14" rx="1.5"/><circle cx="8.5" cy="10" r="1.6"/><path d="M3 16.5l5-4.5 4 3.5 3-2.5 6 5"/></svg>
+        </div>
+        <img class="fives-card-img"
+             src="https://robinage.com/wp-content/uploads/2024/04/GURUKULS-The-schools-of-Ancient-India.jpg"
+             alt="A traditional gurukul, the schools of ancient India">
+        <div class="fives-card-veil"></div>
+        <span class="fives-card-plate">स्वावलम्बन</span>
+      </article>
+
+    </div>
+
+    <div class="fives-band"></div>
+
+    <div class="fives-copy" id="fives-copy" aria-live="polite">
+      <span class="fives-copy-sanskrit">स्वास्थ्य</span>
+      <h3 class="fives-copy-heading">
+        <span class="fives-copy-roman">Svāsthya</span>
+        <span class="fives-copy-eng">&ndash; Health</span>
+      </h3>
+      <div class="fives-copy-rule"></div>
+      <p class="fives-copy-desc">Physical and mental well-being through Yoga and Ayurveda</p>
+    </div>
+
+    <button class="fives-nav prev" type="button" id="fives-prev" aria-label="Previous foundation">
+      <svg viewBox="0 0 12 12"><path d="M7.5 2L3.5 6l4 4" stroke-linecap="round" stroke-linejoin="round"/></svg>
+    </button>
+    <button class="fives-nav next" type="button" id="fives-next" aria-label="Next foundation">
+      <svg viewBox="0 0 12 12"><path d="M4.5 2l4 4-4 4" stroke-linecap="round" stroke-linejoin="round"/></svg>
+    </button>
+
+  </div>
+
+  <div class="fives-dots" id="fives-dots" role="group" aria-label="Choose a foundation"></div>
+
 </section>
 
 <!-- ============ TECHNOLOGIES FOR WELL-BEING ============ -->
@@ -2388,6 +3072,219 @@
 
     statEls.forEach(el => statObserver.observe(el));
   })();
+
+  // ============ THE 5S FAN CAROUSEL ============
+  // Card geometry comes entirely from two custom properties (--o signed offset,
+  // --a absolute offset), so every size and spacing decision stays in CSS and
+  // follows the media queries. The headline overflows the centre card on
+  // purpose — the band behind it keeps the text readable.
+  (function() {
+    const section = document.getElementById('fives-section');
+    if (!section) return;
+
+    const stage    = document.getElementById('fives-stage');
+    const track    = document.getElementById('fives-track');
+    const dotsWrap = document.getElementById('fives-dots');
+    const copy     = document.getElementById('fives-copy');
+    const prevBtn  = document.getElementById('fives-prev');
+    const nextBtn  = document.getElementById('fives-next');
+    const bds      = [document.getElementById('fives-bd-a'), document.getElementById('fives-bd-b')].filter(Boolean);
+    const cards    = Array.prototype.slice.call(track.querySelectorAll('.fives-card'));
+    if (!cards.length) return;
+
+    const n = cards.length;
+    const INTERVAL = 5600; // keep in sync with --fives-interval
+    const reduceMotion = window.matchMedia('(prefers-reduced-motion: reduce)').matches;
+
+    let active = 0;
+    let timer = null, swapTimer = null;
+    let paused = false, visible = true, swiped = false;
+    let bdSlot = 0;
+    const lastOffset = new Map();
+
+    // if a photo 404s, drop the src so the fallback tile shows rather than a
+    // broken-image icon
+    cards.forEach(card => {
+      const img = card.querySelector('.fives-card-img');
+      if (img) img.addEventListener('error', () => img.removeAttribute('src'));
+    });
+
+    // ---- dots ----
+    cards.forEach((card, i) => {
+      const dot = document.createElement('button');
+      dot.type = 'button';
+      dot.className = 'fives-dot';
+      dot.setAttribute('aria-label', 'Show ' + (card.dataset.english || ('slide ' + (i + 1))));
+      dot.innerHTML = '<span class="fives-dot-fill"></span>';
+      dot.addEventListener('click', () => go(i));
+      dotsWrap.appendChild(dot);
+    });
+    const dots = Array.prototype.slice.call(dotsWrap.children);
+    if (!reduceMotion) dotsWrap.classList.add('is-running');
+
+    // ---- geometry ----
+    function offsetOf(i) {
+      let o = i - active;
+      if (o >  n / 2) o -= n;
+      if (o < -n / 2) o += n;
+      return o;
+    }
+
+    function render() {
+      cards.forEach((card, i) => {
+        const o = offsetOf(i);
+        const a = Math.abs(o);
+        const previous = lastOffset.get(card);
+
+        // a card wrapping from one edge of the fan to the other must not
+        // animate across the whole stage — snap it into place instead
+        if (previous !== undefined && Math.abs(o - previous) > 2) {
+          card.style.transition = 'none';
+          requestAnimationFrame(() => {
+            requestAnimationFrame(() => { card.style.transition = ''; });
+          });
+        }
+        lastOffset.set(card, o);
+
+        card.style.setProperty('--o', o);
+        card.style.setProperty('--a', a);
+        card.style.zIndex = String(20 - a);
+        card.classList.toggle('is-active', o === 0);
+        card.classList.toggle('is-far', a >= 2);
+        card.setAttribute('aria-hidden', o === 0 ? 'false' : 'true');
+      });
+
+      const current = cards[active];
+
+      // colour travels with the slide
+      section.style.setProperty('--fives-accent', current.dataset.accent);
+      section.style.setProperty('--fives-glow', current.dataset.glow);
+
+      setBackdrop(current);
+      swapCopy(current);
+      restartDotFill();
+    }
+
+    // cross-fade the full-bleed wash between two stacked layers
+    function setBackdrop(card) {
+      if (!bds.length) return;
+      const img = card.querySelector('.fives-card-img');
+      const url = img ? img.getAttribute('src') : null;
+      if (!url) { bds.forEach(b => b.classList.remove('is-on')); return; }
+
+      const incoming = bds[bds.length === 1 ? 0 : (bdSlot ^ 1)];
+      const outgoing = bds[bdSlot];
+      if (incoming.getAttribute('src') !== url) incoming.setAttribute('src', url);
+      incoming.classList.add('is-on');
+      if (outgoing !== incoming) outgoing.classList.remove('is-on');
+      if (bds.length > 1) bdSlot ^= 1;
+    }
+
+    function swapCopy(card) {
+      const write = () => {
+        copy.querySelector('.fives-copy-sanskrit').textContent = card.dataset.sanskrit;
+        copy.querySelector('.fives-copy-roman').textContent    = card.dataset.roman;
+        copy.querySelector('.fives-copy-eng').textContent      = '\u2013 ' + card.dataset.english;
+        copy.querySelector('.fives-copy-desc').textContent     = card.dataset.desc;
+      };
+      if (reduceMotion) { write(); return; }
+      copy.classList.add('is-swapping');
+      clearTimeout(swapTimer);
+      swapTimer = setTimeout(() => {
+        write();
+        copy.classList.remove('is-swapping');
+      }, 320);
+    }
+
+    function restartDotFill() {
+      if (reduceMotion) return;
+      const fill = dots[active].querySelector('.fives-dot-fill');
+      fill.style.animation = 'none';
+      void fill.offsetWidth;          // force reflow so the animation replays
+      fill.style.animation = '';
+    }
+
+    // ---- navigation ----
+    function go(index) {
+      active = ((index % n) + n) % n;
+      render();
+      schedule();                     // every move earns a fresh full interval
+    }
+    const next = () => go(active + 1);
+    const prev = () => go(active - 1);
+
+    function schedule() {
+      clearTimeout(timer);
+      if (reduceMotion || paused || !visible) return;
+      timer = setTimeout(next, INTERVAL);
+    }
+    function pause() {
+      paused = true;
+      clearTimeout(timer);
+      section.classList.add('is-paused');
+    }
+    function resume() {
+      paused = false;
+      section.classList.remove('is-paused');
+      schedule();
+    }
+
+    nextBtn && nextBtn.addEventListener('click', next);
+    prevBtn && prevBtn.addEventListener('click', prev);
+
+    cards.forEach((card, i) => {
+      card.addEventListener('click', () => {
+        if (!swiped && i !== active) go(i);
+      });
+    });
+
+    stage.addEventListener('keydown', (e) => {
+      if (e.key === 'ArrowRight') { e.preventDefault(); next(); }
+      if (e.key === 'ArrowLeft')  { e.preventDefault(); prev(); }
+    });
+
+    stage.addEventListener('mouseenter', pause);
+    stage.addEventListener('mouseleave', resume);
+    stage.addEventListener('focusin', pause);
+    stage.addEventListener('focusout', (e) => {
+      if (!stage.contains(e.relatedTarget)) resume();
+    });
+    document.addEventListener('visibilitychange', () => {
+      if (document.hidden) pause(); else resume();
+    });
+
+    // ---- swipe / drag ----
+    let startX = null;
+    stage.addEventListener('pointerdown', (e) => {
+      if (e.pointerType === 'mouse' && e.button !== 0) return;
+      startX = e.clientX;
+    });
+    stage.addEventListener('pointerup', (e) => {
+      if (startX === null) return;
+      const dx = e.clientX - startX;
+      startX = null;
+      if (Math.abs(dx) > 44) {
+        swiped = true;
+        if (dx < 0) next(); else prev();
+        setTimeout(() => { swiped = false; }, 140);
+      }
+    });
+    stage.addEventListener('pointercancel', () => { startX = null; });
+
+    // ---- only run the timer while the section is on screen ----
+    if ('IntersectionObserver' in window) {
+      new IntersectionObserver((entries) => {
+        entries.forEach(entry => {
+          visible = entry.isIntersecting;
+          if (visible) schedule(); else clearTimeout(timer);
+        });
+      }, { threshold: 0.25 }).observe(section);
+    }
+
+    render();
+    schedule();
+  })();
+
 </script>
 
 </body>
