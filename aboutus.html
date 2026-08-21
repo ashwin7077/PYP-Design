@@ -3,7 +3,7 @@
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>Message from our Chairman</title>
+<title>About Us — Patanjali Yogpeeth Nepal</title>
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
 <link href="https://fonts.googleapis.com/css2?family=Merriweather:wght@300;400;700&family=Merriweather+Sans:wght@400;500&family=Noto+Serif+Devanagari:wght@300;400;500&family=Crete+Round&display=swap" rel="stylesheet">
@@ -877,6 +877,334 @@
     .chairman-portrait-role { text-align: left; max-width: none; }
   }
 
+  /* ============ SHARED SECTION HEADER (eyebrow + title + rule) ============ */
+  .section-header {
+    text-align: center;
+    max-width: 660px;
+    margin: 0 auto clamp(32px, 5vw, 52px);
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+  }
+  .section-eyebrow {
+    display: inline-flex;
+    align-items: center;
+    gap: 12px;
+    font-family: 'Merriweather Sans', sans-serif;
+    font-size: 12px;
+    font-weight: 500;
+    letter-spacing: 0.16em;
+    text-transform: uppercase;
+    color: var(--maroon);
+    margin-bottom: 16px;
+  }
+  .section-eyebrow::before,
+  .section-eyebrow::after {
+    content: '';
+    width: 24px;
+    height: 1.5px;
+    background: var(--gold);
+  }
+  .section-title {
+    font-family: 'Merriweather', serif;
+    font-weight: 700;
+    font-size: clamp(24px, 3.4vw, 36px);
+    line-height: 1.3;
+    color: var(--ink);
+  }
+  .section-title em {
+    font-style: normal;
+    color: var(--maroon);
+  }
+  .section-desc {
+    margin-top: 14px;
+    font-family: 'Merriweather', Georgia, serif;
+    font-weight: 300;
+    font-size: clamp(14px, 1.5vw, 15.5px);
+    line-height: 1.85;
+    color: var(--muted-text);
+  }
+  .section-rule {
+    width: 54px;
+    height: 2px;
+    background: var(--gold);
+    margin-top: 20px;
+  }
+
+  /* ============ OUR STORY ============ */
+  .story-section {
+    position: relative;
+    background: #FFFFFF;
+    padding: clamp(48px, 7vw, 88px) clamp(20px, 6vw, 64px);
+    overflow: hidden;
+  }
+  .story-inner {
+    max-width: 1180px;
+    margin: 0 auto;
+    display: grid;
+    grid-template-columns: 1fr 340px;
+    gap: clamp(32px, 5vw, 64px);
+    align-items: start;
+  }
+  .story-copy .chairman-quote-mark { margin-bottom: -10px; }
+  .story-copy .chairman-name { font-size: clamp(20px, 2.4vw, 26px); }
+  .story-copy .chairman-rule { margin: 16px 0 20px; }
+  .story-copy .chairman-text p { text-align: left; }
+
+  .story-facts {
+    background: var(--cream);
+    border: 1px solid var(--cream-line);
+    border-radius: 10px;
+    padding: clamp(22px, 3vw, 30px);
+  }
+  .story-facts h4 {
+    font-family: 'Merriweather Sans', sans-serif;
+    font-weight: 500;
+    font-size: 12px;
+    letter-spacing: 0.14em;
+    text-transform: uppercase;
+    color: var(--maroon);
+    margin-bottom: 18px;
+  }
+  .story-facts ul { display: flex; flex-direction: column; gap: 16px; }
+  .story-facts li {
+    display: flex;
+    gap: 12px;
+    align-items: flex-start;
+  }
+  .story-facts li svg {
+    width: 18px; height: 18px;
+    stroke: var(--maroon);
+    fill: none;
+    flex-shrink: 0;
+    margin-top: 2px;
+  }
+  .story-facts li .fact-label {
+    display: block;
+    font-family: 'Merriweather Sans', sans-serif;
+    font-size: 11.5px;
+    letter-spacing: 0.04em;
+    text-transform: uppercase;
+    color: var(--muted-text);
+  }
+  .story-facts li .fact-value {
+    display: block;
+    margin-top: 2px;
+    font-family: 'Merriweather', serif;
+    font-weight: 700;
+    font-size: 15px;
+    color: var(--ink);
+    line-height: 1.4;
+  }
+
+  @media (max-width: 900px) {
+    .story-inner { grid-template-columns: 1fr; }
+  }
+
+  /* ============ STATS STRIP ============ */
+  .stats-section {
+    position: relative;
+    background: linear-gradient(135deg, var(--ink) 0%, var(--maroon-deep) 100%);
+    padding: clamp(40px, 6vw, 60px) clamp(20px, 6vw, 64px);
+  }
+  .stats-inner {
+    max-width: 1180px;
+    margin: 0 auto;
+    display: grid;
+    grid-template-columns: repeat(5, 1fr);
+    gap: clamp(20px, 3vw, 32px);
+  }
+  .stat-item {
+    text-align: center;
+    padding: 0 8px;
+    border-left: 1px solid rgba(246,238,226,0.14);
+  }
+  .stat-item:first-child { border-left: none; }
+  .stat-number {
+    font-family: 'Merriweather', serif;
+    font-weight: 700;
+    font-size: clamp(24px, 3vw, 32px);
+    color: var(--gold-soft);
+    line-height: 1.2;
+  }
+  .stat-label {
+    margin-top: 8px;
+    font-family: 'Merriweather Sans', sans-serif;
+    font-size: 12.5px;
+    letter-spacing: 0.03em;
+    line-height: 1.5;
+    color: var(--ivory-text);
+    opacity: 0.85;
+  }
+  @media (max-width: 900px) {
+    .stats-inner { grid-template-columns: repeat(2, 1fr); }
+    .stat-item:nth-child(odd) { border-left: none; }
+  }
+  @media (max-width: 520px) {
+    .stats-inner { grid-template-columns: 1fr; }
+    .stat-item { border-left: none !important; padding-bottom: 18px; border-bottom: 1px solid rgba(246,238,226,0.14); }
+    .stat-item:last-child { border-bottom: none; padding-bottom: 0; }
+  }
+
+  /* ============ INITIATIVES (CARD GRID) ============ */
+  .initiatives-section {
+    position: relative;
+    background: #FBF7F0;
+    padding: clamp(48px, 7vw, 88px) clamp(20px, 6vw, 64px);
+  }
+  .initiatives-inner { max-width: 1180px; margin: 0 auto; }
+  .initiatives-grid {
+    display: grid;
+    grid-template-columns: repeat(5, 1fr);
+    gap: 20px;
+  }
+  .initiative-card {
+    background: #FFFFFF;
+    border: 1px solid var(--cream-line);
+    border-radius: 10px;
+    padding: 26px 20px;
+    text-align: center;
+    transition: transform var(--dur-base) var(--ease-out), box-shadow var(--dur-base) var(--ease-out), border-color var(--dur-base) var(--ease);
+  }
+  .initiative-card:hover {
+    transform: translateY(-4px);
+    box-shadow: 0 20px 40px -24px rgba(43,17,20,0.25);
+    border-color: var(--gold);
+  }
+  .initiative-icon {
+    width: 54px; height: 54px;
+    margin: 0 auto 16px;
+    border-radius: 50%;
+    background: var(--cream);
+    display: flex; align-items: center; justify-content: center;
+  }
+  .initiative-icon svg { width: 24px; height: 24px; stroke: var(--maroon); fill: none; }
+  .initiative-card h3 {
+    font-family: 'Merriweather', serif;
+    font-weight: 700;
+    font-size: 15.5px;
+    color: var(--ink);
+    line-height: 1.4;
+    margin-bottom: 8px;
+  }
+  .initiative-card p {
+    font-family: 'Merriweather Sans', sans-serif;
+    font-weight: 400;
+    font-size: 12.5px;
+    line-height: 1.65;
+    color: var(--muted-text);
+  }
+  @media (max-width: 1020px) {
+    .initiatives-grid { grid-template-columns: repeat(3, 1fr); }
+  }
+  @media (max-width: 640px) {
+    .initiatives-grid { grid-template-columns: repeat(2, 1fr); }
+  }
+
+  /* ============ MAIN OBJECTIVES (ICON ROWS) ============ */
+  .objectives-section {
+    position: relative;
+    background: #FFFFFF;
+    padding: clamp(48px, 7vw, 88px) clamp(20px, 6vw, 64px);
+  }
+  .objectives-inner {
+    max-width: 1180px;
+    margin: 0 auto;
+    display: grid;
+    grid-template-columns: repeat(2, 1fr);
+    gap: 0 56px;
+  }
+  .objective-row {
+    display: flex;
+    gap: 18px;
+    padding: 22px 0;
+    border-top: 1px solid var(--cream-line);
+  }
+  .objectives-inner .objective-row:nth-child(1),
+  .objectives-inner .objective-row:nth-child(2) {
+    border-top: none;
+  }
+  .objective-icon {
+    width: 52px; height: 52px;
+    flex-shrink: 0;
+    border-radius: 50%;
+    background: var(--maroon);
+    display: flex; align-items: center; justify-content: center;
+  }
+  .objective-icon svg { width: 22px; height: 22px; stroke: var(--ivory-text); fill: none; }
+  .objective-copy h3 {
+    font-family: 'Merriweather', serif;
+    font-weight: 700;
+    font-size: 16.5px;
+    color: var(--maroon);
+    margin-bottom: 6px;
+  }
+  .objective-copy p {
+    font-family: 'Merriweather', Georgia, serif;
+    font-weight: 300;
+    font-size: 14px;
+    line-height: 1.75;
+    color: #4A3A34;
+  }
+  @media (max-width: 760px) {
+    .objectives-inner { grid-template-columns: 1fr; }
+    .objectives-inner .objective-row:nth-child(2) { border-top: 1px solid var(--cream-line); }
+  }
+
+  /* ============ CTA BAND ============ */
+  .about-cta {
+    position: relative;
+    background: var(--cream);
+    border-top: 1px solid var(--cream-line);
+    border-bottom: 1px solid var(--cream-line);
+    padding: clamp(36px, 5vw, 52px) 24px;
+    text-align: center;
+  }
+  .about-cta h2 {
+    font-family: 'Merriweather', serif;
+    font-weight: 700;
+    font-size: clamp(20px, 2.6vw, 28px);
+    color: var(--ink);
+  }
+  .about-cta p {
+    max-width: 560px;
+    margin: 12px auto 24px;
+    font-family: 'Merriweather', Georgia, serif;
+    font-weight: 300;
+    font-size: 14.5px;
+    line-height: 1.8;
+    color: var(--muted-text);
+  }
+  .about-cta-actions {
+    display: flex;
+    gap: 14px;
+    justify-content: center;
+    flex-wrap: wrap;
+  }
+  .cta-btn {
+    display: inline-flex;
+    align-items: center;
+    gap: 8px;
+    padding: 13px 28px;
+    font-family: 'Merriweather Sans', sans-serif;
+    font-weight: 500;
+    font-size: 13.5px;
+    letter-spacing: 0.03em;
+    border-radius: 4px;
+    transition: transform var(--dur-fast) var(--ease), box-shadow var(--dur-fast) var(--ease), background var(--dur-fast) var(--ease);
+  }
+  .cta-btn.primary {
+    background: var(--maroon);
+    color: var(--ivory-text);
+  }
+  .cta-btn.primary:hover { background: var(--maroon-deep); transform: translateY(-2px); box-shadow: 0 12px 24px -12px rgba(94,30,40,0.5); }
+  .cta-btn.secondary {
+    background: transparent;
+    color: var(--maroon);
+    border: 1.5px solid var(--maroon);
+  }
+  .cta-btn.secondary:hover { background: var(--maroon); color: var(--ivory-text); transform: translateY(-2px); }
+
 </style>
 </head>
 <body>
@@ -1024,13 +1352,13 @@
       </li>
 
       <li class="nav-item active">
-        <a class="nav-link" href="about.html">About Us
+        <a class="nav-link" href="aboutus.html">About Us
           <svg viewBox="0 0 10 6" fill="none"><path d="M1 1l4 4 4-4" stroke="currentColor" stroke-width="1.3"/></svg>
         </a>
         <div class="dropdown">
-          <a href="#">Patanjali</a>
-          <a href="about.html#chairman">Chairperson</a>
-          <a href="contactus.html">Contact US</a>
+          <a href="aboutus.html">Patanjali</a>
+          <a href="chairperson.html">Chairperson</a>
+          <a href="#">Contact US</a>
         </div>
       </li>
     </ul>
@@ -1048,184 +1376,266 @@
 </header>
 <!-- ============ ABOUT US HERO ============ -->
 <header class="about-hero">
-  <h1 class="about-hero-title">Message from our <em>Chairman</em></h1>
+  <h1 class="about-hero-title">About <em>Patanjali Yogpeeth Nepal</em></h1>
   <p class="about-hero-desc">
-    Patanjali Yogpeeth Nepal is guided by the vision of two revered leaders whose life's
-    work has carried Yoga and Ayurveda to millions across the world.
+    A non-profit organization dedicated to promoting health, spirituality, and prosperity
+    through Yoga and Ayurveda, fostering a healthy, peaceful, and self-reliant Nepal.
   </p>
 </header>
 
-<!-- ============ MESSAGE FROM OUR CHAIRMAN ============ -->
-<section class="chairman-section" id="chairman">
-  <div class="chairman-inner">
+<!-- ============ OUR STORY ============ -->
+<section class="story-section">
+  <div class="story-inner">
 
-    <div class="chairman-header reveal-fade">
-      <div class="chairman-eyebrow">Leadership</div>
-      <h2 class="chairman-title">Words from Our <em>Chairpersons</em></h2>
-      <div class="chairman-header-rule"></div>
+    <div class="story-copy reveal-fade">
+      <span class="chairman-quote-mark" aria-hidden="true">&ldquo;</span>
+      <h2 class="chairman-name">Our Story</h2>
+      <div class="chairman-rule"></div>
+      <div class="chairman-text">
+        <p>
+          Established on October 7, 2006, under the esteemed guidance of Param Pujya Yog
+          Rishi Swami Ramdev Ji Maharaj and Param Shraddheya Ayurved Shiromani Acharya
+          Balkrishna Ji Maharaj, Patanjali Yogpeeth Nepal is a non-profit organization
+          dedicated to promoting health, spirituality, and prosperity through Yoga and
+          Ayurveda. Registered under the Company Act of 2063, the organization has been
+          instrumental in fostering a healthy, peaceful, and self-reliant Nepal.
+        </p>
+        <p>
+          Guided by a sacred vision for a developed, healthy, happy, and prosperous Nepal,
+          we walk the path of Yog and Ayurved with lakhs of dedicated volunteers, carrying
+          this mission into every corner of the nation &mdash; from bustling cities to the
+          most remote villages across all 77 districts.
+        </p>
+      </div>
     </div>
 
-    <!-- 1 · YOG RISHI SWAMI RAMDEV JI MAHARAJ -->
-    <article class="chairman-block reveal-up">
+    <aside class="story-facts reveal-fade">
+      <h4>At a Glance</h4>
+      <ul>
+        <li>
+          <svg viewBox="0 0 24 24"><path d="M8 2v4M16 2v4M3 9h18M5 5h14a1 1 0 0 1 1 1v13a1 1 0 0 1-1 1H5a1 1 0 0 1-1-1V6a1 1 0 0 1 1-1z" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/></svg>
+          <span>
+            <span class="fact-label">Established</span>
+            <span class="fact-value">October 7, 2006</span>
+          </span>
+        </li>
+        <li>
+          <svg viewBox="0 0 24 24"><path d="M4 20V10l8-6 8 6v10M4 20h16M9 20v-6h6v6" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/></svg>
+          <span>
+            <span class="fact-label">Registration</span>
+            <span class="fact-value">Company Act, 2063</span>
+          </span>
+        </li>
+        <li>
+          <svg viewBox="0 0 24 24"><circle cx="12" cy="8" r="4" stroke-width="1.5"/><path d="M4 21c0-4.4 3.6-8 8-8s8 3.6 8 8" stroke-width="1.5" stroke-linecap="round"/></svg>
+          <span>
+            <span class="fact-label">Leadership</span>
+            <span class="fact-value">Swami Ramdev Ji &amp; Acharya Balkrishna Ji</span>
+          </span>
+        </li>
+        <li>
+          <svg viewBox="0 0 24 24"><path d="M12 22s-8-4.4-8-11a8 8 0 0 1 16 0c0 6.6-8 11-8 11z" stroke-width="1.5" stroke-linejoin="round"/><circle cx="12" cy="11" r="2.6" stroke-width="1.5"/></svg>
+          <span>
+            <span class="fact-label">Reach</span>
+            <span class="fact-value">All 77 Districts of Nepal</span>
+          </span>
+        </li>
+      </ul>
+    </aside>
 
-      <div class="chairman-banner">
-        <img src="https://agromni.co.in/pypnepal1/assets/image/swamiji-banner.jpg" alt="Yog Rishi Swami Ramdev Ji Maharaj">
-        <div class="chairman-banner-caption">
-          <span class="roman">CHAIRPERSON</span>
-          <span class="name">Yog Rishi Swami Ramdev Ji Maharaj</span>
+  </div>
+</section>
+
+<!-- ============ STATS STRIP ============ -->
+<section class="stats-section">
+  <div class="stats-inner">
+    <div class="stat-item reveal-fade">
+      <div class="stat-number">2006</div>
+      <div class="stat-label">Founded in Nepal</div>
+    </div>
+    <div class="stat-item reveal-fade">
+      <div class="stat-number">1,400+</div>
+      <div class="stat-label">Regular Yog Classes</div>
+    </div>
+    <div class="stat-item reveal-fade">
+      <div class="stat-number">65,000+</div>
+      <div class="stat-label">Trained Yog Teachers</div>
+    </div>
+    <div class="stat-item reveal-fade">
+      <div class="stat-number">Lakhs</div>
+      <div class="stat-label">Of Dedicated Volunteers</div>
+    </div>
+    <div class="stat-item reveal-fade">
+      <div class="stat-number">NPR 10Cr+</div>
+      <div class="stat-label">Social Service During Calamities</div>
+    </div>
+  </div>
+</section>
+
+<!-- ============ OUR INITIATIVES ============ -->
+<section class="initiatives-section">
+  <div class="initiatives-inner">
+
+    <div class="section-header reveal-fade">
+      <div class="section-eyebrow">What We Do</div>
+      <h2 class="section-title">Our <em>Initiatives</em></h2>
+      <p class="section-desc">
+        Our work spans healthcare, education, disaster relief, community development, and
+        social welfare &mdash; each rooted in the timeless wisdom of Yoga and Ayurveda.
+      </p>
+    </div>
+
+    <div class="initiatives-grid">
+
+      <div class="initiative-card reveal-up">
+        <div class="initiative-icon">
+          <svg viewBox="0 0 24 24"><path d="M12 21s-7.5-4.9-10-9.3C.4 8.1 2 4.5 5.6 4c2-.3 3.7.7 4.4 2.1C10.7 4.7 12.4 3.7 14.4 4c3.6.5 5.2 4.1 3.6 7.7C15.5 16.1 12 21 12 21z" stroke-width="1.5" stroke-linejoin="round"/></svg>
+        </div>
+        <h3>Healthcare Services</h3>
+        <p>Providing holistic treatments through Ayurveda and Yoga.</p>
+      </div>
+
+      <div class="initiative-card reveal-up">
+        <div class="initiative-icon">
+          <svg viewBox="0 0 24 24"><path d="M4 19V6a2 2 0 0 1 2-2h5v17H6a2 2 0 0 0-2 2zM20 19V6a2 2 0 0 0-2-2h-5v17h5a2 2 0 0 1 2 2z" stroke-width="1.5" stroke-linejoin="round"/></svg>
+        </div>
+        <h3>Education</h3>
+        <p>Operating Patanjali Ayurved Medical College &amp; Research Center in Dhulikhel, offering BAMS degrees affiliated with Nepal Sanskrit University.</p>
+      </div>
+
+      <div class="initiative-card reveal-up">
+        <div class="initiative-icon">
+          <svg viewBox="0 0 24 24"><path d="M12 2l2.4 6.6L21 9l-5.3 4.4L17.3 21 12 17.3 6.7 21l1.6-7.6L3 9l6.6-.4L12 2z" stroke-width="1.4" stroke-linejoin="round"/></svg>
+        </div>
+        <h3>Disaster Relief</h3>
+        <p>Active relief efforts during the 2015 &amp; 2023 earthquakes, 2024 floods, and the COVID-19 pandemic.</p>
+      </div>
+
+      <div class="initiative-card reveal-up">
+        <div class="initiative-icon">
+          <svg viewBox="0 0 24 24"><circle cx="9" cy="7" r="3" stroke-width="1.5"/><path d="M2 21c0-3.9 3.1-7 7-7s7 3.1 7 7" stroke-width="1.5" stroke-linecap="round"/><circle cx="17" cy="8" r="2.4" stroke-width="1.5"/><path d="M15.5 14.2c2.9.4 5.5 2.8 5.5 6.3" stroke-width="1.5" stroke-linecap="round"/></svg>
+        </div>
+        <h3>Community Development</h3>
+        <p>Yoga camps, health awareness programs, and cultural activities across all 77 districts of Nepal.</p>
+      </div>
+
+      <div class="initiative-card reveal-up">
+        <div class="initiative-icon">
+          <svg viewBox="0 0 24 24"><path d="M12 21s-7-4.4-9.3-8.9C1 8.7 2.6 5 6.3 4.5c2.2-.3 3.9.8 4.6 2.2M12 21s7-4.4 9.3-8.9C23 8.7 21.4 5 17.7 4.5c-2.2-.3-3.9.8-4.6 2.2" stroke-width="1.4" stroke-linecap="round" stroke-linejoin="round"/><path d="M9 11h6M12 8v6" stroke-width="1.4" stroke-linecap="round"/></svg>
+        </div>
+        <h3>Social Welfare</h3>
+        <p>Free education, accommodation, and healthcare for orphans and underprivileged communities.</p>
+      </div>
+
+    </div>
+  </div>
+</section>
+
+<!-- ============ MAIN OBJECTIVES ============ -->
+<section class="objectives-section">
+  <div class="initiatives-inner">
+
+    <div class="section-header reveal-fade">
+      <div class="section-eyebrow">Our Purpose</div>
+      <h2 class="section-title">Main <em>Objectives</em></h2>
+      <p class="section-desc">
+        The founding principles that guide every programme we run and every community we serve.
+      </p>
+    </div>
+
+    <div class="objectives-inner">
+
+      <div class="objective-row reveal-fade">
+        <div class="objective-icon">
+          <svg viewBox="0 0 24 24"><circle cx="12" cy="6" r="2.4" stroke-width="1.5"/><path d="M8 21l1.5-6.5L7 12l3-3 2 2 2-2 3 3-2.5 2.5L16 21" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/></svg>
+        </div>
+        <div class="objective-copy">
+          <h3>Promotion of Yoga and Ayurveda</h3>
+          <p>Establishing Yoga and Ayurveda as integral components of health care and wellness on a global scale, focusing on their traditional practices.</p>
         </div>
       </div>
 
-      <div class="chairman-grid">
-      <div class="chairman-portrait">
-        <div class="chairman-portrait-frame">
-          <img class="chairman-portrait-photo" src="https://agromni.co.in/pypnepal1/assets/image/swami-ji.webp" alt="Swami Ramdev Ji">
+      <div class="objective-row reveal-fade">
+        <div class="objective-icon">
+          <svg viewBox="0 0 24 24"><path d="M4 5.5C4 4.7 4.7 4 5.5 4H11v16H5.5A1.5 1.5 0 0 1 4 18.5v-13z" stroke-width="1.5" stroke-linejoin="round"/><path d="M20 5.5c0-.8-.7-1.5-1.5-1.5H13v16h5.5a1.5 1.5 0 0 0 1.5-1.5v-13z" stroke-width="1.5" stroke-linejoin="round"/><circle cx="16.3" cy="9" r="1.1"/></svg>
         </div>
-        <div class="chairman-portrait-name">
-          <span class="roman">Swami Ramdev Ji</span>
-          <span class="devanagari">योग ऋषि स्वामी रामदेव जी महाराज</span>
-        </div>
-        <p class="chairman-portrait-role">Founder, Patanjali Yogpeeth &amp; Chairman</p>
-      </div>
-
-      <div class="chairman-copy">
-        <span class="chairman-quote-mark" aria-hidden="true">&ldquo;</span>
-        <h3 class="chairman-name">Yog Rishi Param Pujya Swami Ramdev Ji Maharaj</h3>
-        <p class="chairman-role">A Sacred Vision for Nepal and Humanity</p>
-        <div class="chairman-rule"></div>
-
-        <div class="chairman-text">
-          <p>
-            The sacred Nepal is not only the land of austerity of various sages but is the soul
-            of Sanatana where mountains are standing as the guardian of Vaidik knowledge and
-            rivers flow carrying the memory of saints of millenniums. A country where people are
-            not just ordinary but are the descendants of divine lineage. Patanjali, a sacred
-            movement of national, spiritual and human service is actually not only a mission
-            but is our dharma, our austerity and a sacred vow of many lifetimes. With a deep
-            sense of responsibility and commitment, I strongly believe that our bond is not
-            defined through borders but is forged in the eternal fires of Sanatana Dharma,
-            rooted in our shared culture, language and lineage of Rishis.
-          </p>
-          <p>
-            Moreover, Yoga is the ancient science of life, not just an exercise, but a complete
-            path to physical health, mental peace, and spiritual awakening. Through yoga, we
-            unite with our inner self, with nature, and with the Divine. It is a way to live in
-            harmony with body, breath, mind, and soul. Also, Yoga is the only way to achieve
-            world harmony and peace too.
-          </p>
-          <p>
-            I wish for Yoga to become the lifestyle in every house where every person is a Yogi.
-            A nation rich in herbal resources should use its herbal nature to cure, heal and
-            rejuvenate people; every youth should be empowered, a Yogi in complete awareness of
-            his full strength. Youth energy channelised with ancient knowledge and wisdom should
-            once again come as guidance for the whole earth. To achieve this motto, we need a
-            revival not just economically but spiritually, morally and culturally  with Yoga
-            and Ayurveda as the best and purest tools. We are the children of Sanatan Dharma. We
-            are the torchbearers of Yoga. We are the guardians of Ayurveda. We are the future.
-          </p>
-          <p>
-            With deep love and unwavering commitment, I wish transformation of Nepal into a
-            global centre of holistic health and Dharmic leadership. Let Nepal rise in economical
-            heights blended with health, harmony and heritage.
-          </p>
-        </div>
-
-        <div class="chairman-signoff">
-          <div class="chairman-signoff-line"></div>
-          <span class="devanagari">स्वामी रामदेव</span>
-        </div>
-      </div>
-      </div>
-    </article>
-
-    <!-- 2 · ACHARYA BALKRISHNA JI MAHARAJ -->
-    <article class="chairman-block is-reverse reveal-up">
-
-      <div class="chairman-banner">
-        <img src="https://agromni.co.in/pypnepal1/assets/image/acharyaji-banner.jpg" alt="Ayurved Shiromani Acharya Balkrishna Ji Maharaj">
-        <div class="chairman-banner-caption">
-          <span class="roman">CHAIRPERSON</span>
-          <span class="name">Ayurved Shiromani Acharya Balkrishna Ji Maharaj</span>
+        <div class="objective-copy">
+          <h3>Research and Study</h3>
+          <p>Dedicated to studying ancient manuscripts related to Vedic traditions, Yoga and Ayurveda, conducting research to validate and modernize these practices.</p>
         </div>
       </div>
 
-      <div class="chairman-grid">
-      <div class="chairman-portrait">
-        <div class="chairman-portrait-frame">
-          <img class="chairman-portrait-photo" src="https://agromni.co.in/pypnepal1/assets/image/acharya-ji.webp" alt="Acharya Balkrishna Ji">
+      <div class="objective-row reveal-fade">
+        <div class="objective-icon">
+          <svg viewBox="0 0 24 24"><circle cx="12" cy="8" r="3.2" stroke-width="1.5"/><path d="M5 21c0-3.9 3.1-7 7-7s7 3.1 7 7" stroke-width="1.5" stroke-linecap="round"/><path d="M17 6l1.4 1.4L21 5" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/></svg>
         </div>
-        <div class="chairman-portrait-name">
-          <span class="roman">Acharya Balkrishna Ji</span>
-          <span class="devanagari">आयुर्वेद शिरोमणि आचार्य बालकृष्ण जी महाराज</span>
-        </div>
-        <p class="chairman-portrait-role">Founder, Patanjali &amp; Chairperson</p>
-      </div>
-
-      <div class="chairman-copy">
-        <span class="chairman-quote-mark" aria-hidden="true">&ldquo;</span>
-        <h3 class="chairman-name">Ayurved Shiromani Param Shraddheya Acharya Balkrishna Ji Maharaj</h3>
-        <p class="chairman-role">A Divine Vow to Serve Nepal</p>
-        <div class="chairman-rule"></div>
-
-        <div class="chairman-text">
-          <p>
-            As we stand amidst the breathtaking beauty of our sacred land from the majestic
-            peaks of Sagarmatha to the serene rivers flowing through our valleys. We are
-            reminded of the profound spiritual and cultural heritage that Nepal embodies. My
-            heart too beats with the rhythms of the Himalayas, and my soul, deeply rooted in the
-            sacred soil of Nepal the cradle of Vaidik wisdom fills with joy and reverence
-            when I reflect upon the strength, purity, and timeless potential of Nepali culture.
-          </p>
-          <p>
-            Yet, alongside this immense spiritual wealth, we are also confronted with pressing
-            challenges poverty, social unrest, and a lack of opportunity in many regions. These
-            challenges are not reasons for despair, but urgent calls to action. As a son of this
-            sacred land, I feel an unshakable responsibility to contribute every ounce of my
-            knowledge, strength, and experience toward Nepal's upliftment.
-          </p>
-          <p>
-            I have always believed that knowledge, when confined, is wasted. True wisdom finds
-            its meaning when it becomes a force for transformation and upliftment. At Patanjali,
-            our vision for Nepal is not merely developmental, it is holistic. We dream of a
-            Nepal that thrives materially, spiritually, and culturally.  A Nepal that is united,
-            self-reliant, and radiant with its ancient values.
-          </p>
-          <p>
-            Our mission is to help build a society that is sustainable, peaceful, and spiritually
-            awakened  where every village becomes a centre of wellness, where every home
-            radiates health, and where every youth becomes a beacon of positive change.
-          </p>
-        </div>
-
-        <ul class="chairman-highlights">
-          <li>In its untouched biodiversity, lies the future of Ayurved-based healthcare and global leadership in herbal science.</li>
-          <li>In its spiritual legacy, lies the power to reawaken Yog not just as an exercise, but as a complete way of life.</li>
-          <li>In its youth, lies the strength and energy to build a prosperous, healthy, and self-sustained nation.</li>
-        </ul>
-
-        <div class="chairman-text">
-          <p>
-            Through Patanjali, we have taken steady and meaningful steps toward realizing this
-            vision. Our efforts in herbal research, Yog training, Gurukul education, health
-            outreach, and self-reliance initiatives are already transforming lives globally. And
-            Patanjali Yogpeeth Nepal, motivated with the same passion, is dedicated to serve
-            mother Nepal to its fullest. With the dedicated service of lakhs of trained Yog
-            teachers, we have established thousands of Yog classes across the nation. Even in the
-            most remote corners of Nepal, lives are being uplifted physically, mentally, and
-            spiritually. This transformation is not just a milestone, it is a movement. And it
-            strengthens our resolve to continue expanding this service to every heart and home.
-            This is not just a project, it is our dharma.
-          </p>
-        </div>
-
-        <div class="chairman-signoff">
-          <div class="chairman-signoff-line"></div>
-          <span class="devanagari">आचार्य बालकृष्ण</span>
+        <div class="objective-copy">
+          <h3>Community Health Initiatives</h3>
+          <p>Organizing health camps and awareness programs to educate the public about the benefits of Yoga and natural healing methods.</p>
         </div>
       </div>
-      </div>
-    </article>
 
+      <div class="objective-row reveal-fade">
+        <div class="objective-icon">
+          <svg viewBox="0 0 24 24"><path d="M12 21s-7-4.4-9.3-8.9C1 8.7 2.6 5 6.3 4.5c2.2-.3 3.9.8 4.6 2.2m1.1 0c.7-1.4 2.4-2.5 4.6-2.2 3.7.5 5.3 4.2 3.3 7.6C18 12.4 15.5 14.6 13 17" stroke-width="1.4" stroke-linecap="round" stroke-linejoin="round"/><path d="M4 15l2.5 2.5L11 13" stroke-width="1.4" stroke-linecap="round" stroke-linejoin="round"/></svg>
+        </div>
+        <div class="objective-copy">
+          <h3>Support For Underprivileged</h3>
+          <p>Actively supporting marginalized communities by providing free accommodation, food and education to orphans and economically weaker sections of society.</p>
+        </div>
+      </div>
+
+      <div class="objective-row reveal-fade">
+        <div class="objective-icon">
+          <svg viewBox="0 0 24 24"><path d="M12 3L2 8l10 5 10-5-10-5z" stroke-width="1.5" stroke-linejoin="round"/><path d="M6 10.5V16c0 1.7 2.7 3 6 3s6-1.3 6-3v-5.5" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/><path d="M22 8v6" stroke-width="1.5" stroke-linecap="round"/></svg>
+        </div>
+        <div class="objective-copy">
+          <h3>Educational Programs</h3>
+          <p>Establishing educational institutions that offer courses in Yoga and Ayurveda, nurturing a new generation of practitioners.</p>
+        </div>
+      </div>
+
+      <div class="objective-row reveal-fade">
+        <div class="objective-icon">
+          <svg viewBox="0 0 24 24"><path d="M12 3l3 5H9l3-5z" stroke-width="1.5" stroke-linejoin="round"/><path d="M6 21V11h12v10M4 21h16" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/><path d="M10 21v-5h4v5" stroke-width="1.5" stroke-linejoin="round"/></svg>
+        </div>
+        <div class="objective-copy">
+          <h3>Cultural Preservation</h3>
+          <p>Promoting Indian cultural values through Yoga and Ayurveda, aiming for a holistic approach to health that includes spiritual, physical, and mental well-being.</p>
+        </div>
+      </div>
+
+      <div class="objective-row reveal-fade">
+        <div class="objective-icon">
+          <svg viewBox="0 0 24 24"><path d="M7 7l3-3 3 3M7 17l3 3 3-3M17 7l3 3-3 3M17 17l3-3-3-3" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/><circle cx="12" cy="12" r="3" stroke-width="1.5"/></svg>
+        </div>
+        <div class="objective-copy">
+          <h3>Environmental Sustainability</h3>
+          <p>Emphasizing organic farming and the use of herbal medicines, contributing to environmental conservation efforts.</p>
+        </div>
+      </div>
+
+      <div class="objective-row reveal-fade">
+        <div class="objective-icon">
+          <svg viewBox="0 0 24 24"><path d="M12 21s-7.5-4.9-10-9.3C.4 8.1 2 4.5 5.6 4c2-.3 3.7.7 4.4 2.1C10.7 4.7 12.4 3.7 14.4 4c3.6.5 5.2 4.1 3.6 7.7C15.5 16.1 12 21 12 21z" stroke-width="1.4" stroke-linejoin="round"/><path d="M9 12l2 2 4-4" stroke-width="1.4" stroke-linecap="round" stroke-linejoin="round"/></svg>
+        </div>
+        <div class="objective-copy">
+          <h3>National Health Improvement</h3>
+          <p>Integrating traditional practices into modern health systems to enhance the overall health landscape in Nepal.</p>
+        </div>
+      </div>
+
+    </div>
+  </div>
+</section>
+
+<!-- ============ CTA BAND ============ -->
+<section class="about-cta">
+  <h2>Join Us in Building a Healthier Nepal</h2>
+  <p>Whether as a volunteer, a student, or a supporter &mdash; there is a place for you in this mission.</p>
+  <div class="about-cta-actions">
+    <a href="#" class="cta-btn primary">Become a Volunteer</a>
+    <a href="chairperson.html" class="cta-btn secondary">Meet Our Chairpersons</a>
   </div>
 </section>
 
