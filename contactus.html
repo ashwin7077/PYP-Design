@@ -39,6 +39,7 @@
     font-weight:300;
     background:#FBF7F0;
     color:var(--ink);
+    padding-top:94px; /* fallback space for the fixed header; JS sets the exact value */
   }
 
   a{ text-decoration:none; color:inherit; }
@@ -284,328 +285,226 @@
     .locale-select{ gap:4px; }
   }
 
-  /* ============ HERO HEADER ============ */
-  .hero-header {
+  /* ============ CONTACT HERO (dark, with skyline signature) ============ */
+  .contact-hero{
     position: relative;
     overflow: hidden;
-    background: linear-gradient(180deg, #FBF7F0 0%, #F3E7DA 100%);
-    text-align: center;
-    padding: clamp(64px, 10vw, 128px) clamp(20px, 5vw, 48px) clamp(64px, 10vw, 118px);
-    border-bottom: 1px solid var(--cream-line);
+    background: linear-gradient(165deg, var(--maroon-deep) 0%, var(--ink) 100%);
+    padding: clamp(56px, 9vw, 96px) clamp(20px, 6vw, 64px) clamp(120px, 16vw, 190px);
   }
-  .hero-bloom{
+  .contact-hero-bloom{
     position: absolute;
     border-radius: 50%;
-    filter: blur(46px);
-    opacity: .35;
+    filter: blur(70px);
     pointer-events: none;
     z-index: 0;
   }
-  .hero-bloom--saffron{ width: 280px; height: 280px; background: var(--saffron-soft); top: -90px; left: -60px; }
-  .hero-bloom--sage{ width: 320px; height: 320px; background: var(--sage-soft); bottom: -140px; right: -80px; }
-  .hero-mandala{
-    position: absolute;
-    top: 50%; left: 50%;
-    width: clamp(420px, 60vw, 640px);
-    height: clamp(420px, 60vw, 640px);
-    transform: translate(-50%, -50%);
-    color: var(--gold);
-    opacity: .16;
-    z-index: 0;
-    animation: mandala-spin 90s linear infinite;
+  .contact-hero-bloom--saffron{ width: 340px; height: 340px; background: var(--saffron); opacity: .16; top: -100px; right: 6%; }
+  .contact-hero-bloom--sage{ width: 260px; height: 260px; background: var(--sage); opacity: .14; bottom: 10px; left: -60px; }
+  .contact-hero-inner{
+    position: relative;
+    z-index: 2;
+    max-width: 1200px;
+    margin: 0 auto;
   }
-  @keyframes mandala-spin{ to{ transform: translate(-50%, -50%) rotate(360deg); } }
-  .hero-header > *{ position: relative; z-index: 1; }
-  .hero-sub {
-    display: inline-flex;
-    align-items: center;
+  .contact-hero-eyebrow{
+    display: flex;
+    align-items: baseline;
     gap: 12px;
     font-family: 'Merriweather Sans', sans-serif;
-    letter-spacing: .3em;
+    font-size: 12px;
+    font-weight: 500;
+    letter-spacing: .22em;
     text-transform: uppercase;
-    font-size: clamp(11px, 1.8vw, 12px);
-    color: var(--maroon);
-    margin-bottom: clamp(14px, 3vw, 22px);
+    color: var(--gold-soft);
+    margin-bottom: 18px;
   }
-  .hero-sub::before, .hero-sub::after{
-    content:'';
-    width: 22px; height: 1px;
-    background: var(--gold);
+  .contact-hero-eyebrow::before{ content:''; width: 34px; height: 1.5px; background: var(--gold); }
+  .contact-hero-eyebrow .devanagari{
+    font-size: 16px;
+    letter-spacing: 0;
+    text-transform: none;
+    color: var(--saffron-soft);
   }
-  .hero-title {
+  .contact-hero-heading{
     font-family: 'Merriweather', serif;
-    font-weight: 300;
-    font-size: clamp(26px, 5vw, 46px);
-    background: linear-gradient(100deg, var(--ink) 35%, var(--maroon) 65%);
-    -webkit-background-clip: text;
-    background-clip: text;
-    color: transparent;
-    max-width: 720px;
-    margin: 0 auto;
-    line-height: 1.35;
+    font-weight: 700;
+    font-size: clamp(34px, 6vw, 60px);
+    line-height: 1.06;
+    letter-spacing: -.01em;
+    max-width: 780px;
+    color: var(--ivory-text);
   }
-  .hero-divider {
-    width: 74px;
-    height: 2px;
-    margin: clamp(20px, 4vw, 30px) auto;
-    background: linear-gradient(90deg, var(--saffron), var(--gold), var(--sage));
-    border-radius: 2px;
-  }
-  .hero-desc {
-    font-family: 'Merriweather Sans', sans-serif;
-    font-weight: 400;
-    font-size: clamp(13px, 2vw, 14.5px);
-    color: #8A6F63;
-    max-width: 480px;
-    margin: 0 auto;
-    line-height: 1.6;
-  }
-  @media (prefers-reduced-motion: reduce){
-    .hero-mandala{ animation: none; }
-  }
-
-  /* ============ QUOTE BAND ============ */
-  .quote-band{
-    position: relative;
-    overflow: hidden;
-    background: linear-gradient(120deg, var(--maroon-deep) 0%, var(--maroon) 100%);
-    padding: clamp(36px, 6vw, 54px) 24px;
-    text-align: center;
-  }
-  .quote-band-icon{
-    width: 34px; height: 34px;
-    margin: 0 auto 16px;
+  .contact-hero-heading em{
+    font-style: normal;
     color: var(--gold-soft);
-    opacity: .9;
   }
-  .quote-band-sanskrit{
-    font-family: 'Noto Serif Devanagari', 'Merriweather', serif;
-    font-size: clamp(19px, 3vw, 26px);
-    color: var(--gold-soft);
-    margin-bottom: 10px;
-  }
-  .quote-band-translation{
+  .contact-hero-desc{
     font-family: 'Merriweather Sans', sans-serif;
-    font-weight: 400;
-    font-size: 13px;
-    letter-spacing: .04em;
+    font-size: clamp(13.5px, 1.6vw, 15px);
+    line-height: 1.7;
     color: var(--muted-text-light);
-    text-transform: uppercase;
+    max-width: 460px;
+    margin-top: 20px;
+  }
+  .contact-hero-skyline{
+    position: absolute;
+    left: 0; right: 0; bottom: 0;
+    width: 100%;
+    height: auto;
+    color: var(--gold);
+    opacity: .5;
+    z-index: 1;
+    pointer-events: none;
+  }
+  @media (max-width: 640px){
+    .contact-hero{ padding-bottom: clamp(150px, 30vw, 190px); }
   }
 
-  /* ---- Generic scroll-reveal utilities ---- */
-  .reveal-fade {
-    opacity: 0;
-    transform: translateY(20px);
-    transition: opacity 0.8s cubic-bezier(0.16, 1, 0.3, 1), transform 0.8s cubic-bezier(0.16, 1, 0.3, 1);
+  /* ============ REACH + FORM (overlapping the hero) ============ */
+  .contact-main-section{
+    position: relative;
+    z-index: 3;
+    padding: 0 clamp(20px, 6vw, 64px) clamp(20px, 3vw, 32px);
   }
-  .reveal-fade.in-view { opacity: 1; transform: translateY(0); }
-  .reveal-up {
-    opacity: 0;
-    transform: translateY(36px);
-    transition: opacity 0.9s cubic-bezier(0.16, 1, 0.3, 1), transform 0.9s cubic-bezier(0.16, 1, 0.3, 1);
-  }
-  .reveal-up.in-view { opacity: 1; transform: translateY(0); }
-
-  /* ============ CONTACT INFO CARDS ============ */
-  .contact-info-section{
-    padding: clamp(50px, 8vw, 90px) clamp(20px, 6vw, 64px) clamp(20px, 4vw, 40px);
-  }
-  .contact-info-grid{
+  .contact-grid{
     max-width: 1200px;
     margin: 0 auto;
     display: grid;
-    grid-template-columns: repeat(4, 1fr);
-    gap: 26px;
+    grid-template-columns: 0.82fr 1.18fr;
+    gap: clamp(20px, 3vw, 30px);
+    align-items: start;
+    margin-top: clamp(-150px, -14vw, -110px);
   }
-  .contact-card{
-    background: #fff;
-    border-radius: 6px;
-    padding: 34px 26px;
-    text-align: center;
-    box-shadow: 0 14px 34px -18px rgba(43,17,20,.22);
-    border-top: 3px solid var(--gold);
-    transition: transform .3s ease, box-shadow .3s ease;
+
+  /* ---- Visiting card (light, lifted) ---- */
+  .visiting-card{
+    background: var(--cream);
+    border-radius: 4px;
+    padding: clamp(28px, 3.5vw, 38px);
+    box-shadow: 0 30px 60px -24px rgba(20,6,9,.45);
+    transform: rotate(-0.6deg);
   }
-  .contact-card:nth-child(1){ transition-delay: .05s; }
-  .contact-card:nth-child(2){ transition-delay: .15s; }
-  .contact-card:nth-child(3){ transition-delay: .25s; }
-  .contact-card:nth-child(4){ transition-delay: .35s; }
-  .contact-card:hover{
-    transform: translateY(-6px);
-    box-shadow: 0 22px 40px -18px rgba(43,17,20,.32);
+  .visiting-card h2{
+    font-family: 'Merriweather', serif;
+    font-weight: 700;
+    font-size: 21px;
+    color: var(--maroon-deep);
+    margin-bottom: 22px;
+    padding-bottom: 16px;
+    border-bottom: 3px solid transparent;
+    border-image: linear-gradient(90deg, var(--saffron), var(--gold), var(--sage)) 1;
   }
-  .contact-card-icon{
-    width: 62px;
-    height: 62px;
-    margin: 0 auto 16px;
+  .reach-list{ display: flex; flex-direction: column; gap: 18px; margin-bottom: 26px; }
+  .reach-item{ display: flex; align-items: flex-start; gap: 14px; }
+  .reach-item-icon{
+    width: 34px; height: 34px;
     border-radius: 50%;
-    background: linear-gradient(160deg, var(--maroon) 0%, var(--maroon-deep) 100%);
     display: flex;
     align-items: center;
     justify-content: center;
-    box-shadow: 0 10px 20px -10px rgba(43,17,20,.5);
+    flex-shrink: 0;
   }
-  .contact-card-icon svg{ width: 24px; height: 24px; stroke: var(--gold-soft); fill: none; }
-  .contact-card-element{
-    font-family: 'Noto Serif Devanagari', 'Merriweather', serif;
-    font-size: 12.5px;
-    letter-spacing: .04em;
-    color: var(--gold);
-    opacity: .85;
-    margin-bottom: 8px;
-  }
-  .contact-card h3{
-    font-family: 'Merriweather', serif;
-    font-weight: 700;
-    font-size: 17px;
-    color: var(--ink);
-    margin-bottom: 10px;
-  }
-  .contact-card p{
+  .reach-item-icon svg{ width: 16px; height: 16px; fill: none; stroke: #fff; }
+  .reach-item-icon--visit{ background: linear-gradient(160deg, var(--maroon) 0%, var(--maroon-deep) 100%); }
+  .reach-item-icon--call{ background: linear-gradient(160deg, var(--saffron) 0%, var(--saffron-deep) 100%); }
+  .reach-item-icon--write{ background: linear-gradient(160deg, var(--sage) 0%, var(--sage-deep) 100%); }
+  .reach-item-label{
+    display: block;
     font-family: 'Merriweather Sans', sans-serif;
-    font-size: 13.5px;
-    line-height: 1.7;
+    font-size: 11px;
+    font-weight: 500;
+    letter-spacing: .1em;
+    text-transform: uppercase;
+    color: var(--muted-text);
+    margin-bottom: 3px;
+  }
+  .reach-item-value{
+    font-family: 'Merriweather Sans', sans-serif;
+    font-size: 14.5px;
+    line-height: 1.6;
+    color: var(--ink);
+  }
+  .reach-item-value a{ color: var(--ink); }
+  .reach-item-value a:hover{ color: var(--maroon); }
+
+  .hours-ledger{
+    padding-top: 20px;
+    border-top: 1px dashed var(--cream-line);
+  }
+  .hours-ledger-head{
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    margin-bottom: 12px;
+  }
+  .hours-ledger-head h3{
+    font-family: 'Merriweather Sans', sans-serif;
+    font-size: 11px;
+    font-weight: 500;
+    letter-spacing: .1em;
+    text-transform: uppercase;
     color: var(--muted-text);
   }
-  .contact-card a{ color: var(--muted-text); transition: color .16s ease; }
-  .contact-card a:hover{ color: var(--maroon); }
-
-  /* Elemental accents: Prithvi (earth), Agni (fire), Jal (water), Akasha (ether) */
-  .contact-card--earth{ border-top-color: var(--maroon); }
-  .contact-card--earth .contact-card-icon{ background: linear-gradient(160deg, var(--maroon) 0%, var(--maroon-deep) 100%); }
-  .contact-card--earth .contact-card-element{ color: var(--maroon); }
-
-  .contact-card--fire{ border-top-color: var(--saffron); }
-  .contact-card--fire .contact-card-icon{ background: linear-gradient(160deg, var(--saffron) 0%, var(--saffron-deep) 100%); }
-  .contact-card--fire .contact-card-icon svg{ stroke: #FCEAD3; }
-  .contact-card--fire .contact-card-element{ color: var(--saffron-deep); }
-
-  .contact-card--water{ border-top-color: var(--sage); }
-  .contact-card--water .contact-card-icon{ background: linear-gradient(160deg, var(--sage) 0%, var(--sage-deep) 100%); }
-  .contact-card--water .contact-card-icon svg{ stroke: #E4F0E4; }
-  .contact-card--water .contact-card-element{ color: var(--sage-deep); }
-
-  .contact-card--ether{ border-top-color: var(--gold); }
-  .contact-card--ether .contact-card-icon{ background: linear-gradient(160deg, var(--gold) 0%, #A87A2E 100%); }
-  .contact-card--ether .contact-card-element{ color: #A87A2E; }
-
-  @media (max-width: 900px){
-    .contact-info-grid{ grid-template-columns: repeat(2, 1fr); }
-  }
-  @media (max-width: 540px){
-    .contact-info-grid{ grid-template-columns: 1fr; }
-  }
-
-  /* ============ MAP + FORM ============ */
-  .contact-main-section{
-    padding: clamp(20px, 4vw, 40px) clamp(20px, 6vw, 64px) clamp(70px, 10vw, 110px);
-  }
-  .contact-main-grid{
-    max-width: 1200px;
-    margin: 0 auto;
-    display: grid;
-    grid-template-columns: 0.9fr 1.1fr;
-    gap: clamp(30px, 5vw, 56px);
-    align-items: stretch;
-  }
-  .contact-map{
-    position: relative;
-    border-radius: 6px;
-    overflow: hidden;
-    min-height: 320px;
-    box-shadow: 0 20px 44px -22px rgba(43,17,20,.3);
-    border: 1px solid var(--cream-line);
-    border-top: 3px solid var(--saffron);
-  }
-  .contact-map iframe{
-    width: 100%;
-    height: 100%;
-    min-height: 320px;
-    border: 0;
-    display: block;
-    filter: sepia(.12) saturate(1.05);
-  }
-  .map-chip{
-    position: absolute;
-    top: 18px; left: 18px;
-    z-index: 2;
-    display: flex;
-    align-items: center;
-    gap: 8px;
-    padding: 10px 16px 10px 12px;
-    background: rgba(251,247,240,.94);
-    backdrop-filter: blur(4px);
-    border-radius: 999px;
-    box-shadow: 0 10px 24px -10px rgba(43,17,20,.4);
-    font-family: 'Merriweather Sans', sans-serif;
-    font-size: 12.5px;
-    font-weight: 500;
-    color: var(--ink);
-  }
-  .map-chip svg{ width: 15px; height: 15px; stroke: var(--saffron-deep); fill: none; flex-shrink: 0; }
-  .contact-form-wrap{
-    position: relative;
-    overflow: hidden;
-    background: #fff;
-    border-radius: 6px;
-    padding: clamp(28px, 4vw, 44px);
-    box-shadow: 0 20px 44px -22px rgba(43,17,20,.22);
-    border-top: 3px solid var(--sage);
-  }
-  .form-watermark{
-    position: absolute;
-    top: -60px; right: -60px;
-    width: 220px;
-    height: 220px;
-    color: var(--gold);
-    opacity: .07;
-    pointer-events: none;
-  }
-  .trust-badge{
+  .hours-status{
     display: inline-flex;
     align-items: center;
-    gap: 8px;
-    margin: 18px 0 4px;
-    padding: 7px 14px 7px 10px;
-    background: var(--sage-soft);
+    gap: 6px;
+    font-family: 'Merriweather Sans', sans-serif;
+    font-size: 11.5px;
+    font-weight: 500;
     color: var(--sage-deep);
-    border-radius: 999px;
-    font-family: 'Merriweather Sans', sans-serif;
-    font-size: 12px;
-    font-weight: 500;
   }
-  .trust-badge svg{ width: 14px; height: 14px; stroke: var(--sage-deep); fill: none; flex-shrink: 0; }
-  .contact-form-eyebrow{
+  .hours-status-dot{ width: 6px; height: 6px; border-radius: 50%; background: var(--sage-deep); flex-shrink: 0; }
+  .hours-status.is-closed{ color: var(--muted-text); }
+  .hours-status.is-closed .hours-status-dot{ background: var(--muted-text); }
+  .hours-row{
     display: flex;
-    align-items: center;
-    gap: 12px;
+    justify-content: space-between;
+    padding: 7px 0;
     font-family: 'Merriweather Sans', sans-serif;
-    font-size: 12px;
-    font-weight: 500;
-    letter-spacing: .16em;
-    text-transform: uppercase;
-    color: var(--maroon);
-    margin-bottom: 14px;
+    font-size: 13.5px;
+    color: var(--muted-text);
+    border-top: 1px solid var(--cream-line);
   }
-  .contact-form-eyebrow::before{ content:''; width: 30px; height: 1.5px; background: var(--gold); flex-shrink: 0; }
-  .contact-form-wrap h2{
+  .hours-row:first-of-type{ border-top: none; }
+  .hours-row span:first-child{ color: var(--ink); }
+  .hours-row.is-today{ background: rgba(217,129,47,.14); margin: 0 -10px; padding: 7px 10px; border-radius: 3px; border-top-color: transparent; }
+  .hours-row.is-today span:first-child{ color: var(--saffron-deep); font-weight: 700; }
+
+  /* ---- Form panel ---- */
+  .form-panel{
+    background: #fff;
+    border-radius: 4px;
+    padding: clamp(28px, 3.5vw, 42px);
+    padding-left: clamp(30px, 3.7vw, 44px);
+    box-shadow: 0 30px 60px -24px rgba(20,6,9,.35);
+    border-left: 5px solid var(--sage);
+    margin-top: clamp(24px, 3vw, 40px);
+  }
+  .form-panel h2{
     font-family: 'Merriweather', serif;
     font-weight: 700;
-    font-size: clamp(22px, 3vw, 28px);
+    font-size: 22px;
     color: var(--ink);
-    margin-bottom: 26px;
+    margin-bottom: 4px;
+  }
+  .form-panel-note{
+    font-family: 'Merriweather Sans', sans-serif;
+    font-size: 13px;
+    color: var(--muted-text);
+    margin-bottom: 24px;
   }
   .contact-form{
     display: grid;
     grid-template-columns: 1fr 1fr;
-    gap: 18px 20px;
+    gap: 16px 18px;
   }
-  .form-field{ display: flex; flex-direction: column; gap: 8px; }
+  .form-field{ display: flex; flex-direction: column; gap: 7px; }
   .form-field.full{ grid-column: 1 / -1; }
   .form-field label{
     font-family: 'Merriweather Sans', sans-serif;
-    font-size: 12.5px;
+    font-size: 12px;
     font-weight: 500;
     color: #5A4038;
   }
@@ -617,11 +516,11 @@
     background: var(--cream);
     border: 1px solid var(--cream-line);
     border-radius: 4px;
-    padding: 12px 14px;
+    padding: 11px 13px;
     outline: none;
     transition: border-color .18s ease, box-shadow .18s ease;
   }
-  .form-field textarea{ resize: vertical; min-height: 120px; }
+  .form-field textarea{ resize: vertical; min-height: 108px; }
   .form-field input::placeholder,
   .form-field textarea::placeholder{ color: var(--muted-text-light); }
   .form-field input:focus,
@@ -632,11 +531,11 @@
   .form-submit{
     grid-column: 1 / -1;
     justify-self: start;
-    margin-top: 6px;
+    margin-top: 4px;
     display: inline-flex;
     align-items: center;
     gap: 10px;
-    padding: 14px 32px;
+    padding: 13px 30px;
     background: var(--maroon);
     color: var(--ivory-text);
     font-family: 'Merriweather Sans', sans-serif;
@@ -652,12 +551,47 @@
   .form-submit:hover{ background: var(--maroon-deep); transform: translateY(-2px); }
 
   @media (max-width: 900px){
-    .contact-main-grid{ grid-template-columns: 1fr; }
-    .contact-map{ min-height: 260px; }
+    .contact-grid{ grid-template-columns: 1fr; margin-top: clamp(-110px, -20vw, -70px); }
+    .visiting-card{ transform: none; }
   }
   @media (max-width: 540px){
     .contact-form{ grid-template-columns: 1fr; }
   }
+
+  /* ============ MAP BAND (full-bleed) ============ */
+  .map-band{
+    position: relative;
+    margin-top: clamp(20px, 3vw, 32px);
+  }
+  .map-band-inner{
+    position: relative;
+    min-height: 300px;
+  }
+  .map-band-inner iframe{
+    width: 100%;
+    height: 100%;
+    min-height: 300px;
+    border: 0;
+    display: block;
+    filter: sepia(.18) saturate(1.1) contrast(1.02);
+  }
+  .map-chip{
+    position: absolute;
+    top: 22px; left: 22px;
+    z-index: 2;
+    display: flex;
+    align-items: center;
+    gap: 8px;
+    padding: 10px 18px 10px 14px;
+    background: var(--saffron-deep);
+    border-radius: 2px;
+    box-shadow: 0 14px 30px -10px rgba(20,6,9,.5);
+    font-family: 'Merriweather Sans', sans-serif;
+    font-size: 12.5px;
+    font-weight: 500;
+    color: var(--ivory-text);
+  }
+  .map-chip svg{ width: 15px; height: 15px; stroke: #FCEAD3; fill: none; flex-shrink: 0; }
 
   /* ============ FOOTER ============ */
   .site-footer{ position:relative; background:#FFFFFF; overflow:hidden; }
@@ -667,12 +601,12 @@
   }
   .footer-inner{
     position:relative; max-width:1400px; margin:0 auto;
-    padding:76px 32px 64px; display:grid;
-    grid-template-columns:1.15fr 1fr 1.15fr; gap:56px;
+    padding:48px 32px 40px; display:grid;
+    grid-template-columns:1.15fr 1fr 1.15fr; gap:40px;
   }
   .footer-col h3{
-    font-family:'Merriweather', serif; font-weight:700; font-size:22px;
-    color:var(--maroon); margin-bottom:22px;
+    font-family:'Merriweather', serif; font-weight:700; font-size:20px;
+    color:var(--maroon); margin-bottom:16px;
   }
   .footer-logo{ height:46px; width:auto; margin-bottom:22px; display:block; }
   .footer-col p{
@@ -725,12 +659,12 @@
   .back-to-top svg{ width:18px; height:18px; stroke:var(--ink); }
 
   @media (max-width: 900px){
-    .footer-inner{ grid-template-columns:1fr; gap:44px; padding:56px 24px 48px; }
+    .footer-inner{ grid-template-columns:1fr; gap:32px; padding:36px 24px 32px; }
     .footer-map{ width:100%; opacity:.05; }
   }
 
   @media (prefers-reduced-motion: reduce){
-    .reveal-fade, .reveal-up, .contact-card, .contact-card:hover, .form-submit{
+    .reveal-fade, .reveal-up, .form-submit{
       transition: none !important;
       animation: none !important;
       opacity: 1 !important;
@@ -897,124 +831,72 @@
 
 <main>
 
-<!-- ============ HERO ============ -->
-<section class="hero-header">
-  <div class="hero-bloom hero-bloom--saffron" aria-hidden="true"></div>
-  <div class="hero-bloom hero-bloom--sage" aria-hidden="true"></div>
-  <svg class="hero-mandala" viewBox="0 0 400 400" aria-hidden="true">
-    <g fill="none" stroke="currentColor" stroke-width="1.2">
-      <ellipse cx="200" cy="140" rx="16" ry="52" transform="rotate(0 200 200)"/>
-      <ellipse cx="200" cy="140" rx="16" ry="52" transform="rotate(30 200 200)"/>
-      <ellipse cx="200" cy="140" rx="16" ry="52" transform="rotate(60 200 200)"/>
-      <ellipse cx="200" cy="140" rx="16" ry="52" transform="rotate(90 200 200)"/>
-      <ellipse cx="200" cy="140" rx="16" ry="52" transform="rotate(120 200 200)"/>
-      <ellipse cx="200" cy="140" rx="16" ry="52" transform="rotate(150 200 200)"/>
-      <ellipse cx="200" cy="140" rx="16" ry="52" transform="rotate(180 200 200)"/>
-      <ellipse cx="200" cy="140" rx="16" ry="52" transform="rotate(210 200 200)"/>
-      <ellipse cx="200" cy="140" rx="16" ry="52" transform="rotate(240 200 200)"/>
-      <ellipse cx="200" cy="140" rx="16" ry="52" transform="rotate(270 200 200)"/>
-      <ellipse cx="200" cy="140" rx="16" ry="52" transform="rotate(300 200 200)"/>
-      <ellipse cx="200" cy="140" rx="16" ry="52" transform="rotate(330 200 200)"/>
-      <circle cx="200" cy="200" r="58" stroke-width="1"/>
-      <circle cx="200" cy="200" r="92" stroke-width=".6"/>
-    </g>
-  </svg>
-  <p class="hero-sub">Get In Touch</p>
-  <h1 class="hero-title">
-    We would love to hear from you
-  </h1>
-  <div class="hero-divider"></div>
-  <p class="hero-desc">
-    Questions about a program, a camp, or a visit to Patanjali Yog Peeth Nepal &mdash; our team in Kathmandu is here to help.
-  </p>
-</section>
-
-<!-- ============ QUOTE BAND ============ -->
-<section class="quote-band">
-  <svg class="quote-band-icon" viewBox="0 0 24 24" fill="none" aria-hidden="true">
-    <path d="M12 21c-4-3-7-6.2-7-10a7 7 0 0 1 14 0c0 3.8-3 7-7 10z" stroke="currentColor" stroke-width="1.3"/>
-    <circle cx="12" cy="11" r="2.6" stroke="currentColor" stroke-width="1.3"/>
-  </svg>
-  <p class="quote-band-sanskrit devanagari">योगः कर्मसु कौशलम्</p>
-  <p class="quote-band-translation">Yoga is skill in action &mdash; Bhagavad Gita, 2.50</p>
-</section>
-
-<!-- ============ CONTACT INFO CARDS ============ -->
-<section class="contact-info-section">
-  <div class="contact-info-grid">
-
-    <div class="contact-card contact-card--earth reveal-up">
-      <div class="contact-card-icon">
-        <svg viewBox="0 0 24 24"><path d="M12 22s7-7.4 7-12.5A7 7 0 0 0 5 9.5C5 14.6 12 22 12 22z" stroke-width="1.5"/><circle cx="12" cy="9.5" r="2.4" stroke-width="1.5"/></svg>
-      </div>
-      <p class="contact-card-element devanagari">पृथ्वी &middot; Earth</p>
-      <h3>Address</h3>
-      <p>Head office &ndash; Budhanilakantha Metropolitan<br>Woda No.8, Mandikatar, Kathmandu, Nepal</p>
-    </div>
-
-    <div class="contact-card contact-card--fire reveal-up">
-      <div class="contact-card-icon">
-        <svg viewBox="0 0 24 24"><path d="M4 4.5c0-.6.4-1 1-1h2.6c.5 0 1 .4 1.1.8l1 3.3c.1.4 0 .9-.4 1.2L7.8 10c1 2.4 3 4.4 5.4 5.4l1.2-1.4c.3-.4.8-.5 1.2-.4l3.3 1c.5.1.8.5.8 1.1V19c0 .6-.4 1-1 1h-1.2C9.5 20 4 14.5 4 5.7V4.5z" stroke-width="1.5"/></svg>
-      </div>
-      <p class="contact-card-element devanagari">अग्नि &middot; Fire</p>
-      <h3>Call Us</h3>
-      <p><a href="tel:+9779849413839">+977 9849413839</a></p>
-    </div>
-
-    <div class="contact-card contact-card--water reveal-up">
-      <div class="contact-card-icon">
-        <svg viewBox="0 0 24 24"><path d="M3 5.5h18v13H3v-13z" stroke-width="1.5"/><path d="M3 6l9 7 9-7" stroke-width="1.5"/></svg>
-      </div>
-      <p class="contact-card-element devanagari">जल &middot; Water</p>
-      <h3>Email Us</h3>
-      <p><a href="mailto:info@pypnepal.org">info@pypnepal.org</a></p>
-    </div>
-
-    <div class="contact-card contact-card--ether reveal-up">
-      <div class="contact-card-icon">
-        <svg viewBox="0 0 24 24"><circle cx="12" cy="12" r="9" stroke-width="1.5"/><path d="M12 7v5l3.2 2" stroke-width="1.5" stroke-linecap="round"/></svg>
-      </div>
-      <p class="contact-card-element devanagari">आकाश &middot; Ether</p>
-      <h3>Open Hours</h3>
-      <p>Monday &ndash; Friday<br>9:00 AM &ndash; 5:00 PM</p>
-    </div>
-
+<!-- ============ CONTACT HERO ============ -->
+<section class="contact-hero">
+  <div class="contact-hero-bloom contact-hero-bloom--saffron" aria-hidden="true"></div>
+  <div class="contact-hero-bloom contact-hero-bloom--sage" aria-hidden="true"></div>
+  <div class="contact-hero-inner">
+    <p class="contact-hero-eyebrow">Contact <span class="devanagari">संपर्क</span></p>
+    <h1 class="contact-hero-heading">We'd love to see you<br>at the <em>peeth</em>.</h1>
+    <p class="contact-hero-desc">Write ahead, call the office, or walk in during visiting hours &mdash; our team in Kathmandu is here to help.</p>
   </div>
+    <svg class="contact-hero-skyline" viewBox="0 0 1200 160" preserveAspectRatio="none" aria-hidden="true">
+      <g fill="none" stroke="currentColor" stroke-width="1.2">
+        <path d="M0 160 L0 120 L60 120 L60 60 L90 60 L90 40 L100 30 L110 40 L110 60 L140 60 L140 120 L210 120 L210 90 L240 90 L240 120 L320 120 L320 70 L350 70 L350 40 L370 20 L390 40 L390 70 L420 70 L420 120 L520 120 L520 100 L560 100 L560 120 L640 120 L640 50 L660 50 L660 30 L680 12 L700 30 L700 50 L720 50 L720 120 L820 120 L820 95 L850 95 L850 120 L930 120 L930 65 L950 65 L950 45 L970 26 L990 45 L990 65 L1010 65 L1010 120 L1100 120 L1100 100 L1140 100 L1140 120 L1200 120 L1200 160 Z"/>
+        <path d="M370 20 L360 30 L380 30 Z" stroke-width="1"/>
+        <path d="M680 12 L668 24 L692 24 Z" stroke-width="1"/>
+        <path d="M970 26 L960 36 L980 36 Z" stroke-width="1"/>
+      </g>
+    </svg>
 </section>
 
-<!-- ============ MAP + FORM ============ -->
+<!-- ============ REACH + FORM ============ -->
 <section class="contact-main-section">
-  <div class="contact-main-grid">
+  <div class="contact-grid">
 
-    <div class="contact-map reveal-fade">
-      <div class="map-chip">
-        <svg viewBox="0 0 24 24"><path d="M12 22s7-7.4 7-12.5A7 7 0 0 0 5 9.5C5 14.6 12 22 12 22z" stroke-width="1.6"/><circle cx="12" cy="9.5" r="2.2" stroke-width="1.6"/></svg>
-        Budhanilakantha, Kathmandu
+    <div class="visiting-card reveal-up">
+      <h2>Reach us</h2>
+      <div class="reach-list">
+        <div class="reach-item">
+          <span class="reach-item-icon reach-item-icon--visit"><svg viewBox="0 0 24 24"><path d="M12 22s7-7.4 7-12.5A7 7 0 0 0 5 9.5C5 14.6 12 22 12 22z" stroke-width="1.6"/><circle cx="12" cy="9.5" r="2.4" stroke-width="1.6"/></svg></span>
+          <div>
+            <span class="reach-item-label">Visit</span>
+            <p class="reach-item-value">Head office &ndash; Budhanilakantha Metropolitan<br>Woda No.8, Mandikatar, Kathmandu, Nepal</p>
+          </div>
+        </div>
+        <div class="reach-item">
+          <span class="reach-item-icon reach-item-icon--call"><svg viewBox="0 0 24 24"><path d="M4 4.5c0-.6.4-1 1-1h2.6c.5 0 1 .4 1.1.8l1 3.3c.1.4 0 .9-.4 1.2L7.8 10c1 2.4 3 4.4 5.4 5.4l1.2-1.4c.3-.4.8-.5 1.2-.4l3.3 1c.5.1.8.5.8 1.1V19c0 .6-.4 1-1 1h-1.2C9.5 20 4 14.5 4 5.7V4.5z" stroke-width="1.6"/></svg></span>
+          <div>
+            <span class="reach-item-label">Call</span>
+            <p class="reach-item-value"><a href="tel:+9779849413839">+977 9849413839</a></p>
+          </div>
+        </div>
+        <div class="reach-item">
+          <span class="reach-item-icon reach-item-icon--write"><svg viewBox="0 0 24 24"><path d="M3 5.5h18v13H3v-13z" stroke-width="1.6"/><path d="M3 6l9 7 9-7" stroke-width="1.6"/></svg></span>
+          <div>
+            <span class="reach-item-label">Write</span>
+            <p class="reach-item-value"><a href="mailto:info@pypnepal.org">info@pypnepal.org</a></p>
+          </div>
+        </div>
       </div>
-      <iframe
-        src="https://www.google.com/maps?q=Budhanilakantha%2C%20Kathmandu%2C%20Nepal&output=embed"
-        loading="lazy"
-        referrerpolicy="no-referrer-when-downgrade"
-        title="Patanjali Yogpeeth Nepal location">
-      </iframe>
+
+      <div class="hours-ledger">
+        <div class="hours-ledger-head">
+          <h3>Visiting Hours</h3>
+          <span class="hours-status" id="hoursStatus">
+            <span class="hours-status-dot"></span>
+            <span id="hoursStatusText">Checking&hellip;</span>
+          </span>
+        </div>
+        <div class="hours-row" data-days="1,2,3,4,5"><span>Monday &ndash; Friday</span><span>9:00 AM &ndash; 5:00 PM</span></div>
+        <div class="hours-row" data-days="6"><span>Saturday</span><span>9:00 AM &ndash; 1:00 PM</span></div>
+        <div class="hours-row" data-days="0"><span>Sunday</span><span>Closed</span></div>
+      </div>
     </div>
 
-    <div class="contact-form-wrap reveal-fade">
-      <svg class="form-watermark" viewBox="0 0 400 400" aria-hidden="true">
-        <g fill="none" stroke="currentColor" stroke-width="1.4">
-          <ellipse cx="200" cy="140" rx="16" ry="52" transform="rotate(0 200 200)"/>
-          <ellipse cx="200" cy="140" rx="16" ry="52" transform="rotate(45 200 200)"/>
-          <ellipse cx="200" cy="140" rx="16" ry="52" transform="rotate(90 200 200)"/>
-          <ellipse cx="200" cy="140" rx="16" ry="52" transform="rotate(135 200 200)"/>
-          <ellipse cx="200" cy="140" rx="16" ry="52" transform="rotate(180 200 200)"/>
-          <ellipse cx="200" cy="140" rx="16" ry="52" transform="rotate(225 200 200)"/>
-          <ellipse cx="200" cy="140" rx="16" ry="52" transform="rotate(270 200 200)"/>
-          <ellipse cx="200" cy="140" rx="16" ry="52" transform="rotate(315 200 200)"/>
-          <circle cx="200" cy="200" r="60" stroke-width="1"/>
-        </g>
-      </svg>
-      <p class="contact-form-eyebrow">Send Message</p>
-      <h2>Write to us</h2>
+    <div class="form-panel reveal-up">
+      <h2>Send a message</h2>
+      <p class="form-panel-note">We usually reply within a day.</p>
 
       <form class="contact-form" id="contactForm">
         <div class="form-field">
@@ -1037,12 +919,6 @@
           <label for="cf-message">Message</label>
           <textarea id="cf-message" name="message" placeholder="Write your message here..." required></textarea>
         </div>
-        <div class="form-field full">
-          <div class="trust-badge">
-            <svg viewBox="0 0 24 24"><path d="M12 22s7-3.6 7-9V6l-7-3-7 3v7c0 5.4 7 9 7 9z" stroke-width="1.5"/><path d="M9 12l2 2 4-4" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/></svg>
-            We typically reply within 24 hours
-          </div>
-        </div>
         <button type="submit" class="form-submit">
           Send Message
           <svg viewBox="0 0 24 24"><path d="M22 2 11 13" stroke-width="1.8" stroke-linecap="round"/><path d="M22 2 15 22l-4-9-9-4 20-7z" stroke-width="1.8" stroke-linejoin="round"/></svg>
@@ -1050,6 +926,22 @@
       </form>
     </div>
 
+  </div>
+</section>
+
+<!-- ============ MAP ============ -->
+<section class="map-band">
+  <div class="map-band-inner reveal-fade">
+    <div class="map-chip">
+      <svg viewBox="0 0 24 24"><path d="M12 22s7-7.4 7-12.5A7 7 0 0 0 5 9.5C5 14.6 12 22 12 22z" stroke-width="1.6"/><circle cx="12" cy="9.5" r="2.2" stroke-width="1.6"/></svg>
+      Budhanilakantha, Kathmandu
+    </div>
+    <iframe
+      src="https://www.google.com/maps?q=Budhanilakantha%2C%20Kathmandu%2C%20Nepal&output=embed"
+      loading="lazy"
+      referrerpolicy="no-referrer-when-downgrade"
+      title="Patanjali Yogpeeth Nepal location">
+    </iframe>
   </div>
 </section>
 
@@ -1117,6 +1009,18 @@
 </footer>
 
 <script>
+  // ---- Reserve space for the fixed header so content isn't hidden under it ----
+  (function() {
+    const header = document.getElementById('siteHeader');
+    if (!header) return;
+    function setOffset() {
+      document.body.style.paddingTop = header.offsetHeight + 'px';
+    }
+    setOffset();
+    window.addEventListener('resize', setOffset);
+    window.addEventListener('load', setOffset);
+  })();
+
   // ---- Sticky header: hide on scroll down, reveal on scroll up ----
   (function() {
     const header = document.getElementById('siteHeader');
@@ -1201,6 +1105,30 @@
     }, { threshold: 0.15 });
 
     revealEls.forEach(el => observer.observe(el));
+  })();
+
+  // ---- Visiting hours ledger: highlight today, show open/closed ----
+  (function() {
+    const rows = document.querySelectorAll('.hours-row');
+    const statusEl = document.getElementById('hoursStatus');
+    const statusText = document.getElementById('hoursStatusText');
+    if (!rows.length || !statusEl) return;
+
+    const now = new Date();
+    const day = now.getDay(); // 0 = Sunday ... 6 = Saturday
+    const hour = now.getHours() + now.getMinutes() / 60;
+
+    let isOpen = false;
+    if (day >= 1 && day <= 5) { isOpen = hour >= 9 && hour < 17; }
+    else if (day === 6) { isOpen = hour >= 9 && hour < 13; }
+
+    rows.forEach(row => {
+      const days = row.dataset.days.split(',').map(Number);
+      if (days.includes(day)) row.classList.add('is-today');
+    });
+
+    statusEl.classList.toggle('is-closed', !isOpen);
+    statusText.textContent = isOpen ? 'Open now' : 'Closed now';
   })();
 
   // ---- Contact form: front-end only (no backend wired up) ----

@@ -6,7 +6,7 @@
 <title>About Us — Patanjali Yogpeeth Nepal</title>
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-<link href="https://fonts.googleapis.com/css2?family=Merriweather:wght@300;400;700&family=Merriweather+Sans:wght@400;500&family=Noto+Serif+Devanagari:wght@300;400;500&family=Crete+Round&display=swap" rel="stylesheet">
+<link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,400;0,500;0,600;0,700;1,400;1,600&family=Merriweather:ital,wght@0,300;0,400;0,700;1,300&family=Merriweather+Sans:wght@400;500;600;700&family=Noto+Serif+Devanagari:wght@300;400;500&family=Crete+Round&display=swap" rel="stylesheet">
 <style>
   :root{
     --maroon:        #8A2D3B;
@@ -535,946 +535,867 @@
   }
   /* staggered entrance: each card lags a little behind the previous one */
 
+  /* ============ ABOUT US — EXTENDED PALETTE & MOTION ============ */
+  :root{
+    --vana:        #3F6B4F;   /* herb green — Ayurveda's supporting accent */
+    --teal:        #2E6E62;
+    --teal-deep:   #163B34;
+    --teal-soft:   #CFE4DE;
+    --indigo:      #454B87;
+    --indigo-soft: #D9DAF0;
+    --saffron:     #E08A2E;
+    --saffron-soft:#F7DFB8;
+    --rose:        #B5495B;
+    --rose-soft:   #F0D3D8;
+    --sand:        #F6ECD9;
+    --glass:       rgba(255,255,255,.6);
+    --glass-brd:   rgba(255,255,255,.8);
+  }
+
+  @keyframes spinSlow{ to{ transform:rotate(360deg); } }
+  @keyframes spinSlowRev{ to{ transform:rotate(-360deg); } }
+  @keyframes floatY{ 0%,100%{ transform:translateY(0); } 50%{ transform:translateY(-14px); } }
+  @keyframes floatYsmall{ 0%,100%{ transform:translateY(0); } 50%{ transform:translateY(-7px); } }
+  @keyframes auroraMove{
+    0%{ background-position:0% 30%, 100% 70%, 50% 50%; }
+    50%{ background-position:30% 55%, 70% 35%, 55% 60%; }
+    100%{ background-position:0% 30%, 100% 70%, 50% 50%; }
+  }
+  @keyframes meshShift{
+    0%{ background-position:0% 0%, 100% 0%, 50% 100%; }
+    50%{ background-position:15% 20%, 80% 25%, 55% 80%; }
+    100%{ background-position:0% 0%, 100% 0%, 50% 100%; }
+  }
+  @keyframes wordUp{
+    from{ opacity:0; transform:translateY(.5em) rotate(1deg); }
+    to{ opacity:1; transform:translateY(0) rotate(0); }
+  }
+  @keyframes chipIn{
+    from{ opacity:0; transform:translateY(-10px) scale(.9); }
+    to{ opacity:1; transform:translateY(0) scale(1); }
+  }
+  @keyframes pulseGlow{
+    0%,100%{ box-shadow:0 0 0 0 rgba(199,154,73,.45); }
+    50%{ box-shadow:0 0 0 10px rgba(199,154,73,0); }
+  }
+  @keyframes drift{
+    0%{ transform:translate(0,0); }
+    33%{ transform:translate(14px,-18px); }
+    66%{ transform:translate(-10px,10px); }
+    100%{ transform:translate(0,0); }
+  }
+  @keyframes borderSpin{ to{ --ang:360deg; } }
+  @property --ang{ syntax:'<angle>'; initial-value:0deg; inherits:false; }
+  @keyframes bounceArrow{
+    0%,100%{ transform:translateY(0); opacity:.5; }
+    50%{ transform:translateY(8px); opacity:1; }
+  }
+  @keyframes scaleIn{
+    from{ opacity:0; transform:scale(.85); }
+    to{ opacity:1; transform:scale(1); }
+  }
+
+  .stagger-1{ transition-delay:.05s !important; } .stagger-2{ transition-delay:.14s !important; }
+  .stagger-3{ transition-delay:.23s !important; } .stagger-4{ transition-delay:.32s !important; }
+  .stagger-5{ transition-delay:.41s !important; } .stagger-6{ transition-delay:.5s !important; }
+  .stagger-7{ transition-delay:.59s !important; } .stagger-8{ transition-delay:.68s !important; }
+
   /* ============ ABOUT US — PAGE HERO ============ */
-  .about-hero {
-    position: relative;
-    padding: clamp(56px, 9vw, 96px) 24px clamp(36px, 5vw, 56px);
-    text-align: center;
-    background:
-      radial-gradient(circle at 18% 20%, rgba(199,154,73,0.10) 0%, rgba(199,154,73,0) 55%),
-      radial-gradient(circle at 84% 78%, rgba(138,45,59,0.08) 0%, rgba(138,45,59,0) 55%),
-      #FBF7F0;
-    overflow: hidden;
-  }
-  .about-hero-title {
-    font-family: 'Merriweather', serif;
-    font-weight: 700;
-    font-size: clamp(30px, 5vw, 50px);
-    line-height: 1.22;
-    color: var(--ink);
-    max-width: 780px;
-    margin: 0 auto;
-  }
-  .about-hero-title em {
-    font-style: normal;
-    color: var(--maroon);
-  }
-  .about-hero-desc {
-    max-width: 620px;
-    margin: 20px auto 0;
-    font-family: 'Merriweather', Georgia, serif;
-    font-weight: 300;
-    font-size: clamp(14.5px, 1.6vw, 16.5px);
-    line-height: 1.9;
-    color: var(--muted-text);
-  }
-
-  /* ============ MESSAGE FROM OUR CHAIRMAN ============ */
-  .chairman-section {
-    position: relative;
-    background: #FFFFFF;
-    padding: clamp(16px, 4vw, 32px) clamp(20px, 6vw, 64px) clamp(56px, 8vw, 96px);
-    overflow: hidden;
-  }
-  .chairman-inner {
-    position: relative;
-    max-width: 1180px;
-    margin: 0 auto;
-  }
-  .chairman-header {
-    text-align: center;
-    max-width: 640px;
-    margin: clamp(32px, 5vw, 56px) auto;
-    display: flex;
-    flex-direction: column;
-    align-items: center;
-    justify-content: center;
-  }
-  .chairman-eyebrow {
-    display: inline-flex;
-    align-items: center;
-    gap: 12px;
-    font-family: 'Merriweather Sans', sans-serif;
-    font-size: 12px;
-    font-weight: 500;
-    letter-spacing: 0.16em;
-    text-transform: uppercase;
-    color: var(--maroon);
-    margin-bottom: 18px;
-  }
-  .chairman-eyebrow::before,
-  .chairman-eyebrow::after {
-    content: '';
-    width: 24px;
-    height: 1.5px;
-    background: var(--gold);
-  }
-  .chairman-title {
-    font-family: 'Merriweather', serif;
-    font-weight: 700;
-    font-size: clamp(26px, 3.6vw, 38px);
-    line-height: 1.3;
-    color: var(--ink);
-  }
-  .chairman-title em {
-    font-style: normal;
-    color: var(--maroon);
-  }
-  .chairman-header-rule {
-    width: 54px;
-    height: 2px;
-    background: var(--gold);
-    margin: 22px auto 0;
-  }
-
-  /* ---- Banner photo above each chairperson's message ---- */
-  .chairman-banner {
-    margin-top: clamp(28px, 4vw, 44px);
-    border-radius: 10px;
-    overflow: hidden;
-    background: linear-gradient(135deg, var(--ink) 0%, var(--maroon-deep) 100%);
-    box-shadow: 0 0 0 1px var(--cream-line), 0 24px 48px -28px rgba(43,17,20,0.35);
-  }
-  .chairman-banner img {
-    display: block;
-    width: 100%;
-    height: auto;
-  }
-  .chairman-banner-caption {
-    padding: 14px clamp(20px, 3vw, 32px) 16px;
-    background: var(--maroon-deep);
-    color: var(--ivory-text);
-  }
-  .chairman-banner-caption .roman {
-    display: block;
-    font-family: 'Merriweather Sans', sans-serif;
-    font-weight: 500;
-    font-size: 12px;
-    letter-spacing: 0.12em;
-    text-transform: uppercase;
-    color: var(--gold-soft);
-  }
-  .chairman-banner-caption .name {
-    display: block;
-    margin-top: 4px;
-    font-family: 'Merriweather', serif;
-    font-weight: 700;
-    font-size: clamp(17px, 2.2vw, 21px);
-  }
-
-  /* ---- Each chairperson block ---- */
-  .chairman-block {
-    padding: clamp(28px, 4vw, 44px) 0;
-  }
-  .chairman-block + .chairman-block {
-    border-top: 1px solid var(--cream-line);
-  }
-  .chairman-grid {
-    display: grid;
-    grid-template-columns: 260px 1fr;
-    gap: clamp(28px, 4vw, 48px);
-    align-items: start;
-    margin-top: clamp(20px, 3vw, 32px);
-  }
-  .chairman-block.is-reverse .chairman-grid {
-    grid-template-columns: 1fr 260px;
-  }
-  .chairman-block.is-reverse .chairman-portrait {
-    order: 2;
-  }
-  .chairman-block.is-reverse .chairman-copy {
-    order: 1;
-  }
-
-  .chairman-portrait {
-    position: relative;
-    display: flex;
-    flex-direction: column;
-    align-items: center;
-    gap: 14px;
-  }
-  .chairman-portrait-frame {
-    position: relative;
-    width: 190px;
-    height: 190px;
-    border-radius: 50%;
-    overflow: hidden;
-    display: flex;
-    align-items: center;
-    justify-content: center;
-    background: radial-gradient(circle at 32% 28%, #F6EEE2 0%, #EFE0C6 55%, #E4C784 100%);
-    box-shadow: 0 0 0 1px var(--cream-line), 0 18px 40px -18px rgba(94,30,40,0.35);
-  }
-  .chairman-portrait-frame::before {
-    content: '';
-    position: absolute;
-    inset: 10px;
-    border-radius: 50%;
-    border: 1.5px solid var(--gold);
-    opacity: 0.55;
-    z-index: 2;
-    pointer-events: none;
-  }
-  .chairman-portrait-photo {
-    width: 100%;
-    height: 100%;
-    object-fit: cover;
-    object-position: center top;
-    border-radius: 50%;
-  }
-  .chairman-portrait-name {
-    text-align: center;
-  }
-  .chairman-portrait-name .roman {
-    display: block;
-    font-family: 'Merriweather Sans', sans-serif;
-    font-weight: 500;
-    font-size: 13px;
-    letter-spacing: 0.06em;
-    text-transform: uppercase;
-    color: var(--maroon);
-  }
-  .chairman-portrait-name .devanagari {
-    display: block;
-    margin-top: 4px;
-    font-size: 16px;
-    color: var(--muted-text);
-  }
-  .chairman-portrait-role {
-    max-width: 190px;
-    text-align: center;
-    font-family: 'Merriweather Sans', sans-serif;
-    font-size: 12.5px;
-    line-height: 1.6;
-    color: var(--muted-text);
-  }
-
-  .chairman-copy {
-    position: relative;
-  }
-  .chairman-quote-mark {
-    display: block;
-    font-family: 'Merriweather', Georgia, serif;
-    font-size: 64px;
-    line-height: 1;
-    color: var(--gold);
-    opacity: 0.75;
-    margin-bottom: -6px;
-  }
-  .chairman-name {
-    font-family: 'Merriweather', serif;
-    font-weight: 700;
-    font-size: clamp(19px, 2.1vw, 23px);
-    line-height: 1.4;
-    color: var(--ink);
-  }
-  .chairman-role {
-    margin-top: 6px;
-    font-family: 'Merriweather Sans', sans-serif;
-    font-weight: 500;
-    font-size: 13px;
-    letter-spacing: 0.03em;
-    color: var(--maroon);
-  }
-  .chairman-rule {
-    width: 44px;
-    height: 2px;
-    background: var(--gold);
-    margin: 18px 0 22px;
-  }
-  .chairman-text p {
-    font-family: 'Merriweather', Georgia, serif;
-    font-weight: 300;
-    font-size: clamp(14.5px, 1.5vw, 16px);
-    line-height: 1.9;
-    color: #4A3A34;
-    letter-spacing: 0.005em;
-    text-align: justify;
-    text-justify: inter-word;
-  }
-  .chairman-text p + p {
-    margin-top: 16px;
-  }
-  .chairman-text p:first-of-type::first-letter {
-    font-family: 'Merriweather', serif;
-    font-weight: 700;
-    font-size: 42px;
-    line-height: 0.75;
-    float: left;
-    padding: 6px 8px 0 0;
-    color: var(--maroon);
-  }
-
-  .chairman-highlights {
-    margin: 22px 0 8px;
-    padding: 20px 22px;
-    background: var(--cream);
-    border-left: 3px solid var(--gold);
-    border-radius: 2px;
-  }
-  .chairman-highlights li {
-    position: relative;
-    padding-left: 20px;
-    font-family: 'Merriweather', Georgia, serif;
-    font-weight: 400;
-    font-size: 14.5px;
-    line-height: 1.75;
-    color: var(--maroon-deep);
-  }
-  .chairman-highlights li + li {
-    margin-top: 10px;
-  }
-  .chairman-highlights li::before {
-    content: '';
-    position: absolute;
-    left: 0;
-    top: 10px;
-    width: 6px;
-    height: 6px;
-    border-radius: 50%;
-    background: var(--gold);
-  }
-
-  .chairman-signoff {
-    margin-top: 22px;
-    display: flex;
-    align-items: center;
-    gap: 14px;
-  }
-  .chairman-signoff-line {
-    width: 36px;
-    height: 1.5px;
-    background: var(--maroon);
-    opacity: 0.4;
-  }
-  .chairman-signoff span {
-    font-family: 'Noto Serif Devanagari', 'Merriweather', serif;
-    font-size: 14px;
-    color: var(--muted-text);
-  }
-
-  @media (max-width: 860px) {
-    .chairman-grid,
-    .chairman-block.is-reverse .chairman-grid {
-      grid-template-columns: 1fr;
-    }
-    .chairman-block.is-reverse .chairman-portrait,
-    .chairman-block.is-reverse .chairman-copy {
-      order: initial;
-    }
-    .chairman-portrait {
-      flex-direction: row;
-      justify-content: flex-start;
-      gap: 18px;
-    }
-    .chairman-portrait-frame {
-      width: 92px;
-      height: 92px;
-      flex-shrink: 0;
-    }
-    .chairman-portrait-frame::before { inset: 5px; }
-    .chairman-portrait-name,
-    .chairman-portrait-role { text-align: left; max-width: none; }
-  }
-
-
-  /* ============ ABOUT US — SIGNATURE TOKENS ============ */
-  /* Recurring motifs for this page: the lotus (dharma/practice), the
-     radiating wheel (the six pillars, echoing the client's own fan
-     chart), and a dotted "marg" (path) line threading the initiatives. */
-
-  .devanagari-accent{
-    font-family:'Noto Serif Devanagari','Merriweather',serif;
-    color: var(--gold);
-    opacity:.9;
-  }
-
-  /* ---- Hero: mandala wash + founders strip ---- */
-  .about-hero{ padding-bottom: clamp(30px, 4vw, 40px); }
-  .hero-mandala{
-    position:absolute;
-    top:50%; left:50%;
-    width:min(920px, 130vw); height:min(920px, 130vw);
-    transform:translate(-50%,-52%);
-    z-index:0;
-    pointer-events:none;
-    opacity:.5;
-  }
-  .about-hero > *:not(.hero-mandala){ position:relative; z-index:1; }
-  .about-hero-eyebrow{
-    display:inline-flex;
-    align-items:center;
-    gap:10px;
-    font-family:'Noto Serif Devanagari','Merriweather',serif;
-    font-size:15px;
-    letter-spacing:.02em;
-    color:var(--maroon);
-    margin-bottom:14px;
-  }
-  .about-hero-eyebrow::before,
-  .about-hero-eyebrow::after{
-    content:'';
-    width:30px; height:1px;
-    background:var(--gold);
-  }
-  .hero-leaders{
-    display:flex;
-    align-items:center;
-    justify-content:center;
-    gap:28px;
-    margin-top: clamp(28px, 4vw, 40px);
-    flex-wrap:wrap;
-  }
-  .hero-leader{
-    display:flex;
-    align-items:center;
-    gap:12px;
-    background:#fff;
-    border:1px solid var(--cream-line);
-    border-radius:100px;
-    padding:8px 20px 8px 8px;
-    box-shadow:0 14px 28px -18px rgba(94,30,40,.28);
-  }
-  .hero-leader img{
-    width:46px; height:46px;
-    border-radius:50%;
-    object-fit:cover;
-    object-position:top;
-    box-shadow:0 0 0 2px var(--gold-soft);
-  }
-  .hero-leader-name{
-    display:block;
-    font-family:'Merriweather Sans', sans-serif;
-    font-weight:500;
-    font-size:12.5px;
-    color:var(--ink);
-    line-height:1.3;
-  }
-  .hero-leader-role{
-    display:block;
-    font-family:'Merriweather Sans', sans-serif;
-    font-size:10.5px;
-    letter-spacing:.05em;
-    text-transform:uppercase;
-    color:var(--maroon);
-    margin-top:1px;
-  }
-  .hero-leader-plus{
-    font-family:'Merriweather', serif;
-    font-size:22px;
-    color:var(--gold);
-  }
-
-  /* ============ SHARED SECTION HEADER ============ */
-  .section-header{
-    text-align:center;
-    max-width:660px;
-    margin:0 auto clamp(36px, 5vw, 56px);
-    display:flex;
-    flex-direction:column;
-    align-items:center;
-  }
-  .section-eyebrow{
-    display:inline-flex;
-    align-items:center;
-    gap:12px;
-    font-family:'Merriweather Sans', sans-serif;
-    font-size:12px;
-    font-weight:500;
-    letter-spacing:0.16em;
-    text-transform:uppercase;
-    color:var(--maroon);
-    margin-bottom:14px;
-  }
-  .section-eyebrow .devanagari-accent{ font-size:15px; letter-spacing:0; text-transform:none; }
-  .section-eyebrow::before,
-  .section-eyebrow::after{
-    content:'';
-    width:24px; height:1.5px;
-    background:var(--gold);
-  }
-  .section-title{
-    font-family:'Merriweather', serif;
-    font-weight:700;
-    font-size:clamp(25px, 3.4vw, 38px);
-    line-height:1.28;
-    color:var(--ink);
-  }
-  .section-title em{ font-style:normal; color:var(--maroon); }
-  .section-desc{
-    margin-top:14px;
-    font-family:'Merriweather', Georgia, serif;
-    font-weight:300;
-    font-size:clamp(14px, 1.5vw, 16px);
-    line-height:1.9;
-    color:var(--muted-text);
-  }
-
-  /* ============ OUR STORY — editorial split + timeline ============ */
-  .story-section{
+  /* Editorial masthead: words on the left, the two founders listed on the
+     right against a hairline. No geometry, no ornament — the type carries it.
+     Set entirely in Merriweather Light. */
+  .about-hero{
     position:relative;
-    background:#fff;
-    padding:clamp(52px, 7vw, 96px) clamp(20px, 6vw, 64px);
     overflow:hidden;
+    display:flex;
+    align-items:center;
+    padding:clamp(88px,11vw,140px) clamp(24px,5vw,56px) clamp(76px,9vw,110px);
+    background:#FBF6EC;
+    isolation:isolate;
   }
-  .story-inner{
+  /* two slow, soft washes of light — the only ambient movement */
+  .about-hero::before{
+    content:'';
+    position:absolute; inset:-20%;
+    z-index:-1;
+    background:
+      radial-gradient(38% 42% at 18% 22%, rgba(199,154,73,.30) 0%, transparent 70%),
+      radial-gradient(42% 46% at 84% 78%, rgba(138,45,59,.16) 0%, transparent 70%);
+    filter:blur(20px);
+    animation:heroWash 26s ease-in-out infinite;
+  }
+  @keyframes heroWash{
+    0%,100%{ transform:translate3d(0,0,0) scale(1); }
+    50%{ transform:translate3d(2%,-2.5%,0) scale(1.06); }
+  }
+  /* hairline horizon that quietly divides the masthead from the page */
+  .about-hero::after{
+    content:'';
+    position:absolute; left:0; right:0; bottom:0; height:1px;
+    background:linear-gradient(90deg, transparent, rgba(199,154,73,.5) 30%, rgba(199,154,73,.5) 70%, transparent);
+  }
+
+  .hero-grid{
+    width:100%;
     max-width:1180px;
     margin:0 auto;
     display:grid;
-    grid-template-columns: 1.15fr .85fr;
-    gap:clamp(40px, 6vw, 80px);
-    align-items:start;
+    grid-template-columns:minmax(0,1.32fr) minmax(260px,.68fr);
+    gap:clamp(40px,6vw,88px);
+    align-items:center;
   }
-  .story-copy .section-eyebrow{ justify-content:flex-start; }
-  .story-copy .section-eyebrow::after{ display:none; }
-  .story-copy h2{
-    font-family:'Merriweather', serif;
-    font-weight:700;
-    font-size:clamp(26px, 3.4vw, 36px);
+
+  /* ---- left: the words ---- */
+  .hero-copy{ text-align:left; }
+
+  .about-hero-eyebrow{
+    display:flex; align-items:center; gap:12px;
+    font-family:'Merriweather Sans', sans-serif;
+    font-weight:600; font-size:10.5px;
+    letter-spacing:.26em; text-transform:uppercase;
+    color:var(--maroon);
+    margin-bottom:26px;
+  }
+  .about-hero-eyebrow::after{
+    content:''; flex:1; height:1px; max-width:120px;
+    background:linear-gradient(90deg, rgba(199,154,73,.7), transparent);
+  }
+
+  .about-hero-title{
+    font-family:'Merriweather', Georgia, serif;
+    font-weight:300;
+    font-size:clamp(2.15rem, 5.1vw, 4rem);
+    line-height:1.2;
+    letter-spacing:-.018em;
     color:var(--ink);
-    line-height:1.28;
+    margin:0;
+    text-wrap:balance;
+  }
+  .about-hero-title .kicker{
+    display:block;
+    font-weight:300;
+    font-style:italic;
+    font-size:.34em;
+    letter-spacing:.02em;
+    color:var(--muted-text);
+    margin-bottom:.34em;
+  }
+  .about-hero-title .accent{
+    color:var(--maroon);
+    position:relative;
+    white-space:nowrap;
+  }
+  /* a light underscore that draws itself beneath "Nepal" */
+  .about-hero-title .accent::after{
+    content:'';
+    position:absolute; left:0; bottom:-.1em;
+    height:2px; width:0;
+    background:linear-gradient(90deg, var(--gold), rgba(199,154,73,0));
+    animation:underscore 1.1s var(--ease-out) 1.15s forwards;
+  }
+  @keyframes underscore{ to{ width:100%; } }
+
+  .about-hero-desc{
+    font-family:'Merriweather', Georgia, serif;
+    font-weight:300;
+    font-size:clamp(.98rem, 1.25vw, 1.08rem);
+    line-height:1.95;
+    color:#5F473D;
+    max-width:46ch;
+    margin:26px 0 0;
+  }
+  .about-hero-desc .year{
+    font-weight:400;
+    color:var(--maroon-deep);
+    box-shadow:inset 0 -.42em 0 rgba(199,154,73,.28);
+  }
+
+  /* ---- right: founders, listed against a hairline ---- */
+  .hero-founders{
+    position:relative;
+    padding-left:clamp(20px,3vw,34px);
+    border-left:1px solid rgba(199,154,73,.45);
+  }
+  .founders-label{
+    font-family:'Merriweather Sans', sans-serif;
+    font-size:10px; font-weight:600;
+    letter-spacing:.22em; text-transform:uppercase;
+    color:var(--muted-text);
     margin-bottom:22px;
+  }
+  .founder{
+    display:flex; align-items:center; gap:16px;
+    padding:18px 0;
+    border-top:1px solid rgba(43,17,20,.1);
+    transition:transform .45s var(--ease-out);
+  }
+  .founder:last-child{ border-bottom:1px solid rgba(43,17,20,.1); }
+  .founder:hover{ transform:translateX(5px); }
+  .founder-portrait{
+    position:relative; flex-shrink:0;
+    width:60px; height:60px;
+  }
+  .founder-portrait img{
+    width:100%; height:100%;
+    border-radius:50%; object-fit:cover; display:block;
+    filter:saturate(.92);
+    transition:filter .45s var(--ease);
+  }
+  .founder:hover .founder-portrait img{ filter:saturate(1.05); }
+  .founder-portrait::after{
+    content:''; position:absolute; inset:-4px;
+    border-radius:50%;
+    border:1px solid rgba(199,154,73,.55);
+    transition:transform .45s var(--ease-out), border-color .45s var(--ease);
+  }
+  .founder:hover .founder-portrait::after{ transform:scale(1.09); border-color:var(--gold); }
+  .founder-name{
+    display:block;
+    font-family:'Merriweather', serif;
+    font-weight:300;
+    font-size:17px;
+    line-height:1.3;
+    color:var(--ink);
+    letter-spacing:-.005em;
+  }
+  .founder-role{
+    display:block;
+    margin-top:7px;
+    font-family:'Merriweather Sans', sans-serif;
+    font-size:9.5px; font-weight:600;
+    letter-spacing:.2em; text-transform:uppercase;
+    color:var(--gold);
+  }
+
+  /* ---- entrance: a soft focus-in, staggered down the column ---- */
+  .hero-in{
+    opacity:0;
+    transform:translateY(16px);
+    filter:blur(7px);
+    animation:focusIn 1.15s cubic-bezier(.19,1,.22,1) forwards;
+  }
+  @keyframes focusIn{
+    to{ opacity:1; transform:translateY(0); filter:blur(0); }
+  }
+  .d1{ animation-delay:.08s; } .d2{ animation-delay:.24s; }
+  .d3{ animation-delay:.42s; } .d4{ animation-delay:.6s; }
+
+  .hero-scroll-cue{
+    position:absolute; bottom:24px; left:50%; transform:translateX(-50%);
+    display:flex; flex-direction:column; align-items:center; gap:7px;
+    font-family:'Merriweather Sans',sans-serif; font-size:9px;
+    letter-spacing:.24em; text-transform:uppercase; color:var(--muted-text);
+    opacity:0; animation:focusIn 1s var(--ease-out) 1.5s forwards;
+  }
+  .hero-scroll-cue svg{ width:14px; height:14px; stroke:var(--gold); animation:bounceArrow 2s ease-in-out infinite; }
+
+  @media (max-width:900px){
+    .hero-grid{ grid-template-columns:1fr; gap:44px; }
+    .hero-founders{
+      border-left:0; padding-left:0;
+      border-top:1px solid rgba(199,154,73,.45); padding-top:26px;
+    }
+    .hero-scroll-cue{ display:none; }
+  }
+  @media (max-width:520px){
+    .about-hero{ padding-top:66px; padding-bottom:56px; }
+    .founder-portrait{ width:52px; height:52px; }
+  }
+
+  @media (prefers-reduced-motion: reduce){
+    .hero-in, .hero-scroll-cue{ opacity:1; transform:none; filter:none; }
+    .about-hero-title .accent::after{ width:100%; }
+  }
+
+  /* ============ OUR STORY ============ */
+  .story-section{
+    position:relative;
+    padding:clamp(60px,8vw,100px) 24px;
+    background:#FBF7F0;
+    overflow:hidden;
+  }
+  .story-section::before{
+    content:'योग';
+    position:absolute; top:-4%; right:-2%;
+    font-family:'Noto Serif Devanagari', serif;
+    font-size:clamp(120px,22vw,320px);
+    color:var(--maroon);
+    opacity:.045;
+    line-height:1; pointer-events:none;
+    user-select:none;
+  }
+  .story-inner{
+    max-width:1280px; margin:0 auto;
+    display:grid; grid-template-columns:1.2fr .8fr; gap:64px;
+    position:relative; z-index:1;
+  }
+  .section-eyebrow{
+    display:inline-flex; align-items:center; gap:8px;
+    font-family:'Merriweather Sans',sans-serif; font-weight:600;
+    font-size:12.5px; letter-spacing:.1em; text-transform:uppercase;
+    color:var(--teal-deep); margin-bottom:14px;
+  }
+  .section-eyebrow::before{ content:''; width:24px; height:2px; background:var(--gold); border-radius:2px; }
+  .story-copy h2{
+    font-family:'Cormorant Garamond', Georgia, serif; font-weight:600;
+    font-size:clamp(2rem,4vw,3rem); line-height:1.14; color:var(--ink);
+    margin-bottom:22px; letter-spacing:.005em;
   }
   .story-copy h2 em{ font-style:normal; color:var(--maroon); }
   .story-lead{
-    font-family:'Merriweather', Georgia, serif;
-    font-weight:300;
-    font-size:clamp(15px, 1.6vw, 17px);
-    line-height:1.95;
-    color:#4A3A34;
-    text-align:justify;
-    text-justify:inter-word;
+    font-size:15.5px; line-height:1.85; color:#5A4038; margin-bottom:16px;
+    font-family:'Merriweather', serif; font-weight:300;
   }
-  .story-lead::first-letter{
-    font-family:'Merriweather', serif;
-    font-weight:700;
-    font-size:46px;
-    line-height:.72;
-    float:left;
-    padding:6px 9px 0 0;
-    color:var(--maroon);
-  }
-  .story-lead + .story-lead{ margin-top:16px; }
   .story-pullquote{
-    margin:26px 0 4px;
-    padding:18px 0 18px 24px;
-    border-left:3px solid var(--gold);
-    font-family:'Merriweather', Georgia, serif;
-    font-style:normal;
-    font-weight:400;
-    font-size:clamp(15px, 1.7vw, 18px);
-    line-height:1.7;
-    color:var(--maroon-deep);
+    position:relative;
+    margin-top:28px;
+    padding:26px 26px 26px 34px;
+    background:linear-gradient(135deg, #fff 0%, var(--sand) 100%);
+    border-left:4px solid var(--gold);
+    border-radius:4px 16px 16px 4px;
+    font-family:'Merriweather',serif; font-style:italic; font-weight:300;
+    font-size:16px; line-height:1.7; color:var(--maroon-deep);
+    box-shadow:0 18px 40px -22px rgba(94,30,40,.35);
+    transition:transform var(--dur-base) var(--ease), box-shadow var(--dur-base) var(--ease);
   }
+  .story-pullquote:hover{ transform:translateY(-5px) rotate(-.3deg); box-shadow:0 24px 46px -20px rgba(94,30,40,.4); }
   .story-pullquote span{
-    display:block;
-    margin-top:8px;
-    font-family:'Merriweather Sans', sans-serif;
-    font-weight:500;
-    font-size:11.5px;
-    letter-spacing:.08em;
-    text-transform:uppercase;
-    color:var(--muted-text);
+    display:block; margin-top:12px; font-style:normal; font-weight:600;
+    font-family:'Merriweather Sans',sans-serif; font-size:12.5px; letter-spacing:.04em;
+    color:var(--gold-soft); background:var(--maroon-deep); display:inline-block;
+    padding:4px 12px; border-radius:999px;
   }
-
-  /* Vertical milestone timeline */
-  .story-timeline{ position:relative; padding-left:34px; }
+  .story-timeline{
+    position:relative;
+    padding-left:30px;
+    display:flex; flex-direction:column; gap:26px;
+  }
   .story-timeline::before{
-    content:'';
-    position:absolute;
-    left:9px; top:6px; bottom:6px;
-    width:1.5px;
-    background:repeating-linear-gradient(to bottom, var(--gold) 0 6px, transparent 6px 12px);
+    content:''; position:absolute; left:6px; top:6px; bottom:6px; width:2px;
+    background:linear-gradient(180deg, var(--gold) 0%, var(--teal) 50%, var(--maroon) 100%);
+    border-radius:2px;
   }
-  .timeline-item{ position:relative; padding-bottom:30px; }
-  .timeline-item:last-child{ padding-bottom:0; }
-  .timeline-item::before{
-    content:'';
-    position:absolute;
-    left:-34px; top:3px;
-    width:19px; height:19px;
-    border-radius:50%;
-    background:var(--maroon);
-    box-shadow:0 0 0 4px #fff, 0 0 0 5px var(--gold);
-  }
-  .timeline-item:nth-child(3n+2)::before{ background:var(--gold); box-shadow:0 0 0 4px #fff, 0 0 0 5px var(--maroon-deep); }
-  .timeline-item:nth-child(3n)::before{ background:var(--maroon-deep); box-shadow:0 0 0 4px #fff, 0 0 0 5px var(--gold-soft); }
-  .timeline-item:nth-child(3n+2) .t-label{ color:var(--maroon-deep); }
-  .timeline-item:nth-child(3n) .t-label{ color:var(--gold); }
-  .timeline-item .t-label{
-    display:block;
-    font-family:'Merriweather Sans', sans-serif;
-    font-size:11px;
-    letter-spacing:.08em;
-    text-transform:uppercase;
-    color:var(--maroon);
-    margin-bottom:3px;
-  }
-  .timeline-item .t-value{
-    display:block;
-    font-family:'Merriweather', serif;
-    font-weight:700;
-    font-size:16px;
-    color:var(--ink);
-    line-height:1.4;
-  }
-  @media (max-width: 900px){
-    .story-inner{ grid-template-columns:1fr; }
-  }
-
-  /* ============ WHEEL OF SERVICE (desktop radial signature) ============ */
-  .wheel-section{
+  .timeline-item{
     position:relative;
-    background:
-      radial-gradient(circle at 50% 42%, rgba(199,154,73,.10) 0%, rgba(199,154,73,0) 60%),
-      linear-gradient(180deg, #FBF7F0 0%, #F8F1E6 100%);
-    padding:clamp(56px, 7vw, 96px) 24px clamp(64px, 8vw, 110px);
-    overflow:hidden;
-  }
-  .wheel-wrap{
-    position:relative;
-    width:640px; height:640px;
-    max-width:92vw;
-    margin:clamp(20px, 4vw, 40px) auto 0;
-  }
-  .wheel-ring{
-    position:absolute; inset:0;
-    border-radius:50%;
-    border:1.5px dashed var(--gold);
-    opacity:.4;
-  }
-  .wheel-ring-inner{
-    position:absolute;
-    left:50%; top:50%;
-    width:76%; height:76%;
-    transform:translate(-50%,-50%);
-    border-radius:50%;
-    border:1px solid var(--cream-line);
-    opacity:.7;
-  }
-  .wheel-hub{
-    position:absolute;
-    left:50%; top:50%;
-    transform:translate(-50%,-50%);
-    width:196px; height:196px;
-    border-radius:50%;
-    background:linear-gradient(135deg, var(--ink) 0%, var(--maroon-deep) 100%);
-    display:flex; align-items:center; justify-content:center;
-    text-align:center;
-    box-shadow:0 0 0 8px #fff, 0 24px 48px -20px rgba(43,17,20,.4);
-    z-index:3;
-    padding:14px;
-  }
-  .wheel-hub-inner .devanagari-accent{ display:block; font-size:15px; margin-bottom:6px; opacity:.85; }
-  .wheel-hub-inner strong{
-    display:block;
-    font-family:'Merriweather', serif;
-    font-weight:700;
-    font-size:17px;
-    color:var(--ivory-text);
-    line-height:1.3;
-  }
-  .wheel-item{
-    position:absolute;
-    width:186px;
-    transform:translate(-50%,-50%);
-    text-align:center;
-    z-index:2;
-  }
-  .wheel-item-inner{
-    background:#fff;
-    border:1px solid var(--cream-line);
-    border-radius:14px;
-    padding:16px 14px;
-    box-shadow:0 16px 32px -22px rgba(43,17,20,.3);
+    background:var(--glass);
+    border:1px solid var(--glass-brd);
+    backdrop-filter:blur(8px);
+    border-radius:12px;
+    padding:14px 18px;
+    box-shadow:0 10px 26px -18px rgba(43,17,20,.3);
     transition:transform var(--dur-base) var(--ease-out), box-shadow var(--dur-base) var(--ease-out);
   }
-  .wheel-item:hover .wheel-item-inner{
-    transform:translateY(-4px);
-    box-shadow:0 24px 40px -20px rgba(43,17,20,.4);
+  .timeline-item:hover{ transform:translateX(6px); box-shadow:0 14px 30px -14px rgba(43,17,20,.28); }
+  .timeline-item::before{
+    content:''; position:absolute; left:-30px; top:18px;
+    width:12px; height:12px; border-radius:50%;
+    background:var(--gold); border:3px solid #FBF7F0;
+    box-shadow:0 0 0 2px var(--gold);
   }
-  .wheel-icon{
-    width:38px; height:38px;
-    margin:0 auto 8px;
-    border-radius:50%;
-    background:var(--cream);
+  .timeline-item:nth-child(2)::before{ background:var(--teal); box-shadow:0 0 0 2px var(--teal); }
+  .timeline-item:nth-child(3)::before{ background:var(--maroon); box-shadow:0 0 0 2px var(--maroon); }
+  .timeline-item:nth-child(4)::before{ background:var(--indigo); box-shadow:0 0 0 2px var(--indigo); }
+  .timeline-item:nth-child(5)::before{ background:var(--saffron); box-shadow:0 0 0 2px var(--saffron); }
+  .t-label{
+    display:block; font-family:'Merriweather Sans',sans-serif; font-weight:600;
+    font-size:10.5px; letter-spacing:.09em; text-transform:uppercase; color:var(--muted-text);
+    margin-bottom:3px;
+  }
+  .t-value{ font-family:'Merriweather Sans',sans-serif; font-weight:500; font-size:14.5px; color:var(--ink); }
+
+  @media (max-width:940px){
+    .story-inner{ grid-template-columns:1fr; gap:44px; }
+  }
+
+  /* ============ WHEEL OF SERVICE (stat grid) ============ */
+  .wheel-section{
+    padding:clamp(60px,8vw,100px) 24px;
+    background:linear-gradient(180deg, var(--ink) 0%, var(--ink-soft) 100%);
+    position:relative; overflow:hidden;
+  }
+  .wheel-section::before{
+    content:'';
+    position:absolute; inset:0;
+    background:
+      radial-gradient(38% 45% at 10% 15%, rgba(199,154,73,.16), transparent 100%),
+      radial-gradient(34% 40% at 92% 85%, rgba(46,110,98,.20), transparent 100%);
+  }
+  .wheel-section .section-header{ position:relative; z-index:1; max-width:680px; margin:0 auto 52px; text-align:center; }
+  .wheel-section .section-eyebrow{ justify-content:center; color:var(--gold-soft); }
+  .wheel-section .section-eyebrow::before{ background:var(--teal); }
+  .wheel-section .section-title{ color:var(--ivory-text); }
+  .wheel-section .section-title em{ font-style:normal; color:var(--gold-soft); }
+  .wheel-section .section-desc{ font-family:'Merriweather Sans',sans-serif; color:var(--muted-text-light); font-size:14.5px; line-height:1.7; }
+
+  .impact-grid{
+    position:relative; z-index:1;
+    max-width:1280px; margin:0 auto;
+    display:grid; grid-template-columns:repeat(3,1fr); gap:22px;
+  }
+  .impact-item{
+    position:relative;
+    padding:30px 22px 26px;
+    text-align:center;
+    border-radius:18px;
+    background:rgba(255,255,255,.05);
+    border:1px solid rgba(255,255,255,.1);
+    backdrop-filter:blur(6px);
+    overflow:hidden;
+    transition:transform var(--dur-base) var(--ease-out), background var(--dur-base) var(--ease), box-shadow var(--dur-base) var(--ease);
+  }
+  .impact-item::before{
+    content:''; position:absolute; top:0; left:0; right:0; height:3px;
+    background:var(--gold);
+  }
+  .impact-item.accent-gold::before{ background:var(--teal); }
+  .impact-item.accent-deep::before{ background:var(--indigo); }
+  .impact-item:nth-child(4)::before{ background:var(--saffron); }
+  .impact-item:nth-child(5)::before{ background:var(--rose); }
+  .impact-item:hover{
+    transform:translateY(-8px);
+    background:rgba(255,255,255,.09);
+    box-shadow:0 20px 40px -18px rgba(0,0,0,.5);
+  }
+  .impact-icon{
+    width:52px; height:52px; margin:0 auto 16px;
     display:flex; align-items:center; justify-content:center;
+    border-radius:50%;
+    background:conic-gradient(from 0deg, var(--gold), var(--teal), var(--maroon), var(--gold));
+    padding:2px;
+    animation:floatY 7s ease-in-out infinite;
   }
-  .wheel-icon svg{ width:18px; height:18px; stroke:var(--maroon); fill:none; }
-  .wheel-item:nth-child(3n+2) .wheel-icon svg{ stroke:var(--gold); }
-  .wheel-item:nth-child(3n) .wheel-icon svg{ stroke:var(--maroon-deep); }
-  .wheel-item:nth-child(3n+2) .wheel-number{ color:var(--gold); }
-  .wheel-item:nth-child(3n) .wheel-number{ color:var(--maroon-deep); }
-  .wheel-number{
-    font-family:'Merriweather', serif;
-    font-weight:700;
-    font-size:19px;
-    color:var(--maroon);
-    line-height:1.2;
+  .impact-icon::after{
+    content:''; position:absolute;
   }
-  .wheel-label{
-    margin-top:3px;
-    font-family:'Merriweather Sans', sans-serif;
-    font-size:11.5px;
-    line-height:1.45;
-    color:var(--muted-text);
+  .impact-icon svg{
+    width:100%; height:100%; padding:12px; border-radius:50%;
+    background:var(--ink-soft); stroke:var(--gold-soft); fill:none;
   }
-  /* six satellite positions computed on a 640px circle, r=250 from center 320,320 */
-  .wheel-item.pos-1{ left:320px; top:70px; }
-  .wheel-item.pos-2{ left:536px; top:195px; }
-  .wheel-item.pos-3{ left:536px; top:445px; }
-  .wheel-item.pos-4{ left:320px; top:570px; }
-  .wheel-item.pos-5{ left:104px; top:445px; }
-  .wheel-item.pos-6{ left:104px; top:195px; }
+  .impact-item.accent-gold .impact-icon svg{ stroke:var(--teal-soft); }
+  .impact-item.accent-deep .impact-icon svg{ stroke:var(--indigo-soft); }
+  .impact-number{
+    font-family:'Cormorant Garamond', serif; font-weight:600;
+    font-size:clamp(1.9rem,3vw,2.4rem); color:var(--ivory-text); margin-bottom:6px;
+    font-variant-numeric:tabular-nums;
+  }
+  .impact-label{ font-family:'Merriweather Sans',sans-serif; font-size:12.5px; letter-spacing:.02em; color:var(--muted-text-light); line-height:1.5; }
 
-  .wheel-mobile-note{ display:none; }
-  @media (max-width: 880px){
-    .wheel-wrap{ display:none; }
-    .wheel-mobile-note{ display:block; }
-  }
-
-  /* Mobile fallback: simple stat strip re-using the same numbers */
-  .stats-fallback{
-    display:none;
-    max-width:640px;
-    margin:0 auto;
-    background:linear-gradient(135deg, var(--ink) 0%, var(--maroon-deep) 100%);
-    border-radius:14px;
-    padding:28px 20px;
-  }
-  @media (max-width: 880px){
-    .stats-fallback{ display:grid; grid-template-columns:repeat(2,1fr); gap:22px; }
-  }
-  .stats-fallback .stat-item{ text-align:center; border-left:none; padding:0; }
-  .stats-fallback .stat-number{
-    font-family:'Merriweather', serif; font-weight:700;
-    font-size:22px; color:var(--gold-soft);
-  }
-  .stats-fallback .stat-label{
-    margin-top:6px; font-family:'Merriweather Sans', sans-serif;
-    font-size:11.5px; color:var(--ivory-text); opacity:.85; line-height:1.4;
-  }
+  @media (max-width:940px){ .impact-grid{ grid-template-columns:repeat(2,1fr); } }
+  @media (max-width:560px){ .impact-grid{ grid-template-columns:1fr; } }
 
   /* ============ QUOTE BANNER ============ */
   .quote-banner{
     position:relative;
-    background:linear-gradient(135deg, var(--maroon-deep) 0%, var(--ink) 100%);
-    padding:clamp(52px, 7vw, 80px) 24px;
+    padding:clamp(70px,9vw,110px) 24px;
     text-align:center;
     overflow:hidden;
+    background:linear-gradient(120deg, var(--maroon-deep) 0%, var(--indigo) 55%, var(--teal-deep) 100%);
+    background-size:220% 220%;
+    animation:meshShift 16s ease-in-out infinite;
   }
-  .quote-banner-mark{
-    font-family:'Merriweather', Georgia, serif;
-    font-size:clamp(56px, 8vw, 84px);
-    line-height:1;
-    color:var(--gold);
-    opacity:.8;
-  }
-  .quote-banner p{
-    max-width:820px;
-    margin:0 auto;
-    font-family:'Merriweather', Georgia, serif;
-    font-weight:300;
-    font-style:italic;
-    font-size:clamp(18px, 2.4vw, 27px);
-    line-height:1.65;
-    color:var(--ivory-text);
-  }
-  .quote-banner-attr{
-    margin-top:22px;
-    display:inline-flex;
-    align-items:center;
-    gap:12px;
-    font-family:'Merriweather Sans', sans-serif;
-    font-weight:500;
-    font-size:13px;
-    letter-spacing:.03em;
-    color:var(--gold-soft);
-  }
-  .quote-banner-attr .line{ width:30px; height:1.5px; background:var(--gold); }
-
-  /* ============ OUR PATH OF SERVICE (initiatives) ============ */
-  .path-section{
-    position:relative;
-    background:#FBF7F0;
-    padding:clamp(52px, 7vw, 96px) clamp(20px, 6vw, 64px);
-  }
-  .path-inner{ max-width:1180px; margin:0 auto; }
-  .path-list{ position:relative; max-width:920px; margin:0 auto; }
-  .path-line{
-    position:absolute;
-    left:50%; top:8px; bottom:8px;
-    width:1.5px;
-    transform:translateX(-50%);
-    background:repeating-linear-gradient(to bottom, var(--gold) 0 8px, transparent 8px 16px);
-  }
-  .path-item{
-    position:relative;
-    display:grid;
-    grid-template-columns:1fr 76px 1fr;
-    align-items:center;
-    column-gap:32px;
-    padding:22px 0;
-  }
-  .path-node{
-    grid-column:2;
-    width:64px; height:64px;
-    border-radius:50%;
-    background:var(--maroon);
-    display:flex; align-items:center; justify-content:center;
-    box-shadow:0 0 0 6px #FBF7F0, 0 0 0 7px var(--gold-soft);
-    z-index:2;
-  }
-  .path-node svg{ width:26px; height:26px; stroke:var(--ivory-text); fill:none; }
-  .path-item:nth-child(3n+2) .path-node{ background:var(--gold); box-shadow:0 0 0 6px #FBF7F0, 0 0 0 7px var(--maroon-deep); }
-  .path-item:nth-child(3n) .path-node{ background:var(--maroon-deep); }
-  .path-content{
-    grid-column:1;
-    text-align:right;
-  }
-  .path-item:nth-child(even) .path-content{
-    grid-column:3;
-    text-align:left;
-  }
-  .path-content h3{
-    font-family:'Merriweather', serif;
-    font-weight:700;
-    font-size:17.5px;
-    color:var(--ink);
-    margin-bottom:8px;
-  }
-  .path-content p{
-    font-family:'Merriweather', Georgia, serif;
-    font-weight:300;
-    font-size:14.5px;
-    line-height:1.8;
-    color:#4A3A34;
-  }
-  @media (max-width: 760px){
-    .path-line{ left:32px; }
-    .path-item{ grid-template-columns:64px 1fr; column-gap:20px; }
-    .path-node{ grid-column:1; }
-    .path-content{ grid-column:2 !important; text-align:left !important; }
-  }
-
-  /* ============ MAIN OBJECTIVES — mandala grid ============ */
-  .objectives-section{
-    position:relative;
-    background:#fff;
-    padding:clamp(52px, 7vw, 96px) clamp(20px, 6vw, 64px);
-    overflow:hidden;
-  }
-  .objectives-mandala{
-    position:absolute;
-    top:-120px; right:-120px;
-    width:520px; height:520px;
-    opacity:.05;
+  .quote-banner-particle{
+    position:absolute; border-radius:50%;
+    background:rgba(255,255,255,.35);
+    animation:drift 9s ease-in-out infinite;
     pointer-events:none;
   }
-  .objectives-inner{ position:relative; max-width:1180px; margin:0 auto; }
-  .objectives-grid{
+  .quote-banner-mark{
+    position:absolute; top:6%; left:50%; transform:translateX(-50%);
+    font-family:'Crete Round',serif; font-size:clamp(120px,16vw,220px);
+    color:rgba(255,255,255,.09); line-height:1; pointer-events:none;
+    animation:floatY 8s ease-in-out infinite;
+  }
+  .quote-banner p{
+    position:relative; z-index:1;
+    max-width:52ch; margin:0 auto;
+    font-family:'Cormorant Garamond', serif; font-weight:400; font-style:italic;
+    font-size:clamp(1.45rem,3vw,2.1rem); line-height:1.5; color:var(--ivory-text);
+  }
+  .quote-banner-attr{
+    position:relative; z-index:1;
+    margin-top:26px; display:flex; align-items:center; justify-content:center; gap:14px;
+    font-family:'Merriweather Sans',sans-serif; font-weight:600; letter-spacing:.06em;
+    font-size:12.5px; text-transform:uppercase; color:var(--gold-soft);
+  }
+  .quote-banner-attr .line{ width:36px; height:1px; background:var(--gold-soft); opacity:.6; }
+
+  /* ---- shared section-header typography ---- */
+  .section-title{
+    font-family:'Cormorant Garamond', Georgia, serif;
+    font-weight:600;
+    font-size:clamp(2rem,4vw,2.9rem);
+    line-height:1.14;
+    color:var(--ink);
+    margin-bottom:16px;
+    letter-spacing:.005em;
+  }
+  .section-title em{ font-style:italic; font-weight:600; color:var(--maroon); }
+  .section-desc{
+    font-family:'Merriweather Sans', sans-serif;
+    font-size:15px; line-height:1.8; color:#6A5147;
+    max-width:52ch; margin:0 auto;
+  }
+
+  /* ============ OUR PATH OF SERVICE ============ */
+  /* Signature: cards cut to a leaf silhouette, with a botanical vein
+     that draws itself in on hover — Ayurveda's own vocabulary. */
+  .path-section{
+    padding:clamp(70px,9vw,110px) 24px;
+    background:linear-gradient(180deg, #FBF7F0 0%, #F6EEE0 100%);
+  }
+  .path-inner{ max-width:1220px; margin:0 auto; }
+  .path-section .section-header{ max-width:640px; margin:0 auto 56px; text-align:center; }
+  .path-section .section-eyebrow{ justify-content:center; }
+
+  .services-grid{
     display:grid;
-    grid-template-columns:repeat(4, 1fr);
-    gap:1px;
-    background:var(--cream-line);
-    border:1px solid var(--cream-line);
-    border-radius:12px;
+    grid-template-columns:repeat(6,1fr);
+    gap:22px;
+  }
+  .service-card{
+    position:relative;
+    grid-column:span 2;
+    padding:34px 30px 32px;
+    background:#fff;
+    border:1px solid rgba(199,154,73,.28);
+    border-radius:6px 46px 6px 46px;
+    overflow:hidden;
+    isolation:isolate;
+    transition:
+      border-radius .55s cubic-bezier(.19,1,.22,1),
+      transform .45s var(--ease-out),
+      box-shadow .45s var(--ease-out),
+      border-color .45s var(--ease);
+    box-shadow:0 10px 26px -22px rgba(43,17,20,.35);
+  }
+  /* first two cards are wider — the mission's two load-bearing pillars */
+  .service-card:nth-child(1),
+  .service-card:nth-child(2){ grid-column:span 3; }
+
+  .service-card::before{
+    content:'';
+    position:absolute; top:-40%; right:-30%;
+    width:75%; aspect-ratio:1;
+    border-radius:50%;
+    background:radial-gradient(circle, rgba(199,154,73,.16) 0%, transparent 70%);
+    transform:scale(.4); opacity:0;
+    transition:transform .6s var(--ease-out), opacity .6s var(--ease);
+    z-index:-1;
+  }
+  .service-card:hover{
+    border-radius:46px 6px 46px 6px;
+    transform:translateY(-6px);
+    border-color:rgba(199,154,73,.6);
+    box-shadow:0 26px 44px -28px rgba(43,17,20,.45);
+  }
+  .service-card:hover::before{ transform:scale(1); opacity:1; }
+
+  /* the vein: drawn with stroke-dashoffset the moment you hover */
+  .service-vein{
+    position:absolute; top:14px; right:14px;
+    width:74px; height:74px;
+    stroke:var(--gold); fill:none; stroke-width:1;
+    opacity:.5; pointer-events:none;
+  }
+  .service-vein path{
+    stroke-dasharray:120; stroke-dashoffset:120;
+    transition:stroke-dashoffset .75s var(--ease-out);
+  }
+  .service-card:hover .service-vein path{ stroke-dashoffset:0; }
+  .service-card:hover .service-vein path:nth-child(2){ transition-delay:.08s; }
+  .service-card:hover .service-vein path:nth-child(3){ transition-delay:.14s; }
+  .service-card:hover .service-vein path:nth-child(4){ transition-delay:.2s; }
+  .service-card:hover .service-vein path:nth-child(5){ transition-delay:.26s; }
+
+  .service-icon{
+    width:46px; height:46px;
+    display:flex; align-items:center; justify-content:center;
+    border-radius:50%;
+    border:1px solid rgba(199,154,73,.5);
+    background:#FDFAF4;
+    margin-bottom:20px;
+    transition:background .4s var(--ease), border-color .4s var(--ease);
+  }
+  .service-card:hover .service-icon{ background:var(--sand); border-color:var(--gold); }
+  .service-icon svg{ width:21px; height:21px; stroke:var(--maroon); fill:none; }
+  .service-card:nth-child(2) .service-icon svg,
+  .service-card:nth-child(4) .service-icon svg{ stroke:var(--vana); }
+
+  .service-text h3{
+    font-family:'Cormorant Garamond', serif;
+    font-weight:600;
+    font-size:24px;
+    line-height:1.2;
+    color:var(--ink);
+    margin-bottom:10px;
+    letter-spacing:.005em;
+  }
+  .service-card:nth-child(1) .service-text h3,
+  .service-card:nth-child(2) .service-text h3{ font-size:28px; }
+  .service-text h3::after{
+    content:''; display:block;
+    width:26px; height:2px; margin-top:12px;
+    background:var(--gold); border-radius:2px;
+    transition:width .45s var(--ease-out);
+  }
+  .service-card:hover .service-text h3::after{ width:56px; }
+  .service-text p{
+    font-family:'Merriweather Sans', sans-serif;
+    font-size:14px; line-height:1.78; color:#6A5147;
+    max-width:44ch; margin-top:14px;
+  }
+
+  @media (max-width:940px){
+    .services-grid{ grid-template-columns:repeat(2,1fr); }
+    .service-card, .service-card:nth-child(1), .service-card:nth-child(2){ grid-column:span 1; }
+    .service-card:nth-child(1) .service-text h3,
+    .service-card:nth-child(2) .service-text h3{ font-size:24px; }
+  }
+  @media (max-width:620px){
+    .services-grid{ grid-template-columns:1fr; }
+    .service-card{ padding:28px 24px; }
+  }
+
+  /* ============ MAIN OBJECTIVES — the eight-part explorer ============ */
+  /* Eight objectives, read one at a time. An index rail on the left, a
+     reading panel on the right, and an eight-node rosette that shows
+     where you are in the circle. */
+  .objectives-section{
+    position:relative;
+    padding:clamp(70px,9vw,110px) 24px;
+    background:var(--ink);
     overflow:hidden;
   }
-  .objective-card{
-    background:#fff;
-    padding:30px 22px;
-    display:flex;
-    flex-direction:column;
-    align-items:flex-start;
-    gap:14px;
-    transition:background var(--dur-base) var(--ease);
+  .objectives-section::before{
+    content:'';
+    position:absolute; inset:0;
+    background:
+      radial-gradient(45% 50% at 8% 12%, rgba(199,154,73,.14), transparent 100%),
+      radial-gradient(45% 55% at 95% 88%, rgba(63,107,79,.20), transparent 100%);
   }
-  .objective-card:nth-child(odd){ background:var(--cream); }
-  .objective-card:hover{ background:#FDF6E9; }
-  .objective-num{
-    font-family:'Merriweather', serif;
-    font-weight:700;
-    font-size:12px;
-    letter-spacing:.06em;
-    color:var(--gold);
+  .objectives-mandala{
+    position:absolute; top:50%; right:-14%;
+    width:760px; height:760px;
+    transform:translateY(-50%);
+    opacity:.07; stroke:var(--gold-soft);
+    animation:spinSlowRev 200s linear infinite;
   }
-  .objective-icon-badge{
-    width:48px; height:48px;
-    border-radius:50%;
-    background:var(--maroon);
-    display:flex; align-items:center; justify-content:center;
+  .objectives-inner{ position:relative; z-index:1; max-width:1180px; margin:0 auto; }
+  .objectives-section .section-header{ max-width:640px; margin:0 auto 54px; text-align:center; }
+  .objectives-section .section-eyebrow{ justify-content:center; color:var(--gold-soft); }
+  .objectives-section .section-eyebrow::before{ background:var(--gold); }
+  .objectives-section .section-title{ color:var(--ivory-text); }
+  .objectives-section .section-title em{ color:var(--gold-soft); }
+  .objectives-section .section-desc{ color:var(--muted-text-light); }
+
+  .obj-explorer{
+    display:grid;
+    grid-template-columns:minmax(280px,360px) 1fr;
+    gap:clamp(28px,4vw,56px);
+    align-items:start;
   }
-  .objective-icon-badge svg{ width:21px; height:21px; stroke:var(--ivory-text); fill:none; }
-  .objective-card:nth-child(4n+2) .objective-icon-badge{ background:var(--gold); }
-  .objective-card:nth-child(4n+3) .objective-icon-badge{ background:var(--maroon-deep); }
-  .objective-card:nth-child(4n+2) .objective-num{ color:var(--maroon); }
-  .objective-card h3{
-    font-family:'Merriweather', serif;
-    font-weight:700;
-    font-size:15px;
-    line-height:1.4;
-    color:var(--ink);
+
+  /* ---- index rail ---- */
+  .obj-index{
+    position:relative;
+    display:flex; flex-direction:column;
+    padding-left:2px;
+    border-left:1px solid rgba(246,238,226,.14);
   }
-  .objective-card p{
+  .obj-marker{
+    position:absolute; left:-1px; top:0;
+    width:2px; height:0;
+    background:linear-gradient(180deg, var(--gold-soft), var(--gold));
+    border-radius:2px;
+    transition:transform .5s cubic-bezier(.19,1,.22,1), height .5s cubic-bezier(.19,1,.22,1);
+    box-shadow:0 0 12px rgba(199,154,73,.7);
+  }
+  .obj-tab{
+    display:flex; align-items:baseline; gap:16px;
+    width:100%;
+    padding:15px 16px;
+    background:none; border:0; cursor:pointer;
+    text-align:left;
+    color:var(--muted-text-light);
+    border-radius:0 8px 8px 0;
+    transition:color .3s var(--ease), background .3s var(--ease), padding-left .35s var(--ease-out);
     font-family:'Merriweather Sans', sans-serif;
-    font-weight:400;
-    font-size:12.5px;
-    line-height:1.65;
+  }
+  .obj-tab:hover{ color:var(--ivory-text); background:rgba(255,255,255,.04); }
+  .obj-tab:focus-visible{ outline:2px solid var(--gold); outline-offset:-2px; }
+  .obj-tab[aria-selected="true"]{
+    color:var(--ivory-text);
+    background:rgba(255,255,255,.06);
+    padding-left:24px;
+  }
+  .obj-num{
+    flex-shrink:0;
+    font-family:'Cormorant Garamond', serif;
+    font-weight:600; font-size:15px;
+    letter-spacing:.08em;
+    color:var(--muted-text);
+    transition:color .3s var(--ease);
+  }
+  .obj-tab[aria-selected="true"] .obj-num{ color:var(--gold); }
+  .obj-tab-title{
+    font-size:14px; font-weight:500; line-height:1.45;
+    letter-spacing:.005em;
+  }
+  .obj-tab[aria-selected="true"] .obj-tab-title{ font-weight:600; }
+
+  /* ---- reading panel ---- */
+  .obj-detail{
+    position:relative;
+    min-height:330px;
+    padding:clamp(34px,4vw,52px);
+    border-radius:4px 34px 4px 34px;
+    background:linear-gradient(150deg, rgba(255,255,255,.075) 0%, rgba(255,255,255,.03) 100%);
+    border:1px solid rgba(246,238,226,.13);
+    backdrop-filter:blur(8px);
+    overflow:hidden;
+  }
+  .obj-ghost{
+    position:absolute; top:-18px; left:14px;
+    font-family:'Cormorant Garamond', serif;
+    font-weight:700; font-size:190px; line-height:1;
+    color:var(--ivory-text); opacity:.045;
+    pointer-events:none; user-select:none;
+  }
+  .obj-rosette{
+    position:absolute; top:30px; right:30px;
+    width:64px; height:64px;
+  }
+  .obj-rosette circle.node{
+    fill:rgba(246,238,226,.22);
+    transition:fill .4s var(--ease), r .4s var(--ease-out);
+  }
+  .obj-rosette circle.node.on{ fill:var(--gold); r:4.4; }
+  .obj-rosette circle.hub{ fill:none; stroke:rgba(199,154,73,.3); }
+
+  .obj-body{ position:relative; z-index:1; max-width:52ch; }
+  .obj-body.swap{ animation:panelIn .55s var(--ease-out); }
+  @keyframes panelIn{
+    from{ opacity:0; transform:translateY(14px); }
+    to{ opacity:1; transform:translateY(0); }
+  }
+  .obj-badge{
+    width:52px; height:52px; border-radius:50%;
+    display:flex; align-items:center; justify-content:center;
+    border:1px solid rgba(199,154,73,.45);
+    background:rgba(199,154,73,.1);
+    margin-bottom:22px;
+  }
+  .obj-badge svg{ width:23px; height:23px; stroke:var(--gold-soft); fill:none; }
+  .obj-body h3{
+    font-family:'Cormorant Garamond', serif;
+    font-weight:600;
+    font-size:clamp(1.6rem,2.8vw,2.15rem);
+    line-height:1.18;
+    color:var(--ivory-text);
+    margin-bottom:16px;
+    letter-spacing:.005em;
+  }
+  .obj-body p{
+    font-family:'Merriweather Sans', sans-serif;
+    font-size:15.5px; line-height:1.85;
+    color:var(--muted-text-light);
+  }
+  .obj-hint{
+    display:flex; align-items:center; gap:9px;
+    margin-top:28px;
+    font-family:'Merriweather Sans', sans-serif;
+    font-size:10px; font-weight:600;
+    letter-spacing:.18em; text-transform:uppercase;
     color:var(--muted-text);
   }
-  @media (max-width: 1020px){
-    .objectives-grid{ grid-template-columns:repeat(2, 1fr); }
+  .obj-hint kbd{
+    font-family:'Merriweather Sans', sans-serif;
+    font-size:10px; letter-spacing:0;
+    padding:2px 7px; border-radius:4px;
+    border:1px solid rgba(246,238,226,.22);
+    color:var(--muted-text-light);
   }
-  @media (max-width: 560px){
-    .objectives-grid{ grid-template-columns:1fr; }
+
+  /* source content lives in the DOM for each tab; shown inline on mobile */
+  .obj-source{ display:none; }
+
+  @media (max-width:900px){
+    /* becomes a plain accordion — no rail, no panel */
+    .obj-explorer{ grid-template-columns:1fr; gap:0; }
+    .obj-detail, .obj-marker{ display:none; }
+    .obj-index{ border-left:0; padding-left:0; gap:0; }
+    .obj-item{ border-bottom:1px solid rgba(246,238,226,.12); }
+    .obj-tab{ border-radius:0; padding:20px 4px; }
+    .obj-tab[aria-selected="true"]{ background:none; padding-left:4px; }
+    .obj-tab-title{ font-size:15px; }
+    .obj-source{
+      display:block;
+      max-height:0; overflow:hidden;
+      transition:max-height .5s var(--ease-out), opacity .4s var(--ease);
+      opacity:0;
+    }
+    .obj-item.open .obj-source{ max-height:340px; opacity:1; }
+    .obj-source-inner{ padding:0 4px 22px 47px; }
+    .obj-source .obj-badge{ display:none; }
+    .obj-source h3{ display:none; }
+    .obj-source p{
+      font-family:'Merriweather Sans', sans-serif;
+      font-size:14px; line-height:1.8; color:var(--muted-text-light);
+    }
   }
 
   /* ============ CTA BAND ============ */
   .about-cta{
     position:relative;
-    background:
-      radial-gradient(circle at 15% 30%, rgba(199,154,73,.14) 0%, rgba(199,154,73,0) 55%),
-      radial-gradient(circle at 88% 75%, rgba(138,45,59,.10) 0%, rgba(138,45,59,0) 55%),
-      var(--cream);
-    border-top:1px solid var(--cream-line);
-    border-bottom:1px solid var(--cream-line);
-    padding:clamp(48px, 6vw, 72px) 24px;
+    padding:clamp(64px,9vw,100px) 24px;
     text-align:center;
+    overflow:hidden;
+    background:var(--ink);
   }
-  .about-cta .devanagari-accent{ display:block; font-size:16px; margin-bottom:8px; }
+  .about-cta::before{
+    content:'';
+    position:absolute; inset:0;
+    background:
+      radial-gradient(40% 60% at 15% 20%, rgba(199,154,73,.28), transparent 100%),
+      radial-gradient(40% 60% at 85% 30%, rgba(46,110,98,.26), transparent 100%),
+      radial-gradient(50% 60% at 50% 100%, rgba(138,45,59,.28), transparent 100%);
+    background-size:180% 180%, 180% 180%, 180% 180%;
+    animation:auroraMove 18s ease-in-out infinite;
+  }
+  .about-cta > *{ position:relative; z-index:1; }
+  .about-cta .devanagari-accent{
+    display:inline-block; font-family:'Merriweather Sans',sans-serif; font-weight:600;
+    font-size:12.5px; letter-spacing:.1em; text-transform:uppercase; color:var(--gold-soft);
+    margin-bottom:16px;
+  }
   .about-cta h2{
-    font-family:'Merriweather', serif;
-    font-weight:700;
-    font-size:clamp(22px, 2.8vw, 30px);
-    color:var(--ink);
+    font-family:'Cormorant Garamond', serif; font-weight:600; color:var(--ivory-text);
+    font-size:clamp(2rem,4.2vw,3.1rem); line-height:1.14; max-width:20ch; margin:0 auto 14px;
   }
-  .about-cta p{
-    max-width:560px;
-    margin:12px auto 26px;
-    font-family:'Merriweather', Georgia, serif;
-    font-weight:300;
-    font-size:14.5px;
-    line-height:1.8;
-    color:var(--muted-text);
-  }
-  .about-cta-actions{ display:flex; gap:14px; justify-content:center; flex-wrap:wrap; }
+  .about-cta p{ font-family:'Merriweather Sans',sans-serif; color:var(--muted-text-light); font-size:15px; max-width:52ch; margin:0 auto 34px; }
+  .about-cta-actions{ display:flex; align-items:center; justify-content:center; gap:16px; flex-wrap:wrap; }
   .cta-btn{
-    display:inline-flex;
-    align-items:center;
-    gap:8px;
-    padding:13px 30px;
-    font-family:'Merriweather Sans', sans-serif;
-    font-weight:500;
-    font-size:13.5px;
-    letter-spacing:0.03em;
-    border-radius:100px;
-    transition:transform var(--dur-fast) var(--ease), box-shadow var(--dur-fast) var(--ease), background var(--dur-fast) var(--ease);
+    display:inline-flex; align-items:center; gap:8px;
+    padding:14px 30px; border-radius:999px;
+    font-family:'Merriweather Sans',sans-serif; font-weight:600; font-size:14px; letter-spacing:.02em;
+    transition:transform var(--dur-base) var(--ease-out), box-shadow var(--dur-base) var(--ease-out), background var(--dur-base) var(--ease);
   }
-  .cta-btn.primary{ background:var(--maroon); color:var(--ivory-text); }
-  .cta-btn.primary:hover{ background:var(--maroon-deep); transform:translateY(-2px); box-shadow:0 14px 26px -12px rgba(94,30,40,.5); }
-  .cta-btn.secondary{ background:transparent; color:var(--maroon); border:1.5px solid var(--maroon); }
-  .cta-btn.secondary:hover{ background:var(--maroon); color:var(--ivory-text); transform:translateY(-2px); }
+  .cta-btn.primary{
+    background:linear-gradient(100deg, var(--gold), var(--saffron));
+    color:var(--ink);
+    box-shadow:0 14px 30px -12px rgba(224,138,46,.55);
+  }
+  .cta-btn.primary:hover{ transform:translateY(-4px) scale(1.03); box-shadow:0 20px 38px -12px rgba(224,138,46,.65); }
+  .cta-btn.secondary{
+    background:rgba(255,255,255,.06);
+    border:1px solid rgba(255,255,255,.35);
+    color:var(--ivory-text);
+  }
+  .cta-btn.secondary:hover{ background:rgba(255,255,255,.14); transform:translateY(-4px); }
+
+  @media (prefers-reduced-motion: reduce){
+    .about-hero-title .word, .about-hero-desc{ animation:none !important; opacity:1 !important; }
+  }
 
 </style>
 </head>
@@ -1550,13 +1471,13 @@
 
   <div class="nav-inner">
 
-    <a href="indx.html" class="brand-logo-link">
+    <a href="index.html" class="brand-logo-link">
       <img class="brand-logo" src="data:image/png;base64,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" alt="Patanjali logo">
     </a>
 
     <div class="nav-right">
     <ul class="primary-links">
-      <li class="nav-item"><a class="nav-link" href="indx.html">Home</a></li>
+      <li class="nav-item"><a class="nav-link" href="index.html">Home</a></li>
 
       <li class="nav-item">
         <a class="nav-link" href="#">Yoga &amp; Meditation
@@ -1647,52 +1568,52 @@
 </header>
 <!-- ============ ABOUT US HERO ============ -->
 <header class="about-hero">
-  <svg class="hero-mandala" viewBox="0 0 400 400" aria-hidden="true" focusable="false">
-    <g fill="none" stroke="#C79A49">
-      <circle cx="200" cy="200" r="180" stroke-width="0.6" opacity="0.35"/>
-      <circle cx="200" cy="200" r="150" stroke-width="0.6" opacity="0.3"/>
-      <circle cx="200" cy="200" r="118" stroke-width="0.6" opacity="0.3"/>
-      <g opacity="0.4" stroke-width="0.6">
-        <path d="M200 20 C 230 90, 230 130, 200 200 C 170 130, 170 90, 200 20 Z"/>
-        <path d="M200 20 C 230 90, 230 130, 200 200 C 170 130, 170 90, 200 20 Z" transform="rotate(30 200 200)"/>
-        <path d="M200 20 C 230 90, 230 130, 200 200 C 170 130, 170 90, 200 20 Z" transform="rotate(60 200 200)"/>
-        <path d="M200 20 C 230 90, 230 130, 200 200 C 170 130, 170 90, 200 20 Z" transform="rotate(90 200 200)"/>
-        <path d="M200 20 C 230 90, 230 130, 200 200 C 170 130, 170 90, 200 20 Z" transform="rotate(120 200 200)"/>
-        <path d="M200 20 C 230 90, 230 130, 200 200 C 170 130, 170 90, 200 20 Z" transform="rotate(150 200 200)"/>
-        <path d="M200 20 C 230 90, 230 130, 200 200 C 170 130, 170 90, 200 20 Z" transform="rotate(180 200 200)"/>
-        <path d="M200 20 C 230 90, 230 130, 200 200 C 170 130, 170 90, 200 20 Z" transform="rotate(210 200 200)"/>
-        <path d="M200 20 C 230 90, 230 130, 200 200 C 170 130, 170 90, 200 20 Z" transform="rotate(240 200 200)"/>
-        <path d="M200 20 C 230 90, 230 130, 200 200 C 170 130, 170 90, 200 20 Z" transform="rotate(270 200 200)"/>
-        <path d="M200 20 C 230 90, 230 130, 200 200 C 170 130, 170 90, 200 20 Z" transform="rotate(300 200 200)"/>
-        <path d="M200 20 C 230 90, 230 130, 200 200 C 170 130, 170 90, 200 20 Z" transform="rotate(330 200 200)"/>
-      </g>
-      <circle cx="200" cy="200" r="34" stroke-width="0.8" opacity="0.5"/>
-    </g>
-  </svg>
+  <div class="hero-grid">
 
-  <div class="about-hero-eyebrow devanagari-accent">Namaste &middot; Yoga &middot; Ayurveda</div>
-  <h1 class="about-hero-title">About <em>Patanjali Yogpeeth Nepal</em></h1>
-  <p class="about-hero-desc">
-    A non-profit organization dedicated to promoting health, spirituality, and prosperity
-    through Yoga and Ayurveda, fostering a healthy, peaceful, and self-reliant Nepal since 2006.
-  </p>
+    <div class="hero-copy">
+      <p class="about-hero-eyebrow hero-in d1">Established 2006 &nbsp;&middot;&nbsp; Kathmandu, Nepal</p>
 
-  <div class="hero-leaders reveal-fade">
-    <div class="hero-leader">
-      <img src="https://agromni.co.in/pypnepal1/assets/image/swami-ji.webp" alt="Swami Ramdev Ji">
-      <span>
-        <span class="hero-leader-name">Swami Ramdev Ji</span>
-        <span class="hero-leader-role">Chairperson</span>
-      </span>
+      <h1 class="about-hero-title hero-in d2">
+        <span class="kicker">About</span>
+        Patanjali Yogpeeth <span class="accent">Nepal</span>
+      </h1>
+
+      <p class="about-hero-desc hero-in d3">
+        A non-profit dedicated to health, spirituality and prosperity through Yoga and
+        Ayurveda &mdash; working since <span class="year">2006</span> toward a healthy,
+        peaceful and self-reliant Nepal.
+      </p>
     </div>
-    <span class="hero-leader-plus">&amp;</span>
-    <div class="hero-leader">
-      <img src="https://agromni.co.in/pypnepal1/assets/image/acharya-ji.webp" alt="Acharya Balkrishna Ji">
-      <span>
-        <span class="hero-leader-name">Acharya Balkrishna Ji</span>
-        <span class="hero-leader-role">Chairperson</span>
-      </span>
+
+    <div class="hero-founders hero-in d4">
+      <p class="founders-label">Founded and guided by</p>
+
+      <div class="founder">
+        <span class="founder-portrait">
+          <img src="https://agromni.co.in/pypnepal1/assets/image/swami-ji.webp" alt="Swami Ramdev Ji">
+        </span>
+        <span>
+          <span class="founder-name">Swami Ramdev Ji</span>
+          <span class="founder-role">Chairperson</span>
+        </span>
+      </div>
+
+      <div class="founder">
+        <span class="founder-portrait">
+          <img src="https://agromni.co.in/pypnepal1/assets/image/acharya-ji.webp" alt="Acharya Balkrishna Ji">
+        </span>
+        <span>
+          <span class="founder-name">Acharya Balkrishna Ji</span>
+          <span class="founder-role">Chairperson</span>
+        </span>
+      </div>
     </div>
+
+  </div>
+
+  <div class="hero-scroll-cue" aria-hidden="true">
+    Scroll
+    <svg viewBox="0 0 24 24" fill="none"><path d="M6 9l6 6 6-6" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/></svg>
   </div>
 </header>
 
@@ -1768,80 +1689,54 @@
     </p>
   </div>
 
-  <div class="wheel-wrap reveal-fade">
-    <div class="wheel-ring"></div>
-    <div class="wheel-ring-inner"></div>
+  <div class="impact-grid reveal-fade">
 
-    <div class="wheel-hub">
-      <div class="wheel-hub-inner">
-        <strong>Patanjali<br>Yogpeeth Nepal</strong>
-      </div>
+    <div class="impact-item">
+      <div class="impact-icon"><svg viewBox="0 0 24 24"><path d="M8 2v4M16 2v4M3 9h18M5 5h14a1 1 0 0 1 1 1v13a1 1 0 0 1-1 1H5a1 1 0 0 1-1-1V6a1 1 0 0 1 1-1z" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/></svg></div>
+      <div class="impact-number">Est. 2006</div>
+      <div class="impact-label">Under divine guidance of our founders</div>
     </div>
 
-    <div class="wheel-item pos-1">
-      <div class="wheel-item-inner">
-        <div class="wheel-icon"><svg viewBox="0 0 24 24"><path d="M8 2v4M16 2v4M3 9h18M5 5h14a1 1 0 0 1 1 1v13a1 1 0 0 1-1 1H5a1 1 0 0 1-1-1V6a1 1 0 0 1 1-1z" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/></svg></div>
-        <div class="wheel-number">Est. 2006</div>
-        <div class="wheel-label">Under divine guidance of our founders</div>
-      </div>
+    <div class="impact-item accent-gold">
+      <div class="impact-icon"><svg viewBox="0 0 24 24"><circle cx="12" cy="8" r="3.2" stroke-width="1.5"/><path d="M5 21c0-3.9 3.1-7 7-7s7 3.1 7 7" stroke-width="1.5" stroke-linecap="round"/></svg></div>
+      <div class="impact-number"><span class="num-value" data-count="65000">0</span><span class="num-suffix">+</span></div>
+      <div class="impact-label">Trained Yog Teachers</div>
     </div>
 
-    <div class="wheel-item pos-2">
-      <div class="wheel-item-inner">
-        <div class="wheel-icon"><svg viewBox="0 0 24 24"><circle cx="12" cy="8" r="3.2" stroke-width="1.5"/><path d="M5 21c0-3.9 3.1-7 7-7s7 3.1 7 7" stroke-width="1.5" stroke-linecap="round"/></svg></div>
-        <div class="wheel-number">65,000+</div>
-        <div class="wheel-label">Trained Yog Teachers</div>
-      </div>
+    <div class="impact-item accent-deep">
+      <div class="impact-icon"><svg viewBox="0 0 24 24"><circle cx="12" cy="6" r="2.4" stroke-width="1.5"/><path d="M8 21l1.5-6.5L7 12l3-3 2 2 2-2 3 3-2.5 2.5L16 21" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/></svg></div>
+      <div class="impact-number"><span class="num-value" data-count="1400">0</span><span class="num-suffix">+</span></div>
+      <div class="impact-label">Regular Yog Classes</div>
     </div>
 
-    <div class="wheel-item pos-3">
-      <div class="wheel-item-inner">
-        <div class="wheel-icon"><svg viewBox="0 0 24 24"><circle cx="12" cy="6" r="2.4" stroke-width="1.5"/><path d="M8 21l1.5-6.5L7 12l3-3 2 2 2-2 3 3-2.5 2.5L16 21" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/></svg></div>
-        <div class="wheel-number">1,400+</div>
-        <div class="wheel-label">Regular Yog Classes</div>
-      </div>
+    <div class="impact-item">
+      <div class="impact-icon"><svg viewBox="0 0 24 24"><path d="M12 21s-7.5-4.9-10-9.3C.4 8.1 2 4.5 5.6 4c2-.3 3.7.7 4.4 2.1C10.7 4.7 12.4 3.7 14.4 4c3.6.5 5.2 4.1 3.6 7.7C15.5 16.1 12 21 12 21z" stroke-width="1.5" stroke-linejoin="round"/></svg></div>
+      <div class="impact-number">Lakhs</div>
+      <div class="impact-label">Of Dedicated Volunteers</div>
     </div>
 
-    <div class="wheel-item pos-4">
-      <div class="wheel-item-inner">
-        <div class="wheel-icon"><svg viewBox="0 0 24 24"><path d="M12 21s-7.5-4.9-10-9.3C.4 8.1 2 4.5 5.6 4c2-.3 3.7.7 4.4 2.1C10.7 4.7 12.4 3.7 14.4 4c3.6.5 5.2 4.1 3.6 7.7C15.5 16.1 12 21 12 21z" stroke-width="1.5" stroke-linejoin="round"/></svg></div>
-        <div class="wheel-number">Lakhs</div>
-        <div class="wheel-label">Of Dedicated Volunteers</div>
-      </div>
+    <div class="impact-item accent-gold">
+      <div class="impact-icon"><svg viewBox="0 0 24 24"><path d="M12 21s-8-4.4-8-11a8 8 0 0 1 16 0c0 6.6-8 11-8 11z" stroke-width="1.5" stroke-linejoin="round"/><path d="M9 12l2 2 4-4" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/></svg></div>
+      <div class="impact-number">NPR 10Cr+</div>
+      <div class="impact-label">Relief During Natural Calamities</div>
     </div>
 
-    <div class="wheel-item pos-5">
-      <div class="wheel-item-inner">
-        <div class="wheel-icon"><svg viewBox="0 0 24 24"><path d="M12 21s-8-4.4-8-11a8 8 0 0 1 16 0c0 6.6-8 11-8 11z" stroke-width="1.5" stroke-linejoin="round"/><path d="M9 12l2 2 4-4" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/></svg></div>
-        <div class="wheel-number">NPR 10Cr+</div>
-        <div class="wheel-label">Relief During Natural Calamities</div>
-      </div>
+    <div class="impact-item accent-deep">
+      <div class="impact-icon"><svg viewBox="0 0 24 24"><circle cx="12" cy="12" r="9" stroke-width="1.5"/><path d="M12 3v18M3 12h18" stroke-width="1.2" opacity=".5"/></svg></div>
+      <div class="impact-number"><span class="num-value" data-count="77">0</span><span class="num-suffix"> / 77</span></div>
+      <div class="impact-label">Districts of Nepal Reached</div>
     </div>
 
-    <div class="wheel-item pos-6">
-      <div class="wheel-item-inner">
-        <div class="wheel-icon"><svg viewBox="0 0 24 24"><circle cx="12" cy="12" r="9" stroke-width="1.5"/><path d="M12 3v18M3 12h18" stroke-width="1.2" opacity=".5"/></svg></div>
-        <div class="wheel-number">77 / 77</div>
-        <div class="wheel-label">Districts of Nepal Reached</div>
-      </div>
-    </div>
-  </div>
-
-  <p class="wheel-mobile-note reveal-fade" style="text-align:center; font-family:'Merriweather Sans',sans-serif; font-size:12.5px; color:var(--muted-text); margin:8px 0 0;">
-    Tap through on a larger screen to see the full wheel &mdash; here's the summary:
-  </p>
-  <div class="stats-fallback reveal-fade">
-    <div class="stat-item"><div class="stat-number">2006</div><div class="stat-label">Founded</div></div>
-    <div class="stat-item"><div class="stat-number">1,400+</div><div class="stat-label">Yog Classes</div></div>
-    <div class="stat-item"><div class="stat-number">65,000+</div><div class="stat-label">Yog Teachers</div></div>
-    <div class="stat-item"><div class="stat-number">Lakhs</div><div class="stat-label">Volunteers</div></div>
-    <div class="stat-item"><div class="stat-number">NPR 10Cr+</div><div class="stat-label">Relief Given</div></div>
-    <div class="stat-item"><div class="stat-number">77/77</div><div class="stat-label">Districts Reached</div></div>
   </div>
 </section>
 
 <!-- ============ QUOTE BANNER ============ -->
 <section class="quote-banner reveal-fade">
+  <span class="quote-banner-particle" style="width:8px;height:8px;top:20%;left:12%;animation-delay:0s"></span>
+  <span class="quote-banner-particle" style="width:5px;height:5px;top:65%;left:22%;animation-delay:1.4s"></span>
+  <span class="quote-banner-particle" style="width:10px;height:10px;top:30%;left:85%;animation-delay:.8s"></span>
+  <span class="quote-banner-particle" style="width:6px;height:6px;top:75%;left:78%;animation-delay:2.1s"></span>
+  <span class="quote-banner-particle" style="width:7px;height:7px;top:15%;left:55%;animation-delay:3s"></span>
   <span class="quote-banner-mark" aria-hidden="true">&ldquo;</span>
   <p>Yoga is not just an exercise &mdash; it is a complete path to physical health,
   mental peace, and spiritual awakening, uniting us with our inner self, with nature,
@@ -1856,67 +1751,102 @@
   <div class="path-inner">
     <div class="section-header reveal-fade">
       <div class="section-eyebrow">
-        <span class="devanagari-accent">What We Do</span>
+        <span>What We Do</span>
       </div>
       <h2 class="section-title">Our Path of <em>Service</em></h2>
       <p class="section-desc">
-        Five threads of the same mission &mdash; healing, teaching, and standing with
+        Five branches of one mission &mdash; healing, teaching, and standing with
         Nepal in its hardest moments.
       </p>
     </div>
 
-    <div class="path-list">
-      <div class="path-line"></div>
+    <div class="services-grid">
 
-      <div class="path-item reveal-fade">
-        <div class="path-content">
-          <h3>Healthcare Services</h3>
-          <p>Providing holistic treatments through Ayurveda and Yoga to communities across Nepal.</p>
-        </div>
-        <div class="path-node">
+      <div class="service-card reveal-up">
+        <svg class="service-vein" viewBox="0 0 60 60" aria-hidden="true">
+          <path d="M6 54 C 20 44, 34 30, 54 6"/>
+          <path d="M18 42 C 22 34, 24 28, 24 20"/>
+          <path d="M27 33 C 32 27, 36 23, 40 20"/>
+          <path d="M14 46 C 16 40, 15 34, 12 28"/>
+          <path d="M35 25 C 38 20, 40 15, 40 10"/>
+        </svg>
+        <div class="service-icon">
           <svg viewBox="0 0 24 24"><path d="M12 21s-7.5-4.9-10-9.3C.4 8.1 2 4.5 5.6 4c2-.3 3.7.7 4.4 2.1C10.7 4.7 12.4 3.7 14.4 4c3.6.5 5.2 4.1 3.6 7.7C15.5 16.1 12 21 12 21z" stroke-width="1.5" stroke-linejoin="round"/></svg>
         </div>
+        <div class="service-text">
+          <h3>Healthcare Services</h3>
+          <p>Holistic Ayurvedic and Yogic treatment brought directly to communities across Nepal, from valley towns to remote hill villages.</p>
+        </div>
       </div>
 
-      <div class="path-item reveal-fade">
-        <div class="path-node">
+      <div class="service-card reveal-up stagger-1">
+        <svg class="service-vein" viewBox="0 0 60 60" aria-hidden="true">
+          <path d="M6 54 C 20 44, 34 30, 54 6"/>
+          <path d="M18 42 C 22 34, 24 28, 24 20"/>
+          <path d="M27 33 C 32 27, 36 23, 40 20"/>
+          <path d="M14 46 C 16 40, 15 34, 12 28"/>
+          <path d="M35 25 C 38 20, 40 15, 40 10"/>
+        </svg>
+        <div class="service-icon">
           <svg viewBox="0 0 24 24"><path d="M4 19V6a2 2 0 0 1 2-2h5v17H6a2 2 0 0 0-2 2zM20 19V6a2 2 0 0 0-2-2h-5v17h5a2 2 0 0 1 2 2z" stroke-width="1.5" stroke-linejoin="round"/></svg>
         </div>
-        <div class="path-content">
+        <div class="service-text">
           <h3>Education</h3>
-          <p>Operating Patanjali Ayurved Medical College &amp; Research Center in Dhulikhel, offering BAMS degrees affiliated with Nepal Sanskrit University.</p>
+          <p>Patanjali Ayurved Medical College &amp; Research Center in Dhulikhel offers BAMS degrees affiliated with Nepal Sanskrit University.</p>
         </div>
       </div>
 
-      <div class="path-item reveal-fade">
-        <div class="path-content">
-          <h3>Disaster Relief</h3>
-          <p>Active relief efforts during the 2015 &amp; 2023 earthquakes, 2024 floods, and the COVID-19 pandemic.</p>
-        </div>
-        <div class="path-node">
+      <div class="service-card reveal-up stagger-2">
+        <svg class="service-vein" viewBox="0 0 60 60" aria-hidden="true">
+          <path d="M6 54 C 20 44, 34 30, 54 6"/>
+          <path d="M18 42 C 22 34, 24 28, 24 20"/>
+          <path d="M27 33 C 32 27, 36 23, 40 20"/>
+          <path d="M14 46 C 16 40, 15 34, 12 28"/>
+          <path d="M35 25 C 38 20, 40 15, 40 10"/>
+        </svg>
+        <div class="service-icon">
           <svg viewBox="0 0 24 24"><path d="M12 2l2.4 6.6L21 9l-5.3 4.4L17.3 21 12 17.3 6.7 21l1.6-7.6L3 9l6.6-.4L12 2z" stroke-width="1.4" stroke-linejoin="round"/></svg>
         </div>
+        <div class="service-text">
+          <h3>Disaster Relief</h3>
+          <p>On the ground through the 2015 and 2023 earthquakes, the 2024 floods, and the COVID-19 pandemic.</p>
+        </div>
       </div>
 
-      <div class="path-item reveal-fade">
-        <div class="path-node">
+      <div class="service-card reveal-up stagger-3">
+        <svg class="service-vein" viewBox="0 0 60 60" aria-hidden="true">
+          <path d="M6 54 C 20 44, 34 30, 54 6"/>
+          <path d="M18 42 C 22 34, 24 28, 24 20"/>
+          <path d="M27 33 C 32 27, 36 23, 40 20"/>
+          <path d="M14 46 C 16 40, 15 34, 12 28"/>
+          <path d="M35 25 C 38 20, 40 15, 40 10"/>
+        </svg>
+        <div class="service-icon">
           <svg viewBox="0 0 24 24"><circle cx="9" cy="7" r="3" stroke-width="1.5"/><path d="M2 21c0-3.9 3.1-7 7-7s7 3.1 7 7" stroke-width="1.5" stroke-linecap="round"/><circle cx="17" cy="8" r="2.4" stroke-width="1.5"/><path d="M15.5 14.2c2.9.4 5.5 2.8 5.5 6.3" stroke-width="1.5" stroke-linecap="round"/></svg>
         </div>
-        <div class="path-content">
+        <div class="service-text">
           <h3>Community Development</h3>
-          <p>Yoga camps, health awareness programs, and cultural activities across all 77 districts of Nepal.</p>
+          <p>Yoga camps, health awareness drives and cultural programmes running across all 77 districts.</p>
         </div>
       </div>
 
-      <div class="path-item reveal-fade">
-        <div class="path-content">
-          <h3>Social Welfare</h3>
-          <p>Free education, accommodation, and healthcare for orphans and underprivileged communities, working toward a discrimination-free society.</p>
-        </div>
-        <div class="path-node">
+      <div class="service-card reveal-up stagger-4">
+        <svg class="service-vein" viewBox="0 0 60 60" aria-hidden="true">
+          <path d="M6 54 C 20 44, 34 30, 54 6"/>
+          <path d="M18 42 C 22 34, 24 28, 24 20"/>
+          <path d="M27 33 C 32 27, 36 23, 40 20"/>
+          <path d="M14 46 C 16 40, 15 34, 12 28"/>
+          <path d="M35 25 C 38 20, 40 15, 40 10"/>
+        </svg>
+        <div class="service-icon">
           <svg viewBox="0 0 24 24"><path d="M12 21s-7-4.4-9.3-8.9C1 8.7 2.6 5 6.3 4.5c2.2-.3 3.9.8 4.6 2.2m1.1 0c.7-1.4 2.4-2.5 4.6-2.2 3.7.5 5.3 4.2 3.3 7.6C18 12.4 15.5 14.6 13 17" stroke-width="1.4" stroke-linecap="round" stroke-linejoin="round"/><path d="M4 15l2.5 2.5L11 13" stroke-width="1.4" stroke-linecap="round" stroke-linejoin="round"/></svg>
         </div>
+        <div class="service-text">
+          <h3>Social Welfare</h3>
+          <p>Free education, housing and healthcare for orphans and underprivileged families, toward a society without discrimination.</p>
+        </div>
       </div>
+
     </div>
   </div>
 </section>
@@ -1924,7 +1854,7 @@
 <!-- ============ MAIN OBJECTIVES ============ -->
 <section class="objectives-section">
   <svg class="objectives-mandala" viewBox="0 0 200 200" aria-hidden="true" focusable="false">
-    <g fill="none" stroke="#8A2D3B" stroke-width="1">
+    <g fill="none" stroke-width="1">
       <circle cx="100" cy="100" r="95"/>
       <circle cx="100" cy="100" r="70"/>
       <circle cx="100" cy="100" r="45"/>
@@ -1935,70 +1865,155 @@
   <div class="objectives-inner">
     <div class="section-header reveal-fade">
       <div class="section-eyebrow">
-        <span class="devanagari-accent">Our Purpose</span>
+        <span>Our Purpose</span>
       </div>
-      <h2 class="section-title">Main <em>Objectives</em></h2>
+      <h2 class="section-title">Eight <em>Objectives</em></h2>
       <p class="section-desc">
-        The founding principles that guide every programme we run and every community we serve.
+        The founding commitments behind every programme we run. Pick one to read it.
       </p>
     </div>
 
-    <div class="objectives-grid">
+    <div class="obj-explorer reveal-fade">
 
-      <div class="objective-card reveal-up">
-        <div class="objective-num">01</div>
-        <div class="objective-icon-badge"><svg viewBox="0 0 24 24"><circle cx="12" cy="6" r="2.4" stroke-width="1.5"/><path d="M8 21l1.5-6.5L7 12l3-3 2 2 2-2 3 3-2.5 2.5L16 21" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/></svg></div>
-        <h3>Promotion of Yoga and Ayurveda</h3>
-        <p>Establishing Yoga and Ayurveda as integral components of health care and wellness on a global scale.</p>
+      <div class="obj-index" role="tablist" aria-label="Main objectives">
+        <span class="obj-marker" aria-hidden="true"></span>
+
+        <div class="obj-item open">
+          <button class="obj-tab" role="tab" id="objtab-1" aria-controls="obj-panel" aria-selected="true">
+            <span class="obj-num">01</span>
+            <span class="obj-tab-title">Promotion of Yoga and Ayurveda</span>
+          </button>
+          <div class="obj-source">
+            <div class="obj-source-inner">
+              <div class="obj-badge"><svg viewBox="0 0 24 24"><circle cx="12" cy="6" r="2.4" stroke-width="1.5"/><path d="M8 21l1.5-6.5L7 12l3-3 2 2 2-2 3 3-2.5 2.5L16 21" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/></svg></div>
+              <h3>Promotion of Yoga and Ayurveda</h3>
+              <p>Establishing Yoga and Ayurveda as integral components of health care and wellness on a global scale.</p>
+            </div>
+          </div>
+        </div>
+
+        <div class="obj-item">
+          <button class="obj-tab" role="tab" id="objtab-2" aria-controls="obj-panel" aria-selected="false" tabindex="-1">
+            <span class="obj-num">02</span>
+            <span class="obj-tab-title">Research and Study</span>
+          </button>
+          <div class="obj-source">
+            <div class="obj-source-inner">
+              <div class="obj-badge"><svg viewBox="0 0 24 24"><path d="M4 5.5C4 4.7 4.7 4 5.5 4H11v16H5.5A1.5 1.5 0 0 1 4 18.5v-13z" stroke-width="1.5" stroke-linejoin="round"/><path d="M20 5.5c0-.8-.7-1.5-1.5-1.5H13v16h5.5a1.5 1.5 0 0 0 1.5-1.5v-13z" stroke-width="1.5" stroke-linejoin="round"/></svg></div>
+              <h3>Research and Study</h3>
+              <p>Studying ancient manuscripts of the Vedic tradition, and conducting research that validates and modernises these practices.</p>
+            </div>
+          </div>
+        </div>
+
+        <div class="obj-item">
+          <button class="obj-tab" role="tab" id="objtab-3" aria-controls="obj-panel" aria-selected="false" tabindex="-1">
+            <span class="obj-num">03</span>
+            <span class="obj-tab-title">Community Health Initiatives</span>
+          </button>
+          <div class="obj-source">
+            <div class="obj-source-inner">
+              <div class="obj-badge"><svg viewBox="0 0 24 24"><circle cx="12" cy="8" r="3.2" stroke-width="1.5"/><path d="M5 21c0-3.9 3.1-7 7-7s7 3.1 7 7" stroke-width="1.5" stroke-linecap="round"/><path d="M17 6l1.4 1.4L21 5" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/></svg></div>
+              <h3>Community Health Initiatives</h3>
+              <p>Health camps and awareness programmes that teach the public about Yoga and natural methods of healing.</p>
+            </div>
+          </div>
+        </div>
+
+        <div class="obj-item">
+          <button class="obj-tab" role="tab" id="objtab-4" aria-controls="obj-panel" aria-selected="false" tabindex="-1">
+            <span class="obj-num">04</span>
+            <span class="obj-tab-title">Support for the Underprivileged</span>
+          </button>
+          <div class="obj-source">
+            <div class="obj-source-inner">
+              <div class="obj-badge"><svg viewBox="0 0 24 24"><path d="M12 3v4M12 3l-2 2M12 3l2 2" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/><path d="M5 21v-6a2 2 0 0 1 2-2h10a2 2 0 0 1 2 2v6" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/><path d="M9 21v-4h6v4" stroke-width="1.5" stroke-linejoin="round"/><path d="M3 21h18" stroke-width="1.5" stroke-linecap="round"/></svg></div>
+              <h3>Support for the Underprivileged</h3>
+              <p>Free accommodation, food and education for orphans and for economically weaker sections of society.</p>
+            </div>
+          </div>
+        </div>
+
+        <div class="obj-item">
+          <button class="obj-tab" role="tab" id="objtab-5" aria-controls="obj-panel" aria-selected="false" tabindex="-1">
+            <span class="obj-num">05</span>
+            <span class="obj-tab-title">Educational Programs</span>
+          </button>
+          <div class="obj-source">
+            <div class="obj-source-inner">
+              <div class="obj-badge"><svg viewBox="0 0 24 24"><path d="M12 3L2 8l10 5 10-5-10-5z" stroke-width="1.5" stroke-linejoin="round"/><path d="M6 10.5V16c0 1.7 2.7 3 6 3s6-1.3 6-3v-5.5" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/></svg></div>
+              <h3>Educational Programs</h3>
+              <p>Institutions offering courses in Yoga and Ayurveda, nurturing a new generation of practitioners.</p>
+            </div>
+          </div>
+        </div>
+
+        <div class="obj-item">
+          <button class="obj-tab" role="tab" id="objtab-6" aria-controls="obj-panel" aria-selected="false" tabindex="-1">
+            <span class="obj-num">06</span>
+            <span class="obj-tab-title">Cultural Preservation</span>
+          </button>
+          <div class="obj-source">
+            <div class="obj-source-inner">
+              <div class="obj-badge"><svg viewBox="0 0 24 24"><path d="M12 3l3 5H9l3-5z" stroke-width="1.5" stroke-linejoin="round"/><path d="M6 21V11h12v10M4 21h16" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/></svg></div>
+              <h3>Cultural Preservation</h3>
+              <p>Carrying cultural values forward through Yoga and Ayurveda, for spiritual, physical and mental well-being alike.</p>
+            </div>
+          </div>
+        </div>
+
+        <div class="obj-item">
+          <button class="obj-tab" role="tab" id="objtab-7" aria-controls="obj-panel" aria-selected="false" tabindex="-1">
+            <span class="obj-num">07</span>
+            <span class="obj-tab-title">Environmental Sustainability</span>
+          </button>
+          <div class="obj-source">
+            <div class="obj-source-inner">
+              <div class="obj-badge"><svg viewBox="0 0 24 24"><path d="M7 7l3-3 3 3M7 17l3 3 3-3M17 7l3 3-3 3M17 17l3-3-3-3" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/><circle cx="12" cy="12" r="3" stroke-width="1.5"/></svg></div>
+              <h3>Environmental Sustainability</h3>
+              <p>Organic farming and herbal medicine that give back to the land they draw from.</p>
+            </div>
+          </div>
+        </div>
+
+        <div class="obj-item">
+          <button class="obj-tab" role="tab" id="objtab-8" aria-controls="obj-panel" aria-selected="false" tabindex="-1">
+            <span class="obj-num">08</span>
+            <span class="obj-tab-title">National Health Improvement</span>
+          </button>
+          <div class="obj-source">
+            <div class="obj-source-inner">
+              <div class="obj-badge"><svg viewBox="0 0 24 24"><path d="M12 21s-7.5-4.9-10-9.3C.4 8.1 2 4.5 5.6 4c2-.3 3.7.7 4.4 2.1C10.7 4.7 12.4 3.7 14.4 4c3.6.5 5.2 4.1 3.6 7.7C15.5 16.1 12 21 12 21z" stroke-width="1.4" stroke-linejoin="round"/><path d="M9 12l2 2 4-4" stroke-width="1.4" stroke-linecap="round" stroke-linejoin="round"/></svg></div>
+              <h3>National Health Improvement</h3>
+              <p>Weaving traditional practice into modern health systems to lift Nepal's overall health landscape.</p>
+            </div>
+          </div>
+        </div>
       </div>
 
-      <div class="objective-card reveal-up">
-        <div class="objective-num">02</div>
-        <div class="objective-icon-badge"><svg viewBox="0 0 24 24"><path d="M4 5.5C4 4.7 4.7 4 5.5 4H11v16H5.5A1.5 1.5 0 0 1 4 18.5v-13z" stroke-width="1.5" stroke-linejoin="round"/><path d="M20 5.5c0-.8-.7-1.5-1.5-1.5H13v16h5.5a1.5 1.5 0 0 0 1.5-1.5v-13z" stroke-width="1.5" stroke-linejoin="round"/></svg></div>
-        <h3>Research and Study</h3>
-        <p>Studying ancient manuscripts of Vedic tradition, conducting research to validate and modernize these practices.</p>
-      </div>
+      <div class="obj-detail">
+        <span class="obj-ghost" aria-hidden="true">01</span>
+        <svg class="obj-rosette" viewBox="0 0 68 68" aria-hidden="true">
+          <circle class="hub" cx="34" cy="34" r="26" stroke-width=".8"/>
+          <circle class="node on" cx="34" cy="8" r="4.4"/>
+          <circle class="node" cx="52.4" cy="15.6" r="3"/>
+          <circle class="node" cx="60" cy="34" r="3"/>
+          <circle class="node" cx="52.4" cy="52.4" r="3"/>
+          <circle class="node" cx="34" cy="60" r="3"/>
+          <circle class="node" cx="15.6" cy="52.4" r="3"/>
+          <circle class="node" cx="8" cy="34" r="3"/>
+          <circle class="node" cx="15.6" cy="15.6" r="3"/>
+        </svg>
 
-      <div class="objective-card reveal-up">
-        <div class="objective-num">03</div>
-        <div class="objective-icon-badge"><svg viewBox="0 0 24 24"><circle cx="12" cy="8" r="3.2" stroke-width="1.5"/><path d="M5 21c0-3.9 3.1-7 7-7s7 3.1 7 7" stroke-width="1.5" stroke-linecap="round"/><path d="M17 6l1.4 1.4L21 5" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/></svg></div>
-        <h3>Community Health Initiatives</h3>
-        <p>Health camps and awareness programs educating the public on Yoga and natural healing methods.</p>
-      </div>
+        <div class="obj-body" id="obj-panel" role="tabpanel" aria-labelledby="objtab-1" tabindex="0">
+          <div class="obj-badge"><svg viewBox="0 0 24 24"><circle cx="12" cy="6" r="2.4" stroke-width="1.5"/><path d="M8 21l1.5-6.5L7 12l3-3 2 2 2-2 3 3-2.5 2.5L16 21" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/></svg></div>
+          <h3>Promotion of Yoga and Ayurveda</h3>
+          <p>Establishing Yoga and Ayurveda as integral components of health care and wellness on a global scale.</p>
+        </div>
 
-      <div class="objective-card reveal-up">
-        <div class="objective-num">04</div>
-        <div class="objective-icon-badge"><svg viewBox="0 0 24 24"><path d="M12 3v4M12 3l-2 2M12 3l2 2" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/><path d="M5 21v-6a2 2 0 0 1 2-2h10a2 2 0 0 1 2 2v6" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/><path d="M9 21v-4h6v4" stroke-width="1.5" stroke-linejoin="round"/><path d="M3 21h18" stroke-width="1.5" stroke-linecap="round"/></svg></div>
-        <h3>Support For Underprivileged</h3>
-        <p>Free accommodation, food and education for orphans and economically weaker sections of society.</p>
-      </div>
-
-      <div class="objective-card reveal-up">
-        <div class="objective-num">05</div>
-        <div class="objective-icon-badge"><svg viewBox="0 0 24 24"><path d="M12 3L2 8l10 5 10-5-10-5z" stroke-width="1.5" stroke-linejoin="round"/><path d="M6 10.5V16c0 1.7 2.7 3 6 3s6-1.3 6-3v-5.5" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/></svg></div>
-        <h3>Educational Programs</h3>
-        <p>Institutions offering courses in Yoga and Ayurveda, nurturing a new generation of practitioners.</p>
-      </div>
-
-      <div class="objective-card reveal-up">
-        <div class="objective-num">06</div>
-        <div class="objective-icon-badge"><svg viewBox="0 0 24 24"><path d="M12 3l3 5H9l3-5z" stroke-width="1.5" stroke-linejoin="round"/><path d="M6 21V11h12v10M4 21h16" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/></svg></div>
-        <h3>Cultural Preservation</h3>
-        <p>Promoting cultural values through Yoga and Ayurveda for holistic spiritual, physical and mental well-being.</p>
-      </div>
-
-      <div class="objective-card reveal-up">
-        <div class="objective-num">07</div>
-        <div class="objective-icon-badge"><svg viewBox="0 0 24 24"><path d="M7 7l3-3 3 3M7 17l3 3 3-3M17 7l3 3-3 3M17 17l3-3-3-3" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/><circle cx="12" cy="12" r="3" stroke-width="1.5"/></svg></div>
-        <h3>Environmental Sustainability</h3>
-        <p>Organic farming and herbal medicines contributing to environmental conservation efforts.</p>
-      </div>
-
-      <div class="objective-card reveal-up">
-        <div class="objective-num">08</div>
-        <div class="objective-icon-badge"><svg viewBox="0 0 24 24"><path d="M12 21s-7.5-4.9-10-9.3C.4 8.1 2 4.5 5.6 4c2-.3 3.7.7 4.4 2.1C10.7 4.7 12.4 3.7 14.4 4c3.6.5 5.2 4.1 3.6 7.7C15.5 16.1 12 21 12 21z" stroke-width="1.4" stroke-linejoin="round"/><path d="M9 12l2 2 4-4" stroke-width="1.4" stroke-linecap="round" stroke-linejoin="round"/></svg></div>
-        <h3>National Health Improvement</h3>
-        <p>Integrating traditional practices into modern health systems to enhance Nepal's health landscape.</p>
+        <div class="obj-hint" aria-hidden="true">
+          <kbd>&uarr;</kbd><kbd>&darr;</kbd> to move through the eight
+        </div>
       </div>
 
     </div>
@@ -2210,6 +2225,138 @@
     }, { threshold: 0.01, rootMargin: '0px 0px 0px 0px' });
 
     revealEls.forEach(el => observer.observe(el));
+  })();
+
+  // ============ COUNT-UP NUMBERS (Wheel of Service) ============
+  (function() {
+    const nums = document.querySelectorAll('.num-value[data-count]');
+    if (!nums.length) return;
+    const reduceMotion = window.matchMedia('(prefers-reduced-motion: reduce)').matches;
+
+    function animateCount(el) {
+      const target = parseInt(el.getAttribute('data-count'), 10) || 0;
+      if (reduceMotion) { el.textContent = target.toLocaleString(); return; }
+      const duration = 1600;
+      const start = performance.now();
+      function tick(now) {
+        const p = Math.min((now - start) / duration, 1);
+        const eased = 1 - Math.pow(1 - p, 3); // ease-out cubic
+        el.textContent = Math.floor(eased * target).toLocaleString();
+        if (p < 1) requestAnimationFrame(tick);
+        else el.textContent = target.toLocaleString();
+      }
+      requestAnimationFrame(tick);
+    }
+
+    if (!('IntersectionObserver' in window)) {
+      nums.forEach(animateCount);
+      return;
+    }
+    const countObserver = new IntersectionObserver((entries, obs) => {
+      entries.forEach(entry => {
+        if (entry.isIntersecting) {
+          animateCount(entry.target);
+          obs.unobserve(entry.target);
+        }
+      });
+    }, { threshold: 0.4 });
+    nums.forEach(el => countObserver.observe(el));
+  })();
+
+  // ============ MAIN OBJECTIVES — eight-part explorer ============
+  // Desktop: an index rail drives a single reading panel.
+  // Mobile (<=900px): the same markup collapses to a plain accordion.
+  (function() {
+    const explorer = document.querySelector('.obj-explorer');
+    if (!explorer) return;
+
+    const items  = Array.from(explorer.querySelectorAll('.obj-item'));
+    const tabs   = items.map(i => i.querySelector('.obj-tab'));
+    const marker = explorer.querySelector('.obj-marker');
+    const body   = explorer.querySelector('.obj-body');
+    const ghost  = explorer.querySelector('.obj-ghost');
+    const nodes  = Array.from(explorer.querySelectorAll('.obj-rosette .node'));
+    const MOBILE_Q = window.matchMedia('(max-width: 900px)');
+    let current = 0;
+
+    function moveMarker(i) {
+      if (!marker || MOBILE_Q.matches) return;
+      const tab = tabs[i];
+      marker.style.height = tab.offsetHeight + 'px';
+      marker.style.transform = 'translateY(' + tab.offsetTop + 'px)';
+    }
+
+    function select(i, focusTab) {
+      current = i;
+
+      tabs.forEach((t, n) => {
+        const on = n === i;
+        t.setAttribute('aria-selected', String(on));
+        t.tabIndex = on ? 0 : -1;
+        items[n].classList.toggle('open', on);
+      });
+
+      // paint the reading panel from the item's own content
+      if (body) {
+        const src = items[i].querySelector('.obj-source-inner');
+        body.innerHTML = src.innerHTML;
+        body.setAttribute('aria-labelledby', tabs[i].id);
+        body.classList.remove('swap');
+        void body.offsetWidth;        // restart the entrance animation
+        body.classList.add('swap');
+      }
+
+      if (ghost) ghost.textContent = String(i + 1).padStart(2, '0');
+      nodes.forEach((n, k) => n.classList.toggle('on', k === i));
+      moveMarker(i);
+
+      if (focusTab) tabs[i].focus();
+    }
+
+    tabs.forEach((tab, i) => {
+      tab.addEventListener('click', () => {
+        // on mobile the same tap closes an already-open item
+        if (MOBILE_Q.matches && items[i].classList.contains('open')) {
+          items[i].classList.remove('open');
+          tab.setAttribute('aria-selected', 'false');
+          return;
+        }
+        select(i);
+      });
+      tab.addEventListener('keydown', (e) => {
+        let next = null;
+        if (e.key === 'ArrowDown' || e.key === 'ArrowRight') next = (i + 1) % tabs.length;
+        if (e.key === 'ArrowUp'   || e.key === 'ArrowLeft')  next = (i - 1 + tabs.length) % tabs.length;
+        if (e.key === 'Home') next = 0;
+        if (e.key === 'End')  next = tabs.length - 1;
+        if (next !== null) { e.preventDefault(); select(next, true); }
+      });
+    });
+
+    window.addEventListener('resize', () => moveMarker(current));
+    window.addEventListener('load', () => moveMarker(current));
+    if (document.fonts && document.fonts.ready) {
+      document.fonts.ready.then(() => moveMarker(current));
+    }
+    moveMarker(0);
+  })();
+
+  // ============ SUBTLE TILT EFFECT (hero leader cards) ============
+  (function() {
+    if (window.matchMedia('(prefers-reduced-motion: reduce)').matches) return;
+    if (window.matchMedia('(pointer: coarse)').matches) return; // skip on touch devices
+    document.querySelectorAll('[data-tilt]').forEach(card => {
+      const strength = 10;
+      card.addEventListener('mousemove', (e) => {
+        const rect = card.getBoundingClientRect();
+        const x = (e.clientX - rect.left) / rect.width - 0.5;
+        const y = (e.clientY - rect.top) / rect.height - 0.5;
+        card.style.transform = `perspective(500px) rotateY(${x * strength}deg) rotateX(${-y * strength}deg) translateY(-6px)`;
+      });
+      card.addEventListener('mouseleave', () => {
+        card.style.transform = '';
+      });
+    });
   })();
 
 </script>
