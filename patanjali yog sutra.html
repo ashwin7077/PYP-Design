@@ -1,0 +1,1960 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>The Yoga Sutras of Patanjali | Patanjali Yogpeeth Nepal</title>
+  <meta name="description" content="All 195 sūtras of Patanjali’s Yoga Sutra, in Sanskrit, transliteration, and plain-English meaning, across all four pādas.">
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link
+    href="https://fonts.googleapis.com/css2?family=Merriweather:wght@300;400;700&family=Merriweather+Sans:wght@400;500&family=Noto+Serif+Devanagari:wght@300;400;500&family=Crete+Round&display=swap"
+    rel="stylesheet">
+  <style>
+    :root {
+      --maroon: #8A2D3B;
+      --maroon-deep: #5E1E28;
+      --ink: #2B1114;
+      /* main navbar background */
+      --ink-soft: #3C1B22;
+      /* dropdown panel background */
+      --cream: #F8F1E6;
+      /* utility bar background */
+      --cream-line: #E4D6C1;
+      --gold: #C79A49;
+      /* signature accent */
+      --gold-soft: #E4C784;
+      --ivory-text: #F6EEE2;
+      --muted-text: #8A6F63;
+      --muted-text-light: #C9A99B;
+
+      /* swoosh geometry — change these two and everything follows */
+      --nav-h: 58px;
+      --swoosh-w: 430px;
+
+      /* motion tokens — every transition/animation on the page pulls from
+       these so hovers, panels and reveals all feel like one system
+       instead of a grab-bag of durations/easings */
+      --ease: cubic-bezier(.4, 0, .2, 1);
+      /* standard, snappy-but-smooth */
+      --ease-out: cubic-bezier(.16, 1, .3, 1);
+      /* soft landing, for panels & reveals */
+      --dur-fast: .2s;
+      --dur-base: .3s;
+      --dur-slow: .5s;
+    }
+
+    @media (prefers-reduced-motion: reduce) {
+
+      *,
+      *::before,
+      *::after {
+        animation-duration: .01ms !important;
+        animation-iteration-count: 1 !important;
+        transition-duration: .01ms !important;
+        scroll-behavior: auto !important;
+      }
+    }
+
+    * {
+      box-sizing: border-box;
+      margin: 0;
+      padding: 0;
+    }
+
+    body {
+      font-family: 'Merriweather', Georgia, serif;
+      font-weight: 300;
+      background: #FBF7F0;
+      color: var(--ink);
+    }
+
+    a {
+      text-decoration: none;
+      color: inherit;
+    }
+
+    ul {
+      list-style: none;
+    }
+
+    /* Devanagari script accent font */
+    .devanagari {
+      font-family: 'Noto Serif Devanagari', 'Merriweather', serif;
+    }
+
+    /* Footer copyright accent font */
+    .copyright-text {
+      font-family: 'Crete Round', 'Merriweather Sans', sans-serif;
+    }
+
+    /* ============ UTILITY BAR ============ */
+    .utility-bar {
+      background: var(--cream);
+      border-bottom: 1px solid var(--cream-line);
+      font-family: 'Merriweather Sans', sans-serif;
+      font-size: 12.5px;
+      letter-spacing: .02em;
+    }
+
+    .utility-inner {
+      max-width: 1400px;
+      margin: 0 auto;
+      padding: 9px 32px;
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+    }
+
+    .locale-select {
+      display: flex;
+      align-items: center;
+      gap: 6px;
+      color: var(--maroon-deep);
+      font-weight: 500;
+      cursor: pointer;
+    }
+
+    .locale-select svg {
+      width: 9px;
+      opacity: .7;
+    }
+
+    .utility-right {
+      display: flex;
+      align-items: center;
+      gap: 26px;
+    }
+
+    .utility-link {
+      display: flex;
+      align-items: center;
+      gap: 6px;
+      color: #5A4038;
+      font-weight: 500;
+      transition: color var(--dur-fast) var(--ease);
+      white-space: nowrap;
+    }
+
+    .utility-link svg {
+      width: 13px;
+      height: 13px;
+      stroke: #8A6F63;
+      transition: stroke var(--dur-fast) var(--ease);
+    }
+
+    .utility-link:hover {
+      color: var(--maroon);
+    }
+
+    .utility-link:hover svg {
+      stroke: var(--maroon);
+    }
+
+    .utility-divider {
+      width: 1px;
+      height: 14px;
+      background: var(--cream-line);
+    }
+
+    .auth-links {
+      color: #5A4038;
+      font-weight: 500;
+    }
+
+    .auth-links a:hover {
+      color: var(--maroon);
+    }
+
+    .auth-links .sep {
+      margin: 0 6px;
+      color: var(--cream-line);
+    }
+
+    /* ============ STICKY HEADER (utility bar + main nav together) ============ */
+    .site-header {
+      position: fixed;
+      top: 0;
+      left: 0;
+      right: 0;
+      z-index: 1000;
+      transition: transform var(--dur-slow) var(--ease), box-shadow var(--dur-base) var(--ease);
+      will-change: transform;
+    }
+
+    .site-header.nav-hidden {
+      transform: translateY(-100%);
+    }
+
+    .site-header.nav-scrolled .main-nav {
+      box-shadow: 0 6px 20px rgba(0, 0, 0, .16);
+    }
+
+    /* ============ MAIN NAVBAR ============ */
+    .main-nav {
+      background: var(--ink);
+      position: relative;
+      isolation: isolate;
+      transition: box-shadow var(--dur-base) var(--ease);
+    }
+
+    /* The cream sweep: a full-bleed SVG pinned to the left edge of the bar.
+     Its viewBox is 1:1 with its rendered size, so the curve never distorts. */
+    .nav-swoosh {
+      position: absolute;
+      top: 0;
+      left: 0;
+      width: var(--swoosh-w);
+      height: var(--nav-h);
+      z-index: 0;
+      pointer-events: none;
+    }
+
+    .nav-inner {
+      max-width: 1400px;
+      margin: 0 auto;
+      padding: 0 32px;
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      min-height: var(--nav-h);
+      position: relative;
+      z-index: 1;
+    }
+
+    /* Logo sits inside the cream sweep, optically centred in it */
+    .brand-logo-link {
+      display: flex;
+      align-items: center;
+      flex-shrink: 0;
+      width: 365px;
+      /* keeps the first link clear of the curve */
+    }
+
+    .brand-logo {
+      height: 50px;
+      width: auto;
+      max-width: 170px;
+      object-fit: contain;
+      background: transparent;
+    }
+
+    .nav-right {
+      display: flex;
+      align-items: center;
+      gap: 6px;
+    }
+
+    /* Primary links */
+    .primary-links {
+      display: flex;
+      align-items: center;
+      gap: 0;
+      height: 100%;
+    }
+
+    .nav-item {
+      position: relative;
+    }
+
+    .nav-link {
+      display: flex;
+      align-items: center;
+      gap: 6px;
+      padding: 19px 12px;
+      font-family: 'Merriweather', serif;
+      font-weight: 300;
+      font-size: 14.5px;
+      letter-spacing: .015em;
+      color: var(--ivory-text);
+      cursor: pointer;
+      position: relative;
+      white-space: nowrap;
+    }
+
+    .nav-link svg {
+      width: 9px;
+      height: 9px;
+      stroke: var(--muted-text-light);
+      transition: transform var(--dur-fast) var(--ease);
+    }
+
+    .nav-item:hover .nav-link svg {
+      transform: rotateX(180deg);
+    }
+
+    /* sunrise underline signature */
+    .nav-link::before {
+      content: "";
+      position: absolute;
+      left: 12px;
+      right: 12px;
+      bottom: 13px;
+      height: 1.5px;
+      background: var(--gold);
+      transform: scaleX(0);
+      transform-origin: center;
+      transition: transform var(--dur-base) var(--ease-out);
+    }
+
+    .nav-item:hover .nav-link,
+    .nav-item.active .nav-link {
+      color: var(--gold-soft);
+    }
+
+    .nav-item:hover .nav-link::before {
+      transform: scaleX(1);
+    }
+
+    .nav-item.active .nav-link::before {
+      transform: scaleX(1);
+    }
+
+    /* Dropdown panel */
+    .dropdown {
+      position: absolute;
+      top: 100%;
+      left: 50%;
+      transform: translateX(-50%) translateY(6px);
+      min-width: 230px;
+      background: var(--ink-soft);
+      border-top: 2px solid var(--gold);
+      box-shadow: 0 18px 34px rgba(20, 6, 9, .35);
+      opacity: 0;
+      visibility: hidden;
+      transition: opacity var(--dur-base) var(--ease-out), transform var(--dur-base) var(--ease-out), visibility var(--dur-base);
+      will-change: transform, opacity;
+      padding: 10px 0;
+      z-index: 40;
+    }
+
+    .nav-item:hover .dropdown {
+      opacity: 1;
+      visibility: visible;
+      transform: translateX(-50%) translateY(0);
+    }
+
+    /* Right-most dropdowns were overflowing off the viewport edge when centered.
+     Anchor these two to the right edge of their trigger instead. */
+    .nav-item:nth-last-child(-n+2) .dropdown {
+      left: auto;
+      right: 0;
+      transform: translateY(6px);
+    }
+
+    .nav-item:nth-last-child(-n+2):hover .dropdown {
+      transform: translateY(0);
+    }
+
+    .dropdown a {
+      display: block;
+      padding: 11px 22px;
+      font-family: 'Merriweather Sans', sans-serif;
+      font-weight: 400;
+      font-size: 13.5px;
+      letter-spacing: .01em;
+      color: var(--muted-text-light);
+      border-left: 2px solid transparent;
+      transition: color var(--dur-fast) var(--ease), background-color var(--dur-fast) var(--ease),
+        border-color var(--dur-fast) var(--ease), transform var(--dur-fast) var(--ease);
+    }
+
+    .dropdown a:hover {
+      color: var(--ivory-text);
+      background: rgba(199, 154, 73, .08);
+      border-left-color: var(--gold);
+      transform: translateX(4px);
+    }
+
+    /* Right icons */
+    .nav-actions {
+      display: flex;
+      align-items: center;
+      gap: 22px;
+    }
+
+    .hamburger {
+      display: none;
+      flex-direction: column;
+      gap: 5px;
+      cursor: pointer;
+      padding: 6px;
+    }
+
+    .hamburger span {
+      width: 22px;
+      height: 1.6px;
+      background: var(--ivory-text);
+      display: block;
+      transition: transform var(--dur-fast) var(--ease), opacity var(--dur-fast) var(--ease);
+    }
+
+    .hamburger.is-open span:nth-child(1) {
+      transform: translateY(6.6px) rotate(45deg);
+    }
+
+    .hamburger.is-open span:nth-child(2) {
+      opacity: 0;
+    }
+
+    .hamburger.is-open span:nth-child(3) {
+      transform: translateY(-6.6px) rotate(-45deg);
+    }
+
+    /* Between ~1020px and 1180px the eight links still fit, but only if the
+     type tightens up a little and the sweep narrows with them. */
+    @media (max-width: 1180px) and (min-width: 1021px) {
+      :root {
+        --swoosh-w: 352px;
+      }
+
+      .brand-logo-link {
+        width: 300px;
+      }
+
+      .brand-logo {
+        height: 27px;
+        max-width: 150px;
+      }
+
+      .nav-link {
+        font-size: 13px;
+        padding: 19px 9px;
+      }
+
+      .nav-link::before {
+        left: 9px;
+        right: 9px;
+      }
+    }
+
+    @media (max-width: 1020px) {
+      .primary-links {
+        display: none;
+      }
+
+      .hamburger {
+        display: flex;
+      }
+
+      .utility-right .utility-link span {
+        display: none;
+      }
+
+      .brand-logo-link {
+        padding-left: 56px;
+        width: auto;
+      }
+
+      :root {
+        --swoosh-w: 340px;
+      }
+
+      /* Mobile flyout menu, toggled by the hamburger via JS */
+      .primary-links.mobile-open {
+        display: flex;
+        flex-direction: column;
+        align-items: stretch;
+        gap: 0;
+        position: absolute;
+        top: 100%;
+        left: 0;
+        right: 0;
+        background: var(--ink-soft);
+        border-top: 2px solid var(--gold);
+        box-shadow: 0 18px 34px rgba(20, 6, 9, .35);
+        padding: 6px 0;
+        max-height: calc(100vh - 100px);
+        overflow-y: auto;
+        z-index: 50;
+      }
+
+      .primary-links.mobile-open .nav-item {
+        width: 100%;
+      }
+
+      .primary-links.mobile-open .nav-link {
+        width: 100%;
+        padding: 15px 24px;
+        justify-content: space-between;
+      }
+
+      .primary-links.mobile-open .nav-link::before {
+        display: none;
+      }
+
+      .primary-links.mobile-open .nav-item.active .nav-link {
+        background: transparent;
+        border: none;
+        border-radius: 0;
+        margin: 0;
+        color: var(--gold-soft);
+      }
+
+      .primary-links.mobile-open .nav-item .nav-link svg {
+        transition: transform var(--dur-fast) var(--ease);
+      }
+
+      .primary-links.mobile-open .nav-item.dropdown-open>.nav-link svg {
+        transform: rotate(180deg);
+      }
+
+      .primary-links.mobile-open .dropdown {
+        position: static;
+        transform: none !important;
+        opacity: 1;
+        visibility: visible;
+        box-shadow: none;
+        border-top: none;
+        min-width: 0;
+        background: rgba(0, 0, 0, .18);
+        padding: 0;
+        max-height: 0;
+        opacity: 0;
+        overflow: hidden;
+        transition: max-height var(--dur-base) var(--ease-out), opacity var(--dur-fast) var(--ease-out);
+      }
+
+      .primary-links.mobile-open .nav-item.dropdown-open .dropdown {
+        max-height: 400px;
+        opacity: 1;
+        padding: 4px 0;
+      }
+
+      .primary-links.mobile-open .dropdown a {
+        padding-left: 36px;
+      }
+    }
+
+    @media (max-width: 640px) {
+      :root {
+        --swoosh-w: 265px;
+      }
+
+      .utility-inner {
+        padding: 8px 16px;
+      }
+
+      .nav-inner {
+        padding: 0 16px;
+      }
+
+      .brand-logo-link {
+        padding-left: 14px;
+        width: auto;
+      }
+
+      .brand-logo {
+        height: 26px;
+        max-width: 140px;
+      }
+    }
+
+    /* Smallest phones (iPhone SE and similar ~360px and under): the utility
+     bar's icon links + divider + auth links can crowd the edge, so the
+     gaps and font tighten a notch further here. */
+    @media (max-width: 380px) {
+      .utility-inner {
+        padding: 8px 12px;
+      }
+
+      .utility-bar {
+        font-size: 11.5px;
+      }
+
+      .utility-right {
+        gap: 14px;
+      }
+
+      .locale-select {
+        gap: 4px;
+      }
+    }
+
+    /* ============ FOOTER ============ */
+    .site-footer {
+      position: relative;
+      background: #FFFFFF;
+      overflow: hidden;
+    }
+
+    .footer-map {
+      position: absolute;
+      top: 0;
+      right: -4%;
+      width: 62%;
+      max-width: 900px;
+      opacity: .07;
+      pointer-events: none;
+      filter: sepia(1) saturate(3) hue-rotate(-40deg);
+    }
+
+    .footer-inner {
+      position: relative;
+      max-width: 1400px;
+      margin: 0 auto;
+      padding: 76px 32px 64px;
+      display: grid;
+      grid-template-columns: 1.15fr 1fr 1.15fr;
+      gap: 56px;
+    }
+
+    .footer-col h3 {
+      font-family: 'Merriweather', serif;
+      font-weight: 700;
+      font-size: 22px;
+      color: var(--maroon);
+      margin-bottom: 22px;
+    }
+
+    .footer-logo {
+      height: 46px;
+      width: auto;
+      margin-bottom: 22px;
+      display: block;
+    }
+
+    .footer-col p {
+      font-family: 'Merriweather Sans', sans-serif;
+      font-weight: 400;
+      font-size: 14.5px;
+      line-height: 1.85;
+      color: #4A3A34;
+      max-width: 420px;
+    }
+
+    .follow-us {
+      display: flex;
+      align-items: center;
+      gap: 14px;
+      margin-top: 24px;
+      font-family: 'Merriweather Sans', sans-serif;
+      font-size: 14px;
+      color: var(--maroon);
+      font-weight: 500;
+    }
+
+    .social-icons {
+      display: flex;
+      gap: 10px;
+    }
+
+    .social-icons a {
+      width: 30px;
+      height: 30px;
+      border-radius: 50%;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      transition: filter var(--dur-fast) var(--ease), transform var(--dur-fast) var(--ease);
+    }
+
+    .social-icons a:hover {
+      filter: brightness(1.1);
+      transform: translateY(-2px);
+    }
+
+    .social-icons svg {
+      width: 14px;
+      height: 14px;
+      fill: #fff;
+    }
+
+    .social-icons a.icon-facebook {
+      background: #1877F2;
+    }
+
+    .social-icons a.icon-twitter {
+      background: #1DA1F2;
+    }
+
+    .social-icons a.icon-instagram {
+      background: radial-gradient(circle at 30% 107%,
+          #fdf497 0%, #fdf497 5%, #fd5949 45%, #d6249f 60%, #285AEB 90%);
+    }
+
+    .social-icons a.icon-linkedin {
+      background: #0A66C2;
+    }
+
+    .useful-links a {
+      display: flex;
+      align-items: center;
+      gap: 9px;
+      font-family: 'Merriweather Sans', sans-serif;
+      font-size: 14.5px;
+      color: #4A3A34;
+      padding: 8px 0;
+      transition: color var(--dur-fast) var(--ease);
+    }
+
+    .useful-links a svg {
+      width: 9px;
+      height: 9px;
+      stroke: var(--maroon);
+      flex-shrink: 0;
+      transition: transform var(--dur-fast) var(--ease);
+    }
+
+    .useful-links a:hover {
+      color: var(--maroon);
+    }
+
+    .useful-links a:hover svg {
+      transform: translateX(4px);
+    }
+
+    .address-col .addr-line {
+      display: flex;
+      gap: 12px;
+      font-family: 'Merriweather Sans', sans-serif;
+      font-size: 14.5px;
+      color: #4A3A34;
+      line-height: 1.7;
+      margin-bottom: 18px;
+    }
+
+    .address-col .addr-line svg {
+      width: 16px;
+      height: 16px;
+      stroke: var(--maroon);
+      fill: none;
+      flex-shrink: 0;
+      margin-top: 3px;
+    }
+
+    .address-col a {
+      color: #4A3A34;
+    }
+
+    .address-col a:hover {
+      color: var(--maroon);
+    }
+
+    .footer-bottom {
+      position: relative;
+      background: var(--maroon);
+      padding: 18px 32px;
+      text-align: center;
+    }
+
+    .footer-bottom p {
+      font-size: 13.5px;
+      color: var(--ivory-text);
+      letter-spacing: .02em;
+    }
+
+    .back-to-top {
+      position: absolute;
+      top: -24px;
+      right: 40px;
+      width: 48px;
+      height: 48px;
+      border-radius: 50%;
+      background: var(--gold);
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      box-shadow: 0 8px 20px rgba(20, 6, 9, .25);
+      cursor: pointer;
+      border: 3px solid #fff;
+    }
+
+    .back-to-top svg {
+      width: 18px;
+      height: 18px;
+      stroke: var(--ink);
+    }
+
+    @media (max-width: 900px) {
+      .footer-inner {
+        grid-template-columns: 1fr;
+        gap: 44px;
+        padding: 56px 24px 48px;
+      }
+
+      .footer-map {
+        width: 100%;
+        opacity: .05;
+      }
+    }
+    /* ============ YOGA SUTRA PAGE ============ */
+
+    .ys-hero {
+      background: radial-gradient(ellipse 900px 500px at 50% -10%, #4A2029 0%, transparent 60%), var(--ink);
+      color: var(--ivory-text);
+      position: relative;
+      overflow: hidden;
+      padding: 76px 32px 64px;
+    }
+
+    .ys-hero-thread {
+      position: absolute;
+      left: 0;
+      right: 0;
+      bottom: -1px;
+      width: 100%;
+      height: 46px;
+      opacity: .55;
+    }
+
+    .ys-hero-inner {
+      max-width: 880px;
+      margin: 0 auto;
+      text-align: center;
+      position: relative;
+      z-index: 1;
+    }
+
+    .ys-eyebrow {
+      font-family: 'Merriweather Sans', sans-serif;
+      letter-spacing: .16em;
+      text-transform: uppercase;
+      font-size: 11.5px;
+      color: var(--gold-soft);
+      margin-bottom: 22px;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      gap: 10px;
+    }
+
+    .ys-eyebrow::before,
+    .ys-eyebrow::after {
+      content: "";
+      width: 28px;
+      height: 1px;
+      background: var(--muted-text-light);
+      opacity: .5;
+    }
+
+    .ys-hero-sanskrit {
+      font-family: 'Noto Serif Devanagari', serif;
+      font-weight: 500;
+      font-size: clamp(2rem, 5.2vw, 3.6rem);
+      line-height: 1.35;
+      margin-bottom: 16px;
+    }
+
+    .ys-hero-iast {
+      font-family: 'Merriweather', serif;
+      font-style: italic;
+      font-weight: 300;
+      font-size: 1rem;
+      color: var(--muted-text-light);
+      margin-bottom: 14px;
+      letter-spacing: .02em;
+    }
+
+    .ys-hero-meaning {
+      font-family: 'Merriweather', serif;
+      font-weight: 300;
+      font-size: clamp(1.05rem, 2vw, 1.3rem);
+      color: var(--ivory-text);
+      max-width: 600px;
+      margin: 0 auto 38px;
+      line-height: 1.75;
+    }
+
+    .ys-hero-meta {
+      display: flex;
+      justify-content: center;
+      gap: 44px;
+      flex-wrap: wrap;
+      margin-bottom: 30px;
+    }
+
+    .ys-hero-meta div {
+      font-family: 'Merriweather Sans', sans-serif;
+      font-size: 12px;
+      letter-spacing: .04em;
+      color: var(--muted-text-light);
+      text-transform: uppercase;
+    }
+
+    .ys-hero-meta strong {
+      display: block;
+      font-family: 'Merriweather', serif;
+      font-weight: 700;
+      font-size: 22px;
+      color: var(--gold-soft);
+      text-transform: none;
+      letter-spacing: 0;
+      margin-bottom: 2px;
+    }
+
+    .ys-today-btn {
+      display: inline-flex;
+      align-items: center;
+      gap: 9px;
+      font-family: 'Merriweather Sans', sans-serif;
+      font-size: 13px;
+      font-weight: 500;
+      color: var(--ink);
+      background: linear-gradient(180deg, var(--gold-soft), var(--gold));
+      border: none;
+      padding: 11px 22px;
+      border-radius: 999px;
+      cursor: pointer;
+      letter-spacing: .02em;
+      transition: transform var(--dur-fast) var(--ease), box-shadow var(--dur-fast) var(--ease);
+      box-shadow: 0 8px 20px rgba(199, 154, 73, .25);
+    }
+
+    .ys-today-btn:hover {
+      transform: translateY(-2px);
+      box-shadow: 0 12px 26px rgba(199, 154, 73, .35);
+    }
+
+    .ys-today-btn svg {
+      width: 13px;
+      height: 13px;
+      stroke: var(--ink);
+    }
+
+    /* ---- toolbar: pada tabs + search ---- */
+    .ys-toolbar {
+      position: sticky;
+      top: 0;
+      z-index: 30;
+      background: var(--cream);
+      border-bottom: 1px solid var(--cream-line);
+      box-shadow: 0 4px 14px rgba(43, 17, 20, .06);
+    }
+
+    .ys-toolbar-inner {
+      max-width: 1100px;
+      margin: 0 auto;
+      padding: 14px 32px;
+      display: flex;
+      align-items: center;
+      gap: 22px;
+      flex-wrap: wrap;
+    }
+
+    .pada-tabs {
+      display: flex;
+      gap: 6px;
+      flex-wrap: wrap;
+      flex: 1;
+    }
+
+    .pada-tab {
+      font-family: 'Merriweather Sans', sans-serif;
+      font-size: 13px;
+      font-weight: 500;
+      color: #5A4038;
+      background: transparent;
+      border: 1px solid transparent;
+      padding: 8px 14px;
+      border-radius: 8px;
+      cursor: pointer;
+      transition: background var(--dur-fast) var(--ease), color var(--dur-fast) var(--ease), border-color var(--dur-fast) var(--ease);
+      white-space: nowrap;
+    }
+
+    .pada-tab .tab-count {
+      opacity: .6;
+      font-size: 11.5px;
+      margin-left: 4px;
+    }
+
+    .pada-tab:hover {
+      background: rgba(138, 45, 59, .06);
+      color: var(--maroon);
+    }
+
+    .pada-tab.is-active {
+      background: var(--maroon);
+      border-color: var(--maroon);
+      color: var(--ivory-text);
+    }
+
+    .pada-tab.is-active .tab-count {
+      opacity: .85;
+    }
+
+    .ys-search-wrap {
+      position: relative;
+      min-width: 220px;
+    }
+
+    .ys-search-wrap svg {
+      position: absolute;
+      left: 12px;
+      top: 50%;
+      transform: translateY(-50%);
+      width: 14px;
+      height: 14px;
+      stroke: var(--muted-text);
+      pointer-events: none;
+    }
+
+    #sutraSearch {
+      width: 100%;
+      font-family: 'Merriweather Sans', sans-serif;
+      font-size: 13.5px;
+      color: var(--ink);
+      background: #fff;
+      border: 1px solid var(--cream-line);
+      border-radius: 8px;
+      padding: 9px 14px 9px 34px;
+      outline: none;
+      transition: border-color var(--dur-fast) var(--ease), box-shadow var(--dur-fast) var(--ease);
+    }
+
+    #sutraSearch:focus {
+      border-color: var(--gold);
+      box-shadow: 0 0 0 3px rgba(199, 154, 73, .16);
+    }
+
+    #sutraSearch::placeholder {
+      color: var(--muted-text);
+    }
+
+    /* ---- content ---- */
+    .ys-content {
+      background: #FBF7F0;
+      min-height: 40vh;
+    }
+
+    .pada-panel {
+      display: none;
+      max-width: 880px;
+      margin: 0 auto;
+      padding: 58px 32px 90px;
+    }
+
+    .pada-panel.is-active {
+      display: block;
+    }
+
+    .pada-intro {
+      text-align: center;
+      margin-bottom: 52px;
+    }
+
+    .pada-intro .pada-eyebrow {
+      font-family: 'Merriweather Sans', sans-serif;
+      font-size: 12px;
+      letter-spacing: .12em;
+      text-transform: uppercase;
+      color: var(--gold);
+      font-weight: 500;
+      margin-bottom: 10px;
+    }
+
+    .pada-intro .pada-sanskrit-title {
+      font-family: 'Noto Serif Devanagari', serif;
+      font-weight: 500;
+      font-size: 2.1rem;
+      color: var(--maroon);
+      margin-bottom: 8px;
+    }
+
+    .pada-intro h2 {
+      font-family: 'Merriweather', serif;
+      font-weight: 700;
+      font-size: 1.5rem;
+      color: var(--ink);
+      margin-bottom: 14px;
+    }
+
+    .pada-intro p {
+      font-family: 'Merriweather Sans', sans-serif;
+      color: #5A4038;
+      max-width: 540px;
+      margin: 0 auto;
+      line-height: 1.75;
+      font-size: 14.5px;
+    }
+
+    /* thread-of-beads verse list -- "sutra" literally means thread */
+    .thread-list {
+      position: relative;
+      padding-left: 42px;
+    }
+
+    .thread-list::before {
+      content: "";
+      position: absolute;
+      left: 13px;
+      top: 8px;
+      bottom: 8px;
+      width: 2px;
+      background: linear-gradient(180deg, var(--gold) 0%, var(--gold) 60%, var(--cream-line) 100%);
+    }
+
+    .sutra-card {
+      position: relative;
+      margin-bottom: 34px;
+      opacity: 0;
+      transform: translateY(14px);
+      transition: opacity var(--dur-slow) var(--ease-out), transform var(--dur-slow) var(--ease-out);
+    }
+
+    .sutra-card.in-view {
+      opacity: 1;
+      transform: translateY(0);
+    }
+
+    .sutra-card::before {
+      content: "";
+      position: absolute;
+      left: -35px;
+      top: 6px;
+      width: 12px;
+      height: 12px;
+      border-radius: 50%;
+      background: var(--cream);
+      border: 2px solid var(--gold);
+    }
+
+    .sutra-card.is-highlight::before {
+      background: var(--gold);
+      box-shadow: 0 0 0 5px rgba(199, 154, 73, .25);
+    }
+
+    .sutra-card.is-highlight {
+      background: rgba(199, 154, 73, .07);
+      border-radius: 10px;
+      padding: 14px 16px;
+      margin-left: -16px;
+    }
+
+    .sutra-num {
+      font-family: 'Merriweather Sans', sans-serif;
+      font-weight: 500;
+      font-size: 11.5px;
+      letter-spacing: .07em;
+      color: var(--maroon);
+      text-transform: uppercase;
+      margin-bottom: 7px;
+    }
+
+    .sutra-sk {
+      font-family: 'Noto Serif Devanagari', serif;
+      font-weight: 400;
+      font-size: 1.45rem;
+      color: var(--ink);
+      line-height: 1.65;
+      margin-bottom: 8px;
+    }
+
+    .sutra-iast {
+      font-family: 'Merriweather', serif;
+      font-style: italic;
+      font-weight: 300;
+      font-size: .92rem;
+      color: var(--muted-text);
+      margin-bottom: 11px;
+    }
+
+    .sutra-meaning {
+      font-family: 'Merriweather Sans', sans-serif;
+      font-size: 15px;
+      color: #3A2A24;
+      line-height: 1.78;
+      max-width: 620px;
+    }
+
+    .pada-nav-foot {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      margin-top: 40px;
+      padding-top: 28px;
+      border-top: 1px solid var(--cream-line);
+    }
+
+    .pada-nav-foot a {
+      font-family: 'Merriweather Sans', sans-serif;
+      font-size: 13.5px;
+      font-weight: 500;
+      color: var(--maroon);
+      display: flex;
+      align-items: center;
+      gap: 7px;
+      transition: color var(--dur-fast) var(--ease);
+    }
+
+    .pada-nav-foot a:hover {
+      color: var(--maroon-deep);
+    }
+
+    .pada-nav-foot svg {
+      width: 10px;
+      height: 10px;
+      stroke: currentColor;
+    }
+
+    /* ---- search results mode ---- */
+    #searchResults {
+      display: none;
+      max-width: 880px;
+      margin: 0 auto;
+      padding: 46px 32px 90px;
+    }
+
+    #searchResults.is-active {
+      display: block;
+    }
+
+    .search-meta {
+      font-family: 'Merriweather Sans', sans-serif;
+      font-size: 13px;
+      color: var(--muted-text);
+      margin-bottom: 28px;
+      text-align: center;
+    }
+
+    .search-empty {
+      text-align: center;
+      font-family: 'Merriweather', serif;
+      font-style: italic;
+      color: var(--muted-text);
+      padding: 40px 0;
+    }
+
+    .search-hit {
+      border-bottom: 1px solid var(--cream-line);
+      padding: 20px 0;
+    }
+
+    .search-hit .sutra-num {
+      display: flex;
+      align-items: center;
+      gap: 8px;
+    }
+
+    .search-hit .pada-pill {
+      background: var(--maroon);
+      color: var(--ivory-text);
+      font-size: 10px;
+      padding: 2px 8px;
+      border-radius: 999px;
+      letter-spacing: .04em;
+    }
+
+    @media (max-width: 720px) {
+      .ys-hero {
+        padding: 58px 20px 46px;
+      }
+
+      .ys-toolbar-inner {
+        padding: 12px 20px;
+        gap: 12px;
+      }
+
+      .pada-tabs {
+        width: 100%;
+        justify-content: flex-start;
+        overflow-x: auto;
+        padding-bottom: 2px;
+      }
+
+      .ys-search-wrap {
+        width: 100%;
+      }
+
+      .pada-panel,
+      #searchResults {
+        padding-left: 20px;
+        padding-right: 20px;
+      }
+
+      .thread-list {
+        padding-left: 34px;
+      }
+
+      .sutra-card::before {
+        left: -27px;
+      }
+
+      .sutra-sk {
+        font-size: 1.25rem;
+      }
+    }
+
+    @media (prefers-reduced-motion: reduce) {
+      .sutra-card {
+        opacity: 1;
+        transform: none;
+      }
+    }
+  </style>
+</head>
+<body>
+
+  <header class="site-header" id="siteHeader">
+
+    <!-- ============ UTILITY BAR ============ -->
+    <div class="utility-bar">
+      <div class="utility-inner">
+        <div class="locale-select">
+          Nepal · <span class="devanagari">नेपाली</span>
+          <svg viewBox="0 0 10 6" fill="none">
+            <path d="M1 1l4 4 4-4" stroke="currentColor" stroke-width="1.3" />
+          </svg>
+        </div>
+        <div class="utility-right">
+          <a class="utility-link" href="#">
+            <svg viewBox="0 0 24 24" fill="none">
+              <path d="M3 6l9 7 9-7M3 6h18v12H3V6z" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round" />
+            </svg>
+            <span>Subscribe</span>
+          </a>
+          <a class="utility-link" href="#">
+            <svg viewBox="0 0 24 24" fill="none">
+              <path
+                d="M12 21s-7.5-4.9-10-9.3C.4 8.1 2 4.5 5.6 4c2-.3 3.7.7 4.4 2.1C10.7 4.7 12.4 3.7 14.4 4c3.6.5 5.2 4.1 3.6 7.7C15.5 16.1 12 21 12 21z"
+                stroke-width="1.5" stroke-linejoin="round" />
+            </svg>
+            <span>Donate</span>
+          </a>
+          <a class="utility-link" href="#">
+            <svg viewBox="0 0 24 24" fill="none">
+              <path d="M4 4h2l1.4 12.6A2 2 0 0 0 9.4 18h7.2a2 2 0 0 0 2-1.8L20 8H6" stroke-width="1.5"
+                stroke-linecap="round" stroke-linejoin="round" />
+              <circle cx="10" cy="21" r="1" />
+              <circle cx="17" cy="21" r="1" />
+            </svg>
+            <span>Shop</span>
+          </a>
+          <div class="utility-divider"></div>
+          <div class="auth-links">
+            <a href="#">Login</a><span class="sep">|</span><a href="#">Sign Up</a>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <!-- ============ MAIN NAVBAR ============ -->
+    <nav class="main-nav">
+
+      <!-- cream sweep + gold edge -->
+      <svg class="nav-swoosh" viewBox="0 0 430 58" preserveAspectRatio="none" aria-hidden="true" focusable="false">
+        <defs>
+          <linearGradient id="sweepFill" x1="0" y1="0" x2="1" y2="0">
+            <stop offset="0" stop-color="#F1E2BF" />
+            <stop offset=".34" stop-color="#FCF7EC" />
+            <stop offset=".70" stop-color="#FAF2E1" />
+            <stop offset="1" stop-color="#E7D2A8" />
+          </linearGradient>
+          <linearGradient id="sweepEdge" x1="0" y1="0" x2="0" y2="1">
+            <stop offset="0" stop-color="#D8C29A" />
+            <stop offset=".45" stop-color="#C79A49" />
+            <stop offset="1" stop-color="#B0812F" />
+          </linearGradient>
+          <clipPath id="sweepClip">
+            <path d="M0,0 L423,0 C405,7 396,11 381,20 C366,29 348,43 311,58 L0,58 Z" />
+          </clipPath>
+        </defs>
+
+        <path d="M0,0 L423,0 C405,7 396,11 381,20 C366,29 348,43 311,58 L0,58 Z" fill="url(#sweepFill)" />
+
+        <!-- soft golden bloom hugging the inside of the curve -->
+        <g clip-path="url(#sweepClip)">
+          <path d="M423,0 C405,7 396,11 381,20 C366,29 348,43 311,58" fill="none" stroke="url(#sweepEdge)"
+            stroke-width="11" opacity=".22" />
+          <path d="M423,0 C405,7 396,11 381,20 C366,29 348,43 311,58" fill="none" stroke="url(#sweepEdge)"
+            stroke-width="4" opacity=".28" />
+        </g>
+
+        <!-- crisp gold hairline on the seam -->
+        <path d="M423,0 C405,7 396,11 381,20 C366,29 348,43 311,58" fill="none" stroke="url(#sweepEdge)"
+          stroke-width="1.4" />
+      </svg>
+
+      <div class="nav-inner">
+
+        <a href="inedx.html" class="brand-logo-link">
+          <img class="brand-logo"
+            src="data:image/png;base64,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"
+            alt="Patanjali logo">
+        </a>
+
+        <div class="nav-right">
+          <ul class="primary-links">
+            <li class="nav-item"><a class="nav-link" href="index.html">Home</a></li>
+
+            <li class="nav-item">
+              <a class="nav-link" href="#">Yoga &amp; Meditation
+                <svg viewBox="0 0 10 6" fill="none">
+                  <path d="M1 1l4 4 4-4" stroke="currentColor" stroke-width="1.3" />
+                </svg>
+              </a>
+              <div class="dropdown">
+                <a href="#">Beginner</a>
+                <a href="#">Intermediate</a>
+                <a href="#">Advanced</a>
+                <a href="#">Pregnant Woman</a>
+                <a href="#">Children</a>
+                <a href="#">Old Age</a>
+                <a href="significance of yoga.html">Significance of Yoga</a>
+                <a href="#">Pranayam</a>
+              </div>
+            </li>
+
+            <li class="nav-item active">
+              <a class="nav-link" href="#">Wisdom
+                <svg viewBox="0 0 10 6" fill="none">
+                  <path d="M1 1l4 4 4-4" stroke="currentColor" stroke-width="1.3" />
+                </svg>
+              </a>
+              <div class="dropdown">
+                <a href="#">Swami Ramdev's Teaching</a>
+                <a href="#">Acharya Balkrishna's Teaching</a>
+                <a href="#">Vedic Philosophy</a>
+                <a href="patanjali yog sutra.html">Patanjali Yoga Sutra</a>
+                <a href="article and discourse.html">Article and Discourses</a>
+              </div>
+            </li>
+
+            <li class="nav-item">
+              <a class="nav-link" href="#">Events
+                <svg viewBox="0 0 10 6" fill="none">
+                  <path d="M1 1l4 4 4-4" stroke="currentColor" stroke-width="1.3" />
+                </svg>
+              </a>
+              <div class="dropdown">
+                <a href="#">Yoga Camps</a>
+                <a href="#">Satsang &amp; Retreats</a>
+                <a href="#">International Yoga Day</a>
+              </div>
+            </li>
+
+            <li class="nav-item">
+              <a class="nav-link" href="#">Health
+                <svg viewBox="0 0 10 6" fill="none">
+                  <path d="M1 1l4 4 4-4" stroke="currentColor" stroke-width="1.3" />
+                </svg>
+              </a>
+              <div class="dropdown">
+                <a href="#">Ayurveda Consultation</a>
+                <a href="#">Naturopathy</a>
+                <a href="#">Panchakarma</a>
+              </div>
+            </li>
+
+            <li class="nav-item"><a class="nav-link" href="#">Centers</a></li>
+
+            <li class="nav-item">
+              <a class="nav-link" href="#">Social Impact
+                <svg viewBox="0 0 10 6" fill="none">
+                  <path d="M1 1l4 4 4-4" stroke="currentColor" stroke-width="1.3" />
+                </svg>
+              </a>
+              <div class="dropdown">
+                <a href="#">Community Programs</a>
+                <a href="#">Rural Health Camps</a>
+                <a href="#">Volunteer</a>
+              </div>
+            </li>
+            <li class="nav-item">
+              <a class="nav-link" href="#">Our Sangathan
+                <svg viewBox="0 0 10 6" fill="none">
+                  <path d="M1 1l4 4 4-4" stroke="currentColor" stroke-width="1.3" />
+                </svg>
+              </a>
+              <div class="dropdown">
+                <a href="patanjali yog samiti.html">Patanjali Yog Samiti</a>
+                <a href="mahila patanjali yog samiti.html">Mahila Patanjali Yog Samiti</a>
+                <a href="yuwa nepal samiti.html">Yuwa Nepal Samiti</a>
+              </div>
+            </li>
+
+
+            <li class="nav-item">
+              <a class="nav-link" href="about.html">About Us
+                <svg viewBox="0 0 10 6" fill="none">
+                  <path d="M1 1l4 4 4-4" stroke="currentColor" stroke-width="1.3" />
+                </svg>
+              </a>
+              <div class="dropdown">
+                <a href="aboutus.html">Patanjali</a>
+                <a href="chairperson.html">Chairperson</a>
+                <a href="contactus.html">Contact US</a>
+              </div>
+            </li>
+          </ul>
+
+          <div class="nav-actions">
+            <div class="hamburger" role="button" aria-label="Toggle menu" aria-expanded="false" tabindex="0">
+              <span></span><span></span><span></span>
+            </div>
+          </div>
+        </div>
+
+      </div>
+    </nav>
+
+  </header>
+
+
+  <section class="ys-hero">
+    <div class="ys-hero-inner">
+      <div class="ys-eyebrow">The Yoga Sutras of Patanjali</div>
+      <div class="ys-hero-sanskrit">अथ योगानुशासनम्</div>
+      <div class="ys-hero-iast"><em>atha yogānuśāsanam</em></div>
+      <p class="ys-hero-meaning">&ldquo;Now begins the teaching of yoga.&rdquo; So opens the first of 195 sūtras &mdash; threads of wisdom, composed by the sage Patanjali, that map the path from a restless mind to the stillness in which the true Self is known.</p>
+      <div class="ys-hero-meta">
+        <div><strong>195</strong>Sūtras</div>
+        <div><strong>4</strong>Pādas</div>
+        <div><strong>8</strong>Limbs of Yoga</div>
+      </div>
+      <button class="ys-today-btn" id="todayThreadBtn" type="button">
+        <svg viewBox="0 0 24 24" fill="none"><path d="M12 2v4M12 18v4M4.9 4.9l2.8 2.8M16.3 16.3l2.8 2.8M2 12h4M18 12h4M4.9 19.1l2.8-2.8M16.3 7.7l2.8-2.8" stroke-width="1.6" stroke-linecap="round"/></svg>
+        Read today&rsquo;s thread
+      </button>
+    </div>
+    <svg class="ys-hero-thread" viewBox="0 0 1400 46" preserveAspectRatio="none" aria-hidden="true" focusable="false">
+      <path d="M0,30 C233,10 466,44 700,26 C933,8 1166,40 1400,20" fill="none" stroke="#C79A49" stroke-width="1.2"/>
+      <path d="M0,36 C233,20 466,48 700,34 C933,20 1166,46 1400,28" fill="none" stroke="#C79A49" stroke-width="1" opacity=".45"/>
+    </svg>
+  </section>
+
+  <div id="toolbarAnchor"></div>
+  <div class="ys-toolbar">
+    <div class="ys-toolbar-inner">
+      <div class="pada-tabs" id="padaTabs"></div>
+      <div class="ys-search-wrap">
+        <svg viewBox="0 0 24 24" fill="none"><circle cx="11" cy="11" r="7" stroke-width="1.7"/><path d="M20 20l-3.5-3.5" stroke-width="1.7" stroke-linecap="round"/></svg>
+        <input type="text" id="sutraSearch" placeholder="Search by word or verse, e.g. 2.46" autocomplete="off">
+      </div>
+    </div>
+  </div>
+
+  <main class="ys-content">
+    <div id="padaPanels"></div>
+    <div id="searchResults"></div>
+  </main>
+
+  <footer class="site-footer">
+    <img class="footer-map"
+      src="https://upload.wikimedia.org/wikipedia/commons/e/ec/World_map_blank_without_borders.svg" alt="">
+
+    <div class="footer-inner">
+
+      <div class="footer-col">
+        <img class="footer-logo"
+          src="data:image/png;base64,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"
+          alt="Patanjali Ayurved logo">
+        <h3>About Us</h3>
+        <p>
+          Patanjali Yogpeeth Trust is established with the purpose of establishing Yoga and Ayurveda
+          on the world map, for the study of the ancient manuscripts of Vedic tradition, Yoga &amp; Ayurveda.
+        </p>
+        <div class="follow-us">
+          Follow us :
+          <div class="social-icons">
+            <a href="#" class="icon-facebook" aria-label="Facebook"><svg viewBox="0 0 24 24">
+                <path
+                  d="M13.5 21v-8h2.7l.4-3.2h-3.1V7.7c0-.9.3-1.6 1.6-1.6h1.7V3.2C16.5 3.1 15.4 3 14.2 3c-2.6 0-4.4 1.6-4.4 4.5v2.3H7v3.2h2.8V21h3.7z" />
+              </svg></a>
+            <a href="#" class="icon-twitter" aria-label="Twitter"><svg viewBox="0 0 24 24">
+                <path
+                  d="M22 5.9c-.7.3-1.5.6-2.3.7.8-.5 1.5-1.3 1.8-2.3-.8.5-1.7.8-2.6 1a4.1 4.1 0 0 0-7 3.7A11.6 11.6 0 0 1 3.4 4.6a4.1 4.1 0 0 0 1.3 5.5c-.7 0-1.3-.2-1.9-.5v.1c0 2 1.4 3.6 3.3 4a4.2 4.2 0 0 1-1.9.1 4.1 4.1 0 0 0 3.8 2.9A8.3 8.3 0 0 1 2 18.4a11.6 11.6 0 0 0 6.3 1.8c7.5 0 11.7-6.3 11.7-11.7v-.5c.8-.6 1.5-1.3 2-2.1z" />
+              </svg></a>
+            <a href="#" class="icon-instagram" aria-label="Instagram"><svg viewBox="0 0 24 24">
+                <path
+                  d="M12 2.2c2.7 0 3 0 4 .1 1 0 1.7.2 2.1.4.5.2.9.5 1.3.9.4.4.7.8.9 1.3.2.4.4 1.1.4 2.1.1 1 .1 1.3.1 4s0 3-.1 4c0 1-.2 1.7-.4 2.1-.2.5-.5.9-.9 1.3-.4.4-.8.7-1.3.9-.4.2-1.1.4-2.1.4-1 .1-1.3.1-4 .1s-3 0-4-.1c-1 0-1.7-.2-2.1-.4a3.7 3.7 0 0 1-1.3-.9 3.7 3.7 0 0 1-.9-1.3c-.2-.4-.4-1.1-.4-2.1-.1-1-.1-1.3-.1-4s0-3 .1-4c0-1 .2-1.7.4-2.1.2-.5.5-.9.9-1.3.4-.4.8-.7 1.3-.9.4-.2 1.1-.4 2.1-.4 1-.1 1.3-.1 4-.1zM12 7a5 5 0 1 0 0 10 5 5 0 0 0 0-10zm0 8.2a3.2 3.2 0 1 1 0-6.4 3.2 3.2 0 0 1 0 6.4zm5.2-8.4a1.2 1.2 0 1 1-2.4 0 1.2 1.2 0 0 1 2.4 0z" />
+              </svg></a>
+            <a href="#" class="icon-linkedin" aria-label="LinkedIn"><svg viewBox="0 0 24 24">
+                <path
+                  d="M4.98 3.5a2.5 2.5 0 1 1 0 5 2.5 2.5 0 0 1 0-5zM3 9h4v12H3zM9 9h3.8v1.7h.1c.5-1 1.8-2 3.7-2 4 0 4.7 2.6 4.7 6V21h-4v-5.7c0-1.4 0-3.1-1.9-3.1s-2.2 1.5-2.2 3v5.8H9z" />
+              </svg></a>
+          </div>
+        </div>
+      </div>
+
+      <div class="footer-col">
+        <h3>Useful Links</h3>
+        <div class="useful-links">
+          <a href="#"><svg viewBox="0 0 10 10" fill="none">
+              <path d="M2 1l5 4-5 4" stroke-width="1.6" />
+            </svg>Patanjali Yogpeeth, Haridwar (India)</a>
+          <a href="#"><svg viewBox="0 0 10 10" fill="none">
+              <path d="M2 1l5 4-5 4" stroke-width="1.6" />
+            </svg>Patanjali Ayurved, Haridwar (India)</a>
+          <a href="#"><svg viewBox="0 0 10 10" fill="none">
+              <path d="M2 1l5 4-5 4" stroke-width="1.6" />
+            </svg>Acharya Ji Website</a>
+          <a href="#"><svg viewBox="0 0 10 10" fill="none">
+              <path d="M2 1l5 4-5 4" stroke-width="1.6" />
+            </svg>Bharat Swabhiman Trust</a>
+          <a href="#"><svg viewBox="0 0 10 10" fill="none">
+              <path d="M2 1l5 4-5 4" stroke-width="1.6" />
+            </svg>University Of Patanjali</a>
+          <a href="#"><svg viewBox="0 0 10 10" fill="none">
+              <path d="M2 1l5 4-5 4" stroke-width="1.6" />
+            </svg>Patanjali Ayurved College</a>
+        </div>
+      </div>
+
+      <div class="footer-col address-col">
+        <h3>Address</h3>
+        <div class="addr-line">
+          <svg viewBox="0 0 24 24">
+            <path d="M12 22s7-7.4 7-12.5A7 7 0 0 0 5 9.5C5 14.6 12 22 12 22z" stroke-width="1.5" />
+            <circle cx="12" cy="9.5" r="2.4" stroke-width="1.5" />
+          </svg>
+          <span><strong>Patanjali Yogpeeth Nepal</strong><br>Head office- Budhanilakantha Metropolitan Woda No.8,
+            Mandikatar, Kathmandu, Nepal</span>
+        </div>
+        <div class="addr-line">
+          <svg viewBox="0 0 24 24">
+            <path
+              d="M4 4.5c0-.6.4-1 1-1h2.6c.5 0 1 .4 1.1.8l1 3.3c.1.4 0 .9-.4 1.2L7.8 10c1 2.4 3 4.4 5.4 5.4l1.2-1.4c.3-.4.8-.5 1.2-.4l3.3 1c.5.1.8.5.8 1.1V19c0 .6-.4 1-1 1h-1.2C9.5 20 4 14.5 4 5.7V4.5z"
+              stroke-width="1.5" />
+          </svg>
+          <span><a href="tel:+9779849413839">Contact no.- +977 9849413839</a></span>
+        </div>
+        <div class="addr-line">
+          <svg viewBox="0 0 24 24">
+            <path d="M3 5.5h18v13H3v-13z" stroke-width="1.5" />
+            <path d="M3 6l9 7 9-7" stroke-width="1.5" />
+          </svg>
+          <span><a href="mailto:info@pypnepal.org">Email:- info@pypnepal.org</a></span>
+        </div>
+      </div>
+
+    </div>
+
+    <div class="footer-bottom">
+      <div class="back-to-top" role="button" aria-label="Back to top">
+        <svg viewBox="0 0 24 24" fill="none">
+          <path d="M6 15l6-6 6 6" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" />
+        </svg>
+      </div>
+      <p class="copyright-text">Copyright &copy; 2026 <strong>Patanjali Yogpeeth Nepal</strong>. All Rights Reserved.
+      </p>
+    </div>
+  </footer>
+
+
+  <script>
+    // ---- Sticky header: hide on scroll down, reveal on scroll up ----
+    // (utility bar + main nav move together, like artofliving.org)
+    (function () {
+      const header = document.getElementById('siteHeader');
+      if (!header) return;
+
+      // Header is position:fixed, so it's lifted out of flow — push the
+      // page content down by the header's real (rendered) height.
+      function syncOffset() {
+        document.body.style.paddingTop = header.offsetHeight + 'px';
+      }
+      syncOffset();
+      window.addEventListener('resize', syncOffset);
+      window.addEventListener('load', syncOffset);
+
+      let lastY = window.scrollY;
+      let ticking = false;
+      const HIDE_AFTER = 120;   // don't hide until scrolled this far down
+      const TOLERANCE = 6;      // ignore tiny scroll jitter
+
+      function onScroll() {
+        const y = Math.max(window.scrollY, 0);
+        const diff = y - lastY;
+
+        header.classList.toggle('nav-scrolled', y > 4);
+
+        if (y <= HIDE_AFTER) {
+          header.classList.remove('nav-hidden');
+        } else if (Math.abs(diff) > TOLERANCE) {
+          if (diff > 0) {
+            header.classList.add('nav-hidden');      // scrolling down
+          } else {
+            header.classList.remove('nav-hidden');    // scrolling up
+          }
+        }
+
+        lastY = y;
+        ticking = false;
+      }
+
+      window.addEventListener('scroll', () => {
+        if (!ticking) {
+          window.requestAnimationFrame(onScroll);
+          ticking = true;
+        }
+      }, { passive: true });
+    })();
+
+    // Mobile hamburger toggle — the original markup had no JS, so on small
+    // screens the nav links disappeared and the hamburger button did nothing.
+    const hamburger = document.querySelector('.hamburger');
+    const primaryLinks = document.querySelector('.primary-links');
+    const MOBILE = '(max-width: 1020px)';
+
+    function closeMenu() {
+      primaryLinks.classList.remove('mobile-open');
+      hamburger.classList.remove('is-open');
+      hamburger.setAttribute('aria-expanded', 'false');
+      document.querySelectorAll('.nav-item.dropdown-open').forEach(i => i.classList.remove('dropdown-open'));
+    }
+
+    hamburger.addEventListener('click', () => {
+      const isOpen = primaryLinks.classList.toggle('mobile-open');
+      hamburger.classList.toggle('is-open', isOpen);
+      hamburger.setAttribute('aria-expanded', String(isOpen));
+    });
+    hamburger.addEventListener('keydown', (e) => {
+      if (e.key === 'Enter' || e.key === ' ') {
+        e.preventDefault();
+        hamburger.click();
+      }
+    });
+
+    // On mobile, dropdowns can't rely on :hover, so tapping a parent link
+    // toggles its submenu instead of navigating nowhere.
+    document.querySelectorAll('.nav-item').forEach(item => {
+      const dropdown = item.querySelector('.dropdown');
+      if (!dropdown) return;
+      const link = item.querySelector('.nav-link');
+      link.addEventListener('click', (e) => {
+        if (window.matchMedia(MOBILE).matches) {
+          e.preventDefault();
+          const isOpen = item.classList.toggle('dropdown-open');
+          if (isOpen) {
+            document.querySelectorAll('.nav-item.dropdown-open').forEach(other => {
+              if (other !== item) other.classList.remove('dropdown-open');
+            });
+          }
+        }
+      });
+    });
+
+    // Close the mobile menu after choosing a leaf link, and when resizing back to desktop.
+    document.querySelectorAll('.primary-links a').forEach(a => a.addEventListener('click', closeMenu));
+    window.addEventListener('resize', () => {
+      if (!window.matchMedia(MOBILE).matches) closeMenu();
+    });
+
+
+    // Back to top smooth scroll handler
+    const backToTopBtn = document.querySelector('.back-to-top');
+    if (backToTopBtn) {
+      backToTopBtn.addEventListener('click', () => {
+        window.scrollTo({ top: 0, behavior: 'smooth' });
+      });
+    }
+
+
+  </script>
+
+  <script>window.__YS_DATA__ = [{"key": "samadhi", "num": "I", "sanskrit": "समाधिपादः", "name": "Samadhi Pada", "meaning": "On Absorption", "blurb": "Fifty-one threads on the nature of yoga, the fluctuations of the mind, and the stages of absorption that still them.", "verses": [{"n": 1, "sk": "अथ योगानुशासनम्।", "t": "atha yogānuśāsanam", "m": "Now begins the teaching of yoga."}, {"n": 2, "sk": "योगश्चित्तवृत्तिनिरोधः।", "t": "yogaś citta-vṛtti-nirodhaḥ", "m": "Yoga is the stilling of the fluctuations of the mind."}, {"n": 3, "sk": "तदा द्रष्टुः स्वरूपेऽवस्थानम्।", "t": "tadā draṣṭuḥ svarūpe 'vasthānam", "m": "Then the seer rests in its own true nature."}, {"n": 4, "sk": "वृत्तिसारूप्यमितरत्र।", "t": "vṛtti-sārūpyam itaratra", "m": "At other times, the seer identifies with the fluctuations of the mind."}, {"n": 5, "sk": "वृत्तयः पञ्चतय्यः क्लिष्टाक्लिष्टाः।", "t": "vṛttayaḥ pañcatayyaḥ kliṣṭākliṣṭāḥ", "m": "The fluctuations are of five kinds, some causing suffering and some not."}, {"n": 6, "sk": "प्रमाणविपर्ययविकल्पनिद्रास्मृतयः।", "t": "pramāṇa-viparyaya-vikalpa-nidrā-smṛtayaḥ", "m": "They are right knowledge, misperception, imagination, sleep, and memory."}, {"n": 7, "sk": "प्रत्यक्षानुमानागमाः प्रमाणानि।", "t": "pratyakṣānumānāgamāḥ pramāṇāni", "m": "Right knowledge rests on direct perception, inference, and reliable testimony."}, {"n": 8, "sk": "विपर्ययो मिथ्याज्ञानमतद्रूपप्रतिष्ठम्।", "t": "viparyayo mithyā-jñānam atad-rūpa-pratiṣṭham", "m": "Misperception is false knowledge, not grounded in the actual form of the thing."}, {"n": 9, "sk": "शब्दज्ञानानुपाती वस्तुशून्यो विकल्पः।", "t": "śabda-jñānānupātī vastu-śūnyo vikalpaḥ", "m": "Imagination follows words and ideas that have no real object behind them."}, {"n": 10, "sk": "अभावप्रत्ययालम्बना वृत्तिर्निद्रा।", "t": "abhāva-pratyayālambanā vṛttir nidrā", "m": "Sleep is the fluctuation of the mind resting on the sense of absence."}, {"n": 11, "sk": "अनुभूतविषयासम्प्रमोषः स्मृतिः।", "t": "anubhūta-viṣayāsampramoṣaḥ smṛtiḥ", "m": "Memory is the retention of experiences that are not lost."}, {"n": 12, "sk": "अभ्यासवैराग्याभ्यां तन्निरोधः।", "t": "abhyāsa-vairāgyābhyāṁ tan-nirodhaḥ", "m": "These fluctuations are stilled through practice and dispassion."}, {"n": 13, "sk": "तत्र स्थितौ यत्नोऽभ्यासः।", "t": "tatra sthitau yatno 'bhyāsaḥ", "m": "Practice is the sustained effort to remain steady in that stillness."}, {"n": 14, "sk": "स तु दीर्घकालनैरन्तर्यसत्कारासेवितो दृढभूमिः।", "t": "sa tu dīrgha-kāla-nairantarya-satkārāsevito dṛḍha-bhūmiḥ", "m": "Practice becomes firmly grounded when pursued for a long time, without interruption, and with sincere devotion."}, {"n": 15, "sk": "दृष्टानुश्रविकविषयवितृष्णस्य वशीकारसंज्ञा वैराग्यम्।", "t": "dṛṣṭānuśravika-viṣaya-vitṛṣṇasya vaśīkāra-saṁjñā vairāgyam", "m": "Dispassion is mastery over craving for objects seen or heard about."}, {"n": 16, "sk": "तत्परं पुरुषख्यातेर्गुणवैतृष्ण्यम्।", "t": "tat paraṁ puruṣa-khyāteḥ guṇa-vaitṛṣṇyam", "m": "The highest dispassion arises from knowledge of the true Self, beyond craving for the qualities of nature."}, {"n": 17, "sk": "वितर्कविचारानन्दास्मितारूपानुगमात्संप्रज्ञातः।", "t": "vitarka-vicārānandāsmitā-rūpānugamāt saṁprajñātaḥ", "m": "Cognitive samadhi is accompanied by reasoning, reflection, bliss, and the sense of pure I-am-ness."}, {"n": 18, "sk": "विरामप्रत्ययाभ्यासपूर्वः संस्कारशेषोऽन्यः।", "t": "virāma-pratyayābhyāsa-pūrvaḥ saṁskāra-śeṣo 'nyaḥ", "m": "The other samadhi is reached through the practice of letting go, leaving only latent impressions."}, {"n": 19, "sk": "भवप्रत्ययो विदेहप्रकृतिलयानाम्।", "t": "bhava-pratyayo videha-prakṛti-layānām", "m": "For beings who are bodiless or absorbed in nature, this state arises spontaneously from existence itself."}, {"n": 20, "sk": "श्रद्धावीर्यस्मृतिसमाधिप्रज्ञापूर्वक इतरेषाम्।", "t": "śraddhā-vīrya-smṛti-samādhi-prajñā-pūrvaka itareṣām", "m": "For others, it comes through faith, energy, memory, absorption, and insight."}, {"n": 21, "sk": "तीव्रसंवेगानामासन्नः।", "t": "tīvra-saṁvegānām āsannaḥ", "m": "For those with intense dedication, this state is close at hand."}, {"n": 22, "sk": "मृदुमध्याधिमात्रत्वात्ततोऽपि विशेषः।", "t": "mṛdu-madhyādhimātratvāt tato 'pi viśeṣaḥ", "m": "This is further distinguished by whether the practice is mild, moderate, or intense."}, {"n": 23, "sk": "ईश्वरप्रणिधानाद्वा।", "t": "īśvara-praṇidhānād vā", "m": "Or it may come through complete surrender to Ishvara, the supreme Lord."}, {"n": 24, "sk": "क्लेशकर्मविपाकाशयैरपरामृष्टः पुरुषविशेष ईश्वरः।", "t": "kleśa-karma-vipākāśayair aparāmṛṣṭaḥ puruṣa-viśeṣa īśvaraḥ", "m": "Ishvara is a special Self, untouched by afflictions, actions, and their results."}, {"n": 25, "sk": "तत्र निरतिशयं सर्वज्ञबीजम्।", "t": "tatra niratiśayaṁ sarvajña-bījam", "m": "In Ishvara, the seed of omniscience is present in its fullest, unsurpassed form."}, {"n": 26, "sk": "पूर्वेषामपि गुरुः कालेनानवच्छेदात्।", "t": "pūrveṣām api guruḥ kālenānavacchedāt", "m": "Being untouched by time, Ishvara is the teacher even of the earliest teachers."}, {"n": 27, "sk": "तस्य वाचकः प्रणवः।", "t": "tasya vācakaḥ praṇavaḥ", "m": "The sound that expresses Ishvara is Om."}, {"n": 28, "sk": "तज्जपस्तदर्थभावनम्।", "t": "taj-japas tad-artha-bhāvanam", "m": "Repeating it with reflection on its meaning is the practice."}, {"n": 29, "sk": "ततः प्रत्यक्चेतनाधिगमोऽप्यन्तरायाभावश्च।", "t": "tataḥ pratyak-cetanādhigamo 'py antarāyābhāvaś ca", "m": "From this comes the turning of awareness inward and the removal of obstacles."}, {"n": 30, "sk": "व्याधिस्त्यानसंशयप्रमादालस्याविरतिभ्रान्तिदर्शनालब्धभूमिकत्वानवस्थितत्वानि चित्तविक्षेपास्तेऽन्तरायाः।", "t": "vyādhi-styāna-saṁśaya-pramādālasyāvirati-bhrānti-darśanālabdha-bhūmikatvānavasthitatvāni citta-vikṣepās te 'ntarāyāḥ", "m": "Illness, dullness, doubt, carelessness, laziness, indulgence, false perception, failure to reach firm ground, and instability are the obstacles that scatter the mind."}, {"n": 31, "sk": "दुःखदौर्मनस्याङ्गमेजयत्वश्वासप्रश्वासा विक्षेपसहभुवः।", "t": "duḥkha-daurmanasyāṅgamejayatva-śvāsapraśvāsā vikṣepa-sahabhuvaḥ", "m": "Suffering, despair, trembling of the body, and unsteady breath accompany this scattering of the mind."}, {"n": 32, "sk": "तत्प्रतिषेधार्थमेकतत्त्वाभ्यासः।", "t": "tat-pratiṣedhārtham eka-tattvābhyāsaḥ", "m": "To overcome these, one should practice concentration on a single principle."}, {"n": 33, "sk": "मैत्रीकरुणामुदितोपेक्षाणां सुखदुःखपुण्यापुण्यविषयाणां भावनातश्चित्तप्रसादनम्।", "t": "maitrī-karuṇā-muditopekṣāṇāṁ sukha-duḥkha-puṇyāpuṇya-viṣayāṇāṁ bhāvanātaś citta-prasādanam", "m": "The mind grows clear by cultivating friendliness toward the happy, compassion for the suffering, joy toward the virtuous, and equanimity toward the unvirtuous."}, {"n": 34, "sk": "प्रच्छर्दनविधारणाभ्यां वा प्राणस्य।", "t": "pracchardana-vidhāraṇābhyāṁ vā prāṇasya", "m": "Or calm comes through the controlled exhalation and retention of the breath."}, {"n": 35, "sk": "विषयवती वा प्रवृत्तिरुत्पन्ना मनसः स्थितिनिबन्धनी।", "t": "viṣayavatī vā pravṛttir utpannā manasaḥ sthiti-nibandhanī", "m": "Or steady focus on a sense object can also bind the mind to stability."}, {"n": 36, "sk": "विशोका वा ज्योतिष्मती।", "t": "viśokā vā jyotiṣmatī", "m": "Or steadiness comes through an inner state of sorrowless, radiant light."}, {"n": 37, "sk": "वीतरागविषयं वा चित्तम्।", "t": "vīta-rāga-viṣayaṁ vā cittam", "m": "Or the mind steadies by dwelling on those who are free of craving."}, {"n": 38, "sk": "स्वप्ननिद्राज्ञानालम्बनं वा।", "t": "svapna-nidrā-jñānālambanaṁ vā", "m": "Or by reflecting on the knowledge gained in dreams and in sleep."}, {"n": 39, "sk": "यथाभिमतध्यानाद्वा।", "t": "yathābhimata-dhyānād vā", "m": "Or through meditation on whatever one finds most agreeable."}, {"n": 40, "sk": "परमाणुपरममहत्त्वान्तोऽस्य वशीकारः।", "t": "paramāṇu-parama-mahattvānto 'sya vaśīkāraḥ", "m": "Such a mastered mind can extend its focus from the smallest atom to the greatest immensity."}, {"n": 41, "sk": "क्षीणवृत्तेरभिजातस्येव मणेर्ग्रहीतृग्रहणग्राह्येषु तत्स्थतदञ्जनता समापत्तिः।", "t": "kṣīṇa-vṛtter abhijātasyeva maṇer grahītṛ-grahaṇa-grāhyeṣu tat-stha-tad-añjanatā samāpattiḥ", "m": "When the mind's fluctuations dwindle, like a flawless crystal it takes on the color of whatever it rests upon — knower, knowing, or known — and this is called samapatti, or absorption."}, {"n": 42, "sk": "तत्र शब्दार्थज्ञानविकल्पैः संकीर्णा सवितर्का समापत्तिः।", "t": "tatra śabdārtha-jñāna-vikalpaiḥ saṅkīrṇā savitarkā samāpattiḥ", "m": "Absorption mixed with the ideas of word, meaning, and knowledge is called savitarka samapatti."}, {"n": 43, "sk": "स्मृतिपरिशुद्धौ स्वरूपशून्येवार्थमात्रनिर्भासा निर्वितर्का।", "t": "smṛti-pariśuddhau svarūpa-śūnyeva arthamātra-nirbhāsā nirvitarkā", "m": "When memory is purified and the mind seems empty of its own nature, revealing only the object itself, this is nirvitarka samapatti."}, {"n": 44, "sk": "एतयैव सविचारा निर्विचारा च सूक्ष्मविषया व्याख्याता।", "t": "etayaiva savicārā nirvicārā ca sūkṣma-viṣayā vyākhyātā", "m": "In the same way, savichara and nirvichara samapatti, which concern subtler objects, are explained."}, {"n": 45, "sk": "सूक्ष्मविषयत्वं चालिङ्गपर्यवसानम्।", "t": "sūkṣma-viṣayatvaṁ cāliṅga-paryavasānam", "m": "The range of subtle objects extends all the way to the unmanifest root of nature."}, {"n": 46, "sk": "ता एव सबीजः समाधिः।", "t": "tā eva sabījaḥ samādhiḥ", "m": "These absorptions, still bearing the seed of latent impressions, are called sabija samadhi."}, {"n": 47, "sk": "निर्विचारवैशारद्येऽध्यात्मप्रसादः।", "t": "nirvicāra-vaiśāradye 'dhyātma-prasādaḥ", "m": "When nirvichara samapatti becomes pure and effortless, a deep inner clarity dawns."}, {"n": 48, "sk": "ऋतम्भरा तत्र प्रज्ञा।", "t": "ṛtambharā tatra prajñā", "m": "In that clarity, wisdom becomes filled with truth alone."}, {"n": 49, "sk": "श्रुतानुमानप्रज्ञाभ्यामन्यविषया विशेषार्थत्वात्।", "t": "śrutānumāna-prajñābhyām anya-viṣayā viśeṣārthatvāt", "m": "This truth-bearing wisdom differs from knowledge gained by testimony or inference, for it grasps the particular directly."}, {"n": 50, "sk": "तज्जः संस्कारोऽन्यसंस्कारप्रतिबन्धी।", "t": "taj-jaḥ saṁskāro 'nya-saṁskāra-pratibandhī", "m": "The impression born of this wisdom prevents other impressions from arising."}, {"n": 51, "sk": "तस्यापि निरोधे सर्वनिरोधान्निर्बीजः समाधिः।", "t": "tasyāpi nirodhe sarva-nirodhān nirbījaḥ samādhiḥ", "m": "When even this impression is stilled, all fluctuations cease, and nirbija samadhi — seedless absorption — is attained."}]}, {"key": "sadhana", "num": "II", "sanskrit": "साधनपादः", "name": "Sadhana Pada", "meaning": "On Practice", "blurb": "Fifty-five threads laying out the yoga of action, the causes of suffering, and the first five limbs of the eightfold path.", "verses": [{"n": 1, "sk": "तपःस्वाध्यायेश्वरप्रणिधानानि क्रियायोगः।", "t": "tapaḥ-svādhyāyeśvara-praṇidhānāni kriyā-yogaḥ", "m": "Discipline, self-study, and surrender to Ishvara together form the yoga of action."}, {"n": 2, "sk": "समाधिभावनार्थः क्लेशतनूकरणार्थश्च।", "t": "samādhi-bhāvanārthaḥ kleśa-tanū-karaṇārthaś ca", "m": "This practice cultivates samadhi and thins out the causes of suffering."}, {"n": 3, "sk": "अविद्यास्मितारागद्वेषाभिनिवेशाः क्लेशाः।", "t": "avidyāsmitā-rāga-dveṣābhiniveśāḥ kleśāḥ", "m": "The causes of suffering are ignorance, egoism, attachment, aversion, and the fear of death."}, {"n": 4, "sk": "अविद्या क्षेत्रमुत्तरेषां प्रसुप्ततनुविच्छिन्नोदाराणाम्।", "t": "avidyā kṣetram uttareṣāṁ prasupta-tanu-vicchinnodārāṇām", "m": "Ignorance is the field for the others, whether they lie dormant, weakened, interrupted, or fully active."}, {"n": 5, "sk": "अनित्याशुचिदुःखानात्मसु नित्यशुचिसुखात्मख्यातिरविद्या।", "t": "anityāśuci-duḥkhānātmasu nitya-śuci-sukhātma-khyātir avidyā", "m": "Ignorance is mistaking the impermanent, impure, painful, and non-Self for the permanent, pure, pleasant, and Self."}, {"n": 6, "sk": "दृग्दर्शनशक्त्योरेकात्मतेवास्मिता।", "t": "dṛg-darśana-śaktyor ekātmatevāsmitā", "m": "Egoism is the apparent identity of the power of seeing with the power of the instrument of seeing."}, {"n": 7, "sk": "सुखानुशयी रागः।", "t": "sukhānuśayī rāgaḥ", "m": "Attachment follows from clinging to pleasure."}, {"n": 8, "sk": "दुःखानुशयी द्वेषः।", "t": "duḥkhānuśayī dveṣaḥ", "m": "Aversion follows from clinging away from pain."}, {"n": 9, "sk": "स्वरसवाही विदुषोऽपि तथारूढोऽभिनिवेशः।", "t": "svarasa-vāhī viduṣo 'pi tathā rūḍho 'bhiniveśaḥ", "m": "The fear of death flows on by its own force, established even in the wise."}, {"n": 10, "sk": "ते प्रतिप्रसवहेयाः सूक्ष्माः।", "t": "te prati-prasava-heyāḥ sūkṣmāḥ", "m": "These causes, in their subtle form, are overcome by tracing them back to their source and dissolving them."}, {"n": 11, "sk": "ध्यानहेयास्तद्वृत्तयः।", "t": "dhyāna-heyās tad-vṛttayaḥ", "m": "In their active, gross form, they are overcome through meditation."}, {"n": 12, "sk": "क्लेशमूलः कर्माशयो दृष्टादृष्टजन्मवेदनीयः।", "t": "kleśa-mūlaḥ karmāśayo dṛṣṭādṛṣṭa-janma-vedanīyaḥ", "m": "The store of karma, rooted in these causes, is experienced in this life or in lives unseen."}, {"n": 13, "sk": "सति मूले तद्विपाको जात्यायुर्भोगाः।", "t": "sati mūle tad-vipāko jātyāyur-bhogāḥ", "m": "As long as this root exists, it ripens into one's birth, lifespan, and experiences."}, {"n": 14, "sk": "ते ह्लादपरितापफलाः पुण्यापुण्यहेतुत्वात्।", "t": "te hlāda-paritāpa-phalāḥ puṇyāpuṇya-hetutvāt", "m": "These bear fruit as pleasure or pain, according to whether their cause was virtuous or not."}, {"n": 15, "sk": "परिणामतापसंस्कारदुःखैर्गुणवृत्तिविरोधाच्च दुःखमेव सर्वं विवेकिनः।", "t": "pariṇāma-tāpa-saṁskāra-duḥkhair guṇa-vṛtti-virodhāc ca duḥkham eva sarvaṁ vivekinaḥ", "m": "To one of discernment, all is seen as suffering, on account of the pain of change, anxiety, habitual patterns, and the ever-conflicting fluctuations of nature's qualities."}, {"n": 16, "sk": "हेयं दुःखमनागतम्।", "t": "heyaṁ duḥkham anāgatam", "m": "Suffering that has not yet come is the one that can and should be avoided."}, {"n": 17, "sk": "द्रष्टृदृश्ययोः संयोगो हेयहेतुः।", "t": "draṣṭṛ-dṛśyayoḥ saṁyogo heya-hetuḥ", "m": "The cause of this avoidable suffering is the union of the seer with the seen."}, {"n": 18, "sk": "प्रकाशक्रियास्थितिशीलं भूतेन्द्रियात्मकं भोगापवर्गार्थं दृश्यम्।", "t": "prakāśa-kriyā-sthiti-śīlaṁ bhūtendriyātmakaṁ bhogāpavargārthaṁ dṛśyam", "m": "The seen, composed of the elements and the senses and possessing the qualities of illumination, activity, and inertia, exists for the purpose of experience and liberation."}, {"n": 19, "sk": "विशेषाविशेषलिङ्गमात्रालिङ्गानि गुणपर्वाणि।", "t": "viśeṣāviśeṣa-liṅga-mātrāliṅgāni guṇa-parvāṇi", "m": "The stages of nature's qualities range from the specific, to the unspecific, to the merely-defined, to the undefined."}, {"n": 20, "sk": "द्रष्टा दृशिमात्रः शुद्धोऽपि प्रत्ययानुपश्यः।", "t": "draṣṭā dṛśi-mātraḥ śuddho 'pi pratyayānupaśyaḥ", "m": "The seer is pure awareness alone, yet perceives only through the ideas presented to it."}, {"n": 21, "sk": "तदर्थ एव दृश्यस्यात्मा।", "t": "tad-artha eva dṛśyasyātmā", "m": "The very being of the seen exists only for the sake of the seer."}, {"n": 22, "sk": "कृतार्थं प्रति नष्टमप्यनष्टं तदन्यसाधारणत्वात्।", "t": "kṛtārthaṁ prati naṣṭam apy anaṣṭaṁ tad-anya-sādhāraṇatvāt", "m": "Though the seen ceases to serve one who has fulfilled its purpose, it remains, since it is common to others still bound."}, {"n": 23, "sk": "स्वस्वामिशक्त्योः स्वरूपोपलब्धिहेतुः संयोगः।", "t": "sva-svāmi-śaktyoḥ svarūpopalabdhi-hetuḥ saṁyogaḥ", "m": "Union is the cause by which the powers of the seen and the seer come to know their own nature."}, {"n": 24, "sk": "तस्य हेतुरविद्या।", "t": "tasya hetur avidyā", "m": "The cause of this union is ignorance."}, {"n": 25, "sk": "तदभावात्संयोगाभावो हानं तद्दृशेः कैवल्यम्।", "t": "tad-abhāvāt saṁyogābhāvo hānaṁ tad-dṛśeḥ kaivalyam", "m": "When ignorance ceases, the union ceases too, and this ending is liberation — the seer established in its own isolated nature."}, {"n": 26, "sk": "विवेकख्यातिरविप्लवा हानोपायः।", "t": "viveka-khyātir aviplavā hānopāyaḥ", "m": "Unbroken, discriminating awareness is the means to this liberation."}, {"n": 27, "sk": "तस्य सप्तधा प्रान्तभूमिः प्रज्ञा।", "t": "tasya saptadhā prānta-bhūmiḥ prajñā", "m": "This awareness unfolds through seven successive stages of wisdom."}, {"n": 28, "sk": "योगाङ्गानुष्ठानादशुद्धिक्षये ज्ञानदीप्तिराविवेकख्यातेः।", "t": "yogāṅgānuṣṭhānād aśuddhi-kṣaye jñāna-dīptir āvivekakhyāteḥ", "m": "Through practicing the limbs of yoga, impurity dwindles, and the light of knowledge grows until it reaches discriminating awareness."}, {"n": 29, "sk": "यमनियमासनप्राणायामप्रत्याहारधारणाध्यानसमाधयोऽष्टावङ्गानि।", "t": "yama-niyamāsana-prāṇāyāma-pratyāhāra-dhāraṇā-dhyāna-samādhayo 'ṣṭāv aṅgāni", "m": "The eight limbs of yoga are restraint, observance, posture, breath control, withdrawal of the senses, concentration, meditation, and absorption."}, {"n": 30, "sk": "अहिंसासत्यास्तेयब्रह्मचर्यापरिग्रहा यमाः।", "t": "ahiṁsā-satyāsteya-brahmacaryāparigrahā yamāḥ", "m": "The restraints are non-harming, truthfulness, non-stealing, right use of energy, and non-possessiveness."}, {"n": 31, "sk": "जातिदेशकालसमयानवच्छिन्नाः सार्वभौमा महाव्रतम्।", "t": "jāti-deśa-kāla-samayānavacchinnāḥ sārva-bhaumā mahāvratam", "m": "These restraints, unbroken by birth, place, time, or circumstance, form the great universal vow."}, {"n": 32, "sk": "शौचसन्तोषतपःस्वाध्यायेश्वरप्रणिधानानि नियमाः।", "t": "śauca-santoṣa-tapaḥ-svādhyāyeśvara-praṇidhānāni niyamāḥ", "m": "The observances are purity, contentment, discipline, self-study, and surrender to Ishvara."}, {"n": 33, "sk": "वितर्कबाधने प्रतिपक्षभावनम्।", "t": "vitarka-bādhane pratipakṣa-bhāvanam", "m": "When disturbed by unwholesome thoughts, one should cultivate their opposite."}, {"n": 34, "sk": "वितर्का हिंसादयः कृतकारितानुमोदिता लोभक्रोधमोहपूर्वका मृदुमध्याधिमात्रा दुःखाज्ञानानन्तफला इति प्रतिपक्षभावनम्।", "t": "vitarkā hiṁsādayaḥ kṛta-kāritānumoditā lobha-krodha-moha-pūrvakā mṛdu-madhyādhimātrā duḥkhājñānānantaphalā iti pratipakṣa-bhāvanam", "m": "Unwholesome thoughts like harming, whether done, caused, or approved, arising from greed, anger, or delusion, mild or intense, all bear endless fruit of suffering and ignorance — reflecting on this is the cultivation of their opposite."}, {"n": 35, "sk": "अहिंसाप्रतिष्ठायां तत्सन्निधौ वैरत्यागः।", "t": "ahiṁsā-pratiṣṭhāyāṁ tat-sannidhau vaira-tyāgaḥ", "m": "When non-harming is firmly established, hostility ceases in the presence of that person."}, {"n": 36, "sk": "सत्यप्रतिष्ठायां क्रियाफलाश्रयत्वम्।", "t": "satya-pratiṣṭhāyāṁ kriyā-phalāśrayatvam", "m": "When truthfulness is firmly established, actions and their fruits become dependent on the speaker's word."}, {"n": 37, "sk": "अस्तेयप्रतिष्ठायां सर्वरत्नोपस्थानम्।", "t": "asteya-pratiṣṭhāyāṁ sarva-ratnopasthānam", "m": "When non-stealing is firmly established, all forms of wealth present themselves."}, {"n": 38, "sk": "ब्रह्मचर्यप्रतिष्ठायां वीर्यलाभः।", "t": "brahmacarya-pratiṣṭhāyāṁ vīrya-lābhaḥ", "m": "When right use of vital energy is firmly established, vitality is gained."}, {"n": 39, "sk": "अपरिग्रहस्थैर्ये जन्मकथन्तासम्बोधः।", "t": "aparigraha-sthairye janma-kathantā-sambodhaḥ", "m": "When non-possessiveness is firmly established, insight arises into the nature and purpose of one's existence."}, {"n": 40, "sk": "शौचात्स्वाङ्गजुगुप्सा परैरसंसर्गः।", "t": "śaucāt svāṅga-jugupsā parair asaṁsargaḥ", "m": "Through purity, one becomes indifferent to one's own body and disinclined toward contact with others."}, {"n": 41, "sk": "सत्त्वशुद्धिसौमनस्यैकाग्र्येन्द्रियजयात्मदर्शनयोग्यत्वानि च।", "t": "sattva-śuddhi-saumanasyaikāgryendriya-jayātma-darśana-yogyatvāni ca", "m": "Purity also brings clarity of mind, cheerfulness, one-pointedness, mastery of the senses, and fitness for self-realization."}, {"n": 42, "sk": "सन्तोषादनुत्तमः सुखलाभः।", "t": "santoṣād anuttamaḥ sukha-lābhaḥ", "m": "From contentment comes unsurpassed happiness."}, {"n": 43, "sk": "कायेन्द्रियसिद्धिरशुद्धिक्षयात्तपसः।", "t": "kāyendriya-siddhir aśuddhi-kṣayāt tapasaḥ", "m": "Through discipline, impurity is destroyed, bringing perfection of the body and senses."}, {"n": 44, "sk": "स्वाध्यायादिष्टदेवतासम्प्रयोगः।", "t": "svādhyāyād iṣṭa-devatā-samprayogaḥ", "m": "Through self-study, one comes into communion with one's chosen ideal."}, {"n": 45, "sk": "समाधिसिद्धिरीश्वरप्रणिधानात्।", "t": "samādhi-siddhir īśvara-praṇidhānāt", "m": "Perfection in samadhi comes through surrender to Ishvara."}, {"n": 46, "sk": "स्थिरसुखमासनम्।", "t": "sthira-sukham āsanam", "m": "Posture should be steady and comfortable."}, {"n": 47, "sk": "प्रयत्नशैथिल्यानन्तसमापत्तिभ्याम्।", "t": "prayatna-śaithilyānanta-samāpattibhyām", "m": "This is achieved by relaxing effort and by absorption into the infinite."}, {"n": 48, "sk": "ततो द्वन्द्वानभिघातः।", "t": "tato dvandvānabhighātaḥ", "m": "From this, one is no longer disturbed by the pairs of opposites."}, {"n": 49, "sk": "तस्मिन्सति श्वासप्रश्वासयोर्गतिविच्छेदः प्राणायामः।", "t": "tasmin sati śvāsa-praśvāsayor gati-vicchedaḥ prāṇāyāmaḥ", "m": "Once posture is mastered, breath control is the regulation of the incoming and outgoing breath."}, {"n": 50, "sk": "बाह्याभ्यन्तरस्तम्भवृत्तिर्देशकालसंख्याभिः परिदृष्टो दीर्घसूक्ष्मः।", "t": "bāhyābhyantara-stambha-vṛttir deśa-kāla-saṅkhyābhiḥ paridṛṣṭo dīrgha-sūkṣmaḥ", "m": "Its movements — external, internal, or held — are regulated by place, time, and number, and become progressively long and subtle."}, {"n": 51, "sk": "बाह्याभ्यन्तरविषयाक्षेपी चतुर्थः।", "t": "bāhyābhyantara-viṣayākṣepī caturthaḥ", "m": "The fourth kind of breath control transcends the external and internal altogether."}, {"n": 52, "sk": "ततः क्षीयते प्रकाशावरणम्।", "t": "tataḥ kṣīyate prakāśāvaraṇam", "m": "From this, the veil covering inner light dissolves."}, {"n": 53, "sk": "धारणासु च योग्यता मनसः।", "t": "dhāraṇāsu ca yogyatā manasaḥ", "m": "And the mind becomes fit for concentration."}, {"n": 54, "sk": "स्वविषयासम्प्रयोगे चित्तस्य स्वरूपानुकार इवेन्द्रियाणां प्रत्याहारः।", "t": "sva-viṣayāsamprayoge cittasya svarūpānukāra ivendriyāṇāṁ pratyāhāraḥ", "m": "Withdrawal of the senses occurs when they disengage from their objects and, as it were, take on the nature of the mind itself."}, {"n": 55, "sk": "ततः परमा वश्यतेन्द्रियाणाम्।", "t": "tataḥ paramā vaśyatendriyāṇām", "m": "From this follows the highest mastery over the senses."}]}, {"key": "vibhuti", "num": "III", "sanskrit": "विभूतिपादः", "name": "Vibhuti Pada", "meaning": "On Attainment", "blurb": "Fifty-five threads on samyama, the inner limbs of yoga, and the extraordinary powers that can arise — and the caution they call for.", "verses": [{"n": 1, "sk": "देशबन्धश्चित्तस्य धारणा।", "t": "deśa-bandhaś cittasya dhāraṇā", "m": "Concentration is binding the mind to one place."}, {"n": 2, "sk": "तत्र प्रत्ययैकतानता ध्यानम्।", "t": "tatra pratyayaikatānatā dhyānam", "m": "Meditation is the unbroken flow of attention toward that place."}, {"n": 3, "sk": "तदेवार्थमात्रनिर्भासं स्वरूपशून्यमिव समाधिः।", "t": "tad evārtha-mātra-nirbhāsaṁ svarūpa-śūnyam iva samādhiḥ", "m": "Absorption is when that same meditation shines forth as the object alone, as if empty of its own form."}, {"n": 4, "sk": "त्रयमेकत्र संयमः।", "t": "trayam ekatra saṁyamaḥ", "m": "The three together, applied to one object, are called samyama."}, {"n": 5, "sk": "तज्जयात्प्रज्ञालोकः।", "t": "taj-jayāt prajñālokaḥ", "m": "By mastering samyama, the light of wisdom dawns."}, {"n": 6, "sk": "तस्य भूमिषु विनियोगः।", "t": "tasya bhūmiṣu viniyogaḥ", "m": "It is to be applied progressively, stage by stage."}, {"n": 7, "sk": "त्रयमन्तरङ्गं पूर्वेभ्यः।", "t": "trayam antar-aṅgaṁ pūrvebhyaḥ", "m": "These three are more internal than the preceding limbs."}, {"n": 8, "sk": "तदपि बहिरङ्गं निर्बीजस्य।", "t": "tad api bahir-aṅgaṁ nirbījasya", "m": "Yet even these three remain external in relation to seedless samadhi."}, {"n": 9, "sk": "व्युत्थाननिरोधसंस्कारयोरभिभवप्रादुर्भावौ निरोधक्षणचित्तान्वयो निरोधपरिणामः।", "t": "vyutthāna-nirodha-saṁskārayor abhibhava-prādurbhāvau nirodha-kṣaṇa-cittānvayo nirodha-pariṇāmaḥ", "m": "The transformation into stillness occurs as the impressions of restlessness subside and the impressions of stillness emerge, moment by moment, in the mind."}, {"n": 10, "sk": "तस्य प्रशान्तवाहिता संस्कारात्।", "t": "tasya praśānta-vāhitā saṁskārāt", "m": "Its peaceful flow is sustained by this repeated impression."}, {"n": 11, "sk": "सर्वार्थतैकाग्रतयोः क्षयोदयौ चित्तस्य समाधिपरिणामः।", "t": "sarvārthataikāgratayoḥ kṣayodayau cittasya samādhi-pariṇāmaḥ", "m": "The transformation into samadhi occurs as scattered attention diminishes and one-pointed attention arises."}, {"n": 12, "sk": "ततः पुनः शान्तोदितौ तुल्यप्रत्ययौ चित्तस्यैकाग्रतापरिणामः।", "t": "tataḥ punaḥ śāntoditau tulya-pratyayau cittasyaikāgratā-pariṇāmaḥ", "m": "The transformation into one-pointedness occurs when the arising and subsiding thought remain identical."}, {"n": 13, "sk": "एतेन भूतेन्द्रियेषु धर्मलक्षणावस्थापरिणामा व्याख्याताः।", "t": "etena bhūtendriyeṣu dharma-lakṣaṇāvasthā-pariṇāmā vyākhyātāḥ", "m": "In this same way, the changes of form, character, and condition in the elements and senses are explained."}, {"n": 14, "sk": "शान्तोदिताव्यपदेश्यधर्मानुपाती धर्मी।", "t": "śāntoditāvyapadeśya-dharmānupātī dharmī", "m": "The underlying substance persists through its qualities, whether they are past, present, or yet unmanifest."}, {"n": 15, "sk": "क्रमान्यत्वं परिणामान्यत्वे हेतुः।", "t": "kramānyatvaṁ pariṇāmānyatve hetuḥ", "m": "The difference in these transformations arises from a difference in the sequence of change."}, {"n": 16, "sk": "परिणामत्रयसंयमादतीतानागतज्ञानम्।", "t": "pariṇāma-traya-saṁyamād atītānāgata-jñānam", "m": "By practicing samyama on the three kinds of transformation, knowledge of the past and future arises."}, {"n": 17, "sk": "शब्दार्थप्रत्ययानामितरेतराध्यासात्सङ्करस्तत्प्रविभागसंयमात्सर्वभूतरुतज्ञानम्।", "t": "śabdārtha-pratyayānām itaretarādhyāsāt saṅkaras tat-pravibhāga-saṁyamāt sarva-bhūta-ruta-jñānam", "m": "Word, meaning, and idea are ordinarily confused together; through samyama distinguishing them, one gains understanding of the sounds of all beings."}, {"n": 18, "sk": "संस्कारसाक्षात्करणात्पूर्वजातिज्ञानम्।", "t": "saṁskāra-sākṣāt-karaṇāt pūrva-jāti-jñānam", "m": "By directly perceiving one's latent impressions, knowledge of past births arises."}, {"n": 19, "sk": "प्रत्ययस्य परचित्तज्ञानम्।", "t": "pratyayasya para-citta-jñānam", "m": "By samyama on another's mental images, knowledge of another's mind arises."}, {"n": 20, "sk": "न च तत्सालम्बनं तस्याविषयीभूतत्वात्।", "t": "na ca tat sālambanaṁ tasyāviṣayī-bhūtatvāt", "m": "Yet this does not reveal the object underlying that mind, since that is not what samyama is directed toward."}, {"n": 21, "sk": "कायरूपसंयमात्तद्ग्राह्यशक्तिस्तम्भे चक्षुःप्रकाशासंप्रयोगेऽन्तर्धानम्।", "t": "kāya-rūpa-saṁyamāt tad-grāhya-śakti-stambhe cakṣuḥ-prakāśāsamprayoge 'ntardhānam", "m": "By samyama on the form of the body, its perceptibility can be suspended, disconnecting it from the observer's sight, and thus one becomes invisible."}, {"n": 22, "sk": "सोपक्रमं निरुपक्रमं च कर्म तत्संयमादपरान्तज्ञानमरिष्टेभ्यो वा।", "t": "sopakramaṁ nirupakramaṁ ca karma tat-saṁyamād aparānta-jñānam ariṣṭebhyo vā", "m": "Karma is either fast or slow to ripen; through samyama on it, or through omens, knowledge of the time of death arises."}, {"n": 23, "sk": "मैत्र्यादिषु बलानि।", "t": "maitryādiṣu balāni", "m": "Through samyama on friendliness and the like, corresponding strengths are gained."}, {"n": 24, "sk": "बलेषु हस्तिबलादीनि।", "t": "baleṣu hasti-balādīni", "m": "Through samyama on strength, one gains the strength of an elephant and the like."}, {"n": 25, "sk": "प्रवृत्त्यालोकन्यासात्सूक्ष्मव्यवहितविप्रकृष्टज्ञानम्।", "t": "pravṛtty-āloka-nyāsāt sūkṣma-vyavahita-viprakṛṣṭa-jñānam", "m": "By directing the inner light of perception, knowledge of the subtle, the hidden, and the distant arises."}, {"n": 26, "sk": "भुवनज्ञानं सूर्ये संयमात्।", "t": "bhuvana-jñānaṁ sūrye saṁyamāt", "m": "Through samyama on the sun, knowledge of the cosmic regions arises."}, {"n": 27, "sk": "चन्द्रे ताराव्यूहज्ञानम्।", "t": "candre tārā-vyūha-jñānam", "m": "Through samyama on the moon, knowledge of the arrangement of the stars arises."}, {"n": 28, "sk": "ध्रुवे तद्गतिज्ञानम्।", "t": "dhruve tad-gati-jñānam", "m": "Through samyama on the pole star, knowledge of the movement of the stars arises."}, {"n": 29, "sk": "नाभिचक्रे कायव्यूहज्ञानम्।", "t": "nābhi-cakre kāya-vyūha-jñānam", "m": "Through samyama on the navel center, knowledge of the body's arrangement arises."}, {"n": 30, "sk": "कण्ठकूपे क्षुत्पिपासानिवृत्तिः।", "t": "kaṇṭha-kūpe kṣut-pipāsā-nivṛttiḥ", "m": "Through samyama on the pit of the throat, hunger and thirst cease."}, {"n": 31, "sk": "कूर्मनाड्यां स्थैर्यम्।", "t": "kūrma-nāḍyāṁ sthairyam", "m": "Through samyama on the tortoise channel beneath the throat, steadiness is gained."}, {"n": 32, "sk": "मूर्धज्योतिषि सिद्धदर्शनम्।", "t": "mūrdha-jyotiṣi siddha-darśanam", "m": "Through samyama on the light at the crown of the head, vision of perfected beings arises."}, {"n": 33, "sk": "प्रातिभाद्वा सर्वम्।", "t": "prātibhād vā sarvam", "m": "Or, through spontaneous intuitive insight, all this may be known."}, {"n": 34, "sk": "हृदये चित्तसंवित्।", "t": "hṛdaye citta-saṁvit", "m": "Through samyama on the heart, knowledge of the mind arises."}, {"n": 35, "sk": "सत्त्वपुरुषयोरत्यन्तासंकीर्णयोः प्रत्ययाविशेषो भोगः परार्थत्वात्स्वार्थसंयमात्पुरुषज्ञानम्।", "t": "sattva-puruṣayor atyantāsaṅkīrṇayoḥ pratyayāviśeṣo bhogaḥ parārthatvāt svārtha-saṁyamāt puruṣa-jñānam", "m": "Experience arises from failing to distinguish the mind, which serves another's purpose, from the Self; through samyama directed toward the Self's own purpose, knowledge of the Self arises."}, {"n": 36, "sk": "ततः प्रातिभश्रावणवेदनादर्शास्वादवार्ता जायन्ते।", "t": "tataḥ prātibha-śrāvaṇa-vedanādarśāsvāda-vārtā jāyante", "m": "From this arise intuitive powers of hearing, touch, sight, taste, and smell."}, {"n": 37, "sk": "ते समाधावुपसर्गा व्युत्थाने सिद्धयः।", "t": "te samādhāv upasargā vyutthāne siddhayaḥ", "m": "These are accomplishments for the outward-turned mind but obstacles to samadhi."}, {"n": 38, "sk": "बन्धकारणशैथिल्यात्प्रचारसंवेदनाच्च चित्तस्य परशरीरावेशः।", "t": "bandha-kāraṇa-śaithilyāt pracāra-saṁvedanāc ca cittasya para-śarīrāveśaḥ", "m": "By loosening the causes that bind the mind, and by understanding its channels of movement, one can enter another's body."}, {"n": 39, "sk": "उदानजयाज्जलपङ्ककण्टकादिष्वसङ्ग उत्क्रान्तिश्च।", "t": "udāna-jayāj jala-paṅka-kaṇṭakādiṣv asaṅga utkrāntiś ca", "m": "By mastering the upward vital current, one becomes unaffected by water, mud, and thorns, and can rise above them."}, {"n": 40, "sk": "समानजयाज्ज्वलनम्।", "t": "samāna-jayāj jvalanam", "m": "By mastering the equalizing vital current, radiance is gained."}, {"n": 41, "sk": "श्रोत्राकाशयोः सम्बन्धसंयमाद्दिव्यं श्रोत्रम्।", "t": "śrotrākāśayoḥ sambandha-saṁyamād divyaṁ śrotram", "m": "By samyama on the relation between the ear and space, divine hearing is attained."}, {"n": 42, "sk": "कायाकाशयोः सम्बन्धसंयमाल्लघुतूलसमापत्तेश्चाकाशगमनम्।", "t": "kāyākāśayoḥ sambandha-saṁyamāl laghu-tūla-samāpatteś cākāśa-gamanam", "m": "By samyama on the relation between the body and space, and by absorption in lightness, movement through space becomes possible."}, {"n": 43, "sk": "बहिरकल्पिता वृत्तिर्महाविदेहा ततः प्रकाशावरणक्षयः।", "t": "bahir akalpitā vṛttir mahā-videhā tataḥ prakāśāvaraṇa-kṣayaḥ", "m": "The great, unimagined outward activity of the mind is called videha; through it, the veil covering inner light is destroyed."}, {"n": 44, "sk": "स्थूलस्वरूपसूक्ष्मान्वयार्थवत्त्वसंयमाद्भूतजयः।", "t": "sthūla-svarūpa-sūkṣmānvayārthavattva-saṁyamād bhūta-jayaḥ", "m": "By samyama on the gross form, essential nature, subtlety, connection, and purpose of the elements, mastery over them is attained."}, {"n": 45, "sk": "ततोऽणिमादिप्रादुर्भावः कायसम्पत्तद्धर्मानभिघातश्च।", "t": "tato 'ṇimādi-prādurbhāvaḥ kāya-sampat tad-dharmānabhighātaś ca", "m": "From this arise the power of becoming minute and the like, along with perfection of the body and freedom from the obstruction of its natural qualities."}, {"n": 46, "sk": "रूपलावण्यबलवज्रसंहननत्वानि कायसम्पत्।", "t": "rūpa-lāvaṇya-bala-vajra-saṁhananatvāni kāya-sampat", "m": "Perfection of the body includes beauty, grace, strength, and the firmness of a diamond."}, {"n": 47, "sk": "ग्रहणस्वरूपास्मितान्वयार्थवत्त्वसंयमादिन्द्रियजयः।", "t": "grahaṇa-svarūpāsmitānvayārthavattva-saṁyamād indriya-jayaḥ", "m": "By samyama on the process, nature, egoism, connection, and purpose of the senses, mastery over the senses is attained."}, {"n": 48, "sk": "ततो मनोजवित्वं विकरणभावः प्रधानजयश्च।", "t": "tato mano-javitvaṁ vikaraṇa-bhāvaḥ pradhāna-jayaś ca", "m": "From this comes speed equal to that of the mind, functioning independent of the body, and mastery over primal nature."}, {"n": 49, "sk": "सत्त्वपुरुषान्यताख्यातिमात्रस्य सर्वभावाधिष्ठातृत्वं सर्वज्ञातृत्वं च।", "t": "sattva-puruṣānyatā-khyāti-mātrasya sarva-bhāvādhiṣṭhātṛtvaṁ sarva-jñātṛtvaṁ ca", "m": "To one who has clear discernment of the difference between the mind and the Self alone comes mastery over all states of being and omniscience."}, {"n": 50, "sk": "तद्वैराग्यादपि दोषबीजक्षये कैवल्यम्।", "t": "tad-vairāgyād api doṣa-bīja-kṣaye kaivalyam", "m": "By dispassion even toward this, when the seeds of imperfection are destroyed, liberation follows."}, {"n": 51, "sk": "स्थान्युपनिमन्त्रणे सङ्गस्मयाकरणं पुनरनिष्टप्रसङ्गात्।", "t": "sthāny-upanimantraṇe saṅga-smayākaraṇaṁ punar aniṣṭa-prasaṅgāt", "m": "Even when invited by celestial beings, one should feel neither attachment nor pride, since undesirable consequences could follow again."}, {"n": 52, "sk": "क्षणतत्क्रमयोः संयमाद्विवेकजं ज्ञानम्।", "t": "kṣaṇa-tat-kramayoḥ saṁyamād vivekajaṁ jñānam", "m": "By samyama on the moment and its sequence, discriminative knowledge is born."}, {"n": 53, "sk": "जातिलक्षणदेशैरन्यतानवच्छेदात्तुल्ययोस्ततः प्रतिपत्तिः।", "t": "jāti-lakṣaṇa-deśair anyatānavacchedāt tulyayos tataḥ pratipattiḥ", "m": "From this arises the ability to distinguish between two things that appear identical in class, character, and position."}, {"n": 54, "sk": "तारकं सर्वविषयं सर्वथाविषयमक्रमं चेति विवेकजं ज्ञानम्।", "t": "tārakaṁ sarva-viṣayaṁ sarvathā-viṣayam akramaṁ ceti vivekajaṁ jñānam", "m": "This discriminative knowledge, born of insight, comprehends all objects, in every state, all at once, beyond sequence, and carries one across."}, {"n": 55, "sk": "सत्त्वपुरुषयोः शुद्धिसाम्ये कैवल्यमिति।", "t": "sattva-puruṣayoḥ śuddhi-sāmye kaivalyam iti", "m": "When the purity of the mind equals the purity of the Self, liberation is attained."}]}, {"key": "kaivalya", "num": "IV", "sanskrit": "कैवल्यपादः", "name": "Kaivalya Pada", "meaning": "On Liberation", "blurb": "Thirty-four threads on the nature of mind, karma, and the final establishment of consciousness in its own true nature.", "verses": [{"n": 1, "sk": "जन्मौषधिमन्त्रतपःसमाधिजाः सिद्धयः।", "t": "janmauṣadhi-mantra-tapaḥ-samādhijāḥ siddhayaḥ", "m": "Extraordinary powers arise from birth, herbs, mantra, discipline, or samadhi."}, {"n": 2, "sk": "जात्यन्तरपरिणामः प्रकृत्यापूरात्।", "t": "jāty-antara-pariṇāmaḥ prakṛtyāpūrāt", "m": "Transformation into another form of life occurs through the abundant flow of nature."}, {"n": 3, "sk": "निमित्तमप्रयोजकं प्रकृतीनां वरणभेदस्तु ततः क्षेत्रिकवत्।", "t": "nimittam aprayojakaṁ prakṛtīnāṁ varaṇa-bhedas tu tataḥ kṣetrika-vat", "m": "Incidental causes do not directly set nature into motion; they merely remove obstacles, as a farmer clears a channel for water."}, {"n": 4, "sk": "निर्माणचित्तान्यस्मितामात्रात्।", "t": "nirmāṇa-cittāny asmitā-mātrāt", "m": "Constructed minds arise from the sense of pure I-am-ness alone."}, {"n": 5, "sk": "प्रवृत्तिभेदे प्रयोजकं चित्तमेकमनेकेषाम्।", "t": "pravṛtti-bhede prayojakaṁ cittam ekam anekeṣām", "m": "Though the activities of these many minds differ, one original mind directs them all."}, {"n": 6, "sk": "तत्र ध्यानजमनाशयम्।", "t": "tatra dhyāna-jam anāśayam", "m": "Among these, only the mind born of meditation is free from latent impressions."}, {"n": 7, "sk": "कर्माशुक्लाकृष्णं योगिनस्त्रिविधमितरेषाम्।", "t": "karmāśukla-akṛṣṇaṁ yoginas tri-vidham itareṣām", "m": "The yogi's action is neither white nor black; the actions of others are of three kinds."}, {"n": 8, "sk": "ततस्तद्विपाकानुगुणानामेवाभिव्यक्तिर्वासनानाम्।", "t": "tatas tad-vipākānuguṇānām evābhivyaktir vāsanānām", "m": "From these actions, only the latent tendencies suited to their ripening manifest."}, {"n": 9, "sk": "जातिदेशकालव्यवहितानामप्यानन्तर्यं स्मृतिसंस्कारयोरेकरूपत्वात्।", "t": "jāti-deśa-kāla-vyavahitānām apy ānantaryaṁ smṛti-saṁskārayor eka-rūpatvāt", "m": "Even when separated by class, place, and time, there is continuity between memory and impression, since they share the same essential nature."}, {"n": 10, "sk": "तासामनादित्वं चाशिषो नित्यत्वात्।", "t": "tāsām anāditvaṁ cāśiṣo nityatvāt", "m": "These tendencies are beginningless, since the will to live is eternal."}, {"n": 11, "sk": "हेतुफलाश्रयालम्बनैः संगृहीतत्वादेषामभावे तदभावः।", "t": "hetu-phalāśrayālambanaiḥ saṅgṛhītatvād eṣām abhāve tad-abhāvaḥ", "m": "Since they are held together by cause, effect, basis, and support, when these are absent, the tendencies too are absent."}, {"n": 12, "sk": "अतीतानागतं स्वरूपतोऽस्त्यध्वभेदाद्धर्माणाम्।", "t": "atītānāgataṁ svarūpato 'sty adhva-bhedād dharmāṇām", "m": "The past and future exist in their own essential reality, differing only in the path their qualities have taken."}, {"n": 13, "sk": "ते व्यक्तसूक्ष्मा गुणात्मानः।", "t": "te vyakta-sūkṣmā guṇātmānaḥ", "m": "Whether manifest or subtle, these qualities are of the nature of the three gunas."}, {"n": 14, "sk": "परिणामैकत्वाद्वस्तुतत्त्वम्।", "t": "pariṇāmaikatvād vastu-tattvam", "m": "The reality of an object lies in the unity underlying its transformations."}, {"n": 15, "sk": "वस्तुसाम्ये चित्तभेदात्तयोर्विभक्तः पन्थाः।", "t": "vastu-sāmye citta-bhedāt tayor vibhaktaḥ panthāḥ", "m": "Though the object remains the same, differing minds perceive it differently, since their paths of knowing diverge."}, {"n": 16, "sk": "न चैकचित्ततन्त्रं वस्तु तदप्रमाणकं तदा किं स्यात्।", "t": "na caika-citta-tantraṁ vastu tad apramāṇakaṁ tadā kiṁ syāt", "m": "An object does not depend on a single mind, for if it did, what would become of it when that mind failed to perceive it?"}, {"n": 17, "sk": "तदुपरागापेक्षित्वाच्चित्तस्य वस्तु ज्ञाताज्ञातम्।", "t": "tad-uparāgāpekṣitvāc cittasya vastu jñātājñātam", "m": "An object is known or unknown to the mind according to whether the mind is colored by it."}, {"n": 18, "sk": "सदा ज्ञाताश्चित्तवृत्तयस्तत्प्रभोः पुरुषस्यापरिणामित्वात्।", "t": "sadā jñātāś citta-vṛttayas tat-prabhoḥ puruṣasyāpariṇāmitvāt", "m": "The fluctuations of the mind are always known to their master, the Self, because the Self itself does not change."}, {"n": 19, "sk": "न तत्स्वाभासं दृश्यत्वात्।", "t": "na tat svābhāsaṁ dṛśyatvāt", "m": "The mind is not self-luminous, since it is itself an object of perception."}, {"n": 20, "sk": "एकसमये चोभयानवधारणम्।", "t": "eka-samaye cobhayānavadhāraṇam", "m": "Nor can the mind know both itself and its object at the very same moment."}, {"n": 21, "sk": "चित्तान्तरदृश्ये बुद्धिबुद्धेरतिप्रसङ्गः स्मृतिसंकरश्च।", "t": "cittāntara-dṛśye buddhi-buddher atiprasaṅgaḥ smṛti-saṅkaraś ca", "m": "If one mind were perceived by another, it would lead to an infinite regress of perceivers and a confusion of memories."}, {"n": 22, "sk": "चितेरप्रतिसंक्रमायास्तदाकारापत्तौ स्वबुद्धिसंवेदनम्।", "t": "citer apratisaṅkramāyās tad-ākārāpattau sva-buddhi-saṁvedanam", "m": "Consciousness, itself unchanging, appears to take the form of the intellect and thereby becomes aware of its own cognition."}, {"n": 23, "sk": "द्रष्टृदृश्योपरक्तं चित्तं सर्वार्थम्।", "t": "draṣṭṛ-dṛśyoparaktaṁ cittaṁ sarvārtham", "m": "The mind, colored by both the seer and the seen, can comprehend everything."}, {"n": 24, "sk": "तदसंख्येयवासनाभिश्चित्रमपि परार्थं संहत्यकारित्वात्।", "t": "tad asaṅkhyeya-vāsanābhiś citram api parārthaṁ saṁhatya-kāritvāt", "m": "Though colored by countless latent tendencies, the mind exists for another's sake, since it works only in combination with the Self."}, {"n": 25, "sk": "विशेषदर्शिन आत्मभावभावनाविनिवृत्तिः।", "t": "viśeṣa-darśina ātma-bhāva-bhāvana-vinivṛttiḥ", "m": "For one who sees this distinction clearly, all speculation about the nature of the Self comes to an end."}, {"n": 26, "sk": "तदा विवेकनिम्नं कैवल्यप्राग्भारं चित्तम्।", "t": "tadā viveka-nimnaṁ kaivalya-prāgbhāraṁ cittam", "m": "Then the mind inclines toward discrimination and gravitates naturally toward liberation."}, {"n": 27, "sk": "तच्छिद्रेषु प्रत्ययान्तराणि संस्कारेभ्यः।", "t": "tac-chidreṣu pratyayāntarāṇi saṁskārebhyaḥ", "m": "In the gaps of this discrimination, other thoughts may still arise from old impressions."}, {"n": 28, "sk": "हानमेषां क्लेशवदुक्तम्।", "t": "hānam eṣāṁ kleśavad uktam", "m": "Their removal is taught in the same way as the removal of the causes of suffering."}, {"n": 29, "sk": "प्रसंख्यानेऽप्यकुसीदस्य सर्वथाविवेकख्यातेर्धर्ममेघः समाधिः।", "t": "prasaṅkhyāne 'py akusīdasya sarvathā viveka-khyāter dharma-meghaḥ samādhiḥ", "m": "For one who remains without desire even toward the highest attainments, and who possesses unbroken discrimination, comes the samadhi called dharma-megha, the cloud of virtue."}, {"n": 30, "sk": "ततः क्लेशकर्मनिवृत्तिः।", "t": "tataḥ kleśa-karma-nivṛttiḥ", "m": "From this, the causes of suffering and the accumulation of karma come to an end."}, {"n": 31, "sk": "तदा सर्वावरणमलापेतस्य ज्ञानस्यानन्त्याज्ज्ञेयमल्पम्।", "t": "tadā sarvāvaraṇa-malāpetasya jñānasyānantyāj jñeyam alpam", "m": "Then, freed from every veil and impurity, knowledge becomes infinite, and what remains to be known becomes very little."}, {"n": 32, "sk": "ततः कृतार्थानां परिणामक्रमसमाप्तिर्गुणानाम्।", "t": "tataḥ kṛtārthānāṁ pariṇāma-krama-samāptir guṇānām", "m": "From this, the sequence of change in the qualities of nature comes to an end, their purpose fulfilled."}, {"n": 33, "sk": "क्षणप्रतियोगी परिणामापरान्तनिर्ग्राह्यः क्रमः।", "t": "kṣaṇa-pratiyogī pariṇāmāparānta-nirgrāhyaḥ kramaḥ", "m": "Sequence is the succession of moments, recognizable only at the very end of a transformation."}, {"n": 34, "sk": "पुरुषार्थशून्यानां गुणानां प्रतिप्रसवः कैवल्यं स्वरूपप्रतिष्ठा वा चितिशक्तिरिति।", "t": "puruṣārtha-śūnyānāṁ guṇānāṁ prati-prasavaḥ kaivalyaṁ svarūpa-pratiṣṭhā vā citi-śaktir iti", "m": "Liberation is the return of the qualities of nature to their source, now devoid of purpose for the Self — or, in other words, the establishment of the power of consciousness in its own true nature."}]}];</script>
+  <script>
+    // ---- Yoga Sutra reader: render, tabs, search, "today's thread" ----
+    (function () {
+      var PADAS = window.__YS_DATA__ || [];
+      var panelsWrap = document.getElementById('padaPanels');
+      var tabsWrap = document.getElementById('padaTabs');
+      var searchInput = document.getElementById('sutraSearch');
+      var searchResults = document.getElementById('searchResults');
+      var heroToday = document.getElementById('todayThreadBtn');
+
+      function svgChevron() {
+        return '<svg viewBox="0 0 10 6" fill="none"><path d="M1 1l4 4 4-4" stroke="currentColor" stroke-width="1.3"/></svg>';
+      }
+
+      // Build tabs
+      PADAS.forEach(function (pada, idx) {
+        var btn = document.createElement('button');
+        btn.className = 'pada-tab' + (idx === 0 ? ' is-active' : '');
+        btn.type = 'button';
+        btn.dataset.key = pada.key;
+        btn.innerHTML = pada.num + '. ' + pada.name + '<span class="tab-count">' + pada.verses.length + '</span>';
+        btn.addEventListener('click', function () { showPada(pada.key, true); });
+        tabsWrap.appendChild(btn);
+      });
+
+      // Build panels
+      PADAS.forEach(function (pada, idx) {
+        var panel = document.createElement('section');
+        panel.className = 'pada-panel' + (idx === 0 ? ' is-active' : '');
+        panel.id = 'panel-' + pada.key;
+
+        var intro = document.createElement('div');
+        intro.className = 'pada-intro';
+        intro.innerHTML =
+          '<div class="pada-eyebrow">Pada ' + pada.num + ' &middot; ' + pada.verses.length + ' s\u016btras</div>' +
+          '<div class="pada-sanskrit-title">' + pada.sanskrit + '</div>' +
+          '<h2>' + pada.name + ' &mdash; ' + pada.meaning + '</h2>' +
+          '<p>' + pada.blurb + '</p>';
+        panel.appendChild(intro);
+
+        var list = document.createElement('div');
+        list.className = 'thread-list';
+        pada.verses.forEach(function (v) {
+          list.appendChild(buildCard(pada, v));
+        });
+        panel.appendChild(list);
+
+        var foot = document.createElement('div');
+        foot.className = 'pada-nav-foot';
+        var prev = PADAS[idx - 1], next = PADAS[idx + 1];
+        foot.innerHTML =
+          (prev ? '<a href="#" data-goto="' + prev.key + '" style="transform:scaleX(-1)">' + svgChevron() + '</a><a href="#" data-goto="' + prev.key + '">Previous: ' + prev.name + '</a>' : '<span></span>') +
+          (next ? '<a href="#" data-goto="' + next.key + '" style="margin-left:auto">Next: ' + next.name + svgChevron() + '</a>' : '<span></span>');
+        panel.appendChild(foot);
+
+        panelsWrap.appendChild(panel);
+      });
+
+      panelsWrap.querySelectorAll('[data-goto]').forEach(function (a) {
+        a.addEventListener('click', function (e) {
+          e.preventDefault();
+          showPada(a.dataset.goto, true);
+          window.scrollTo({ top: document.getElementById('toolbarAnchor').offsetTop - 4, behavior: 'smooth' });
+        });
+      });
+
+      function buildCard(pada, v) {
+        var card = document.createElement('article');
+        card.className = 'sutra-card';
+        card.id = 'sutra-' + pada.key + '-' + v.n;
+        card.innerHTML =
+          '<div class="sutra-num">' + pada.num + '.' + v.n + '</div>' +
+          '<div class="sutra-sk">' + v.sk + '</div>' +
+          '<div class="sutra-iast">' + v.t + '</div>' +
+          '<div class="sutra-meaning">' + v.m + '</div>';
+        return card;
+      }
+
+      function showPada(key, updateHash) {
+        panelsWrap.querySelectorAll('.pada-panel').forEach(function (p) {
+          p.classList.toggle('is-active', p.id === 'panel-' + key);
+        });
+        tabsWrap.querySelectorAll('.pada-tab').forEach(function (t) {
+          t.classList.toggle('is-active', t.dataset.key === key);
+        });
+        searchResults.classList.remove('is-active');
+        searchInput.value = '';
+        if (updateHash) history.replaceState(null, '', '#' + key);
+        observeVisible();
+      }
+
+      // Reveal-on-scroll for cards currently in the DOM's active panel
+      var io = ('IntersectionObserver' in window) ? new IntersectionObserver(function (entries) {
+        entries.forEach(function (e) {
+          if (e.isIntersecting) { e.target.classList.add('in-view'); io.unobserve(e.target); }
+        });
+      }, { rootMargin: '0px 0px -8% 0px', threshold: 0.05 }) : null;
+
+      function observeVisible() {
+        if (!io) {
+          panelsWrap.querySelectorAll('.sutra-card').forEach(function (c) { c.classList.add('in-view'); });
+          return;
+        }
+        var active = panelsWrap.querySelector('.pada-panel.is-active');
+        if (!active) return;
+        active.querySelectorAll('.sutra-card:not(.in-view)').forEach(function (c) { io.observe(c); });
+      }
+      observeVisible();
+
+      // ---- search across all padas ----
+      var allFlat = [];
+      PADAS.forEach(function (pada) {
+        pada.verses.forEach(function (v) {
+          allFlat.push({ pada: pada, v: v });
+        });
+      });
+
+      function runSearch(qRaw) {
+        var q = qRaw.trim().toLowerCase();
+        if (!q) {
+          searchResults.classList.remove('is-active');
+          panelsWrap.style.display = '';
+          return;
+        }
+        panelsWrap.style.display = 'none';
+        searchResults.classList.add('is-active');
+
+        var numMatch = q.match(/^(\d)?\.?\s*(\d{1,2})$/); // "1.12" or "12" or "I.3"
+        var hits = allFlat.filter(function (item) {
+          var hay = (item.v.t + ' ' + item.v.m + ' ' + item.pada.name).toLowerCase();
+          if (hay.indexOf(q) !== -1) return true;
+          if (numMatch && numMatch[2]) {
+            var n = parseInt(numMatch[2], 10);
+            if (item.v.n === n) {
+              if (!numMatch[1]) return true;
+              var padaOrdinal = { samadhi: '1', sadhana: '2', vibhuti: '3', kaivalya: '4' }[item.pada.key];
+              if (padaOrdinal === numMatch[1]) return true;
+            }
+          }
+          return false;
+        }).slice(0, 60);
+
+        searchResults.innerHTML = '<div class="search-meta">' +
+          (hits.length ? hits.length + ' thread' + (hits.length === 1 ? '' : 's') + ' match \u201c' + qRaw.trim() + '\u201d' : 'No threads match \u201c' + qRaw.trim() + '\u201d') +
+          '</div>';
+
+        if (!hits.length) {
+          var empty = document.createElement('div');
+          empty.className = 'search-empty';
+          empty.textContent = 'Try a keyword like \u201cbreath\u201d, \u201cdispassion\u201d, or a reference like \u201c2.46\u201d.';
+          searchResults.appendChild(empty);
+          return;
+        }
+
+        hits.forEach(function (item) {
+          var hit = document.createElement('article');
+          hit.className = 'search-hit';
+          hit.innerHTML =
+            '<div class="sutra-num"><span class="pada-pill">' + item.pada.name + '</span> ' + item.pada.num + '.' + item.v.n + '</div>' +
+            '<div class="sutra-sk">' + item.v.sk + '</div>' +
+            '<div class="sutra-iast">' + item.v.t + '</div>' +
+            '<div class="sutra-meaning">' + item.v.m + '</div>';
+          hit.addEventListener('click', function () {
+            searchInput.value = '';
+            showPada(item.pada.key, true);
+            requestAnimationFrame(function () {
+              var el = document.getElementById('sutra-' + item.pada.key + '-' + item.v.n);
+              if (el) {
+                el.classList.add('is-highlight');
+                el.scrollIntoView({ behavior: 'smooth', block: 'center' });
+                setTimeout(function () { el.classList.remove('is-highlight'); }, 2600);
+              }
+            });
+          });
+          searchResults.appendChild(hit);
+        });
+      }
+
+      searchInput.addEventListener('input', function () { runSearch(this.value); });
+
+      // ---- today's thread ----
+      if (heroToday) {
+        heroToday.addEventListener('click', function () {
+          var dayOfYear = Math.floor((Date.now() - new Date(new Date().getFullYear(), 0, 0)) / 86400000);
+          var idx = dayOfYear % allFlat.length;
+          var item = allFlat[idx];
+          showPada(item.pada.key, true);
+          window.scrollTo({ top: document.getElementById('toolbarAnchor').offsetTop - 4, behavior: 'smooth' });
+          requestAnimationFrame(function () {
+            setTimeout(function () {
+              var el = document.getElementById('sutra-' + item.pada.key + '-' + item.v.n);
+              if (el) {
+                el.classList.add('in-view', 'is-highlight');
+                el.scrollIntoView({ behavior: 'smooth', block: 'center' });
+                setTimeout(function () { el.classList.remove('is-highlight'); }, 2600);
+              }
+            }, 350);
+          });
+        });
+      }
+
+      // Deep link on load, e.g. patanjali yog sutra.html#vibhuti
+      var startKey = (location.hash || '').replace('#', '');
+      if (PADAS.some(function (p) { return p.key === startKey; })) {
+        showPada(startKey, false);
+      }
+    })();
+  </script>
+
+</body>
+
+</html>

@@ -27,6 +27,8 @@
       --ivory-text: #F6EEE2;
       --muted-text: #8A6F63;
       --muted-text-light: #C9A99B;
+      --quote-navy: #263A66;
+      /* quote-card title accent, echoing isha.sadhguru.org's quote typography */
 
       /* swoosh geometry — change these two and everything follows */
       --nav-h: 58px;
@@ -778,6 +780,669 @@
         opacity: .05;
       }
     }
+    /* ============ WISDOM SECTION: SWAMI RAMDEV'S TEACHING ============
+       Layout, spacing and colours follow the isha.sadhguru.org wisdom
+       listings (/wisdom/type/quotes and /wisdom/type/video): a full-width
+       banner, a white filter strip directly beneath it, then a narrower
+       three-column grid of cards on a plain white page. */
+    :root {
+      --band: #8B3420;
+      /* banner red-brown */
+      --band-dark: #6E2716;
+      --accent: #CF4523;
+      /* filter underlines, play icon, Clear All */
+      --quote-card: #FAF7F2;
+      --quote-text: #000054;
+      --mark-tan: #DFD6C4;
+      --meta: #8A8173;
+      --hairline: #E0D7C5;
+      --title-ink: #28231E;
+      --desc-ink: #675F55;
+      --card-shadow: 0 1px 6px rgba(43, 17, 20, .15);
+      --card-shadow-hover: 0 4px 16px rgba(43, 17, 20, .2);
+      --video-shadow: 0 2px 10px rgba(43, 17, 20, .18), 0 8px 24px rgba(43, 17, 20, .10);
+      --video-shadow-hover: 0 4px 14px rgba(43, 17, 20, .22), 0 14px 34px rgba(43, 17, 20, .16);
+      --gutter: 18px;
+      --grid-max: 1140px;
+    }
+
+    /* ---------- banner ---------- */
+    .wisdom-hero {
+      position: relative;
+      overflow: hidden;
+      margin: 0;
+      /* white page gutters around the banner, as on the reference pages */
+      border: 0 solid #fff;
+      border-width: 8px var(--gutter) 0;
+      padding: 46px 32px;
+      text-align: center;
+      background: linear-gradient(120deg, var(--band) 0%, var(--band-dark) 100%);
+    }
+
+    .wisdom-hero::before {
+      content: "";
+      position: absolute;
+      inset: 0;
+      background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='150' height='150'%3E%3Cpolygon points='75,10 140,130 10,130' fill='none' stroke='%23ffffff' stroke-opacity='0.16' stroke-width='2'/%3E%3C/svg%3E");
+      background-size: 150px 150px;
+      opacity: .5;
+      pointer-events: none;
+    }
+
+    .wisdom-hero h2 {
+      position: relative;
+      font-family: 'Merriweather', Georgia, serif;
+      font-weight: 400;
+      font-size: clamp(30px, 4.6vw, 58px);
+      line-height: 1.18;
+      color: var(--ivory-text);
+      margin: 0;
+    }
+
+    .wisdom-hero h2 a {
+      color: inherit;
+    }
+
+    /* ---------- section shell ----------
+       The filter strip runs the full banner width; the card grid is
+       narrower and centred, as on the reference pages. */
+    .ramdev-section {
+      max-width: none;
+      margin: 0;
+      padding: 0 0 80px;
+      background: #fff;
+    }
+
+    /* ---------- filter strip ---------- */
+    .ramdev-filterbar {
+      background: #fff;
+      border: none;
+      border-radius: 0;
+      box-shadow: 0 4px 10px rgba(43, 17, 20, .07);
+      margin: 0 var(--gutter) 72px;
+      padding: 22px 46px 26px;
+      font-family: 'Merriweather Sans', sans-serif;
+    }
+
+    .fb-row {
+      display: flex;
+      flex-wrap: wrap;
+      align-items: center;
+      gap: 14px 26px;
+    }
+
+    .fb-group-label {
+      font-size: 11px;
+      font-weight: 500;
+      letter-spacing: .08em;
+      text-transform: uppercase;
+      color: var(--meta);
+    }
+
+    .fb-select-wrap {
+      position: relative;
+      padding: 0 20px 7px 0;
+      border-bottom: 2px solid var(--accent);
+    }
+
+    .fb-select-wrap::after {
+      content: "";
+      position: absolute;
+      right: 2px;
+      top: 4px;
+      width: 7px;
+      height: 7px;
+      border-right: 1.7px solid #3A2E28;
+      border-bottom: 1.7px solid #3A2E28;
+      transform: rotate(45deg);
+      pointer-events: none;
+    }
+
+    .fb-select {
+      appearance: none;
+      -webkit-appearance: none;
+      -moz-appearance: none;
+      background: transparent;
+      border: none;
+      outline: none;
+      cursor: pointer;
+      font-family: inherit;
+      font-size: 15px;
+      color: #2E2620;
+      max-width: 150px;
+    }
+
+    .fb-spacer {
+      flex: 1;
+      min-width: 8px;
+    }
+
+    .fb-search-wrap {
+      position: relative;
+      display: flex;
+      align-items: center;
+      min-width: 230px;
+      padding: 0 24px 7px 0;
+      border-bottom: 2px solid var(--accent);
+      background: transparent;
+      border-radius: 0;
+    }
+
+    .fb-search {
+      flex: 1;
+      min-width: 0;
+      border: none;
+      background: transparent;
+      outline: none;
+      font-family: inherit;
+      font-size: 15px;
+      color: #2E2620;
+    }
+
+    .fb-search::placeholder {
+      color: #8A8173;
+    }
+
+    .fb-search-icon {
+      position: absolute;
+      right: 0;
+      bottom: 8px;
+      width: 16px;
+      height: 16px;
+      stroke: #3A2E28;
+      fill: none;
+      stroke-width: 2;
+      pointer-events: none;
+    }
+
+    .fb-tags-row {
+      display: flex;
+      flex-wrap: wrap;
+      align-items: center;
+      gap: 18px;
+      margin-top: 26px;
+      padding: 0;
+      border: 0;
+      font-size: 12px;
+    }
+
+    .fb-tags-row[hidden] {
+      display: none;
+    }
+
+    .fb-tag {
+      display: inline-flex;
+      align-items: center;
+      gap: 8px;
+      padding: 7px 12px 7px 16px;
+      border: 1px solid var(--hairline);
+      border-radius: 999px;
+      background: #fff;
+      color: var(--meta);
+    }
+
+    .fb-tag-x {
+      border: none;
+      background: none;
+      cursor: pointer;
+      color: var(--meta);
+      font-family: inherit;
+      font-size: 13px;
+      line-height: 1;
+      padding: 0 2px;
+      transition: color var(--dur-fast) var(--ease);
+    }
+
+    .fb-tag-x:hover {
+      color: var(--accent);
+    }
+
+    .fb-clear-all {
+      border: none;
+      background: none;
+      cursor: pointer;
+      color: var(--accent);
+      font-family: inherit;
+      font-size: 12px;
+      font-weight: 500;
+      padding: 0;
+    }
+
+    .fb-clear-all:hover {
+      text-decoration: underline;
+    }
+
+    /* ---------- grids, centred and narrower than the strip ---------- */
+    .group-label,
+    .card-grid,
+    .ramdev-loadmore {
+      max-width: var(--grid-max);
+      margin-left: auto;
+      margin-right: auto;
+    }
+
+    .group-label {
+      position: relative;
+      font-family: 'Merriweather', Georgia, serif;
+      font-size: 22px;
+      font-weight: 400;
+      letter-spacing: 0;
+      color: var(--band);
+      border: 0;
+      border-bottom: 1px solid var(--hairline);
+      padding: 0 20px 12px;
+      margin-bottom: 30px;
+    }
+
+    /* short accent under the word itself, so each group reads as the start
+       of a new section rather than a caption above the cards */
+    .group-label::after {
+      content: "";
+      position: absolute;
+      left: 20px;
+      bottom: -2px;
+      width: 54px;
+      height: 3px;
+      background: var(--accent);
+    }
+
+    .card-grid {
+      padding: 0 20px;
+    }
+
+    .card-grid + .group-label {
+      margin-top: 78px;
+    }
+
+    /* ---------- quote cards ---------- */
+    .articles-grid {
+      display: block;
+      column-count: 3;
+      column-gap: 20px;
+    }
+
+    .article-card {
+      position: relative;
+      break-inside: avoid;
+      margin: 0 0 20px;
+      background: var(--quote-card);
+      border: none;
+      border-radius: 0;
+      padding: 46px 26px 22px;
+      box-shadow: var(--card-shadow);
+      overflow: hidden;
+      transition: box-shadow var(--dur-base) var(--ease);
+    }
+
+    .article-card:hover {
+      box-shadow: var(--card-shadow-hover);
+    }
+
+    /* faint watermark, as on the reference cards */
+    .article-card::before {
+      content: "\201D";
+      position: absolute;
+      top: -26px;
+      right: 10px;
+      font: 400 130px/1 Georgia, 'Merriweather', serif;
+      color: rgba(43, 17, 20, .022);
+      pointer-events: none;
+    }
+
+    .article-mark {
+      position: relative;
+      display: block;
+      text-align: center;
+      font-family: Georgia, 'Merriweather', serif;
+      font-size: 30px;
+      line-height: 1;
+      color: var(--mark-tan);
+      margin-bottom: 22px;
+    }
+
+    /* visually hidden — kept for screen readers, in-page search and SEO;
+       the visible headline of the card is the quote itself */
+    .article-title {
+      position: absolute;
+      width: 1px;
+      height: 1px;
+      padding: 0;
+      margin: -1px;
+      overflow: hidden;
+      clip: rect(0, 0, 0, 0);
+      white-space: nowrap;
+      border: 0;
+    }
+
+    .article-body {
+      position: relative;
+      font-family: 'Merriweather', Georgia, serif;
+      font-weight: 300;
+      font-size: 17px;
+      line-height: 1.6;
+      color: var(--quote-text);
+      text-align: center;
+      margin: 0 0 34px;
+    }
+
+    /* a quote written in Devanagari switches font and weight, same as a
+       Devanagari video title — Noto Serif Devanagari has no true light cut */
+    .article-body.devanagari {
+      font-weight: 400;
+      line-height: 1.75;
+    }
+
+    .article-foot {
+      position: relative;
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      padding: 0;
+      border: 0;
+      font-family: 'Merriweather Sans', sans-serif;
+      font-size: 12.5px;
+      color: var(--meta);
+    }
+
+    .article-share,
+    .video-share {
+      display: inline-flex;
+      align-items: center;
+      justify-content: center;
+      width: 16px;
+      height: 16px;
+      color: var(--meta);
+      transition: color var(--dur-fast) var(--ease);
+    }
+
+    .article-share svg,
+    .video-share svg {
+      width: 100%;
+      height: 100%;
+      stroke: currentColor;
+      fill: none;
+      stroke-width: 1.6;
+    }
+
+    .article-card:hover .article-share,
+    .video-card:hover .video-share {
+      color: var(--accent);
+    }
+
+    /* ---------- video cards ---------- */
+    .videos-grid {
+      display: grid;
+      grid-template-columns: repeat(3, 1fr);
+      gap: 24px 20px;
+    }
+
+    .video-card {
+      display: flex;
+      flex-direction: column;
+      background: #fff;
+      box-shadow: var(--video-shadow);
+      transition: box-shadow var(--dur-base) var(--ease), transform var(--dur-base) var(--ease);
+    }
+
+    .video-card:hover {
+      box-shadow: var(--video-shadow-hover);
+      transform: translateY(-2px);
+    }
+
+    .video-thumb {
+      position: relative;
+      aspect-ratio: 16 / 9;
+      overflow: hidden;
+      background: var(--ink);
+      clip-path: polygon(0 0, 100% 0, 100% 100%, 0 92%);
+    }
+
+    .video-thumb img {
+      width: 100%;
+      height: 100%;
+      object-fit: cover;
+      display: block;
+      transition: transform var(--dur-slow) var(--ease);
+    }
+
+    .video-card:hover .video-thumb img {
+      transform: scale(1.03);
+    }
+
+    /* "Video" with the play glyph beneath it, right-aligned under the
+       thumbnail — the reference listing's content-type marker */
+    .video-label {
+      display: flex;
+      flex-direction: column;
+      align-items: flex-end;
+      gap: 6px;
+      margin: 0;
+      padding: 10px 22px 0;
+      font-family: 'Merriweather Sans', sans-serif;
+      font-size: 12.5px;
+      color: #6E665C;
+    }
+
+    .video-play {
+      display: inline-flex;
+      align-items: center;
+      justify-content: center;
+      width: 18px;
+      height: 18px;
+      border-radius: 50%;
+      border: 1.4px solid var(--accent);
+      background: transparent;
+      flex-shrink: 0;
+    }
+
+    .video-play svg {
+      width: 7px;
+      fill: var(--accent);
+      margin-left: 1px;
+    }
+
+    .video-media {
+      display: block;
+    }
+
+    .video-title {
+      font-family: 'Merriweather', Georgia, serif;
+      font-weight: 300;
+      font-size: 18px;
+      line-height: 1.4;
+      color: var(--title-ink);
+      margin: 0;
+      padding: 10px 22px 0;
+      display: -webkit-box;
+      -webkit-line-clamp: 2;
+      -webkit-box-orient: vertical;
+      overflow: hidden;
+    }
+
+    .video-title a {
+      color: inherit;
+      transition: color var(--dur-fast) var(--ease);
+    }
+
+    .video-title.devanagari {
+      font-weight: 400;
+      line-height: 1.55;
+    }
+
+    .video-card:hover .video-title a,
+    .video-title a:hover {
+      color: var(--accent);
+    }
+
+    .video-desc {
+      font-family: 'Merriweather', Georgia, serif;
+      font-weight: 300;
+      font-size: 13.5px;
+      line-height: 1.6;
+      color: var(--desc-ink);
+      margin: 0;
+      padding: 12px 22px 20px;
+      display: -webkit-box;
+      -webkit-line-clamp: 3;
+      -webkit-box-orient: vertical;
+      overflow: hidden;
+    }
+
+    /* a description written in Devanagari switches font and weight, same
+       as a Devanagari video title or quote — Noto Serif Devanagari has no
+       true light cut */
+    .video-desc.devanagari {
+      font-weight: 400;
+      line-height: 1.7;
+    }
+
+    .video-foot {
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      margin-top: auto;
+      padding: 0 22px 20px;
+      border: 0;
+      font-family: 'Merriweather Sans', sans-serif;
+      font-size: 12.5px;
+      color: var(--meta);
+    }
+
+    /* like / bookmark / share, as on the reference video cards */
+    .video-actions {
+      display: flex;
+      align-items: center;
+      gap: 14px;
+    }
+
+    .video-act {
+      display: inline-flex;
+      align-items: center;
+      justify-content: center;
+      width: 16px;
+      height: 16px;
+      padding: 0;
+      border: 0;
+      background: none;
+      cursor: pointer;
+      color: #A79C8D;
+      transition: color var(--dur-fast) var(--ease);
+    }
+
+    .video-act svg {
+      width: 100%;
+      height: 100%;
+      fill: none;
+      stroke: currentColor;
+      stroke-width: 1.6;
+      stroke-linejoin: round;
+    }
+
+    .video-card:hover .video-act {
+      color: var(--meta);
+    }
+
+    .video-act:hover {
+      color: var(--accent);
+    }
+
+    /* ---------- load more ---------- */
+    .ramdev-loadmore {
+      display: block;
+      margin-top: 52px;
+      padding: 12px 38px;
+      width: auto;
+      border: 1px solid var(--accent);
+      border-radius: 2px;
+      background: transparent;
+      color: var(--accent);
+      font-family: 'Merriweather Sans', sans-serif;
+      font-size: 13px;
+      letter-spacing: .02em;
+      cursor: pointer;
+      transition: background var(--dur-fast) var(--ease), color var(--dur-fast) var(--ease);
+    }
+
+    .ramdev-loadmore:hover {
+      background: var(--accent);
+      color: #fff;
+    }
+
+    .ramdev-section :is(a, button, select, input):focus-visible,
+    .wisdom-hero a:focus-visible {
+      outline: 2px solid var(--accent);
+      outline-offset: 3px;
+    }
+
+    @media (max-width: 1080px) {
+      .ramdev-filterbar {
+        padding: 20px 26px 22px;
+        margin-bottom: 56px;
+      }
+
+      .videos-grid {
+        grid-template-columns: repeat(2, 1fr);
+      }
+
+      .articles-grid {
+        column-count: 2;
+      }
+    }
+
+    @media (max-width: 680px) {
+      :root {
+        --gutter: 10px;
+      }
+
+      .wisdom-hero {
+        padding: 34px 18px;
+      }
+
+      .ramdev-filterbar {
+        padding: 18px 18px 20px;
+        margin-bottom: 40px;
+      }
+
+      .fb-row {
+        gap: 14px 18px;
+      }
+
+      /* the spacer would orphan "Sort by:" at the far right once the row wraps */
+      .fb-spacer {
+        display: none;
+      }
+
+      .fb-search-wrap {
+        flex: 1 1 100%;
+        min-width: 0;
+      }
+
+      .card-grid,
+      .group-label {
+        padding-left: 12px;
+        padding-right: 12px;
+      }
+
+      .group-label {
+        font-size: 19px;
+      }
+
+      .group-label::after {
+        left: 12px;
+      }
+
+      .videos-grid {
+        grid-template-columns: 1fr;
+      }
+
+      .articles-grid {
+        column-count: 1;
+      }
+
+      .card-grid + .group-label {
+        margin-top: 54px;
+      }
+    }
   </style>
 </head>
 
@@ -987,6 +1652,269 @@
     </nav>
 
   </header>
+
+  <div class="wisdom-hero">
+    <h2 id="ramdev-heading"><a href="#">Swami Ramdev's Teaching</a></h2>
+  </div>
+
+
+
+  <section class="ramdev-section" aria-labelledby="ramdev-heading">
+    <div class="ramdev-filterbar">
+      <div class="fb-row">
+        <span class="fb-group-label">Filters:</span>
+
+        <div class="fb-select-wrap">
+          <select class="fb-select" id="fbLanguage" aria-label="Language">
+            <option>English</option>
+            <option>Hindi</option>
+          </select>
+        </div>
+
+        <div class="fb-select-wrap">
+          <select class="fb-select" id="fbTopics" aria-label="Topics">
+            <option value="">Topics</option>
+            <option value="yoga">Yoga</option>
+            <option value="ayurveda">Ayurveda</option>
+            <option value="pranayama">Pranayama</option>
+            <option value="discipline">Discipline</option>
+          </select>
+        </div>
+
+        <div class="fb-select-wrap">
+          <select class="fb-select" id="fbContentType" aria-label="Content type">
+            <option value="all">Content Type</option>
+            <option value="articles">Articles</option>
+            <option value="videos">Videos</option>
+          </select>
+        </div>
+
+        <span class="fb-spacer"></span>
+
+        <span class="fb-group-label">Sort by:</span>
+        <div class="fb-select-wrap">
+          <select class="fb-select" id="fbSort" aria-label="Sort by">
+            <option>Newest</option>
+            <option>Oldest</option>
+            <option>Most Popular</option>
+          </select>
+        </div>
+
+        <div class="fb-search-wrap">
+          <input type="text" class="fb-search" id="fbSearch" placeholder="Search" aria-label="Search">
+          <svg class="fb-search-icon" viewBox="0 0 24 24">
+            <circle cx="11" cy="11" r="7" />
+            <path d="M21 21l-4.3-4.3" />
+          </svg>
+        </div>
+      </div>
+
+      <div class="fb-tags-row" id="fbTagsRow" hidden>
+        <span class="fb-tag" id="fbActiveTag"><span id="fbActiveTagLabel"></span><button class="fb-tag-x"
+            id="fbTagClose" aria-label="Remove filter">&times;</button></span>
+        <button class="fb-clear-all" id="fbClearAll">Clear All</button>
+      </div>
+    </div>
+
+    <h3 class="group-label">Articles</h3>
+    <div class="card-grid articles-grid">
+
+      <article class="article-card">
+        <span class="article-mark" aria-hidden="true">&#8221;</span>
+        <h4 class="article-title">Breath Is the First Medicine</h4>
+        <div class="article-body">
+          <p>Long before a single herb is measured or a single posture is held, the breath is already teaching the
+            body how to heal. Pranayama practised at sunrise settles the nervous system, steadies the mind, and
+            prepares the lungs to carry oxygen more efficiently through the rest of the day. A slow, deliberate
+            breath, held with attention rather than effort, is often the simplest correction a person can make to a
+            life crowded with stress.</p>
+        </div>
+        <div class="article-foot">
+          <span>Aug 30, 2026</span>
+          <span class="article-share" aria-hidden="true"><svg viewBox="0 0 24 24"><circle cx="18" cy="5" r="2.5"/><circle cx="6" cy="12" r="2.5"/><circle cx="18" cy="19" r="2.5"/><path d="M8.2 10.7l7.6-4.4M8.2 13.3l7.6 4.4"/></svg></span>
+        </div>
+      </article>
+
+      <article class="article-card">
+        <span class="article-mark" aria-hidden="true">&#8221;</span>
+        <h4 class="article-title">Ayurveda Treats the Person, Not the Disease</h4>
+        <div class="article-body">
+          <p>Two people with the same complaint rarely need the same remedy, because Ayurveda begins with
+            constitution, not symptom. Diet, sleep, season and temperament are read together before any treatment is
+            suggested. This is why a teaching repeated so often bears repeating again: the goal is not to silence a
+            symptom but to restore the balance whose absence produced it in the first place.</p>
+        </div>
+        <div class="article-foot">
+          <span>Aug 28, 2026</span>
+          <span class="article-share" aria-hidden="true"><svg viewBox="0 0 24 24"><circle cx="18" cy="5" r="2.5"/><circle cx="6" cy="12" r="2.5"/><circle cx="18" cy="19" r="2.5"/><path d="M8.2 10.7l7.6-4.4M8.2 13.3l7.6 4.4"/></svg></span>
+        </div>
+      </article>
+
+      <article class="article-card">
+        <span class="article-mark" aria-hidden="true">&#8221;</span>
+        <h4 class="article-title">Discipline Is a Quiet Form of Freedom</h4>
+        <div class="article-body">
+          <p>Waking early, eating at fixed hours, and closing the day with stillness are not restrictions on
+            freedom but the conditions that make it possible. A mind pulled in every direction by irregular habits
+            has little energy left to choose anything deliberately. Structure, kept gently and consistently, is
+            what eventually gives a person room to think, rest and act with clarity.</p>
+        </div>
+        <div class="article-foot">
+          <span>Aug 25, 2026</span>
+          <span class="article-share" aria-hidden="true"><svg viewBox="0 0 24 24"><circle cx="18" cy="5" r="2.5"/><circle cx="6" cy="12" r="2.5"/><circle cx="18" cy="19" r="2.5"/><path d="M8.2 10.7l7.6-4.4M8.2 13.3l7.6 4.4"/></svg></span>
+        </div>
+      </article>
+
+      <article class="article-card">
+        <span class="article-mark" aria-hidden="true">&#8221;</span>
+        <h4 class="article-title">Guru Purnima</h4>
+        <div class="article-body">
+          <p>A day set aside to turn attention toward the teacher within — the part of every person capable of
+            outgrowing its own limitations.</p>
+        </div>
+        <div class="article-foot">
+          <span>Aug 22, 2026</span>
+          <span class="article-share" aria-hidden="true"><svg viewBox="0 0 24 24"><circle cx="18" cy="5" r="2.5"/><circle cx="6" cy="12" r="2.5"/><circle cx="18" cy="19" r="2.5"/><path d="M8.2 10.7l7.6-4.4M8.2 13.3l7.6 4.4"/></svg></span>
+        </div>
+      </article>
+
+      <article class="article-card">
+        <span class="article-mark" aria-hidden="true">&#8221;</span>
+        <h4 class="article-title">Health Is Not the Absence of Illness</h4>
+        <div class="article-body">
+          <p>It is the presence of enough vitality that the body rarely needs to announce itself. Ayurveda measures
+            wellbeing by how little you notice your own digestion, breath and sleep — not by how quickly a symptom
+            was suppressed once it appeared.</p>
+        </div>
+        <div class="article-foot">
+          <span>Aug 20, 2026</span>
+          <span class="article-share" aria-hidden="true"><svg viewBox="0 0 24 24"><circle cx="18" cy="5" r="2.5"/><circle cx="6" cy="12" r="2.5"/><circle cx="18" cy="19" r="2.5"/><path d="M8.2 10.7l7.6-4.4M8.2 13.3l7.6 4.4"/></svg></span>
+        </div>
+      </article>
+
+    </div>
+
+    <h3 class="group-label">Videos</h3>
+    <div class="card-grid videos-grid">
+
+      <article class="video-card">
+        <a class="video-media" href="https://www.youtube.com/watch?v=AP5YJCh4jOI&list=PLUpkve4ZZMbsF75P_6kCWJdKa_QJdmsfB" target="_blank" rel="noopener" tabindex="-1" aria-hidden="true">
+          <div class="video-thumb">
+            <img src="https://img.youtube.com/vi/AP5YJCh4jOI/hqdefault.jpg" alt="" loading="lazy">
+          </div>
+        </a>
+        <div class="video-label"><span>Video</span><span class="video-play" aria-hidden="true"><svg viewBox="0 0 24 24"><path d="M6 4l14 8-14 8V4z"/></svg></span></div>
+        <h4 class="video-title devanagari"><a href="https://www.youtube.com/watch?v=AP5YJCh4jOI&list=PLUpkve4ZZMbsF75P_6kCWJdKa_QJdmsfB" target="_blank" rel="noopener" title="योगी का जीवन कैसा होना चाहिए">योगी का जीवन कैसा होना चाहिए</a></h4>
+        <p class="video-desc">Swami Ramdev on what actually distinguishes a yogi's way of living from an ordinary one.</p>
+        <div class="video-foot">
+          <span class="video-date">Aug 31, 2026</span>
+          <div class="video-actions">
+            <button type="button" class="video-act" aria-label="Save योगी का जीवन कैसा होना चाहिए to favourites"><svg viewBox="0 0 24 24"><path d="M12 20.3l-7-6.9a4.5 4.5 0 016.4-6.3l.6.6.6-.6a4.5 4.5 0 016.4 6.3z"/></svg></button>
+            <button type="button" class="video-act" aria-label="Bookmark योगी का जीवन कैसा होना चाहिए"><svg viewBox="0 0 24 24"><path d="M6.5 3.6h11v16.8L12 16.2l-5.5 4.2z"/></svg></button>
+            <button type="button" class="video-act video-share" aria-label="Share योगी का जीवन कैसा होना चाहिए"><svg viewBox="0 0 24 24"><circle cx="18" cy="5" r="2.5"/><circle cx="6" cy="12" r="2.5"/><circle cx="18" cy="19" r="2.5"/><path d="M8.2 10.7l7.6-4.4M8.2 13.3l7.6 4.4"/></svg></button>
+          </div>
+        </div>
+      </article>
+
+      <article class="video-card">
+        <a class="video-media" href="https://www.youtube.com/watch?v=6oTeJ6nm2g8&list=PLUpkve4ZZMbsF75P_6kCWJdKa_QJdmsfB&index=2" target="_blank" rel="noopener" tabindex="-1" aria-hidden="true">
+          <div class="video-thumb">
+            <img src="https://img.youtube.com/vi/6oTeJ6nm2g8/hqdefault.jpg" alt="" loading="lazy">
+          </div>
+        </a>
+        <div class="video-label"><span>Video</span><span class="video-play" aria-hidden="true"><svg viewBox="0 0 24 24"><path d="M6 4l14 8-14 8V4z"/></svg></span></div>
+        <h4 class="video-title"><a href="https://www.youtube.com/watch?v=6oTeJ6nm2g8&list=PLUpkve4ZZMbsF75P_6kCWJdKa_QJdmsfB&index=2" target="_blank" rel="noopener" title="Proof of the Existence of a Soul">Proof of the Existence of a Soul</a></h4>
+        <p class="video-desc">A discussion on consciousness, the self, and what Ayurveda and yoga philosophy hold to be beyond the body.</p>
+        <div class="video-foot">
+          <span class="video-date">Aug 30, 2026</span>
+          <div class="video-actions">
+            <button type="button" class="video-act" aria-label="Save Proof of the Existence of a Soul to favourites"><svg viewBox="0 0 24 24"><path d="M12 20.3l-7-6.9a4.5 4.5 0 016.4-6.3l.6.6.6-.6a4.5 4.5 0 016.4 6.3z"/></svg></button>
+            <button type="button" class="video-act" aria-label="Bookmark Proof of the Existence of a Soul"><svg viewBox="0 0 24 24"><path d="M6.5 3.6h11v16.8L12 16.2l-5.5 4.2z"/></svg></button>
+            <button type="button" class="video-act video-share" aria-label="Share Proof of the Existence of a Soul"><svg viewBox="0 0 24 24"><circle cx="18" cy="5" r="2.5"/><circle cx="6" cy="12" r="2.5"/><circle cx="18" cy="19" r="2.5"/><path d="M8.2 10.7l7.6-4.4M8.2 13.3l7.6 4.4"/></svg></button>
+          </div>
+        </div>
+      </article>
+
+      <article class="video-card">
+        <a class="video-media" href="https://www.youtube.com/watch?v=rJYxMRiVgws&list=PLUpkve4ZZMbsF75P_6kCWJdKa_QJdmsfB&index=14" target="_blank" rel="noopener" tabindex="-1" aria-hidden="true">
+          <div class="video-thumb">
+            <img src="https://img.youtube.com/vi/rJYxMRiVgws/hqdefault.jpg" alt="" loading="lazy">
+          </div>
+        </a>
+        <div class="video-label"><span>Video</span><span class="video-play" aria-hidden="true"><svg viewBox="0 0 24 24"><path d="M6 4l14 8-14 8V4z"/></svg></span></div>
+        <h4 class="video-title"><a href="https://www.youtube.com/watch?v=rJYxMRiVgws&list=PLUpkve4ZZMbsF75P_6kCWJdKa_QJdmsfB&index=14" target="_blank" rel="noopener" title="What is Yoga?">What is Yoga?</a></h4>
+        <p class="video-desc">Swami Ramdev breaks down yoga as a complete discipline, not merely a set of physical postures.</p>
+        <div class="video-foot">
+          <span class="video-date">Aug 29, 2026</span>
+          <div class="video-actions">
+            <button type="button" class="video-act" aria-label="Save What is Yoga? to favourites"><svg viewBox="0 0 24 24"><path d="M12 20.3l-7-6.9a4.5 4.5 0 016.4-6.3l.6.6.6-.6a4.5 4.5 0 016.4 6.3z"/></svg></button>
+            <button type="button" class="video-act" aria-label="Bookmark What is Yoga?"><svg viewBox="0 0 24 24"><path d="M6.5 3.6h11v16.8L12 16.2l-5.5 4.2z"/></svg></button>
+            <button type="button" class="video-act video-share" aria-label="Share What is Yoga?"><svg viewBox="0 0 24 24"><circle cx="18" cy="5" r="2.5"/><circle cx="6" cy="12" r="2.5"/><circle cx="18" cy="19" r="2.5"/><path d="M8.2 10.7l7.6-4.4M8.2 13.3l7.6 4.4"/></svg></button>
+          </div>
+        </div>
+      </article>
+
+      <article class="video-card">
+        <a class="video-media" href="https://www.youtube.com/watch?v=6kdyuoqVdKQ&list=PLUpkve4ZZMbsF75P_6kCWJdKa_QJdmsfB&index=21" target="_blank" rel="noopener" tabindex="-1" aria-hidden="true">
+          <div class="video-thumb">
+            <img src="https://img.youtube.com/vi/6kdyuoqVdKQ/hqdefault.jpg" alt="" loading="lazy">
+          </div>
+        </a>
+        <div class="video-label"><span>Video</span><span class="video-play" aria-hidden="true"><svg viewBox="0 0 24 24"><path d="M6 4l14 8-14 8V4z"/></svg></span></div>
+        <h4 class="video-title devanagari"><a href="https://www.youtube.com/watch?v=6kdyuoqVdKQ&list=PLUpkve4ZZMbsF75P_6kCWJdKa_QJdmsfB&index=21" target="_blank" rel="noopener" title="सुबह जल्दी उठकर 5 कार्य अवश्य करें">सुबह जल्दी उठकर 5 कार्य अवश्य करें</a></h4>
+        <p class="video-desc">Five habits Swami Ramdev recommends building into the first hour after waking.</p>
+        <div class="video-foot">
+          <span class="video-date">Aug 27, 2026</span>
+          <div class="video-actions">
+            <button type="button" class="video-act" aria-label="Save सुबह जल्दी उठकर 5 कार्य अवश्य करें to favourites"><svg viewBox="0 0 24 24"><path d="M12 20.3l-7-6.9a4.5 4.5 0 016.4-6.3l.6.6.6-.6a4.5 4.5 0 016.4 6.3z"/></svg></button>
+            <button type="button" class="video-act" aria-label="Bookmark सुबह जल्दी उठकर 5 कार्य अवश्य करें"><svg viewBox="0 0 24 24"><path d="M6.5 3.6h11v16.8L12 16.2l-5.5 4.2z"/></svg></button>
+            <button type="button" class="video-act video-share" aria-label="Share सुबह जल्दी उठकर 5 कार्य अवश्य करें"><svg viewBox="0 0 24 24"><circle cx="18" cy="5" r="2.5"/><circle cx="6" cy="12" r="2.5"/><circle cx="18" cy="19" r="2.5"/><path d="M8.2 10.7l7.6-4.4M8.2 13.3l7.6 4.4"/></svg></button>
+          </div>
+        </div>
+      </article>
+
+      <article class="video-card">
+        <a class="video-media" href="https://www.youtube.com/watch?v=hsXuqhRHNYE&list=PLUpkve4ZZMbsF75P_6kCWJdKa_QJdmsfB&index=25" target="_blank" rel="noopener" tabindex="-1" aria-hidden="true">
+          <div class="video-thumb">
+            <img src="https://img.youtube.com/vi/hsXuqhRHNYE/hqdefault.jpg" alt="" loading="lazy">
+          </div>
+        </a>
+        <div class="video-label"><span>Video</span><span class="video-play" aria-hidden="true"><svg viewBox="0 0 24 24"><path d="M6 4l14 8-14 8V4z"/></svg></span></div>
+        <h4 class="video-title"><a href="https://www.youtube.com/watch?v=hsXuqhRHNYE&list=PLUpkve4ZZMbsF75P_6kCWJdKa_QJdmsfB&index=25" target="_blank" rel="noopener" title="What is DNA?">What is DNA?</a></h4>
+        <p class="video-desc">A plain-language look at DNA and how modern science meets traditional ideas of inheritance and constitution.</p>
+        <div class="video-foot">
+          <span class="video-date">Aug 26, 2026</span>
+          <div class="video-actions">
+            <button type="button" class="video-act" aria-label="Save What is DNA? to favourites"><svg viewBox="0 0 24 24"><path d="M12 20.3l-7-6.9a4.5 4.5 0 016.4-6.3l.6.6.6-.6a4.5 4.5 0 016.4 6.3z"/></svg></button>
+            <button type="button" class="video-act" aria-label="Bookmark What is DNA?"><svg viewBox="0 0 24 24"><path d="M6.5 3.6h11v16.8L12 16.2l-5.5 4.2z"/></svg></button>
+            <button type="button" class="video-act video-share" aria-label="Share What is DNA?"><svg viewBox="0 0 24 24"><circle cx="18" cy="5" r="2.5"/><circle cx="6" cy="12" r="2.5"/><circle cx="18" cy="19" r="2.5"/><path d="M8.2 10.7l7.6-4.4M8.2 13.3l7.6 4.4"/></svg></button>
+          </div>
+        </div>
+      </article>
+
+      <article class="video-card">
+        <a class="video-media" href="https://www.youtube.com/watch?v=83tSHanuFCQ&list=PLUpkve4ZZMbt2gL9lDzdiunUXUBL_v_OT&index=36" target="_blank" rel="noopener" tabindex="-1" aria-hidden="true">
+          <div class="video-thumb">
+            <img src="https://img.youtube.com/vi/83tSHanuFCQ/hqdefault.jpg" alt="" loading="lazy">
+          </div>
+        </a>
+        <div class="video-label"><span>Video</span><span class="video-play" aria-hidden="true"><svg viewBox="0 0 24 24"><path d="M6 4l14 8-14 8V4z"/></svg></span></div>
+        <h4 class="video-title"><a href="https://www.youtube.com/watch?v=83tSHanuFCQ&list=PLUpkve4ZZMbt2gL9lDzdiunUXUBL_v_OT&index=36" target="_blank" rel="noopener" title="12 Effective Exercises for Obesity">12 Effective Exercises for Obesity</a></h4>
+        <p class="video-desc">A practical exercise sequence aimed at weight management, demonstrated step by step.</p>
+        <div class="video-foot">
+          <span class="video-date">Aug 24, 2026</span>
+          <div class="video-actions">
+            <button type="button" class="video-act" aria-label="Save 12 Effective Exercises for Obesity to favourites"><svg viewBox="0 0 24 24"><path d="M12 20.3l-7-6.9a4.5 4.5 0 016.4-6.3l.6.6.6-.6a4.5 4.5 0 016.4 6.3z"/></svg></button>
+            <button type="button" class="video-act" aria-label="Bookmark 12 Effective Exercises for Obesity"><svg viewBox="0 0 24 24"><path d="M6.5 3.6h11v16.8L12 16.2l-5.5 4.2z"/></svg></button>
+            <button type="button" class="video-act video-share" aria-label="Share 12 Effective Exercises for Obesity"><svg viewBox="0 0 24 24"><circle cx="18" cy="5" r="2.5"/><circle cx="6" cy="12" r="2.5"/><circle cx="18" cy="19" r="2.5"/><path d="M8.2 10.7l7.6-4.4M8.2 13.3l7.6 4.4"/></svg></button>
+          </div>
+        </div>
+      </article>
+
+    </div>
+
+    <button type="button" class="ramdev-loadmore">Load More</button>
+  </section>
 
   <footer class="site-footer">
     <img class="footer-map"
@@ -1198,7 +2126,67 @@
       });
     }
 
+    // Content-type filter (dropdown) + active-filter tag chip, echoing the
+    // isha.sadhguru.org "Filters: ... / Sort by: ..." listing chrome
+    (function () {
+      const contentType = document.getElementById('fbContentType');
+      const search = document.getElementById('fbSearch');
+      const groupLabels = document.querySelectorAll('.ramdev-section .group-label');
+      const articlesGrid = document.querySelector('.articles-grid');
+      const videosGrid = document.querySelector('.videos-grid');
+      const tagsRow = document.getElementById('fbTagsRow');
+      const tagLabel = document.getElementById('fbActiveTagLabel');
+      const tagClose = document.getElementById('fbTagClose');
+      const clearAllBtn = document.getElementById('fbClearAll');
+      if (!contentType) return;
 
+      function applyContentType() {
+        const type = contentType.value;
+        const showArticles = type === 'all' || type === 'articles';
+        const showVideos = type === 'all' || type === 'videos';
+        if (groupLabels[0]) groupLabels[0].style.display = showArticles ? '' : 'none';
+        if (articlesGrid) articlesGrid.style.display = showArticles ? '' : 'none';
+        if (groupLabels[1]) groupLabels[1].style.display = showVideos ? '' : 'none';
+        if (videosGrid) videosGrid.style.display = showVideos ? '' : 'none';
+
+        if (type === 'all') {
+          tagsRow.hidden = true;
+        } else {
+          tagsRow.hidden = false;
+          tagLabel.textContent = contentType.options[contentType.selectedIndex].text;
+        }
+      }
+
+      function applySearch() {
+        const q = search.value.trim().toLowerCase();
+        document.querySelectorAll('.article-card').forEach((card) => {
+          const title = card.querySelector('.article-title');
+          const match = !q || (title && title.textContent.toLowerCase().includes(q));
+          card.style.display = match ? '' : 'none';
+        });
+        document.querySelectorAll('.video-card').forEach((card) => {
+          const title = card.querySelector('.video-title');
+          const match = !q || (title && title.textContent.toLowerCase().includes(q));
+          card.style.display = match ? '' : 'none';
+        });
+      }
+
+      contentType.addEventListener('change', applyContentType);
+      if (search) search.addEventListener('input', applySearch);
+
+      function clearContentType() {
+        contentType.value = 'all';
+        applyContentType();
+      }
+
+      if (tagClose) tagClose.addEventListener('click', clearContentType);
+      if (clearAllBtn) {
+        clearAllBtn.addEventListener('click', () => {
+          clearContentType();
+          if (search) { search.value = ''; applySearch(); }
+        });
+      }
+    })();
   </script>
 
 </body>
