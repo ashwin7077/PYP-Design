@@ -4,7 +4,10 @@
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>Community Programs | Patanjali Yogpeeth Nepal</title>
+  <title>Pranayam | Patanjali Yogpeeth Nepal</title>
+  <meta name="description"
+    content="A complete guide to pranayama — the traditional breathing practices of yoga, their method and benefits.">
+
   <link rel="preconnect" href="https://fonts.googleapis.com">
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
   <link
@@ -780,494 +783,1083 @@
     }
 
     /* ============================================================
-       COMMUNITY PROGRAM — Nepal Flood Relief
+       PRANAYAM PAGE
        ============================================================ */
 
-    .relief-page {
-      background: #FBF7F0;
-      overflow-x: clip;
+    :root {
+      --sage: #6E7F5C;
+      --sage-soft: #DCE3D2;
+      /* page-specific surfaces: the entry sheet lifts a half-step off
+         the page so eleven long entries read as separate objects */
+      --paper: #FFFDFA;
+      --rule: #EADCC8;
+      --prose: #4A3A34;
+      --measure: 64ch;
     }
 
-    /* ---- Hero ---- */
-    .relief-hero {
+    main {
+      background: #FBF7F0;
+    }
+
+    /* Shared page gutter, so hero / intro / sections / videos all sit on
+       exactly the same left edge instead of each inventing their own. */
+    .page-shell {
+      max-width: 1120px;
+      margin: 0 auto;
+      padding: 0 40px;
+    }
+
+    /* ---------- Hero: the breath itself ---------- */
+    .pranayam-hero {
       position: relative;
-      min-height: 78vh;
+      background: var(--ink);
+      overflow: hidden;
+      padding: 84px 0 76px;
+    }
+
+    .pranayam-hero::before {
+      content: "";
+      position: absolute;
+      inset: 0;
+      background:
+        radial-gradient(ellipse 60% 90% at 85% 0%, rgba(199, 154, 73, .16), transparent 60%);
+      pointer-events: none;
+    }
+
+    .hero-inner {
+      position: relative;
+      display: grid;
+      grid-template-columns: 1.05fr 0.95fr;
+      gap: 64px;
+      align-items: center;
+    }
+
+    .hero-eyebrow {
+      font-family: 'Noto Serif Devanagari', serif;
+      font-size: 21px;
+      color: var(--gold-soft);
+      margin-bottom: 16px;
+      font-weight: 400;
+    }
+
+    .hero-inner h1 {
+      font-family: 'Merriweather', serif;
+      font-weight: 300;
+      font-size: 45px;
+      line-height: 1.2;
+      color: var(--ivory-text);
+      margin-bottom: 20px;
+      max-width: 17ch;
+    }
+
+    .hero-inner h1 em {
+      font-style: normal;
+      color: var(--gold-soft);
+    }
+
+    .hero-inner p {
+      font-family: 'Merriweather Sans', sans-serif;
+      font-weight: 400;
+      font-size: 15.5px;
+      line-height: 1.85;
+      color: var(--muted-text-light);
+      max-width: 48ch;
+    }
+
+    /* Three facts about what the page contains, so a reader knows the
+       shape of the guide before scrolling into it. */
+    .hero-facts {
       display: flex;
-      align-items: flex-end;
+      flex-wrap: wrap;
+      gap: 0;
+      margin-top: 30px;
+      border-top: 1px solid rgba(199, 154, 73, .28);
+      padding-top: 18px;
+    }
+
+    .hero-facts div {
+      padding-right: 26px;
+      margin-right: 26px;
+      border-right: 1px solid rgba(199, 154, 73, .22);
+    }
+
+    .hero-facts div:last-child {
+      border-right: none;
+      padding-right: 0;
+      margin-right: 0;
+    }
+
+    .hero-facts b {
+      display: block;
+      font-family: 'Merriweather', serif;
+      font-weight: 300;
+      font-size: 27px;
+      color: var(--gold-soft);
+      line-height: 1.1;
+    }
+
+    .hero-facts span {
+      font-family: 'Merriweather Sans', sans-serif;
+      font-size: 12.5px;
+      color: var(--muted-text-light);
+    }
+
+    .hero-breath {
+      position: relative;
+      height: 210px;
+    }
+
+    .hero-breath svg {
+      width: 100%;
+      height: 100%;
+    }
+
+    .breath-line {
+      fill: none;
+      stroke: url(#breathGrad);
+      stroke-width: 2.5;
+      stroke-linecap: round;
+      stroke-dasharray: 900;
+      stroke-dashoffset: 900;
+      animation: breathe-in 9s var(--ease) infinite;
+    }
+
+    .breath-dot {
+      fill: var(--gold-soft);
+      animation: breathe-dot 9s var(--ease) infinite;
+      offset-path: path("M10,140 C 70,40 110,220 170,110 S 270,20 330,130 S 420,230 480,110 S 560,10 620,120");
+    }
+
+    @keyframes breathe-in {
+
+      0%,
+      100% {
+        stroke-dashoffset: 900;
+      }
+
+      45%,
+      55% {
+        stroke-dashoffset: 0;
+      }
+    }
+
+    @keyframes breathe-dot {
+      0% {
+        offset-distance: 0%;
+      }
+
+      100% {
+        offset-distance: 100%;
+      }
+    }
+
+    .hero-breath-caption {
+      position: absolute;
+      bottom: -6px;
+      left: 0;
+      right: 0;
+      display: flex;
+      justify-content: space-between;
+      font-family: 'Merriweather Sans', sans-serif;
+      font-size: 12px;
+      letter-spacing: .04em;
+      color: var(--muted-text-light);
+    }
+
+    @media (prefers-reduced-motion: reduce) {
+
+      .breath-line,
+      .breath-dot {
+        animation: none;
+        stroke-dashoffset: 0;
+      }
+    }
+
+    /* ---------- Intro: prose + a practice note beside it ---------- */
+    .pranayam-intro {
+      padding: 72px 0 8px;
+      display: grid;
+      grid-template-columns: minmax(0, 1fr) 300px;
+      gap: 60px;
+      align-items: start;
+    }
+
+    .pranayam-intro h2 {
+      font-family: 'Merriweather', serif;
+      font-weight: 700;
+      font-size: 27px;
+      color: var(--maroon);
+      margin-bottom: 18px;
+    }
+
+    .intro-prose p {
+      font-family: 'Merriweather', serif;
+      font-weight: 300;
+      font-size: 17px;
+      line-height: 1.9;
+      color: var(--ink);
+      margin-bottom: 16px;
+      max-width: var(--measure);
+    }
+
+    .intro-prose p strong {
+      font-weight: 700;
+      color: var(--maroon-deep);
+    }
+
+    .intro-prose p:last-child {
+      margin-bottom: 0;
+    }
+
+    /* Safety guidance was buried in the middle of the intro prose, where
+       it read as background. It belongs somewhere a reader can't miss. */
+    .practice-note {
+      background: var(--cream);
+      border: 1px solid var(--rule);
+      border-top: 3px solid var(--maroon);
+      padding: 22px 24px 24px;
+    }
+
+    .practice-note h3 {
+      font-family: 'Merriweather', serif;
+      font-weight: 700;
+      font-size: 16px;
+      color: var(--maroon-deep);
+      margin-bottom: 12px;
+    }
+
+    .practice-note ul {
+      display: flex;
+      flex-direction: column;
+      gap: 11px;
+    }
+
+    .practice-note li {
+      position: relative;
+      padding-left: 18px;
+      font-family: 'Merriweather Sans', sans-serif;
+      font-size: 13.5px;
+      line-height: 1.65;
+      color: var(--prose);
+    }
+
+    .practice-note li::before {
+      content: '';
+      position: absolute;
+      left: 0;
+      top: 8px;
+      width: 6px;
+      height: 6px;
+      border-radius: 50%;
+      background: var(--gold);
+    }
+
+    /* ---------- Index: jump straight to a technique ---------- */
+    .technique-index {
+      margin: 56px auto 0;
+      background: var(--paper);
+      border: 1px solid var(--rule);
+      padding: 28px 32px 30px;
+    }
+
+    .technique-index h2 {
+      font-family: 'Merriweather', serif;
+      font-weight: 700;
+      font-size: 19px;
+      color: var(--maroon);
+      margin-bottom: 4px;
+    }
+
+    .technique-index > p {
+      font-family: 'Merriweather Sans', sans-serif;
+      font-size: 13.5px;
+      color: var(--muted-text);
+      margin-bottom: 20px;
+    }
+
+    .index-group {
+      display: grid;
+      grid-template-columns: 190px 1fr;
+      gap: 24px;
+      padding: 16px 0;
+      border-top: 1px solid var(--rule);
+      align-items: baseline;
+    }
+
+    .index-group h3 {
+      font-family: 'Merriweather Sans', sans-serif;
+      font-weight: 500;
+      font-size: 13.5px;
+      color: var(--maroon-deep);
+      line-height: 1.5;
+    }
+
+    .index-links {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 8px;
+    }
+
+    .index-links a {
+      font-family: 'Merriweather Sans', sans-serif;
+      font-size: 13.5px;
+      color: var(--prose);
+      background: var(--cream);
+      border: 1px solid var(--rule);
+      border-radius: 2px;
+      padding: 6px 13px;
+      transition: color var(--dur-fast) var(--ease),
+        border-color var(--dur-fast) var(--ease),
+        background var(--dur-fast) var(--ease);
+    }
+
+    .index-links a:hover,
+    .index-links a:focus-visible {
+      color: var(--maroon-deep);
+      background: #FFF;
+      border-color: var(--gold);
+    }
+
+    .index-links a:focus-visible,
+    .video-thumb:focus-visible {
+      outline: 2px solid var(--gold);
+      outline-offset: 3px;
+    }
+
+    /* ---------- Category sections ---------- */
+    .category-block {
+      padding: 60px 0 4px;
+    }
+
+    .category-head {
+      margin-bottom: 8px;
+    }
+
+    .category-head h2 {
+      font-family: 'Merriweather', serif;
+      font-weight: 700;
+      font-size: 27px;
+      color: var(--maroon);
+      line-height: 1.25;
+    }
+
+    .category-head h2::after {
+      content: '';
+      display: block;
+      width: 54px;
+      height: 2px;
+      background: var(--gold);
+      margin: 14px 0 14px;
+    }
+
+    .category-head p {
+      font-family: 'Merriweather Sans', sans-serif;
+      font-size: 14.5px;
+      color: var(--muted-text);
+      line-height: 1.75;
+      max-width: 58ch;
+    }
+
+    .category-count {
+      font-family: 'Merriweather Sans', sans-serif;
+      font-size: 12.5px;
+      color: var(--maroon);
+      margin-top: 12px;
+      padding-top: 10px;
+      border-top: 1px solid var(--rule);
+      max-width: 58ch;
+    }
+
+    /* ---------- One technique = one entry ----------
+       Two columns of roughly equal weight: what it is on the left
+       (photo, names, description), what to do on the right (method,
+       effects, cautions). The old layout mirrored every second row, so
+       the eye had to hunt for the starting point on each one; this keeps
+       the same reading order for all eleven. */
+    .technique {
+      display: grid;
+      grid-template-columns: minmax(0, 400px) minmax(0, 1fr);
+      background: var(--paper);
+      border: 1px solid var(--rule);
+      margin-top: 26px;
+      scroll-margin-top: 120px;
+    }
+
+    .technique-head {
+      padding: 28px 32px 30px;
+    }
+
+    .technique-head h3 {
+      font-family: 'Merriweather', serif;
+      font-weight: 700;
+      font-size: 24px;
+      color: var(--ink);
+      margin-bottom: 5px;
+      line-height: 1.25;
+    }
+
+    .technique-tagline {
+      font-family: 'Merriweather Sans', sans-serif;
+      font-weight: 500;
+      font-size: 13.5px;
+      color: var(--maroon);
+      margin-bottom: 20px;
+    }
+
+    /* Reference photo. The source images are all landscape, so a 3:2
+       frame with cover fills it instead of leaving the empty cream bands
+       the old 4:5 portrait frame produced at 216px wide. */
+    .photo-slot {
+      position: relative;
+      width: 100%;
+      aspect-ratio: 3 / 2;
+      overflow: hidden;
+      background: var(--cream);
+      border: 1px solid var(--rule);
+      box-shadow: 0 8px 22px rgba(20, 6, 9, .11);
+    }
+
+    .photo-slot img {
+      display: block;
+      width: 100%;
+      height: 100%;
+      object-fit: cover;
+      object-position: center;
+    }
+
+    /* Symbol and Devanagari name, sitting under the photo instead of
+       pinned to its corner, where the old chip overlapped the image. */
+    .name-plate {
+      display: flex;
+      align-items: center;
+      gap: 13px;
+      margin-top: 16px;
+      padding-bottom: 18px;
+      border-bottom: 1px solid var(--rule);
+    }
+
+    .icon-chip {
+      width: 46px;
+      height: 46px;
+      flex-shrink: 0;
+      border-radius: 50%;
+      background: var(--cream);
+      border: 1.5px solid var(--gold);
+      display: flex;
+      align-items: center;
+      justify-content: center;
+    }
+
+    .icon-chip svg {
+      width: 25px;
+      height: 25px;
+    }
+
+    .icon-chip svg .stroke {
+      fill: none;
+      stroke: var(--maroon);
+      stroke-width: 2.4;
+      stroke-linecap: round;
+      stroke-linejoin: round;
+    }
+
+    .icon-chip svg .stroke-soft {
+      fill: none;
+      stroke: var(--gold);
+      stroke-width: 2;
+      stroke-linecap: round;
+    }
+
+    .icon-chip svg .fill-gold {
+      fill: var(--gold-soft);
+    }
+
+    .technique-sanskrit {
+      font-family: 'Noto Serif Devanagari', serif;
+      font-size: 19px;
+      color: var(--maroon);
+      line-height: 1.4;
+    }
+
+    .technique-desc {
+      font-family: 'Merriweather', serif;
+      font-weight: 300;
+      font-size: 15.5px;
+      line-height: 1.85;
+      color: var(--prose);
+      margin-top: 18px;
+    }
+
+    .technique-body {
+      padding: 28px 32px 30px;
+      border-left: 1px solid var(--rule);
+      background: linear-gradient(180deg, rgba(248, 241, 230, .5), rgba(248, 241, 230, 0) 55%);
+    }
+
+    .technique-body h4 {
+      font-family: 'Merriweather', serif;
+      font-weight: 700;
+      font-size: 14.5px;
+      color: var(--maroon-deep);
+      margin-bottom: 16px;
+      padding-bottom: 9px;
+      border-bottom: 1px solid var(--rule);
+    }
+
+    .technique-body h4 + * {
+      margin-bottom: 26px;
+    }
+
+    .technique-body > :last-child {
+      margin-bottom: 0;
+    }
+
+    /* Steps are a real sequence, so they carry numbers. */
+    .step-list {
+      list-style: none;
+      counter-reset: step;
+      display: flex;
+      flex-direction: column;
+      gap: 12px;
+      max-width: 68ch;
+    }
+
+    .step-list li {
+      position: relative;
+      counter-increment: step;
+      padding-left: 34px;
+      font-family: 'Merriweather Sans', sans-serif;
+      font-size: 14px;
+      line-height: 1.7;
+      color: var(--prose);
+      min-height: 22px;
+    }
+
+    .step-list li::before {
+      content: counter(step);
+      position: absolute;
+      left: 0;
+      top: 2px;
+      width: 22px;
+      height: 22px;
+      border-radius: 50%;
+      border: 1px solid var(--gold);
+      background: var(--cream);
+      color: var(--maroon-deep);
+      font-size: 11.5px;
+      line-height: 20px;
+      text-align: center;
+    }
+
+    .benefit-tags {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 8px;
+    }
+
+    .benefit-tags span {
+      font-family: 'Merriweather Sans', sans-serif;
+      font-size: 13.5px;
+      line-height: 1.5;
+      color: var(--maroon-deep);
+      background: var(--cream);
+      border: 1px solid var(--rule);
+      border-left: 2px solid var(--gold);
+      border-radius: 0 2px 2px 0;
+      padding: 7px 13px;
+    }
+
+    .technique-caution {
+      display: flex;
+      gap: 10px;
+      align-items: flex-start;
+      font-family: 'Merriweather Sans', sans-serif;
+      font-size: 13px;
+      line-height: 1.65;
+      color: var(--maroon-deep);
+      background: rgba(138, 45, 59, .07);
+      border-left: 2px solid var(--maroon);
+      padding: 12px 14px;
+      max-width: 68ch;
+    }
+
+    .technique-caution svg {
+      width: 15px;
+      height: 15px;
+      stroke: var(--maroon);
+      fill: none;
+      flex-shrink: 0;
+      margin-top: 3px;
+    }
+
+    /* ---------- Watch: guided sessions ---------- */
+    .video-section {
+      position: relative;
+      margin-top: 76px;
+      padding: 78px 0 84px;
+      background: var(--ink);
       overflow: hidden;
     }
 
-    .relief-hero-img {
+    .video-section::before {
+      content: "";
+      position: absolute;
+      inset: 0;
+      background: radial-gradient(ellipse 70% 80% at 15% 0%, rgba(199, 154, 73, .15), transparent 62%);
+      pointer-events: none;
+    }
+
+    .video-head {
+      position: relative;
+      max-width: 640px;
+      margin-bottom: 42px;
+    }
+
+    .video-head h2 {
+      font-family: 'Merriweather', serif;
+      font-weight: 300;
+      font-size: 34px;
+      line-height: 1.25;
+      color: var(--ivory-text);
+      margin-bottom: 16px;
+    }
+
+    .video-head h2::after {
+      content: '';
+      display: block;
+      width: 54px;
+      height: 2px;
+      background: var(--gold);
+      margin-top: 18px;
+    }
+
+    .video-head p {
+      font-family: 'Merriweather Sans', sans-serif;
+      max-width: 58ch;
+      font-size: 15px;
+      line-height: 1.8;
+      color: var(--muted-text-light);
+    }
+
+    .video-grid {
+      position: relative;
+      display: grid;
+      grid-template-columns: repeat(3, 1fr);
+      gap: 26px;
+    }
+
+    .video-card {
+      position: relative;
+      display: flex;
+      flex-direction: column;
+      background: rgba(246, 238, 226, .045);
+      border: 1px solid rgba(199, 154, 73, .3);
+      overflow: hidden;
+      /* entrance state — cleared by .is-revealed once in view */
+      opacity: 0;
+      transform: translateY(22px);
+      transition:
+        opacity .7s var(--ease-out),
+        transform .7s var(--ease-out),
+        border-color var(--dur-base) var(--ease),
+        box-shadow var(--dur-base) var(--ease),
+        background var(--dur-base) var(--ease);
+    }
+
+    .video-card.is-revealed {
+      opacity: 1;
+      transform: none;
+    }
+
+    .video-card:hover,
+    .video-card:focus-within {
+      border-color: var(--gold);
+      background: rgba(246, 238, 226, .075);
+      box-shadow: 0 18px 40px rgba(0, 0, 0, .38);
+      transform: translateY(-6px);
+    }
+
+    .video-thumb {
+      position: relative;
+      display: block;
+      width: 100%;
+      aspect-ratio: 16 / 9;
+      border: none;
+      padding: 0;
+      background: #1B0A0D;
+      overflow: hidden;
+      cursor: pointer;
+    }
+
+    .video-thumb img {
+      display: block;
+      width: 100%;
+      height: 100%;
+      object-fit: cover;
+      transition: transform .8s var(--ease-out), opacity var(--dur-base) var(--ease);
+    }
+
+    .video-card:hover .video-thumb img {
+      transform: scale(1.06);
+    }
+
+    /* darkens the lower half so the play control stays legible on any
+       thumbnail, and deepens slightly on hover */
+    .video-thumb::after {
+      content: '';
+      position: absolute;
+      inset: 0;
+      background: linear-gradient(180deg, rgba(20, 6, 9, .08) 0%, rgba(20, 6, 9, .52) 100%);
+      transition: opacity var(--dur-base) var(--ease);
+      opacity: .8;
+    }
+
+    .video-card:hover .video-thumb::after {
+      opacity: 1;
+    }
+
+    .play-badge {
+      position: absolute;
+      z-index: 2;
+      left: 50%;
+      top: 50%;
+      width: 62px;
+      height: 62px;
+      margin: -31px 0 0 -31px;
+      border-radius: 50%;
+      border: 1.5px solid var(--gold-soft);
+      background: rgba(43, 17, 20, .55);
+      backdrop-filter: blur(2px);
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      transition: transform var(--dur-base) var(--ease-out),
+        background var(--dur-base) var(--ease),
+        border-color var(--dur-base) var(--ease);
+    }
+
+    .play-badge svg {
+      width: 18px;
+      height: 20px;
+      fill: var(--gold-soft);
+      margin-left: 3px;
+      transition: fill var(--dur-base) var(--ease);
+    }
+
+    .video-card:hover .play-badge {
+      transform: scale(1.12);
+      background: var(--gold);
+      border-color: var(--gold-soft);
+    }
+
+    .video-card:hover .play-badge svg {
+      fill: var(--ink);
+    }
+
+    /* a soft ring that pulses outward on hover, echoing the breath line
+       in the hero rather than introducing a new idiom */
+    .play-badge::before {
+      content: '';
+      position: absolute;
+      inset: -1px;
+      border-radius: 50%;
+      border: 1px solid var(--gold-soft);
+      opacity: 0;
+    }
+
+    .video-card:hover .play-badge::before {
+      animation: ring-out 1.9s var(--ease-out) infinite;
+    }
+
+    @keyframes ring-out {
+      0% {
+        opacity: .55;
+        transform: scale(1);
+      }
+
+      70%,
+      100% {
+        opacity: 0;
+        transform: scale(1.55);
+      }
+    }
+
+    .video-tag {
+      position: absolute;
+      z-index: 2;
+      left: 12px;
+      top: 12px;
+      font-family: 'Merriweather Sans', sans-serif;
+      font-size: 11.5px;
+      color: var(--ivory-text);
+      background: rgba(20, 6, 9, .72);
+      border: 1px solid rgba(199, 154, 73, .34);
+      border-radius: 2px;
+      padding: 3px 8px;
+    }
+
+    .video-meta {
+      padding: 20px 22px 22px;
+      display: flex;
+      flex-direction: column;
+      gap: 9px;
+      flex: 1;
+    }
+
+    .video-meta h3 {
+      font-family: 'Merriweather', serif;
+      font-weight: 400;
+      font-size: 17px;
+      line-height: 1.45;
+      color: var(--ivory-text);
+      transition: color var(--dur-base) var(--ease);
+    }
+
+    .video-card:hover .video-meta h3 {
+      color: var(--gold-soft);
+    }
+
+    .video-meta p {
+      font-family: 'Merriweather Sans', sans-serif;
+      font-size: 13.5px;
+      line-height: 1.7;
+      color: var(--muted-text-light);
+    }
+
+    .video-source {
+      margin-top: auto;
+      padding-top: 12px;
+      font-family: 'Merriweather Sans', sans-serif;
+      font-size: 12px;
+      color: var(--muted-text-light);
+      border-top: 1px solid rgba(199, 154, 73, .2);
+      display: flex;
+      align-items: center;
+      gap: 8px;
+    }
+
+    .video-source svg {
+      width: 15px;
+      height: 15px;
+      fill: var(--gold);
+      flex-shrink: 0;
+    }
+
+    /* the loaded player replaces the thumbnail in place */
+    .video-thumb iframe {
       position: absolute;
       inset: 0;
       width: 100%;
       height: 100%;
-      object-fit: cover;
+      border: 0;
+      animation: player-in var(--dur-base) var(--ease);
     }
 
-    .relief-hero-scrim {
-      position: absolute;
-      inset: 0;
-      background:
-        linear-gradient(0deg, var(--ink) 4%, rgba(43, 17, 20, .78) 34%, rgba(43, 17, 20, .32) 68%, rgba(43, 17, 20, .18) 100%);
-    }
-
-    .relief-hero-inner {
-      position: relative;
-      z-index: 1;
-      max-width: 760px;
-      padding: 0 32px 76px;
-      margin: 0 auto;
-      width: 100%;
-      color: var(--ivory-text);
-    }
-
-    .relief-hero-lede {
-      font-family: 'Merriweather Sans', sans-serif;
-      font-size: 13px;
-      font-weight: 500;
-      letter-spacing: .04em;
-      color: var(--gold-soft);
-      margin-bottom: 14px;
-    }
-
-    .relief-hero-inner h1 {
-      font-family: 'Merriweather', Georgia, serif;
-      font-weight: 700;
-      font-size: clamp(2.1rem, 4.4vw, 3.4rem);
-      line-height: 1.14;
-      margin-bottom: 16px;
-    }
-
-    .relief-hero-deva {
-      font-size: 1.15rem;
-      color: var(--gold-soft);
-      margin-bottom: 22px;
-    }
-
-    .relief-hero-body {
-      font-size: 1rem;
-      line-height: 1.75;
-      max-width: 54ch;
-      color: var(--muted-text-light);
-      font-weight: 300;
-    }
-
-    /* ---- Contribution figure ---- */
-    .relief-figure {
-      background: var(--cream);
-      border-bottom: 1px solid var(--cream-line);
-    }
-
-    .relief-figure-inner {
-      max-width: 1100px;
-      margin: 0 auto;
-      padding: 68px 32px;
-      display: grid;
-      grid-template-columns: auto 1fr;
-      gap: 48px;
-      align-items: center;
-    }
-
-    .relief-figure-number {
-      font-family: 'Merriweather', Georgia, serif;
-      font-weight: 700;
-      font-size: clamp(2.2rem, 5vw, 3.6rem);
-      color: var(--maroon);
-      white-space: nowrap;
-      line-height: 1;
-    }
-
-    .relief-figure-number .currency {
-      font-family: 'Merriweather Sans', sans-serif;
-      font-weight: 500;
-      font-size: .38em;
-      color: var(--gold);
-      vertical-align: super;
-      margin-right: 8px;
-      letter-spacing: .03em;
-    }
-
-    .relief-figure-text h2 {
-      font-size: 1.3rem;
-      font-weight: 400;
-      color: var(--maroon-deep);
-      margin-bottom: 10px;
-    }
-
-    .relief-figure-text p {
-      font-size: .98rem;
-      line-height: 1.7;
-      color: #5A4038;
-      font-weight: 300;
-      max-width: 62ch;
-    }
-
-    /* ---- Condolence ---- */
-    .relief-condolence {
-      background: var(--ink-soft);
-    }
-
-    .relief-condolence-inner {
-      max-width: 680px;
-      margin: 0 auto;
-      padding: 64px 32px;
-      text-align: center;
-    }
-
-    .relief-condolence-inner p {
-      font-family: 'Merriweather', Georgia, serif;
-      font-style: italic;
-      font-weight: 300;
-      font-size: 1.2rem;
-      line-height: 1.8;
-      color: var(--ivory-text);
-    }
-
-    /* ---- Initiatives ---- */
-    .relief-initiatives {
-      max-width: 1200px;
-      margin: 0 auto;
-      padding: 80px 32px 90px;
-    }
-
-    .relief-initiatives-head {
-      max-width: 480px;
-      margin-bottom: 48px;
-    }
-
-    .relief-initiatives-head h2 {
-      font-size: 1.7rem;
-      font-weight: 700;
-      color: var(--ink);
-      margin-bottom: 8px;
-    }
-
-    .relief-initiatives-head p {
-      color: var(--muted-text);
-      font-size: .95rem;
-      font-weight: 300;
-    }
-
-    .relief-initiatives-row {
-      display: grid;
-      grid-template-columns: repeat(3, 1fr);
-    }
-
-    .relief-initiative {
-      padding: 4px 36px;
-      border-left: 1px solid var(--cream-line);
-    }
-
-    .relief-initiative:first-child {
-      padding-left: 0;
-      border-left: none;
-    }
-
-    .relief-icon {
-      width: 36px;
-      height: 36px;
-      color: var(--gold);
-      margin-bottom: 18px;
-    }
-
-    .relief-initiative h3 {
-      font-size: 1.08rem;
-      font-weight: 700;
-      color: var(--maroon-deep);
-      margin-bottom: 10px;
-      line-height: 1.35;
-    }
-
-    .relief-initiative h3 .devanagari {
-      font-weight: 400;
-      font-size: .92em;
-      color: var(--muted-text);
-    }
-
-    .relief-initiative p {
-      font-size: .93rem;
-      line-height: 1.7;
-      color: #5A4038;
-      font-weight: 300;
-    }
-
-    /* ---- Closing motto banner ---- */
-    .relief-motto {
-      background: var(--maroon);
-      text-align: center;
-      padding: 74px 32px;
-    }
-
-    .relief-motto-deva {
-      font-size: 1.6rem;
-      color: var(--gold-soft);
-      margin-bottom: 10px;
-    }
-
-    .relief-motto-en {
-      font-family: 'Merriweather', Georgia, serif;
-      font-weight: 300;
-      font-style: italic;
-      font-size: 1.15rem;
-      color: var(--ivory-text);
-      margin-bottom: 30px;
-    }
-
-    .relief-motto-cta {
-      display: inline-block;
-      font-family: 'Merriweather Sans', sans-serif;
-      font-size: .9rem;
-      font-weight: 500;
-      color: var(--ink);
-      background: var(--gold-soft);
-      padding: 13px 28px;
-      border-radius: 2px;
-      transition: background var(--dur-fast) var(--ease), transform var(--dur-fast) var(--ease);
-    }
-
-    .relief-motto-cta:hover {
-      background: var(--gold);
-      transform: translateY(-1px);
-    }
-
-    /* ---- Responsive ---- */
-    @media (max-width: 900px) {
-      .relief-figure-inner {
-        grid-template-columns: 1fr;
-        gap: 20px;
-        padding: 52px 28px;
+    @keyframes player-in {
+      from {
+        opacity: 0;
       }
 
-      .relief-initiatives-row {
+      to {
+        opacity: 1;
+      }
+    }
+
+    .video-thumb.is-playing {
+      cursor: default;
+    }
+
+    .video-thumb.is-playing::after,
+    .video-thumb.is-playing .play-badge,
+    .video-thumb.is-playing .video-tag {
+      display: none;
+    }
+
+    /* Shown in place of the player if YouTube reports it can't play here
+       (most often because the page has no valid referrer — e.g. it's
+       being opened as a local file rather than served over http/https). */
+    .video-fallback {
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      background: #1B0A0D;
+    }
+
+    .video-fallback-link {
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      gap: 10px;
+      padding: 18px 24px;
+      font-family: 'Merriweather Sans', sans-serif;
+      font-size: 13.5px;
+      color: var(--gold-soft);
+      text-align: center;
+      transition: color var(--dur-fast) var(--ease);
+    }
+
+    .video-fallback-link svg {
+      width: 30px;
+      height: 30px;
+      fill: var(--gold-soft);
+      transition: fill var(--dur-fast) var(--ease);
+    }
+
+    .video-fallback-link:hover,
+    .video-fallback-link:focus-visible {
+      color: var(--ivory-text);
+    }
+
+    .video-fallback-link:hover svg,
+    .video-fallback-link:focus-visible svg {
+      fill: var(--ivory-text);
+    }
+
+    .video-fallback-note {
+      font-size: 11.5px;
+      color: var(--muted-text-light);
+      max-width: 22ch;
+    }
+
+    @media (prefers-reduced-motion: reduce) {
+
+      .video-card {
+        opacity: 1;
+        transform: none;
+      }
+
+      .video-card:hover {
+        transform: none;
+      }
+
+      .video-card:hover .video-thumb img,
+      .technique:hover .photo-slot img {
+        transform: none;
+      }
+
+      .video-card:hover .play-badge::before {
+        animation: none;
+      }
+    }
+
+    /* ---------- Closing note ---------- */
+    .pranayam-closing {
+      max-width: 720px;
+      margin: 0 auto;
+      padding: 72px 32px 88px;
+      text-align: center;
+    }
+
+    .pranayam-closing p {
+      font-family: 'Merriweather', serif;
+      font-weight: 300;
+      font-style: italic;
+      font-size: 19px;
+      line-height: 1.75;
+      color: var(--maroon-deep);
+    }
+
+    .pranayam-closing cite {
+      display: block;
+      margin-top: 16px;
+      font-family: 'Merriweather Sans', sans-serif;
+      font-style: normal;
+      font-size: 12.5px;
+      color: var(--muted-text);
+    }
+
+    /* ---------- Responsive ---------- */
+    @media (max-width: 1020px) {
+      .video-grid {
+        grid-template-columns: repeat(2, 1fr);
+      }
+    }
+
+    @media (max-width: 900px) {
+      .hero-inner {
         grid-template-columns: 1fr;
         gap: 40px;
       }
 
-      .relief-initiative {
-        border-left: none;
-        padding: 0;
-        padding-top: 32px;
-        border-top: 1px solid var(--cream-line);
+      .hero-breath {
+        height: 150px;
+        order: -1;
       }
 
-      .relief-initiative:first-child {
-        border-top: none;
-        padding-top: 0;
+      .hero-inner h1 {
+        font-size: 33px;
+        max-width: none;
+      }
+
+      .pranayam-intro {
+        grid-template-columns: 1fr;
+        gap: 34px;
+      }
+
+      .technique {
+        grid-template-columns: 1fr;
+      }
+
+      .technique-head {
+        padding: 24px 24px 26px;
+      }
+
+      .technique-body {
+        padding: 24px 24px 28px;
+        border-left: none;
+        border-top: 1px solid var(--rule);
+      }
+
+      .index-group {
+        grid-template-columns: 1fr;
+        gap: 12px;
+      }
+
+      .video-head h2 {
+        font-size: 28px;
       }
     }
 
-    @media (max-width: 560px) {
-      .relief-hero {
-        min-height: 86vh;
+    @media (max-width: 640px) {
+      .video-grid {
+        grid-template-columns: 1fr;
       }
 
-      .relief-hero-inner {
-        padding: 0 20px 56px;
-      }
-
-      .relief-condolence-inner,
-      .relief-initiatives {
+      .technique-head,
+      .technique-body {
         padding-left: 20px;
         padding-right: 20px;
       }
     }
 
-    /* ============================================================
-       COMMUNITY PROGRAMS — listing + card component
-       ============================================================ */
+    @media (max-width: 480px) {
+      .page-shell {
+        padding: 0 20px;
+      }
 
-    .programs-page {
-      background: #FBF7F0;
-    }
+      .pranayam-hero {
+        padding: 64px 0 58px;
+      }
 
-    .programs-intro {
-      max-width: 1200px;
-      margin: 0 auto;
-      padding: 72px 32px 36px;
-      border-bottom: 1px solid var(--cream-line);
-    }
+      .hero-facts b {
+        font-size: 23px;
+      }
 
-    .programs-intro h1 {
-      font-family: 'Merriweather', Georgia, serif;
-      font-weight: 700;
-      font-size: clamp(1.9rem, 3.4vw, 2.6rem);
-      color: var(--ink);
-      margin-bottom: 12px;
-    }
+      .technique-index {
+        padding: 22px 20px 24px;
+      }
 
-    .programs-intro p {
-      max-width: 62ch;
-      color: var(--muted-text);
-      font-size: 1rem;
-      font-weight: 300;
-      line-height: 1.7;
-    }
+      .pranayam-closing {
+        padding: 56px 20px 72px;
+      }
 
-    .programs-grid {
-      max-width: 1200px;
-      margin: 0 auto;
-      padding: 56px 32px 110px;
-      display: grid;
-      grid-template-columns: repeat(auto-fill, minmax(300px, 1fr));
-      gap: 44px 32px;
-    }
-
-    /* ---- Card ----
-       Structure/behaviour mirrors the wisdom.blade.php video-card:
-       diagonally-clipped media, floating label+badge row, line-clamped
-       title/excerpt, and a footer row pinned to the bottom. */
-    .program-card {
-      display: flex;
-      flex-direction: column;
-      background: #fff;
-      box-shadow: 0 2px 10px rgba(43, 17, 20, .18), 0 8px 24px rgba(43, 17, 20, .1);
-      transition: box-shadow var(--dur-base) var(--ease), transform var(--dur-base) var(--ease);
-    }
-
-    .program-card:hover {
-      transform: translateY(-2px);
-      box-shadow: 0 4px 14px rgba(43, 17, 20, .22), 0 14px 34px rgba(43, 17, 20, .16);
-    }
-
-    /* Image sits on a fixed-ratio letterbox ground and is never cropped —
-       object-fit: contain shows the whole photo whatever its own shape,
-       which matters here since the source graphics are portrait-oriented
-       with their own headline baked in. The diagonal clip on the bottom
-       edge echoes the video-card's angled thumbnail. */
-    .program-card-media {
-      position: relative;
-      aspect-ratio: 16 / 9;
-      overflow: hidden;
-      background: var(--ink-soft);
-      display: flex;
-      align-items: center;
-      justify-content: center;
-      clip-path: polygon(0 0, 100% 0, 100% 100%, 0 92%);
-    }
-
-    .program-card-media img {
-      width: 100%;
-      height: 100%;
-      object-fit: contain;
-      display: block;
-      transition: transform .5s var(--ease);
-    }
-
-    .program-card:hover .program-card-media img {
-      transform: scale(1.03);
-    }
-
-    /* Sits behind the <img>; only visible if the photo fails to load,
-       so a missing asset reads as an intentional placeholder rather
-       than a broken-image icon. */
-    .program-card-fallback {
-      position: absolute;
-      inset: 0;
-      display: flex;
-      align-items: center;
-      justify-content: center;
-    }
-
-    .program-card-fallback svg {
-      width: 56px;
-      height: 56px;
-      color: var(--gold-soft);
-      opacity: .55;
-    }
-
-    /* Floating label row, directly under the media — carries the gold
-       accent rule that used to sit on the body, plus a circular badge
-       (the video-card's "Video ▶" pairing, re-purposed as a location pin). */
-    .program-card-label {
-      display: flex;
-      align-items: flex-end;
-      justify-content: space-between;
-      gap: 10px;
-      padding: 14px 22px 0;
-      border-top: 3px solid var(--gold);
-      font-family: 'Merriweather Sans', sans-serif;
-      font-size: 12px;
-      font-weight: 500;
-      color: var(--maroon);
-      letter-spacing: .01em;
-    }
-
-    .program-card-badge {
-      display: inline-flex;
-      align-items: center;
-      justify-content: center;
-      width: 18px;
-      height: 18px;
-      border-radius: 50%;
-      border: 1.4px solid var(--gold);
-      flex-shrink: 0;
-    }
-
-    .program-card-badge svg {
-      width: 9px;
-      height: 9px;
-      fill: none;
-      stroke: var(--gold);
-      stroke-width: 1.6;
-    }
-
-    .program-card-body {
-      padding: 10px 22px 24px;
-      display: flex;
-      flex-direction: column;
-      flex: 1;
-    }
-
-    .program-card h3 {
-      font-family: 'Merriweather', Georgia, serif;
-      font-weight: 700;
-      font-size: 1.22rem;
-      line-height: 1.42;
-      color: var(--ink);
-      margin: 12px 0 10px;
-      display: -webkit-box;
-      -webkit-line-clamp: 2;
-      -webkit-box-orient: vertical;
-      overflow: hidden;
-    }
-
-    .program-card-excerpt {
-      font-size: .93rem;
-      line-height: 1.7;
-      color: #5A4038;
-      font-weight: 300;
-      margin: 0;
-      flex: 1;
-      display: -webkit-box;
-      -webkit-line-clamp: 3;
-      -webkit-box-orient: vertical;
-      overflow: hidden;
-    }
-
-    .program-card-foot {
-      display: flex;
-      align-items: center;
-      justify-content: flex-end;
-      margin-top: 18px;
-    }
-
-    .program-card-link {
-      font-family: 'Merriweather Sans', sans-serif;
-      font-size: .85rem;
-      font-weight: 500;
-      color: var(--maroon-deep);
-      padding-bottom: 2px;
-      border-bottom: 1px solid var(--cream-line);
-      transition: color var(--dur-fast) var(--ease), border-color var(--dur-fast) var(--ease);
-    }
-
-    .program-card:hover .program-card-link {
-      color: var(--maroon);
-      border-color: var(--gold);
+      .video-section {
+        padding: 60px 0 66px;
+      }
     }
 
   </style>
+
 </head>
 
 <body>
@@ -1364,7 +1956,7 @@
           <ul class="primary-links">
             <li class="nav-item"><a class="nav-link" href="index.html">Home</a></li>
 
-            <li class="nav-item">
+            <li class="nav-item active">
               <a class="nav-link" href="#">Yoga &amp; Meditation
                 <svg viewBox="0 0 10 6" fill="none">
                   <path d="M1 1l4 4 4-4" stroke="currentColor" stroke-width="1.3" />
@@ -1378,7 +1970,7 @@
                 <a href="#">Children</a>
                 <a href="#">Old Age</a>
                 <a href="significance of yoga.html">Significance of Yoga</a>
-                <a href="#">Pranayam</a>
+                <a href="pranayam.html">Pranayam</a>
               </div>
             </li>
 
@@ -1425,20 +2017,19 @@
             </li>
 
             <li class="nav-item"><a class="nav-link" href="yoga centre.html">Centers</a></li>
-enters</a></li>
 
 
-            <li class="nav-item active">
+            <li class="nav-item">
               <a class="nav-link" href="#">Social Impact
                 <svg viewBox="0 0 10 6" fill="none">
                   <path d="M1 1l4 4 4-4" stroke="currentColor" stroke-width="1.3" />
                 </svg>
               </a>
               <div class="dropdown">
-                <a href="community-program.html">Community Programs</a>
+                <a href="community program.html">Community Programs</a>
+
                 <a href="#">Rural Health Camps</a>
                 <a href="volunteer.html">Volunteer</a>
-Volunteer</a>
 
               </div>
             </li>
@@ -1481,55 +2072,455 @@ Volunteer</a>
     </nav>
 
   </header>
+  <main>
 
-  <main class="programs-page">
-
-    <div class="programs-intro">
-      <h1>Community Programs</h1>
-      <p>
-        Relief, health and outreach work carried out by Patanjali Yogpeeth Nepal — on the ground,
-        for the communities that need it.
-      </p>
-    </div>
-
-    <div class="programs-grid">
-
-      <a class="program-card" href="community-program.html">
-        <div class="program-card-media">
-          <div class="program-card-fallback">
-            <svg viewBox="0 0 40 40" fill="none">
-              <path
-                d="M12 34c0-6 3.5-10 8-10s8 4 8 10M20 20a5 5 0 1 0 0-10 5 5 0 0 0 0 10zM6 34c.3-4.3 2.3-7.4 5-8.8M34 34c-.3-4.3-2.3-7.4-5-8.8M9 15a3.6 3.6 0 1 0 0-7.2 3.6 3.6 0 0 0 0 7.2zM31 15a3.6 3.6 0 1 0 0-7.2 3.6 3.6 0 0 0 0 7.2z"
-                stroke="currentColor" stroke-width="1.4" stroke-linecap="round" stroke-linejoin="round" />
-            </svg>
+    <section class="pranayam-hero">
+      <div class="page-shell">
+        <div class="hero-inner">
+          <div class="hero-copy">
+            <p class="hero-eyebrow">&#2346;&#2381;&#2352;&#2366;&#2339;&#2366;&#2351;&#2366;&#2350;</p>
+            <h1>The quiet discipline of <em>conscious breath</em></h1>
+            <p>Pranayama is the branch of yoga devoted to the breath &mdash;
+              lengthening it, directing it, and occasionally suspending it, so that
+              the mind that rides on it grows steady in turn. This is a working
+              guide to the classical eight-step sequence, practised in the order
+              given below, moving from the most active breaths to the most still.</p>
+            <div class="hero-facts">
+              <div><b>8</b><span>techniques</span></div>
+              <div><b>1</b><span>sequence, practised in order</span></div>
+              <div><b>4th</b><span>limb of Ashtanga Yoga</span></div>
+            </div>
           </div>
-          <img src="assets/donation.jpg"
-            alt="Patanjali representatives presenting a cheque for NPR 2.11 crore to Nepal's Prime Minister's Disaster Relief Fund"
-            onerror="this.style.display='none'">
-        </div>
-        <div class="program-card-label">
-          <span>Nepal</span>
-          <span class="program-card-badge" aria-hidden="true">
-            <svg viewBox="0 0 24 24">
-              <path
-                d="M12 22s7-7.4 7-12.5A7 7 0 0 0 5 9.5C5 14.6 12 22 12 22z" />
-              <circle cx="12" cy="9.5" r="2.2" />
+          <div class="hero-breath">
+            <svg viewBox="0 0 640 220" preserveAspectRatio="none" aria-hidden="true">
+              <defs>
+                <linearGradient id="breathGrad" x1="0" y1="0" x2="1" y2="0">
+                  <stop offset="0" stop-color="#C79A49" />
+                  <stop offset="0.5" stop-color="#E4C784" />
+                  <stop offset="1" stop-color="#C79A49" />
+                </linearGradient>
+              </defs>
+              <path class="breath-line"
+                d="M10,140 C 70,40 110,220 170,110 S 270,20 330,130 S 420,230 480,110 S 560,10 620,120" />
+              <circle class="breath-dot" r="5" />
             </svg>
-          </span>
-        </div>
-        <div class="program-card-body">
-          <h3>Patanjali Donates NPR 2.11 Crore for Nepal Flood Relief</h3>
-          <p class="program-card-excerpt">
-            Contributed to the Prime Minister's Disaster Relief Fund for flood-affected families,
-            alongside relief teams, food distribution and essential supplies on the ground.
-          </p>
-          <div class="program-card-foot">
-            <span class="program-card-link">Read more</span>
+            <div class="hero-breath-caption"><span>inhale</span><span>exhale</span></div>
           </div>
         </div>
-      </a>
+      </div>
+    </section>
+
+    <div class="page-shell">
+
+      <section class="pranayam-intro">
+        <div class="intro-prose">
+          <h2>What is pranayama?</h2>
+          <p><strong>Pranayama</strong> comes from two Sanskrit roots &mdash;
+            <em>prana</em>, the vital breath or life force, and <em>ayama</em>, to
+            extend or regulate. In the classical texts it is the fourth limb of
+            Ashtanga Yoga, practised after posture has made the body steady enough
+            to sit through longer breathing work.</p>
+          <p>Each technique below manages the breath differently: some slow it
+            down, some speed it up, some route it through one nostril at a time.
+            They are presented here as a single eight-step sequence, in the
+            order they are traditionally practised together, moving from the
+            more active breaths toward stillness and silent meditation.</p>
+        </div>
+        <aside class="practice-note">
+          <h3>Before you begin</h3>
+          <ul>
+            <li>Sit with the spine upright, on an empty stomach, ideally in the morning.</li>
+            <li>Keep the breath unforced. Strain, dizziness, or breathlessness is the signal to stop and rest.</li>
+            <li>The gentler breaths suit daily practice; the forceful ones are best learned in person from a teacher.</li>
+            <li>Ask a doctor or teacher first if you are pregnant, or managing a heart, lung, or blood-pressure condition.</li>
+          </ul>
+        </aside>
+      </section>
+
+      <nav class="technique-index" aria-labelledby="indexHeading">
+        <h2 id="indexHeading">Find a technique</h2>
+        <p>Eight practices on this page, in sequence. Jump straight to one, or read them in order.</p>
+        <div class="index-group">
+          <h3>The eight-step sequence</h3>
+          <div class="index-links">
+            <a href="#bhastrika">1. Bhastrika</a>
+            <a href="#kapalbhati">2. Kapalbhati</a>
+            <a href="#bahya">3. Bahya</a>
+            <a href="#ujjayi">4. Ujjayi</a>
+            <a href="#anulom-vilom">5. Anulom Vilom</a>
+            <a href="#bhramari">6. Bhramari</a>
+            <a href="#udgeeth">7. Udgeeth</a>
+            <a href="#pranav-dhyan">8. Pranav Dhyan</a>
+          </div>
+        </div>
+      </nav>
+
+    <section class="category-block" id="sequence">
+      <div class="category-head">
+        <h2>The eight-step sequence</h2>
+        <p>Practised together in this order, moving from the most active breaths through to stillness and silent meditation.</p>
+        <p class="category-count">8 techniques, in sequence</p>
+      </div>
+
+      <article class="technique" id="bhastrika">
+        <div class="technique-head">
+          <h3>1. Bhastrika Pranayama</h3>
+          <p class="technique-tagline">Bellows breath</p>
+          <figure class="photo-slot">
+            <img src="https://staticimg.amarujala.com/assets/images/2019/09/30/yoga_1569835684.jpeg?w=750" alt="Demonstration of Bhastrika bellows breath technique" loading="lazy" decoding="async">
+          </figure>
+          <div class="name-plate">
+            <span class="icon-chip" aria-hidden="true">
+              <svg viewBox="0 0 100 100"> <path class="stroke" d="M28,36 L28,64 L44,58 L44,42 Z"></path> <path class="stroke" d="M72,36 L72,64 L56,58 L56,42 Z"></path> <line class="stroke-soft" x1="44" x2="56" y1="50" y2="50"></line> <path class="stroke-soft" d="M18,50 l8,-6 l0,12 z"></path> <path class="stroke-soft" d="M82,50 l-8,-6 l0,12 z"></path> </svg>
+            </span>
+            <span class="technique-sanskrit">भस्त्रिका</span>
+          </div>
+          <p class="technique-desc">Named after a blacksmith&rsquo;s bellows, this breath is active on both the inhale and the exhale, pumped through the nose at a steady, vigorous pace to build internal heat. It is traditionally the first practice in the sequence, warming the body before the others.</p>
+        </div>
+        <div class="technique-body">
+          <h4>How it&rsquo;s done</h4>
+          <ol class="step-list">
+            <li>Sit with the spine straight and take a few normal breaths.</li>
+            <li>Inhale deeply and forcefully through both nostrils, expanding the chest.</li>
+            <li>Exhale with equal force, pulling the abdomen in firmly.</li>
+            <li>Continue this active inhale-exhale rhythm at a steady, vigorous pace.</li>
+            <li>After a short round, return to normal breathing before moving on.</li>
+          </ol>
+          <h4>What it helps with</h4>
+          <div class="benefit-tags">
+            <span>Energises and warms the body</span>
+            <span>Traditionally builds vitality</span>
+          </div>
+          <h4>Take care</h4>
+          <div class="technique-caution"><svg viewBox="0 0 24 24" stroke-width="2" stroke-linecap="round" aria-hidden="true"><path d="M12 3 2 21h20L12 3z"/><path d="M12 9v6"/><path d="M12 18h.01"/></svg><p>A forceful practice. Beginners should start with very short rounds; avoid during pregnancy or with high blood pressure or a heart condition.</p></div>
+        </div>
+      </article>
+
+      <article class="technique" id="kapalbhati">
+        <div class="technique-head">
+          <h3>2. Kapalbhati Pranayama</h3>
+          <p class="technique-tagline">Skull-shining breath</p>
+          <figure class="photo-slot">
+            <img src="https://www.baliyogaashram.com/blog/wp-content/uploads/2022/08/Kapalbhati.jpeg" alt="Illustration of Kapalbhati skull-shining breath technique" loading="lazy" decoding="async">
+          </figure>
+          <div class="name-plate">
+            <span class="icon-chip" aria-hidden="true">
+              <svg viewBox="0 0 100 100"> <circle class="stroke" cx="50" cy="42" r="15"></circle> <path class="stroke" d="M50,57 C46,66 46,72 50,78 C54,72 54,66 50,57 Z"></path> <path class="stroke-soft" d="M50,80 l0,10"></path> <path class="stroke-soft" d="M40,78 l-8,9"></path> <path class="stroke-soft" d="M60,78 l8,9"></path> <path class="stroke-soft" d="M32,72 l-10,4"></path> <path class="stroke-soft" d="M68,72 l10,4"></path> </svg>
+            </span>
+            <span class="technique-sanskrit">कपालभाति</span>
+          </div>
+          <p class="technique-desc">A fast, forceful exhale from the lower abdomen followed by a passive inhale, repeated in quick succession. It follows Bhastrika in the sequence, continuing the work of clearing and activating.</p>
+        </div>
+        <div class="technique-body">
+          <h4>How it&rsquo;s done</h4>
+          <ol class="step-list">
+            <li>Sit tall with the hands resting on the knees.</li>
+            <li>Take one normal breath in.</li>
+            <li>Exhale sharply through the nose by pulling the navel firmly toward the spine.</li>
+            <li>Let the inhale happen on its own, passively, between exhales.</li>
+            <li>Continue in quick succession &mdash; begin with around 20 rounds and build up gradually with practice.</li>
+          </ol>
+          <h4>What it helps with</h4>
+          <div class="benefit-tags">
+            <span>Energises the body</span>
+            <span>Activates the abdominal muscles</span>
+            <span>Supports respiratory clearing</span>
+          </div>
+          <h4>Take care</h4>
+          <div class="technique-caution"><svg viewBox="0 0 24 24" stroke-width="2" stroke-linecap="round" aria-hidden="true"><path d="M12 3 2 21h20L12 3z"/><path d="M12 9v6"/><path d="M12 18h.01"/></svg><p>A forceful practice. Avoid during pregnancy, or with high blood pressure or a hernia; learn it under guidance before practising alone.</p></div>
+        </div>
+      </article>
+
+      <article class="technique" id="bahya">
+        <div class="technique-head">
+          <h3>3. Bahya Pranayama</h3>
+          <p class="technique-tagline">External breath-retention</p>
+          <figure class="photo-slot">
+            <svg viewBox="0 0 300 200" style="width:100%;height:100%;display:block;background:#F8F1E6" xmlns="http://www.w3.org/2000/svg" role="img" aria-label="Illustration of Bahya Pranayama, external breath retention">
+              <circle cx="150" cy="102" r="46" fill="none" stroke="#8A2D3B" stroke-width="3.5"></circle>
+              <circle cx="150" cy="102" r="30" fill="none" stroke="#C79A49" stroke-width="2.5"></circle>
+              <path d="M150,102 L150,54" fill="none" stroke="#C79A49" stroke-width="2.5" stroke-linecap="round"></path>
+              <path d="M140,64 L150,50 L160,64" fill="none" stroke="#C79A49" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"></path>
+              <circle cx="150" cy="102" r="4" fill="#E4C784"></circle>
+            </svg>
+          </figure>
+          <div class="name-plate">
+            <span class="icon-chip" aria-hidden="true">
+              <svg viewBox="0 0 100 100"> <circle class="stroke" cx="50" cy="52" r="20"></circle> <path class="stroke-soft" d="M50,52 l0,-34"></path> <path class="stroke-soft" d="M44,24 l6,-8 l6,8"></path> </svg>
+            </span>
+            <span class="technique-sanskrit">बाह्य प्राणायाम</span>
+          </div>
+          <p class="technique-desc">A gentle breath retention taken after a full exhale, with the lungs kept empty for a comfortable pause. Coming third in the sequence, it follows the two activating breaths and is practised with a light chin lock.</p>
+        </div>
+        <div class="technique-body">
+          <h4>How it&rsquo;s done</h4>
+          <ol class="step-list">
+            <li>Sit tall and exhale completely through the nose.</li>
+            <li>With the lungs empty, gently draw the abdomen in and tuck the chin lightly toward the chest.</li>
+            <li>Hold this pause for a comfortable few seconds, without straining.</li>
+            <li>Release the chin, relax the abdomen, and inhale slowly.</li>
+            <li>Return to normal breathing before repeating for a few rounds.</li>
+          </ol>
+          <h4>What it helps with</h4>
+          <div class="benefit-tags">
+            <span>Draws attention inward</span>
+            <span>Settles the mind after activation</span>
+          </div>
+          <h4>Take care</h4>
+          <div class="technique-caution"><svg viewBox="0 0 24 24" stroke-width="2" stroke-linecap="round" aria-hidden="true"><path d="M12 3 2 21h20L12 3z"/><path d="M12 9v6"/><path d="M12 18h.01"/></svg><p>A breath-retention practice. Learn it under guidance, hold only as long as is comfortable, and avoid it during pregnancy or with high blood pressure.</p></div>
+        </div>
+      </article>
+
+      <article class="technique" id="ujjayi">
+        <div class="technique-head">
+          <h3>4. Ujjayi Pranayama</h3>
+          <p class="technique-tagline">Victorious breath</p>
+          <figure class="photo-slot">
+            <img src="https://www.theyogacollective.com/wp-content/uploads/2019/12/Ujjayi-Pic-for-Pose-Page-e1575669818830.jpeg" alt="Demonstration of Ujjayi victorious breath technique" loading="lazy" decoding="async">
+          </figure>
+          <div class="name-plate">
+            <span class="icon-chip" aria-hidden="true">
+              <svg viewBox="0 0 100 100"> <path class="stroke" d="M50,74 C34,74 26,62 32,50 C37,40 50,42 48,52 C46,60 36,58 38,48"></path> <path class="stroke-soft" d="M62,34 C66,38 66,44 62,48"></path> <path class="stroke-soft" d="M68,28 C74,34 74,44 68,50"></path> </svg>
+            </span>
+            <span class="technique-sanskrit">उज्जायी</span>
+          </div>
+          <p class="technique-desc">A slow, audible breath made by gently narrowing the back of the throat, producing a soft sound often compared to ocean waves. Fourth in the sequence, it eases the pace down from the forceful breaths before it.</p>
+        </div>
+        <div class="technique-body">
+          <h4>How it&rsquo;s done</h4>
+          <ol class="step-list">
+            <li>Sit or lie down and let the throat relax.</li>
+            <li>Inhale through the nose while softly constricting the back of the throat, creating a gentle rasping sound.</li>
+            <li>Exhale through the nose, keeping the same soft constriction and sound.</li>
+            <li>Keep the sound quiet &mdash; audible to you, not the room &mdash; and continue for the desired duration.</li>
+          </ol>
+          <h4>What it helps with</h4>
+          <div class="benefit-tags">
+            <span>Builds steady focus</span>
+            <span>Generates gentle internal heat</span>
+            <span>Pairs naturally with asana</span>
+          </div>
+        </div>
+      </article>
+
+      <article class="technique" id="anulom-vilom">
+        <div class="technique-head">
+          <h3>5. Anulom Vilom</h3>
+          <p class="technique-tagline">Alternate nostril breathing</p>
+          <figure class="photo-slot">
+            <img src="https://img.etimg.com/thumb/msid-92353321,width-480,height-360,imgsize-69596,resizemode-75/anulom-vilom.jpg" alt="Illustration of Anulom Vilom alternate-nostril breathing technique" loading="lazy" decoding="async">
+          </figure>
+          <div class="name-plate">
+            <span class="icon-chip" aria-hidden="true">
+              <svg viewBox="0 0 100 100"> <path class="stroke" d="M20,50 C20,32 34,28 40,44 C46,60 60,60 66,44 C72,28 86,32 80,50"></path> <path class="stroke-soft" d="M14,50 l8,-5 l0,10 z"></path> <path class="stroke-soft" d="M86,50 l-8,-5 l0,10 z"></path> <circle class="fill-gold" cx="50" cy="50" r="3.4"></circle> </svg>
+            </span>
+            <span class="technique-sanskrit">अनुलोम विलोम</span>
+          </div>
+          <p class="technique-desc">Air is drawn in and released through one nostril at a time, without any pause between the two sides. Fifth in the sequence, it balances and evens out the breath after the more active practices.</p>
+        </div>
+        <div class="technique-body">
+          <h4>How it&rsquo;s done</h4>
+          <ol class="step-list">
+            <li>Sit with the spine upright and shoulders relaxed.</li>
+            <li>Fold the index and middle fingers of the right hand into the palm, keeping the thumb and ring finger free.</li>
+            <li>Close the right nostril with the thumb and inhale slowly through the left.</li>
+            <li>Close the left nostril with the ring finger, release the thumb, and exhale through the right.</li>
+            <li>Inhale through the right, then switch and exhale through the left to complete one round.</li>
+            <li>Continue for 5&ndash;10 minutes, keeping the breath even and unforced.</li>
+          </ol>
+          <h4>What it helps with</h4>
+          <div class="benefit-tags">
+            <span>Calms the mind</span>
+            <span>Improves breathing balance</span>
+            <span>Eases everyday stress</span>
+          </div>
+        </div>
+      </article>
+
+      <article class="technique" id="bhramari">
+        <div class="technique-head">
+          <h3>6. Bhramari Pranayama</h3>
+          <p class="technique-tagline">Humming bee breath</p>
+          <figure class="photo-slot">
+            <img src="https://www.shutterstock.com/shutterstock/videos/1105814591/thumb/12.jpg?ip=x480" alt="Demonstration of Bhramari humming bee breath technique" loading="lazy" decoding="async">
+          </figure>
+          <div class="name-plate">
+            <span class="icon-chip" aria-hidden="true">
+              <svg viewBox="0 0 100 100"> <ellipse class="stroke" cx="50" cy="54" rx="17" ry="11"></ellipse> <line class="stroke" x1="38" x2="62" y1="47" y2="47"></line> <line class="stroke" x1="36" x2="64" y1="54" y2="54"></line> <line class="stroke" x1="38" x2="62" y1="61" y2="61"></line> <circle class="fill-gold" cx="50" cy="41" r="5"></circle> <path class="stroke-soft" d="M40,38 C34,30 26,32 24,26"></path> <path class="stroke-soft" d="M60,38 C66,30 74,32 76,26"></path> <path class="stroke-soft" d="M20,44 C16,44 16,50 20,50"></path> <path class="stroke-soft" d="M80,44 C84,44 84,50 80,50"></path> </svg>
+            </span>
+            <span class="technique-sanskrit">भ्रामरी</span>
+          </div>
+          <p class="technique-desc">Named for the low, steady hum of a bee, this practice is felt as much as it is heard &mdash; the vibration travels through the jaw and skull and settles the nervous system almost immediately. Sixth in the sequence, it turns attention further inward, toward the final two practices.</p>
+        </div>
+        <div class="technique-body">
+          <h4>How it&rsquo;s done</h4>
+          <ol class="step-list">
+            <li>Sit comfortably and close the eyes.</li>
+            <li>Rest the index fingers lightly on the cartilage in front of each ear, or simply rest the hands on the knees.</li>
+            <li>Inhale deeply through the nose.</li>
+            <li>Exhale slowly while humming steadily with the mouth closed.</li>
+            <li>Let the sound stay soft and even; repeat for several rounds.</li>
+          </ol>
+          <h4>What it helps with</h4>
+          <div class="benefit-tags">
+            <span>Deep relaxation</span>
+            <span>Releases tension</span>
+            <span>Soothes the nervous system</span>
+          </div>
+        </div>
+      </article>
+
+      <article class="technique" id="udgeeth">
+        <div class="technique-head">
+          <h3>7. Udgeeth Pranayama</h3>
+          <p class="technique-tagline">Chanting Om breath</p>
+          <figure class="photo-slot">
+            <svg viewBox="0 0 300 200" style="width:100%;height:100%;display:block;background:#F8F1E6" xmlns="http://www.w3.org/2000/svg" role="img" aria-label="Illustration of Udgeeth Pranayama, the chanting Om breath">
+              <circle cx="150" cy="100" r="58" fill="none" stroke="#C79A49" stroke-width="1.5" opacity="0.55"></circle>
+              <circle cx="150" cy="100" r="44" fill="none" stroke="#C79A49" stroke-width="2" opacity="0.75"></circle>
+              <circle cx="150" cy="100" r="30" fill="none" stroke="#8A2D3B" stroke-width="3"></circle>
+              <text x="150" y="112" text-anchor="middle" font-family="'Noto Serif Devanagari', serif" font-size="34" fill="#8A2D3B">&#2323;</text>
+            </svg>
+          </figure>
+          <div class="name-plate">
+            <span class="icon-chip" aria-hidden="true">
+              <svg viewBox="0 0 100 100"> <circle class="stroke" cx="50" cy="50" r="24"></circle> <circle class="stroke-soft" cx="50" cy="50" r="14"></circle> <circle class="fill-gold" cx="50" cy="50" r="3.4"></circle> </svg>
+            </span>
+            <span class="technique-sanskrit">उद्गीथ प्राणायाम</span>
+          </div>
+          <p class="technique-desc">A slow breath paired with the long, drawn-out chanting of &ldquo;Om&rdquo; on the exhale. Seventh in the sequence, its sound and vibration quiet the mind and prepare it for silent meditation.</p>
+        </div>
+        <div class="technique-body">
+          <h4>How it&rsquo;s done</h4>
+          <ol class="step-list">
+            <li>Sit comfortably with the eyes closed and the spine upright.</li>
+            <li>Inhale slowly and deeply through the nose.</li>
+            <li>Exhale slowly while chanting &ldquo;Om&rdquo; aloud, letting the sound stretch out for as long as the breath allows.</li>
+            <li>Let the hum of the &ldquo;mmm&rdquo; linger gently at the end of each exhale.</li>
+            <li>Continue for several rounds, keeping the chant unhurried and even.</li>
+          </ol>
+          <h4>What it helps with</h4>
+          <div class="benefit-tags">
+            <span>Quiets mental chatter</span>
+            <span>Prepares the mind for meditation</span>
+          </div>
+        </div>
+      </article>
+
+      <article class="technique" id="pranav-dhyan">
+        <div class="technique-head">
+          <h3>8. Pranav Dhyan</h3>
+          <p class="technique-tagline">Om meditation</p>
+          <figure class="photo-slot">
+            <svg viewBox="0 0 300 200" style="width:100%;height:100%;display:block;background:#F8F1E6" xmlns="http://www.w3.org/2000/svg" role="img" aria-label="Illustration of Pranav Dhyan, silent Om meditation">
+              <circle cx="150" cy="100" r="52" fill="none" stroke="#8A2D3B" stroke-width="2.5"></circle>
+              <text x="150" y="114" text-anchor="middle" font-family="'Noto Serif Devanagari', serif" font-size="46" fill="#C79A49">&#2323;</text>
+              <circle cx="150" cy="100" r="4" fill="#8A2D3B" opacity="0"></circle>
+            </svg>
+          </figure>
+          <div class="name-plate">
+            <span class="icon-chip" aria-hidden="true">
+              <svg viewBox="0 0 100 100"> <circle class="stroke" cx="50" cy="50" r="26"></circle> <circle class="fill-gold" cx="50" cy="50" r="3.4"></circle> </svg>
+            </span>
+            <span class="technique-sanskrit">प्रणव ध्यान</span>
+          </div>
+          <p class="technique-desc">A closing, silent meditation on the sound and stillness of &ldquo;Om&rdquo;, done without any deliberate breath control. The final step in the sequence, it lets the effects of the seven breaths that came before settle into quiet.</p>
+        </div>
+        <div class="technique-body">
+          <h4>How it&rsquo;s done</h4>
+          <ol class="step-list">
+            <li>Sit in a steady, comfortable meditative posture with the eyes closed.</li>
+            <li>Let the breath return to its own natural rhythm, without controlling it.</li>
+            <li>Bring attention to the silent repetition of &ldquo;Om&rdquo; in the mind, or simply to the stillness that follows the chanting breath before it.</li>
+            <li>Let thoughts arise and pass without engaging them, returning attention gently each time it wanders.</li>
+            <li>Sit for several minutes before opening the eyes slowly.</li>
+          </ol>
+          <h4>What it helps with</h4>
+          <div class="benefit-tags">
+            <span>Deepens stillness after the breathing practices</span>
+            <span>Closes the sequence with quiet awareness</span>
+          </div>
+        </div>
+      </article>
+    </section>
+
 
     </div>
+
+    <section class="video-section" id="watch">
+      <div class="page-shell">
+        <div class="video-head">
+          <h2>Practise along with a guided session</h2>
+          <p>Reading a method through is one thing; watching where the fingers sit
+            and hearing how slowly the breath moves is another. Start with whichever
+            of these matches where you are.</p>
+        </div>
+
+        <div class="video-grid">
+        <article class="video-card" style="--i:0">
+          <button class="video-thumb" type="button" data-video="-EH4D_DAvqc"
+            aria-label="Play &ldquo;5 Pranayama You Should Practice Daily&rdquo; on YouTube">
+            <img src="https://i.ytimg.com/vi/-EH4D_DAvqc/hqdefault.jpg"
+              srcset="https://i.ytimg.com/vi/-EH4D_DAvqc/hqdefault.jpg 480w, https://i.ytimg.com/vi/-EH4D_DAvqc/maxresdefault.jpg 1280w"
+              sizes="(max-width: 640px) 100vw, 350px"
+              alt="" loading="lazy" decoding="async">
+            <span class="video-tag">Daily set</span>
+            <span class="play-badge" aria-hidden="true">
+              <svg viewBox="0 0 24 24"><path d="M6 4l14 8-14 8V4z"/></svg>
+            </span>
+          </button>
+          <div class="video-meta">
+            <h3>5 Pranayama You Should Practice Daily</h3>
+            <p>Five breathing practices grouped into one short sitting you can repeat every morning.</p>
+            <p class="video-source"><svg viewBox="0 0 24 24" aria-hidden="true"><path d="M21.6 7.2a2.5 2.5 0 0 0-1.75-1.77C18.25 5 12 5 12 5s-6.25 0-7.85.43A2.5 2.5 0 0 0 2.4 7.2C2 8.8 2 12 2 12s0 3.2.4 4.8a2.5 2.5 0 0 0 1.75 1.77C5.75 19 12 19 12 19s6.25 0 7.85-.43a2.5 2.5 0 0 0 1.75-1.77C22 15.2 22 12 22 12s0-3.2-.4-4.8zM10 15.5v-7l6 3.5-6 3.5z"/></svg><span>Swami Ramdev &middot; YouTube</span></p>
+          </div>
+        </article>
+        <article class="video-card" style="--i:1">
+          <button class="video-thumb" type="button" data-video="3p4r_ad2Y7g"
+            aria-label="Play &ldquo;Complete Package of Pranayama for Beginner&#x27;s&rdquo; on YouTube">
+            <img src="https://i.ytimg.com/vi/3p4r_ad2Y7g/hqdefault.jpg"
+              srcset="https://i.ytimg.com/vi/3p4r_ad2Y7g/hqdefault.jpg 480w, https://i.ytimg.com/vi/3p4r_ad2Y7g/maxresdefault.jpg 1280w"
+              sizes="(max-width: 640px) 100vw, 350px"
+              alt="" loading="lazy" decoding="async">
+            <span class="video-tag">For beginners</span>
+            <span class="play-badge" aria-hidden="true">
+              <svg viewBox="0 0 24 24"><path d="M6 4l14 8-14 8V4z"/></svg>
+            </span>
+          </button>
+          <div class="video-meta">
+            <h3>Complete Package of Pranayama for Beginner's</h3>
+            <p>Starts at the beginning — how to sit, where the fingers go, and how slowly to breathe.</p>
+            <p class="video-source"><svg viewBox="0 0 24 24" aria-hidden="true"><path d="M21.6 7.2a2.5 2.5 0 0 0-1.75-1.77C18.25 5 12 5 12 5s-6.25 0-7.85.43A2.5 2.5 0 0 0 2.4 7.2C2 8.8 2 12 2 12s0 3.2.4 4.8a2.5 2.5 0 0 0 1.75 1.77C5.75 19 12 19 12 19s6.25 0 7.85-.43a2.5 2.5 0 0 0 1.75-1.77C22 15.2 22 12 22 12s0-3.2-.4-4.8zM10 15.5v-7l6 3.5-6 3.5z"/></svg><span>Swami Ramdev &middot; YouTube</span></p>
+          </div>
+        </article>
+        <article class="video-card" style="--i:2">
+          <button class="video-thumb" type="button" data-video="7S1CecDFavg"
+            aria-label="Play &ldquo;Complete Package of Pranayama&rdquo; on YouTube">
+            <img src="https://i.ytimg.com/vi/7S1CecDFavg/hqdefault.jpg"
+              srcset="https://i.ytimg.com/vi/7S1CecDFavg/hqdefault.jpg 480w, https://i.ytimg.com/vi/7S1CecDFavg/maxresdefault.jpg 1280w"
+              sizes="(max-width: 640px) 100vw, 350px"
+              alt="" loading="lazy" decoding="async">
+            <span class="video-tag">Full session</span>
+            <span class="play-badge" aria-hidden="true">
+              <svg viewBox="0 0 24 24"><path d="M6 4l14 8-14 8V4z"/></svg>
+            </span>
+          </button>
+          <div class="video-meta">
+            <h3>Complete Package of Pranayama</h3>
+            <p>A longer session that works through the calming and the forceful breaths in order.</p>
+            <p class="video-source"><svg viewBox="0 0 24 24" aria-hidden="true"><path d="M21.6 7.2a2.5 2.5 0 0 0-1.75-1.77C18.25 5 12 5 12 5s-6.25 0-7.85.43A2.5 2.5 0 0 0 2.4 7.2C2 8.8 2 12 2 12s0 3.2.4 4.8a2.5 2.5 0 0 0 1.75 1.77C5.75 19 12 19 12 19s6.25 0 7.85-.43a2.5 2.5 0 0 0 1.75-1.77C22 15.2 22 12 22 12s0-3.2-.4-4.8zM10 15.5v-7l6 3.5-6 3.5z"/></svg><span>Swami Ramdev &middot; YouTube</span></p>
+          </div>
+        </article>
+        </div>
+
+      </div>
+    </section>
+
+    <section class="pranayam-closing">
+      <p>&ldquo;When the breath wanders, the mind is unsteady. When the breath is
+        still, so too is the mind.&rdquo;</p>
+      <cite>Hatha Yoga Pradipika</cite>
+    </section>
 
   </main>
 
@@ -1734,6 +2725,112 @@ Volunteer</a>
       if (!window.matchMedia(MOBILE).matches) closeMenu();
     });
 
+
+
+    // ---- Video cards: load the YouTube player only when asked ----
+    // The cards ship as a thumbnail + button, so nothing is requested from
+    // YouTube until someone presses play.
+    const WATCH_SVG = '<svg viewBox="0 0 24 24" aria-hidden="true"><path d="M21.6 7.2a2.5 2.5 0 0 0-1.75-1.77C18.25 5 12 5 12 5s-6.25 0-7.85.43A2.5 2.5 0 0 0 2.4 7.2C2 8.8 2 12 2 12s0 3.2.4 4.8a2.5 2.5 0 0 0 1.75 1.77C5.75 19 12 19 12 19s6.25 0 7.85-.43a2.5 2.5 0 0 0 1.75-1.77C22 15.2 22 12 22 12s0-3.2-.4-4.8zM10 15.5v-7l6 3.5-6 3.5z"/></svg>';
+
+    // If YouTube can't play here — most often because the page has no
+    // valid referrer, e.g. it's been opened as a local file rather than
+    // served over http/https — swap the stuck player for a plain link
+    // out to YouTube instead of leaving a dead frame on screen.
+    function showVideoFallback(thumbEl, id) {
+      thumbEl.classList.add('video-fallback');
+      thumbEl.innerHTML = '';
+      const link = document.createElement('a');
+      link.className = 'video-fallback-link';
+      link.href = 'https://www.youtube.com/watch?v=' + id;
+      link.target = '_blank';
+      link.rel = 'noopener';
+      link.innerHTML = WATCH_SVG +
+        '<span>Watch on YouTube</span>' +
+        '<span class="video-fallback-note">Playback isn&rsquo;t available here</span>';
+      thumbEl.appendChild(link);
+    }
+
+    document.querySelectorAll('.video-thumb').forEach(btn => {
+      btn.addEventListener('click', () => {
+        if (btn.classList.contains('is-playing')) return;
+        const id = btn.dataset.video;
+        const shell = document.createElement('div');
+        shell.className = 'video-thumb is-playing';
+        const frame = document.createElement('iframe');
+        const origin = (location.protocol === 'http:' || location.protocol === 'https:')
+          ? '&origin=' + encodeURIComponent(location.origin) : '';
+        frame.src = 'https://www.youtube-nocookie.com/embed/' + id +
+          '?autoplay=1&rel=0&modestbranding=1&playsinline=1&enablejsapi=1' + origin;
+        frame.title = btn.getAttribute('aria-label') || 'YouTube video player';
+        frame.allow = 'accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture';
+        frame.referrerPolicy = 'strict-origin-when-cross-origin';
+        frame.allowFullscreen = true;
+        frame.dataset.videoId = id;
+        shell.appendChild(frame);
+        btn.replaceWith(shell);
+        frame.focus();
+      });
+    });
+
+    // The embedded player posts a JSON message when it hits an error
+    // (disabled embedding, missing referrer/origin, region lock, etc).
+    // e.source lets us match the message back to the exact frame.
+    window.addEventListener('message', (event) => {
+      let data = event.data;
+      if (typeof data !== 'string') return;
+      try {
+        data = JSON.parse(data);
+      } catch {
+        return;
+      }
+      if (data.event !== 'onError') return;
+      document.querySelectorAll('.video-thumb.is-playing iframe').forEach(frame => {
+        if (frame.contentWindow === event.source) {
+          showVideoFallback(frame.closest('.video-thumb'), frame.dataset.videoId);
+        }
+      });
+    });
+
+    // Fall back to the standard thumbnail if a video has no maxres image.
+    document.querySelectorAll('.video-thumb img').forEach(img => {
+      img.addEventListener('error', () => {
+        img.removeAttribute('srcset');
+      }, { once: true });
+    });
+
+    // ---- One reveal, for the video row only ----
+    (function () {
+      const cards = document.querySelectorAll('.video-card');
+      if (!cards.length) return;
+
+      const reduce = window.matchMedia('(prefers-reduced-motion: reduce)').matches;
+      if (reduce || !('IntersectionObserver' in window)) {
+        cards.forEach(c => c.classList.add('is-revealed'));
+        return;
+      }
+
+      const io = new IntersectionObserver((entries, obs) => {
+        entries.forEach(entry => {
+          if (!entry.isIntersecting) return;
+          const i = Number(entry.target.style.getPropertyValue('--i')) || 0;
+          setTimeout(() => entry.target.classList.add('is-revealed'), i * 110);
+          obs.unobserve(entry.target);
+        });
+      }, { threshold: 0.2, rootMargin: '0px 0px -8% 0px' });
+
+      cards.forEach(c => io.observe(c));
+    })();
+
+    // ---- Index links: scroll without fighting the fixed header ----
+    document.querySelectorAll('.technique-index a[href^="#"]').forEach(link => {
+      link.addEventListener('click', e => {
+        const target = document.querySelector(link.getAttribute('href'));
+        if (!target) return;
+        e.preventDefault();
+        target.scrollIntoView({ behavior: 'smooth', block: 'start' });
+        history.replaceState(null, '', link.getAttribute('href'));
+      });
+    });
 
     // Back to top smooth scroll handler
     const backToTopBtn = document.querySelector('.back-to-top');

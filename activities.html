@@ -3,7 +3,7 @@
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>International Yoga Day</title>
+<title>Activities &amp; Campaigns — Patanjali Yogpeeth Nepal</title>
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
 <link href="https://fonts.googleapis.com/css2?family=Merriweather:wght@300;400;700&family=Merriweather+Sans:wght@400;500&family=Noto+Serif+Devanagari:wght@300;400;500&family=Crete+Round&display=swap" rel="stylesheet">
@@ -300,9 +300,10 @@
   .hamburger.is-open span:nth-child(2){ opacity:0; }
   .hamburger.is-open span:nth-child(3){ transform:translateY(-6.6px) rotate(-45deg); }
 
-  /* Between ~1020px and 1180px the eight links still fit, but only if the
-     type tightens up a little and the sweep narrows with them. */
-  @media (max-width: 1180px) and (min-width: 1021px){
+  /* Between the hamburger breakpoint and full desktop size, the ten links
+     still fit, but only if the type tightens up a little and the sweep
+     narrows with them. */
+  @media (max-width: 1430px) and (min-width: 1261px){
     :root{ --swoosh-w:352px; }
     .brand-logo-link{ width:300px; }
     .brand-logo{ height:27px; max-width:150px; }
@@ -310,7 +311,7 @@
     .nav-link::before{ left:9px; right:9px; }
   }
 
-  @media (max-width: 1020px){
+  @media (max-width: 1260px){
     .primary-links{ display:none; }
     .hamburger{ display:flex; }
     .utility-right .utility-link span{ display:none; }
@@ -319,6 +320,7 @@
 
     /* Mobile flyout menu, toggled by the hamburger via JS */
     .primary-links.mobile-open{
+      height:auto;
       display:flex;
       flex-direction:column;
       align-items:stretch;
@@ -504,19 +506,6 @@
     color:var(--ivory-text);
     letter-spacing:.02em;
   }
-  .back-to-top{
-    position:absolute;
-    top:-24px; right:40px;
-    width:48px; height:48px;
-    border-radius:50%;
-    background:var(--gold);
-    display:flex; align-items:center; justify-content:center;
-    box-shadow:0 8px 20px rgba(20,6,9,.25);
-    cursor:pointer;
-    border:3px solid #fff;
-  }
-  .back-to-top svg{ width:18px; height:18px; stroke:var(--ink); }
-
   @media (max-width: 900px){
     .footer-inner{ grid-template-columns:1fr; gap:44px; padding:56px 24px 48px; }
     .footer-map{ width:100%; opacity:.05; }
@@ -909,6 +898,120 @@
   }
 
 </style>
+<style>
+/* ============ ACTIVITIES HUB (extends the base stylesheet above) ============ */
+/* Styled to match the main navbar directly above it (same dark ink
+   background and gold underline signature) so the two bars read as one
+   continuous piece of navigation instead of two different UI styles. */
+.jumpnav{position:sticky;top:96px;z-index:900;background:var(--ink);border-bottom:1px solid rgba(255,255,255,.08);transition:top .35s var(--ease);display:flex;align-items:stretch;}
+.jumpnav-inner{
+  position:relative;
+  max-width:1180px;margin:0 auto;padding:0 32px;
+  display:flex;flex-wrap:nowrap;gap:2px;overflow-x:auto;flex:1;
+  scrollbar-width:none;-ms-overflow-style:none;
+}
+.jumpnav-inner::-webkit-scrollbar{display:none;}
+.jumpnav-arrow{
+  display:none;
+  flex-shrink:0;
+  align-items:center;justify-content:center;
+  width:36px;
+  background:var(--ink);
+  border:none;color:var(--ivory-text);
+  cursor:pointer;
+}
+.jumpnav-arrow svg{width:16px;height:16px;stroke:currentColor;}
+.jumpnav-arrow:hover{color:var(--gold-soft);}
+.jumpnav-arrow.is-visible{display:flex;}
+.jumpnav a{
+  position:relative;
+  font-family:'Merriweather Sans',sans-serif;
+  font-size:13px;font-weight:500;letter-spacing:.01em;
+  white-space:nowrap;
+  padding:15px 14px;
+  color:var(--muted-text-light);
+  transition:color .2s var(--ease);
+}
+.jumpnav a::before{
+  content:"";position:absolute;left:14px;right:14px;bottom:9px;
+  height:1.5px;background:var(--gold);
+  transform:scaleX(0);transform-origin:center;
+  transition:transform var(--dur-base) var(--ease-out);
+}
+.jumpnav a:hover{color:var(--ivory-text);}
+.jumpnav a:hover::before{transform:scaleX(1);}
+.jumpnav a.is-active{color:var(--gold-soft);}
+.jumpnav a.is-active::before{transform:scaleX(1);}
+
+.activity-block{padding:64px 24px;scroll-margin-top:150px;border-bottom:1px solid var(--cream-line);}
+.activity-block.tint{background:var(--cream);}
+.activity-inner{max-width:820px;margin:0 auto;}
+
+/* Event banner: a purely decorative color panel (no photo) — a soft
+   diagonal texture plus a large faint watermark of the event's icon —
+   so each section still reads as visually distinct while scrolling,
+   without repeating the photo that now lives with the copy below. */
+.event-banner-v2{
+  position:relative;overflow:hidden;
+  max-width:1180px;margin:0 auto 40px;
+  border-radius:10px;
+  padding:24px 28px;
+  display:flex;align-items:center;gap:18px;
+  box-shadow:0 18px 40px rgba(43,17,20,.18);
+}
+.event-banner-v2::before{
+  content:"";position:absolute;inset:0;pointer-events:none;
+  background-image:repeating-linear-gradient(135deg, rgba(255,255,255,.07) 0 2px, transparent 2px 26px);
+}
+.ebv2-icon{
+  position:relative;z-index:1;flex-shrink:0;
+  width:48px;height:48px;border-radius:50%;
+  background:rgba(255,255,255,.18);
+  display:flex;align-items:center;justify-content:center;
+}
+.ebv2-icon svg{width:24px;height:24px;stroke:#fff;fill:none;stroke-width:1.6;stroke-linecap:round;stroke-linejoin:round;}
+.ebv2-text{position:relative;z-index:1;min-width:0;}
+.ebv2-kicker{display:block;font-family:'Merriweather Sans',sans-serif;font-weight:700;font-size:11.5px;letter-spacing:.08em;text-transform:uppercase;color:var(--gold-soft);margin-bottom:4px;}
+.event-banner-v2 h2{font-family:'Merriweather',Georgia,serif;font-weight:700;font-size:clamp(20px,2.6vw,28px);color:#fff;line-height:1.25;margin:0 0 2px;}
+.ebv2-dev{font-family:'Noto Serif Devanagari',serif;font-size:13.5px;color:rgba(255,255,255,.75);}
+.ebv2-watermark{
+  position:absolute;right:-18px;bottom:-30px;z-index:0;
+  width:150px;height:150px;opacity:.14;pointer-events:none;
+}
+.ebv2-watermark svg{width:100%;height:100%;stroke:#fff;fill:none;stroke-width:.9;}
+.b-yoga{background:linear-gradient(120deg,#8A2D3B,#5E1E28);}
+.b-ram{background:linear-gradient(120deg,#7A3B1E,#5E1E28);}
+.b-women{background:linear-gradient(120deg,#9B3F63,#5E1E28);}
+.b-guru{background:linear-gradient(120deg,#3B3466,#241F45);}
+.b-jadi{background:linear-gradient(120deg,#4E5B44,#38412F);}
+.b-teej{background:linear-gradient(120deg,#3E6B4E,#2C4E38);}
+.b-sthapna{background:linear-gradient(120deg,#5E1E28,#3C1218);}
+.b-blood{background:linear-gradient(120deg,#8A1F1F,#5E1414);}
+.b-swachchta{background:linear-gradient(120deg,#3F6B4E,#2C4E38);}
+.b-disaster{background:linear-gradient(120deg,#5A4630,#3C2F1F);}
+
+/* The photo now sits with the copy: floated alongside the paragraphs
+   (right on tinted/even entries, left otherwise) rather than as a
+   banner, so the text wraps around it like a magazine pull-image. */
+.activity-copy{overflow:hidden;}
+.activity-figure{float:left;width:52%;max-width:400px;margin:4px 30px 18px 0;shape-outside:margin-box;}
+.activity-figure .frame{border-radius:8px;overflow:hidden;box-shadow:0 14px 30px rgba(43,17,20,.16);}
+.activity-figure img{width:100%;display:block;}
+.activity-block.tint .activity-figure{float:right;margin:4px 0 18px 30px;}
+
+.activity-copy p{font-size:16px;line-height:1.9;color:#3C2A26;margin-bottom:16px;font-family:'Merriweather',Georgia,serif;font-weight:300;}
+.activity-copy p:last-child{margin-bottom:0;}
+.activity-copy p:first-of-type::first-letter{font-family:'Crete Round',serif;font-size:46px;line-height:.75;float:left;padding:6px 8px 0 0;color:var(--maroon);}
+
+@media(max-width:640px){
+  .activity-block{padding:48px 18px;}
+  .event-banner-v2{padding:18px 18px;gap:12px;}
+  .ebv2-icon{width:38px;height:38px;}
+  .ebv2-icon svg{width:19px;height:19px;}
+  .activity-figure{float:none;width:100%;max-width:none;margin:0 0 20px;}
+  .activity-block.tint .activity-figure{float:none;margin:0 0 20px;}
+}
+</style>
 </head>
 <body>
 
@@ -1029,16 +1132,6 @@
         </div>
       </li>
 
-      <li class="nav-item">
-        <a class="nav-link" href="#">Health
-          <svg viewBox="0 0 10 6" fill="none"><path d="M1 1l4 4 4-4" stroke="currentColor" stroke-width="1.3"/></svg>
-        </a>
-        <div class="dropdown">
-          <a href="#">Ayurveda Consultation</a>
-          <a href="#">Naturopathy</a>
-          <a href="#">Panchakarma</a>
-        </div>
-      </li>
 
       <li class="nav-item"><a class="nav-link" href="yoga centre.html">Centers</a></li>
 
@@ -1067,16 +1160,6 @@
         </div>
       </li>
 
-      <li class="nav-item">
-        <a class="nav-link" href="#">Media Center
-          <svg viewBox="0 0 10 6" fill="none"><path d="M1 1l4 4 4-4" stroke="currentColor" stroke-width="1.3"/></svg>
-        </a>
-        <div class="dropdown">
-          <a href="press-release.html">Press Releases</a>
-          <a href="photo-gallery.html">Photo Gallery</a>
-          <a href="video.html">Voice of Patanjali Yogpeeth Nepal</a>
-        </div>
-      </li>
 
       <li class="nav-item">
         <a class="nav-link" href="about.html">About Us
@@ -1101,87 +1184,258 @@
 </nav>
 
 </header>
-
 <main>
 
-  <!-- ============ HERO ============ -->
+  <!-- ============ HUB HERO ============ -->
   <section class="samiti-hero">
     <div class="samiti-hero-inner reveal">
-      <span class="devanagari-line">अन्तर्राष्ट्रिय योग दिवस</span>
-      <span class="samiti-kicker">Events</span>
-      <h1>International Yoga Day Celebration</h1>
-      <p>Patanjali Yogpeeth Nepal, operating through its local body the Patanjali Yog Samiti, plays a
-        significant and consistent role in the annual International Yoga Day celebrations across the
-        country — bringing mass participation, dignitaries, and spiritual leaders together each year.</p>
+      <span class="devanagari-line">हमारी गतिविधियाँ</span>
+      <span class="samiti-kicker">Events &amp; Campaigns</span>
+      <h1>Activities &amp; Campaigns</h1>
+      <p>A look at the festivals, observances and humanitarian campaigns that Patanjali Yogpeeth Nepal and the
+        Patanjali Yog Samiti carry out across the country each year — from mass yoga celebrations to
+        earthquake relief.</p>
     </div>
   </section>
 
-  <!-- ============ FEATURED IMAGE ============ -->
-  <figure class="samiti-figure reveal">
-    <div class="samiti-figure-frame">
-      <img src="https://agromni.co.in/pypnepal1/assets/image/events/International%20yoga%20day.webp" alt="International Yoga Day celebration organized by Patanjali Yog Samiti">
+  <nav class="jumpnav">
+    <button type="button" class="jumpnav-arrow prev" aria-label="Scroll tabs left">
+      <svg viewBox="0 0 24 24" fill="none"><path d="M15 6l-6 6 6 6" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/></svg>
+    </button>
+    <div class="jumpnav-inner">
+      <a href="#yoga-day">Yoga Day</a>
+      <a href="#ram-navami">Ram Navami</a>
+      <a href="#womens-day">Women's Day</a>
+      <a href="#guru-purnima">Guru Purnima</a>
+      <a href="#jadi-buti">Jadi Buti Divas</a>
+      <a href="#haritalika-teej">Haritalika Teej</a>
+      <a href="#sthapna-diwas">Sthapna Diwas</a>
+      <a href="#blood-donation">Blood Donation</a>
+      <a href="#swachchta-abhiyan">Swachchta Abhiyan</a>
+      <a href="#disaster-management">Disaster Management</a>
     </div>
-    <figcaption class="samiti-figure-caption">International Yoga Day celebration organized by Patanjali Yog Samiti</figcaption>
-  </figure>
+    <button type="button" class="jumpnav-arrow next" aria-label="Scroll tabs right">
+      <svg viewBox="0 0 24 24" fill="none"><path d="M9 6l6 6-6 6" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/></svg>
+    </button>
+  </nav>
 
-  <!-- ============ OVERVIEW ============ -->
-  <section class="samiti-section">
-    <div class="narrative-panel reveal">
-      <p class="drop-cap">Since the UN declared International Yoga Day (IYD) in 2014, the Nepal Samiti
-        has been organizing large-scale events every year since 2015, in collaboration with the Indian
-        Embassy in Kathmandu, local municipalities, and other national organizations.</p>
-      <p>These celebrations feature mass yoga demonstrations led by renowned Patanjali teachers and
-        attract widespread public participation as well as high-profile dignitaries and spiritual
-        leaders from both Nepal and India, highlighting the cultural and diplomatic importance of the
-        shared yogic tradition. Patanjali leverages this platform to promote holistic health through
-        yoga and Ayurveda.</p>
-    </div>
-  </section>
-
-  <!-- ============ SPOTLIGHT: 2019 JANAKPUR ============ -->
-  <section class="samiti-section">
-    <div class="spotlight-panel reveal">
-      <div class="spotlight-head">
-        <span class="spotlight-eyebrow">Spotlight</span>
-        <h2>2019 Celebration at Janki Mandir, Janakpur</h2>
-        <p>A prominent example of these grand affairs, underscored by national and international
-          importance through the attendance of several esteemed guests.</p>
+  <section class="activity-block" id="yoga-day">
+    <div class="event-banner-v2 b-yoga reveal">
+      <span class="ebv2-icon"><svg viewBox="0 0 24 24"><circle cx="12" cy="4.5" r="2"/><path d="M12 8v3.5M7 20c1.2-3.5 2.6-4.8 5-4.8s3.8 1.3 5 4.8M5 13.5c2.2 1.3 4.6 2 7 2s4.8-.7 7-2"/></svg></span>
+      <div class="ebv2-text">
+        <span class="ebv2-kicker">Festival</span>
+        <h2>International Yoga Day Celebration</h2>
+        <span class="ebv2-dev">अन्तर्राष्ट्रिय योग दिवस</span>
       </div>
-      <div class="spotlight-list">
-        <div class="spotlight-item">
-          <span class="spotlight-role">Deputy Prime Minister</span>
-          <span class="spotlight-name">Mr. Upendra Yadav</span>
-        </div>
-        <div class="spotlight-item">
-          <span class="spotlight-role">Chief Minister, Province No. 2</span>
-          <span class="spotlight-name">Mr. Mohammad Lalbabu Raut Gaddi</span>
-        </div>
-        <div class="spotlight-item">
-          <span class="spotlight-role">Governor, Province No. 2</span>
-          <span class="spotlight-name">Mr. Ratneshwar Lal Kayastha</span>
-        </div>
-        <div class="spotlight-item">
-          <span class="spotlight-role">India's Ambassador to Nepal</span>
-          <span class="spotlight-name">Mr. Manjit Singh Puri</span>
-        </div>
+      <span class="ebv2-watermark"><svg viewBox="0 0 24 24"><circle cx="12" cy="4.5" r="2"/><path d="M12 8v3.5M7 20c1.2-3.5 2.6-4.8 5-4.8s3.8 1.3 5 4.8M5 13.5c2.2 1.3 4.6 2 7 2s4.8-.7 7-2"/></svg></span>
+    </div>
+    <div class="activity-inner">
+      <div class="activity-copy reveal">
+        <figure class="activity-figure">
+          <div class="frame"><img src="https://agromni.co.in/pypnepal1/assets/image/events/International%20yoga%20day.webp" alt="International Yoga Day celebration"></div>
+        </figure>
+        <p>Patanjali Yogpeeth Nepal, operating through its local body the Patanjali Yog Samiti, plays a significant and consistent role in the annual International Yoga Day (IYD) celebrations across the country. Since the UN declared IYD in 2014, the Nepal Samiti has been organizing large-scale events every year since 2015, in collaboration with the Indian Embassy in Kathmandu, local municipalities, and other national organizations.</p>
+        <p>These celebrations feature mass yoga demonstrations led by renowned Patanjali teachers and attract widespread public participation as well as high-profile dignitaries and spiritual leaders from both Nepal and India, highlighting the cultural and diplomatic importance of the shared yogic tradition. Patanjali leverages this platform to promote holistic health through yoga and Ayurveda.</p>
+        <p>A prominent example of these grand affairs was the 2019 celebration held at the historic Janki Mandir in Janakpur. The event underscored its national and international importance with the attendance of several esteemed guests, including the Honorable Deputy Prime Minister Mr. Upendra Yadav; the Honorable Chief Minister of Province No. 2, Mr. Mohammad Lalbabu Raut Gaddi; the Honorable Governor of Province No. 2, Mr. Ratneshwar Lal Kayastha; and India's Ambassador to Nepal, Mr. Manjit Singh Puri. The event also saw robust political and security representation from several MLAs and top officials from the security and army forces.</p>
+        <p>Fortified by the unwavering support of influential leaders and community figures, Patanjali Yog Samiti remains steadfast in its mission to disseminate the profound benefits of yoga, broadening its outreach each year to cultivate an environment of health, wellness, and unity across diverse populations.</p>
       </div>
-      <p class="spotlight-footnote">The event also saw robust political and security representation
-        from several MLAs and top officials from the security and army forces.</p>
     </div>
   </section>
 
-  <!-- ============ CLOSING STATEMENT ============ -->
-  <section class="samiti-closing reveal">
-    <span class="devanagari">योगेन चित्तस्य पदेन वाचां मलं शरीरस्य च वैद्यकेन</span>
-    <p>Fortified by the unwavering support of influential leaders and community figures, Patanjali Yog
-      Samiti remains steadfast in its mission to disseminate the profound benefits of yoga —
-      <strong>broadening its outreach each year</strong> to cultivate an environment of health,
-      wellness, and unity across diverse populations.</p>
+  <section class="activity-block tint" id="ram-navami">
+    <div class="event-banner-v2 b-ram reveal">
+      <span class="ebv2-icon"><svg viewBox="0 0 24 24"><path d="M7 3c6 3.2 6 14.6 0 18"/><path d="M7 12h12M16 9l2.5 3-2.5 3"/></svg></span>
+      <div class="ebv2-text">
+        <span class="ebv2-kicker">Festival</span>
+        <h2>Ram Navami</h2>
+        <span class="ebv2-dev">राम नवमी</span>
+      </div>
+      <span class="ebv2-watermark"><svg viewBox="0 0 24 24"><path d="M7 3c6 3.2 6 14.6 0 18"/><path d="M7 12h12M16 9l2.5 3-2.5 3"/></svg></span>
+    </div>
+    <div class="activity-inner">
+      <div class="activity-copy reveal">
+        <figure class="activity-figure">
+          <div class="frame"><img src="https://agromni.co.in/pypnepal1/assets/image/events/ram-navmi.webp" alt="Ram Navami celebration"></div>
+        </figure>
+        <p>Ram Navami is a sacred Hindu festival that commemorates the divine birth of Lord Rama, the seventh incarnation of Vishnu, on the ninth day of the Chaitra Navratri. This auspicious occasion celebrates righteousness, duty and virtue as embodied by Lord Rama, and symbolizes the eternal triumph of good over evil. His life, as recounted in the epic Ramayana, offers timeless lessons on how to lead a principled and moral life.</p>
+        <p>This sacred day also holds special significance for followers of the Patanjali tradition, marking the sannyas divas (renunciation day) of the revered Yoga Guru, Swami Ramdev Ji Maharaj. The occasion inspires spiritual aspirants to embrace a life of discipline and devotion, reinforcing the festival's themes of spiritual awakening and inner righteousness.</p>
+        <p>In Nepal, the celebrations extend beyond traditional worship. Devotees participate in the ancient Agnihotra ritual in yoga classes, a fire ceremony that purifies the atmosphere and reinforces spiritual dedication. This practice is complemented by compassionate community service, where people engage in social activities such as donating food and clothes to those in need — embodying the virtues of selfless service and compassion that Lord Rama exemplified.</p>
+      </div>
+    </div>
+  </section>
+
+  <section class="activity-block" id="womens-day">
+    <div class="event-banner-v2 b-women reveal">
+      <span class="ebv2-icon"><svg viewBox="0 0 24 24"><circle cx="12" cy="9" r="5.2"/><path d="M12 14.2V21M8.8 18h6.4"/></svg></span>
+      <div class="ebv2-text">
+        <span class="ebv2-kicker">Observance</span>
+        <h2>Women&rsquo;s Day</h2>
+      </div>
+      <span class="ebv2-watermark"><svg viewBox="0 0 24 24"><circle cx="12" cy="9" r="5.2"/><path d="M12 14.2V21M8.8 18h6.4"/></svg></span>
+    </div>
+    <div class="activity-inner">
+      <div class="activity-copy reveal">
+        <figure class="activity-figure">
+          <div class="frame"><img src="https://agromni.co.in/pypnepal1/assets/image/events/women-day.webp" alt="Women's Day celebration"></div>
+        </figure>
+        <p>Patanjali Yog Samiti's annual celebration of International Women's Day is a heartfelt tribute to the extraordinary contributions of women in society and within the organization itself. Every year on March 8, women volunteers at the local level organize a special event that recognizes those who have paved the way for societal progress and the devoted women who tirelessly promote the principles of Yoga and Ayurveda.</p>
+        <p>During the event, women who have significantly impacted the community are publicly recognized and celebrated, receiving accolades for their inspiring work. Honoring these local heroes serves as a powerful source of motivation for other women and girls, and highlights the crucial role women play in the holistic wellness movement championed by Patanjali.</p>
+        <p>The celebration also functions as a unifying event, bringing together women from diverse backgrounds to share their experiences and strengthen their resolve — reinforcing a collective commitment to personal and communal well-being, and the transformative power of women's leadership in shaping a healthier, more balanced society.</p>
+      </div>
+    </div>
+  </section>
+
+  <section class="activity-block tint" id="guru-purnima">
+    <div class="event-banner-v2 b-guru reveal">
+      <span class="ebv2-icon"><svg viewBox="0 0 24 24"><circle cx="12" cy="12" r="7.2"/><path d="M9.5 8.5a4 4 0 0 0 0 7"/></svg></span>
+      <div class="ebv2-text">
+        <span class="ebv2-kicker">Festival</span>
+        <h2>Guru Purnima</h2>
+        <span class="ebv2-dev">गुरु पूर्णिमा</span>
+      </div>
+      <span class="ebv2-watermark"><svg viewBox="0 0 24 24"><circle cx="12" cy="12" r="7.2"/><path d="M9.5 8.5a4 4 0 0 0 0 7"/></svg></span>
+    </div>
+    <div class="activity-inner">
+      <div class="activity-copy reveal">
+        <figure class="activity-figure">
+          <div class="frame"><img src="https://agromni.co.in/pypnepal1/assets/image/events/guru-purnima.webp" alt="Guru Purnima celebration"></div>
+        </figure>
+        <p>Patanjali Yogpeeth Nepal joyfully observes Guru Purnima, paying heartfelt tribute to its revered founders, Param Pujya Swami Ramdev Ji Maharaj and Param Shraddheya Acharya Balkrishna Ji Maharaj.</p>
+        <p>This sacred occasion, deeply rooted in the Vedic tradition, celebrates the timeless values of devotion, gratitude, and the eternal Guru-disciple bond. It serves as a reminder of the guiding light that spiritual masters bring into the lives of seekers, illuminating their journey towards knowledge, wisdom and self-realization.</p>
+        <p>In Nepal, Guru Purnima is celebrated with profound reverence and spiritual fervor. On this auspicious day, the dedicated volunteers of Patanjali Yoga Samiti, Mahila Patanjali Yoga Samiti, and Yuva Nepal Samiti come together to perform sacred Agnihotra rituals, conduct spiritual assemblies, and engage in selfless social service activities, offering their unwavering devotion and respect to their revered Gurus.</p>
+      </div>
+    </div>
+  </section>
+
+  <section class="activity-block" id="jadi-buti">
+    <div class="event-banner-v2 b-jadi reveal">
+      <span class="ebv2-icon"><svg viewBox="0 0 24 24"><path d="M12 3.5c5.2 1.8 7.2 6.8 5.2 12.3-5.2 1.8-10.2-.2-12-5.4-1.2-3.6 1.6-6.9 6.8-6.9z"/><path d="M9 17.5c2.6-3.8 4.4-6.6 7-10.3"/></svg></span>
+      <div class="ebv2-text">
+        <span class="ebv2-kicker">Observance</span>
+        <h2>Jadi Buti Divas</h2>
+      </div>
+      <span class="ebv2-watermark"><svg viewBox="0 0 24 24"><path d="M12 3.5c5.2 1.8 7.2 6.8 5.2 12.3-5.2 1.8-10.2-.2-12-5.4-1.2-3.6 1.6-6.9 6.8-6.9z"/><path d="M9 17.5c2.6-3.8 4.4-6.6 7-10.3"/></svg></span>
+    </div>
+    <div class="activity-inner">
+      <div class="activity-copy reveal">
+        <figure class="activity-figure">
+          <div class="frame"><img src="https://agromni.co.in/pypnepal1/assets/image/events/jadi%20buti.webp" alt="Jadi Buti Divas plantation drive"></div>
+        </figure>
+        <p>Patanjali proudly celebrates August 4th — the birthday of Pujya Acharya Balkrishna Ji Maharaj — as "Jadi Buti Diwas" across the globe. On this auspicious day, millions of Patanjali volunteers come together to honor nature through a grand movement of medicinal plant and herb plantation, adding millions of trees to the earth every year.</p>
+        <p>This occasion is not only a celebration of Ayurveda and nature's healing power but also a moment of deep spiritual awakening. Devotees engage in Gayatri Mantra chanting and perform Gayatri Agnihotra Yajnas across countless locations, transforming the environment with vibrations of purity, devotion, and positive energy.</p>
+        <p>Through Jadi Buti Diwas, Patanjali continues to spread the message of harmony between nature, spirituality and humanity, inspired by the vision of Pujya Swami Ramdev Ji Maharaj and Pujya Acharya Balkrishna Ji Maharaj.</p>
+      </div>
+    </div>
+  </section>
+
+  <section class="activity-block tint" id="haritalika-teej">
+    <div class="event-banner-v2 b-teej reveal">
+      <span class="ebv2-icon"><svg viewBox="0 0 24 24"><path d="M6 3v6M18 3v6M5 9h14M8.5 9L7 21M15.5 9L17 21"/></svg></span>
+      <div class="ebv2-text">
+        <span class="ebv2-kicker">Festival</span>
+        <h2>Haritalika Teej</h2>
+        <span class="ebv2-dev">हरितालिका तीज</span>
+      </div>
+      <span class="ebv2-watermark"><svg viewBox="0 0 24 24"><path d="M6 3v6M18 3v6M5 9h14M8.5 9L7 21M15.5 9L17 21"/></svg></span>
+    </div>
+    <div class="activity-inner">
+      <div class="activity-copy reveal">
+        <figure class="activity-figure">
+          <div class="frame"><img src="https://agromni.co.in/pypnepal1/assets/image/events/Teej.webp" alt="Haritalika Teej celebration"></div>
+        </figure>
+        <p>Haritalika Teej is one of the most cherished festivals in Hindu tradition, celebrated by women in devotion to Goddess Parvati and her divine union with Lord Shiva. The festival symbolizes marital bliss, the well-being of one's spouse, and spiritual purification through fasting and prayer. Women come together to sing traditional folk songs, dance, and strengthen social and cultural bonds, making Teej a vibrant expression of faith, joy and togetherness.</p>
+        <p>Patanjali has played a pivotal role in promoting and preserving the cultural and spiritual essence of Haritalika Teej — raising awareness about its significance, engaging the Nepali diaspora, and helping transform Teej into a celebration observed on a global stage.</p>
+        <p>Patanjali Yogpeeth Nepal is deeply involved in celebrating Haritalika Teej with the Nepali community, highlighting the spiritual and cultural bonds between India and Nepal. Each year, the Patanjali family and its social wings organize grand celebrations that bring together people from both nations, showcasing unity, devotion and cultural pride.</p>
+      </div>
+    </div>
+  </section>
+
+  <section class="activity-block" id="sthapna-diwas">
+    <div class="event-banner-v2 b-sthapna reveal">
+      <span class="ebv2-icon"><svg viewBox="0 0 24 24"><path d="M6 21V4"/><path d="M6 4h11l-3 4 3 4H6"/></svg></span>
+      <div class="ebv2-text">
+        <span class="ebv2-kicker">Milestone</span>
+        <h2>Sthapna Diwas</h2>
+        <span class="ebv2-dev">स्थापना दिवस</span>
+      </div>
+      <span class="ebv2-watermark"><svg viewBox="0 0 24 24"><path d="M6 21V4"/><path d="M6 4h11l-3 4 3 4H6"/></svg></span>
+    </div>
+    <div class="activity-inner">
+      <div class="activity-copy reveal">
+        <figure class="activity-figure">
+          <div class="frame"><img src="https://agromni.co.in/pypnepal1/assets/image/events/establishment-day.webp" alt="Sthapna Diwas / establishment day"></div>
+        </figure>
+        <p>Patanjali Yogpeeth Nepal, registered as a charitable trust in 2006, was founded by Yogrishi Swami Ramdev Ji Maharaj and Acharya Balkrishna Ji Maharaj with the mission of promoting yoga and healthy living across Nepal. The organization conducts free yoga classes and camps in all 77 districts, develops herbal gardens, and trains Ayurvedic professionals.</p>
+        <p>Following the 7.8-magnitude earthquake in 2015, Patanjali led relief efforts worth ₹5 crore, including ₹1 crore in medicines. Volunteers set up 30 relief camps, mobilized over 30,000 people across 20+ districts, distributed 1,00,000+ food packets, 50,000 blankets and 10,000 tents, and provided over 10,000 meals daily during peak relief operations.</p>
+        <p>Patanjali has also adopted over 100 orphaned children, providing shelter, food and education, and helped end the 400-year-old animal sacrifice tradition at Nepal's Kalika Temple, saving more than 30,000 animals annually. The organization has conducted 38,208 free yoga and wellness camps reaching over 27,431 people, and its Ayurveda Medical College in Dhulikhel, established in 2016, offers a 5.5-year BAMS program affiliated with Nepal Sanskrit University, enrolling 40 students annually.</p>
+      </div>
+    </div>
+  </section>
+
+  <section class="activity-block tint" id="blood-donation">
+    <div class="event-banner-v2 b-blood reveal">
+      <span class="ebv2-icon"><svg viewBox="0 0 24 24"><path d="M12 3.5s6.5 7.4 6.5 12A6.5 6.5 0 0 1 5.5 15.5c0-4.6 6.5-12 6.5-12z"/></svg></span>
+      <div class="ebv2-text">
+        <span class="ebv2-kicker">Campaign</span>
+        <h2>Blood Donation Camp</h2>
+      </div>
+      <span class="ebv2-watermark"><svg viewBox="0 0 24 24"><path d="M12 3.5s6.5 7.4 6.5 12A6.5 6.5 0 0 1 5.5 15.5c0-4.6 6.5-12 6.5-12z"/></svg></span>
+    </div>
+    <div class="activity-inner">
+      <div class="activity-copy reveal">
+        <figure class="activity-figure">
+          <div class="frame"><img src="https://agromni.co.in/pypnepal1/assets/image/events/Blood%20donation.webp" alt="Blood donation camp"></div>
+        </figure>
+        <p>Patanjali Yogpeeth Nepal views blood donation as a profound act of selfless service — a sacred offering that can bridge the gap between life and death. It is an act of pure compassion that offers healing and hope to those in critical need, a testament to the life-affirming power of human solidarity.</p>
+        <p>Drawing inspiration from the compassionate leadership of Param Shraddheya Acharya Balkrishna Ji Maharaj, who personally donates blood on his birthday and has led large-scale donation camps, volunteers across Patanjali Yogpeeth Nepal have been moved to carry that same commitment forward.</p>
+        <p>With steadfast commitment, these volunteers continuously organize blood donation camps throughout Nepal, ensuring the availability of life-saving blood for emergencies and vital medical care — reflecting Patanjali's vision of a healthier, more compassionate world.</p>
+      </div>
+    </div>
+  </section>
+
+  <section class="activity-block" id="swachchta-abhiyan">
+    <div class="event-banner-v2 b-swachchta reveal">
+      <span class="ebv2-icon"><svg viewBox="0 0 24 24"><path d="M13 3L6 17.5"/><path d="M13 3l5 2.3L9.5 20 6 17.5"/><path d="M18.5 15l1 2 2 1-2 1-1 2-1-2-2-1 2-1z"/></svg></span>
+      <div class="ebv2-text">
+        <span class="ebv2-kicker">Campaign</span>
+        <h2>Swachchta Abhiyan</h2>
+      </div>
+      <span class="ebv2-watermark"><svg viewBox="0 0 24 24"><path d="M13 3L6 17.5"/><path d="M13 3l5 2.3L9.5 20 6 17.5"/><path d="M18.5 15l1 2 2 1-2 1-1 2-1-2-2-1 2-1z"/></svg></span>
+    </div>
+    <div class="activity-inner">
+      <div class="activity-copy reveal">
+        <figure class="activity-figure">
+          <div class="frame"><img src="https://agromni.co.in/pypnepal1/assets/image/events/swachta-abhiyan.webp" alt="Swachchta Abhiyan cleanliness drive"></div>
+        </figure>
+        <p>Patanjali's Swachchta Abhiyan is an expansive public health and sanitation campaign operating across Nepal and India, working in harmony with national missions like the Swachh Bharat Mission. Beyond simple cleaning efforts, it is a holistic, community-driven program designed to foster a deep-seated culture of cleanliness and hygiene.</p>
+        <p>The effort mobilizes volunteers from Patanjali's various organizations and educational institutions to carry out cleanliness drives in public spaces, educational facilities, and local communities. At its core, the campaign is grounded in education and awareness, encouraging behavior change and proper sanitation practices through outreach programs and direct engagement.</p>
+        <p>By engaging local residents, students and employees, the program transforms a broad national objective into a decentralized, people-powered movement — a catalyst for a cleaner, healthier society where cleanliness becomes a collective, ingrained way of life.</p>
+      </div>
+    </div>
+  </section>
+
+  <section class="activity-block tint" id="disaster-management">
+    <div class="event-banner-v2 b-disaster reveal">
+      <span class="ebv2-icon"><svg viewBox="0 0 24 24"><path d="M12 3.5l7 2.8v5.4c0 5-3 8.2-7 9.3-4-1.1-7-4.3-7-9.3V6.3z"/><path d="M9 12l2 2 4-4.2"/></svg></span>
+      <div class="ebv2-text">
+        <span class="ebv2-kicker">Campaign</span>
+        <h2>Disaster Management &amp; Relief Efforts</h2>
+      </div>
+      <span class="ebv2-watermark"><svg viewBox="0 0 24 24"><path d="M12 3.5l7 2.8v5.4c0 5-3 8.2-7 9.3-4-1.1-7-4.3-7-9.3V6.3z"/><path d="M9 12l2 2 4-4.2"/></svg></span>
+    </div>
+    <div class="activity-inner">
+      <div class="activity-copy reveal">
+        <figure class="activity-figure">
+          <div class="frame"><img src="https://agromni.co.in/pypnepal1/assets/image/events/disaster-management.webp" alt="Disaster relief efforts in Nepal"></div>
+        </figure>
+        <p>Nepal faces a high risk of natural disasters — earthquakes, landslides, floods and glacial lake outburst floods — due to its geography and geology, a risk compounded by deforestation and poor agricultural practices. Patanjali has been actively involved in disaster relief across Nepal, providing essential supplies, medical assistance and financial aid to affected areas.</p>
+        <p>Following the devastating earthquake that struck Kathmandu on 10 Baisakh 2072 BS, Patanjali established relief camps providing food, water, medical aid and shelter to thousands of survivors. Param Pujya Swami Ramdev Ji Maharaj and Param Shraddheya Acharya Balkrishna Ji Maharaj personally oversaw the distribution of approximately Rs. 70 million worth of aid, with Ayurvedic doctors, volunteers and yoga teachers offering health services and emotional support through yoga and meditation.</p>
+        <p>Patanjali continued its humanitarian efforts after another earthquake on 17 Kartik 2080 BS, assisting around 3,000 families with aid worth approximately Rs. 20 million, and most recently provided Rs. 20 million in relief to victims of floods and landslides in Bagmati Province in Bhadra 2081 BS. Alongside immediate assistance, Patanjali supports long-term preparedness, coordinating regularly with local bodies, health centers and community organizations on disaster mitigation and rehabilitation.</p>
+      </div>
+    </div>
   </section>
 
 </main>
-
-
 <footer class="site-footer">
   <img class="footer-map" src="https://upload.wikimedia.org/wikipedia/commons/e/ec/World_map_blank_without_borders.svg" alt="">
 
@@ -1236,13 +1490,9 @@
   </div>
 
   <div class="footer-bottom">
-    <div class="back-to-top" role="button" aria-label="Back to top">
-      <svg viewBox="0 0 24 24" fill="none"><path d="M6 15l6-6 6 6" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/></svg>
-    </div>
     <p class="copyright-text">Copyright &copy; 2026 <strong>Patanjali Yogpeeth Nepal</strong>. All Rights Reserved.</p>
   </div>
 </footer>
-
 <script>
   // ---- Sticky header: hide on scroll down, reveal on scroll up ----
   // (utility bar + main nav move together, like artofliving.org)
@@ -1296,7 +1546,7 @@
   // screens the nav links disappeared and the hamburger button did nothing.
   const hamburger = document.querySelector('.hamburger');
   const primaryLinks = document.querySelector('.primary-links');
-  const MOBILE = '(max-width: 1020px)';
+  const MOBILE = '(max-width: 1260px)';
 
   function closeMenu(){
     primaryLinks.classList.remove('mobile-open');
@@ -1343,14 +1593,6 @@
   });
 
 
-  // Back to top smooth scroll handler
-  const backToTopBtn = document.querySelector('.back-to-top');
-  if (backToTopBtn) {
-    backToTopBtn.addEventListener('click', () => {
-      window.scrollTo({ top: 0, behavior: 'smooth' });
-    });
-  }
-
   // Scroll-reveal: fade/rise elements into view as they enter the viewport
   const revealEls = document.querySelectorAll('.reveal');
   if (revealEls.length) {
@@ -1366,6 +1608,54 @@
   }
 
 
+</script>
+<script>
+(function(){
+  var header = document.getElementById('siteHeader');
+  var jumpnav = document.querySelector('.jumpnav');
+  if(!header || !jumpnav) return;
+
+  function syncJumpNav(){
+    jumpnav.style.top = header.classList.contains('nav-hidden') ? '0px' : header.offsetHeight + 'px';
+  }
+  syncJumpNav();
+  window.addEventListener('load', syncJumpNav);
+  window.addEventListener('resize', syncJumpNav);
+  window.addEventListener('scroll', function(){ window.requestAnimationFrame(syncJumpNav); }, {passive:true});
+
+  var links = Array.prototype.slice.call(jumpnav.querySelectorAll('a'));
+  var sections = links.map(function(a){ return document.getElementById(a.getAttribute('href').slice(1)); });
+  var obs = new IntersectionObserver(function(entries){
+    entries.forEach(function(entry){
+      var idx = sections.indexOf(entry.target);
+      if(idx > -1 && entry.isIntersecting){
+        links.forEach(function(a){ a.classList.remove('is-active'); });
+        links[idx].classList.add('is-active');
+      }
+    });
+  }, { rootMargin: '-45% 0px -50% 0px' });
+  sections.forEach(function(s){ if(s) obs.observe(s); });
+
+  // Scroll arrows: show only the direction that has more to reveal, and
+  // scroll the tab strip by a fixed step on click (with a gentle nudge
+  // toward the active tab on load, so it isn't hidden off-screen).
+  var track = jumpnav.querySelector('.jumpnav-inner');
+  var prevBtn = jumpnav.querySelector('.jumpnav-arrow.prev');
+  var nextBtn = jumpnav.querySelector('.jumpnav-arrow.next');
+  if(track && prevBtn && nextBtn){
+    function syncArrows(){
+      var max = track.scrollWidth - track.clientWidth;
+      prevBtn.classList.toggle('is-visible', track.scrollLeft > 4);
+      nextBtn.classList.toggle('is-visible', track.scrollLeft < max - 4);
+    }
+    syncArrows();
+    window.addEventListener('load', syncArrows);
+    window.addEventListener('resize', syncArrows);
+    track.addEventListener('scroll', syncArrows, {passive:true});
+    prevBtn.addEventListener('click', function(){ track.scrollBy({left:-220, behavior:'smooth'}); });
+    nextBtn.addEventListener('click', function(){ track.scrollBy({left:220, behavior:'smooth'}); });
+  }
+})();
 </script>
 
 </body>
